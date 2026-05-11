@@ -905,10 +905,15 @@ Da lahko problem obravnavamo kot ravninsko deformacijski problem (RDS v ravnini 
 
 ## 79. V čem se razlikuje KE za reševanje ravninsko napetostnega problema od ravninsko deformacijskega problema?
 
-Oba elementa (za RNS in RDS) sta **2D kontinuirna (solid) elementa** in imata v vozliščih kot primarni neznanki le pomika ($u_x$ in $u_y$). Ne vsebujeta zasukov. Glavni razliki pri njuni formulaciji sta:
+Oba elementa (za RNS in RDS) sta **2D kontinuirna (solid) elementa** in imata v vozliščih kot primarni neznanki le pomika ($u_x$ in $u_y$). Ne vsebujeta zasukov. Glavni razliki pri njuni matematični formulaciji in fizični predstavitvi sta:
 
-1. **Matrika elastičnosti $[E]$:** Zveza med napetostmi in deformacijami je drugačna. Matrika $[E]$ za RNS upošteva, da je $\sigma_{zz}=0$, matrika $[E]$ za RDS pa upošteva, da je $\varepsilon_{zz}=0$.
-2. **Obravnava debeline:** Pri izračunu matrike togosti in ekvivalentnih vozliščnih sil pri RNS upoštevamo dejansko debelino plošče $h$. Pri RDS pa problem obravnavamo na enoto globine (običajno se vzame $h=1$).
+**1. Konstutivna matrika (Matrika elastičnosti $[E]$):** 
+Zveza med napetostmi in deformacijami je drugačna. Matrika $[E]$ za RNS izhaja iz predpostavke, da je element zelo tanek in zato ne more prenašati napetosti pravokotno na ravnino ($\sigma_{zz}=0$). Matrika $[E]$ za RDS pa izhaja iz predpostavke, da je element zelo dolg in je deformiranje v z-smeri blokirano ($\varepsilon_{zz}=0$).
+
+**2. Obravnava debeline (dimenzije v z-smeri):**
+Matrika togosti $[K]_e$ in ekvivalentne vozliščne sile $\{F\}_e$ se izračunajo z integriranjem po volumnu elementa ($dV = dx \cdot dy \cdot h$). Tu nastopi ključna razlika:
+*   **Pri RNS (modeliranje tankih plošč):** Kot debelino v program vnesemo **dejansko fizično debelino** plošče $h$ (npr. 5 mm). Ta debelina neposredno določa, koliko sile bo element prenesel.
+*   **Pri RDS (modeliranje dolgih struktur, npr. jez, cev):** Ker modeliramo le en presek neskončno dolge strukture, v program vnesemo (oziroma program privzame) **enotsko debelino** (npr. $h = 1 \text{ m}$). Vse izračunane sile in togosti pri RDS modelu so zato vedno podane in obravnavane *na enoto dolžine* strukture.
 
 ## 80. V čem se razlikujeta tri in štiri vozliščnih KE za reševanje ravninskih problemov?
 
