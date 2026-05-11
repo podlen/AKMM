@@ -841,9 +841,11 @@ Moramo paziti: tudi če je problem osnosimetričen in so vsi odvodi $\frac{\part
 
 Aksialna točkovna obremenitev v vozlišču 2D osnosimetričnega KE dejansko predstavlja celotno silo na določenem radiju. V realnosti to ustreza linijski obremenitvi v aksialni smeri, ki je porazdeljena po celotnem obodu krožnice s tem radijem.
 
+
 ## 73. Kaj predstavlja radialna točkovna obremenitev v primeru obravnave problema z osnosimetričnimi KE?
 
 Radialna točkovna obremenitev v vozlišču predstavlja celotno silo na določenem radiju v radialni smeri (ustreza radialni linijski obremenitvi po celotnem obodu).
+
 
 ## 74. Kako obravnavamo volumske obremenitve v primeru obravnave problema z osnosimetričnimi KE?
 
@@ -869,3 +871,65 @@ Da lahko problem obravnavamo kot ravninsko napetostni problem (v ravnini x-y), m
 2. Material mora biti homogen, njegove fizikalne lastnosti pa so lahko tudi ortotropne (različne lastnosti v pravokotnih smereh).
 3. Predpisani robni pogoji se morajo nanašati izključno na ravnino obravnavanega problema.
 4. Obremenitev mora ležati v ravnini obravnavanega problema.
+
+
+# Predavanje 10 - 4.5.2026
+
+## 76. Opišite prednosti uporabe ravninskih KE v primerjavi z uporabo volumskih KE?
+
+Uporaba ravninskih KE močno zmanjša število prostostnih stopenj in enačb v sistemu. To omogoča, da za enako natančnost porabimo bistveno manj računskega časa, oziroma lahko mrežo zgostimo in dobimo bolj natančne rezultate.
+
+(Praktični vidik: Če bi tanke strukture, kot je pločevina, modelirali z volumskimi 3D elementi, bi za preprečitev prevelike togosti elementov ("shear locking") potrebovali več slojev elementov po debelini. To bi mrežo naredilo pregosto in računsko izjemno potratno, zato so ravninski elementi tu nujni.)
+
+## 77. Kako izračunamo deformacijo v smeri pravokotno na ravnino problema v primeru uporabe ravninsko napetostnega KE in linearno elastičnega materialnega modela?
+
+Izhajamo iz Hookeovega zakona (zveze med napetostjo in deformacijo). V primeru ravninskega napetostnega stanja (RNS) vemo, da je napetost v smeri $z$ enaka nič ($\sigma_{zz} = 0$). S pomočjo Hookeovega zakona lahko zapišemo:
+
+$$
+\sigma_{zz} = 0 = \frac{E}{(1+\nu)(1-2\nu)}\left[\nu \,\varepsilon_{xx} + \nu \,\varepsilon_{yy} + (1-\nu)\,\varepsilon_{zz}\right]
+$$
+
+Iz te enačbe izrazimo deformacijo $\varepsilon_{zz}$:
+
+$$
+\varepsilon_{zz} = -\frac{\nu}{1-\nu}(\varepsilon_{xx} + \varepsilon_{yy})
+$$
+
+## 78. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot ravninsko deformacijski problem?
+
+Da lahko problem obravnavamo kot ravninsko deformacijski problem (RDS v ravnini x-y), mora biti izpolnjeno naslednje:
+1. Komponente deformacijskega tenzorja $\varepsilon_{zz}$, $\varepsilon_{xz}$ in $\varepsilon_{yz}$ morajo biti enake 0 oz. tako majhne, da jih lahko zanemarimo.
+2. Material mora biti homogen, njegove fizikalne lastnosti pa so lahko tudi ortotropne.
+3. Predpisani robni pogoji se vzdolž "z" koordinatne osi ne smejo spreminjati.
+4. Obremenitev se vzdolž "z" koordinatne osi ne sme spreminjati.
+
+## 79. V čem se razlikuje KE za reševanje ravninsko napetostnega problema od ravninsko deformacijskega problema?
+
+Oba elementa (za RNS in RDS) sta **2D kontinuirna (solid) elementa** in imata v vozliščih kot primarni neznanki le pomika ($u_x$ in $u_y$). Ne vsebujeta zasukov. Glavni razliki pri njuni formulaciji sta:
+
+1. **Matrika elastičnosti $[E]$:** Zveza med napetostmi in deformacijami je drugačna. Matrika $[E]$ za RNS upošteva, da je $\sigma_{zz}=0$, matrika $[E]$ za RDS pa upošteva, da je $\varepsilon_{zz}=0$.
+2. **Obravnava debeline:** Pri izračunu matrike togosti in ekvivalentnih vozliščnih sil pri RNS upoštevamo dejansko debelino plošče $h$. Pri RDS pa problem obravnavamo na enoto globine (običajno se vzame $h=1$).
+
+## 80. V čem se razlikujeta tri in štiri vozliščnih KE za reševanje ravninskih problemov?
+
+**Tri-vozliščni KE** imajo linearne interpolacijske funkcije, kar pomeni, da so primarne veličine (pomiki) linearni, sekundarne veličine (napetosti in deformacije) pa so po celotni površini KE **konstantne**. To naredi element bolj tog (slabše popisuje gradient napetosti), zato za natančen rezultat potrebujemo precej gosto mrežo. Prednost teh elementov je uporaba trikotniških/površinskih koordinat, ki omogočajo analitično točno vrednotenje integralov brez numerične integracije.
+
+**Štiri-vozliščni KE** (izoparametrični) imajo nelinearne (bilinearne) interpolacijske funkcije. Posledično se sekundarne veličine (napetosti in deformacije) po površini KE **spreminjajo**. Zaradi tega so elementi mehkejši in bolj natančni pri opisu upogiba, kar omogoča redkejšo mrežo. Intergrali se izračunavajo numerično s pomočjo **Gaussove integracije**. Napetosti se  izračunajo v integracijskih (Gaussovih) točkah znotraj elementa,.
+
+## 81. Kako izračunamo napetost v smeri pravokotno na ravnino problema v primeru uporabe ravninsko deformacijskega KE in linearno elastičnega materialnega modela?
+
+Za ravninsko deformacijsko stanje (RDS) velja, da so komponente deformacijskega tenzorja $\varepsilon_{zz}$, $\varepsilon_{xz}$ in $\varepsilon_{yz}$ enake 0 oz. tako majhne, da jih zanemarimo. Ker je $\varepsilon_{zz} = 0$, uporabimo Hookeov zakon za izračun preostale normalne napetosti v smeri $z$:
+
+$$
+\sigma_{zz} = \frac{E}{(1+\nu)(1-2\,\nu)}\left[\nu \,\varepsilon_{xx} + \nu\,\varepsilon_{yy}\right]
+$$
+
+## 82. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem?
+
+Da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem (GRDS), mora veljati:
+1. Komponenti deformacijskega tenzorja $\varepsilon_{xz}$ in $\varepsilon_{yz}$ morata biti enaki 0 oz. tako majhni, da jih lahko zanemarimo.
+2. Material mora biti homogen, njegove fizikalne lastnosti pa so lahko ortotropne.
+3. Predpisani robni pogoji se vzdolž "z" koordinatne osi ne spreminjajo.
+4. Obremenitev se vzdolž "z" koordinatne osi ne spreminja.
+5. Krajni površini analiziranega območja, katerih normali sta vzporedni z osjo "z", ostaneta plani (ravni) v obremenjenem stanju.
+6. Komponenta deformacijskega tenzorja $\varepsilon_{zz}$ je konstantna (ne enaka nič kot pri RDS, temveč konstantna povsod), oziroma od te konstantne vrednosti le malo odstopa.
