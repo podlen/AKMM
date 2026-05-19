@@ -1013,3 +1013,45 @@ Definicija lupinskega KE bazira na **superpoziciji** KE ravninskega napetostnega
 
 - V **globalnem koordinatnem sistemu** $(x, y, z)$ je definirana geometrija lupine, prav tako se v njem definirajo rešitve primarnih neznank (vozliščni pomiki in zasuki).
 - V **lokalnem koordinatnem sistemu** $(\hat{x}, \hat{y}, \hat{z})$, ki je vezan na tangencialno in normalno smer posameznega elementa, pa sta definirana deformacijski in napetostni tenzor (sekundarne veličine).
+
+
+# Predavanje 12 - 18.5.2026
+
+## 95. Kaj mora biti izpolnjeno, da lahko konstrukcijo obravnavamo z linijskimi KE, ki prenašajo samo osno obremenitev?
+
+Da lahko konstrukcijo obravnavamo kot paličje, mora biti izpolnjeno:
+1. Konstrukcijski element (imenovan palica) prenaša predvsem osno obremenitev (nateg/tlak).
+2. Material mora biti homogen in izotropen.
+3. Prerez palice mora biti majhen glede na njeno dolžino ($L \gg A$).
+4. Obremenjene smejo biti le povezave med palicami (vozlišča), pri čemer mora biti obremenitev točkovna.
+
+## 96. Kaj moramo upoštevati pri pripravi numeričnega modela z linijskimi KE, ki prenašajo samo osno obremenitev?
+
+Pri pripravi modela s paličnimi elementi moramo upoštevati, da obremenitve lahko delujejo **izključno v vozliščih** in samo kot točkovne sile. Ker element prenaša le osne obremenitve, v vozliščih **ni rotacijskih prostostnih stopenj** (ni zasukov, vozlišča delujejo kot idealni členki). Zato, kot si pravilno ugotovil, običajno velja, da **eni fizični palici pripada le en končni element**, saj linearne interpolacijske funkcije znotraj elementa eksaktno popišejo konstantno osno silo.
+
+## 97. Kaj mora biti izpolnjeno, da lahko konstrukcijo obravnavamo z linijskimi KE, ki prenašajo samo upogibno obremenitev?
+
+Da lahko konstrukcijo obravnavamo kot upogibno obremenjen nosilec (v ravnini x-z), mora veljati:
+1. Konstrukcijski element (nosilec) je obremenjen predvsem upogibno.
+2. Material je homogen in izotropen.
+3. Prerez nosilca je majhen glede na njegovo dolžino ($L \gg A$).
+4. Obremenitev v obliki sile mora biti usmerjena prečno na nosilec (v smeri "z" koordinatne osi).
+5. Obremenitev v obliki momenta mora biti usmerjena okoli "y" koordinatne osi.
+
+## 98. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Euler-Bernullijevo teorijo nosilcev?
+
+Euler-Bernoullijeva teorija predpostavlja planost prerezov v deformiranem stanju, pri čemer prerez ostane **strogo pravokoten na težiščnico**. To pomeni, da teorija povsem **zanemarja strižne deformacije** ($\gamma_{xz} = 0$). 
+Ker je zasuk definiran zgolj kot odvod povesa ($\varphi_y = - \frac{du_z}{dx}$), poves in zasuk nista neodvisna. Za aproksimacijo primarne spremenljivke se uporablja en sam polinom 3. stopnje (Hermitovi kubični polinomi), ki zagotavlja zveznost tako povesa kot naklona med elementi ($C^1$ zveznost).
+
+## 99. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Timoshenkovo teorijo nosilcev?
+
+Timoshenkova teorija prav tako predpostavlja planost prerezov, vendar **prerez v splošnem ni več pravokoten na težiščnico**, kar pomeni, da **upošteva prečne strižne deformacije**.
+Vozliščni neznanki, poves ($u_z$) in zasuk ($\varphi_y$), sta pri tej formulaciji obravnavani kot popolnoma **neodvisni spremenljivki**. To pomeni, da ima vsaka svojo interpolacijsko funkcijo (potrebna je le $C^0$ zveznost). Pri najenostavnejšem 2-vozliščnem elementu se tako za poves kot za zasuk uporabljata linearni aproksimaciji (polinomi prvega reda).
+
+## 100. Primerjajte KE, ki prenašajo upogibno obremenitev, in so zasnovani na Timoshenkovi teoriji nosilcev.
+
+Primerjava teh elementov se v osnovi nanaša na problematiko strižne togosti in **način numeričnega integriranja** matrike togosti (kot je prikazano na prosojnicah- predavanje 12 pg.  68–70):
+
+1. **Polna integracija (2 Gaussovi točki):** Če integral izračunamo eksaktno (z 2 točkama za linearni element), element postane pri vitkih nosilcih prekomerno tog. Temu pojavu rečemo "strižno zaklepanje" (*shear locking*).
+2. **Reducirana integracija (1 Gaussova točka):** Da se izognemo strižnemu zaklepanju, se pogosto uporabi reducirana integracija samo z 1 Gaussovo točko. To umetno "omehča" element in omogoča pravilno obnašanje tudi pri vitkih nosilcih.
+3. **Modificirana (kubična) oblika Timoshenkovega elementa:** To je hibridni element, ki združuje prednosti obeh teorij. Uporablja kubično polinomsko aproksimacijo (kot E-B element), hkrati pa v enačbe vključi faktor strižne podajnosti materiala ($C$). Ta element daje odlične rezultate tako za debele (kjer je strig pomemben) kot za vitke nosilce (brez strižnega zaklepanja).
