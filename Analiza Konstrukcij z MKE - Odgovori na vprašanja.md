@@ -877,9 +877,12 @@ Da lahko problem obravnavamo kot ravninsko napetostni problem (v ravnini x-y), m
 
 ## 76. Opišite prednosti uporabe ravninskih KE v primerjavi z uporabo volumskih KE?
 
-Uporaba ravninskih KE močno zmanjša število prostostnih stopenj in enačb v sistemu. To omogoča, da za enako natančnost porabimo bistveno manj računskega časa, oziroma lahko mrežo zgostimo in dobimo bolj natančne rezultate.
+Uporaba ravninskih KE drastično zmanjša število enačb in rešuje probleme z geometrijo mreže. Glavni prednosti sta: 
 
-(Praktični vidik: Če bi tanke strukture, kot je pločevina, modelirali z volumskimi 3D elementi, bi za preprečitev prevelike togosti elementov ("shear locking") potrebovali več slojev elementov po debelini. To bi mrežo naredilo pregosto in računsko izjemno potratno, zato so ravninski elementi tu nujni.)
+1. **Bistveno manj prostostnih stopenj:** 2D štirikotni element za ravninske probleme ima 4 vozlišča in 2 prostostni stopnji na vozlišče (skupaj 8). Enojni sloj volumskega 3D elementa ima 8 vozlišč in 3 prostostne stopnje na vozlišče (skupaj 24). Izračun je z 2D elementi zato precej hitrejši in računalniško manj potraten, kar nam omogoča uporabo veliko gostejše mreže za isto porabo časa. 
+
+2. **Rešen problem oblikovnega razmerja (aspect ratio):** Pri obravnavi tankih struktur (npr. pločevine) bi pri uporabi 3D volumskih elementov dobili elemente z zelo slabim razmerjem stranic (npr. stranica v ravnini 100 mm, debelina pa 1 mm). Taki sploščeni elementi vodijo do hudih numeričnih napak. Pri 2D ravninskih elementih te težave ni, saj debelina plošče ni fizična dimenzija mreže, temveč le podatek (parameter $h$), ki ga vstavimo v enačbo matrike togosti.
+
 
 ## 77. Kako izračunamo deformacijo v smeri pravokotno na ravnino problema v primeru uporabe ravninsko napetostnega KE in linearno elastičnega materialnega modela?
 
@@ -938,3 +941,75 @@ Da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem 
 4. Obremenitev se vzdolž "z" koordinatne osi ne spreminja.
 5. Krajni površini analiziranega območja, katerih normali sta vzporedni z osjo "z", ostaneta plani (ravni) v obremenjenem stanju.
 6. Komponenta deformacijskega tenzorja $\varepsilon_{zz}$ je konstantna (ne enaka nič kot pri RDS, temveč konstantna povsod), oziroma od te konstantne vrednosti le malo odstopa.
+
+# Predavanje 11 - 11.5.2026
+
+## 83. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot upogibno obremenjeno ploščo?
+
+Problem lahko obravnavamo kot upogibno obremenjeno ploščo (v x-y ravnini), ko velja:
+- obravnavano geometrijsko območje mora ležati v ravnini, pri čemer mora biti izmera v z-smeri (debelina) majhna glede na ostale mere obravnavanega območja ($h \ll L_x, L_y$).
+- material je homogen, njegove lastnosti pa so lahko ortotropne.
+- obremenitev je lahko usmerjena samo pravokotno na ravnino, v kateri leži ploskev.
+- komponenta napetostnega tenzorja $\sigma_{zz}$ mora biti tako majhna, da jo lahko zanemarimo.
+- dimenzije **srednje ravnine plošče** se med obremenjevanjem le malo spremenijo, tako da lahko v tej ravnini komponente deformacijskega tenzorja $\varepsilon_{xx}$, $\varepsilon_{yy}$ in $\varepsilon_{xy}$ zanemarimo.
+
+## 84. Kaj zajema Reissner-Mindlinova teorija plošč?
+
+Reissner-Mindlinova teorija plošč nam pravi, da so pomiki v ravnini ($u_x$ in $u_y$) linearno povezani z zasuki ($\varphi_x$ in $\varphi_y$).
+
+$$u_x = +z\,\varphi_y$$
+$$u_y = -z\,\varphi_x$$
+
+Teorija predpostavlja planost prereza v deformiranem stanju, pri čemer pa prerez v splošnem **ni več pravokoten** na srednjo ravnino plošče (upoštevanje prečnih strižnih deformacij). Srednja ravnina plošče se dimenzijsko ne spremeni. 
+
+## 85. Kako se izvede numerično integriranje v primeru obravnave upogibno obremenjene plošče?
+
+V ravnini x-y (v ravnini plošče) se izvaja **Gaussova numerična integracija**, kjer se količine izračunavajo v integracijskih točkah. 
+
+Po debelini plošče (v z-smeri) imamo dve možnosti:
+1. **Analitična integracija:** Če je material homogen in linearno elastičen, lahko integral po z-smeri izračunamo vnaprej analitično (tako dobimo upogibne togosti).
+2. **Numerična integracija (uporaba v praksi, npr. Abaqus):** Izvaja se po **Simpsonovi metodi**. Simpsonova metoda upošteva liho število točk – točke so postavljene na robove integracijskega območja (zgornja in spodnja površina) in v sredino. To nam ustreza, saj se pri upogibu plošč največje normalne napetosti pojavijo ravno na vrhu in dnu plošče, največje strižne napetosti pa v srednji ravnini ($z=0$).
+
+## 86. Katere so neznanke v vozliščih v primeru obravnave upogibno obremenjene plošče?
+
+V primeru upogibno obremenjene plošče imamo v posameznem vozlišču 3 primarne neznanke:
+- pomik v z-smeri: $u_z$
+- zasuk okoli x-osi: $\varphi_x$
+- zasuk okoli y-osi: $\varphi_y$
+
+## 87. Kako se upošteva porazdeljena obremenitev po območju plošče?
+
+Porazdeljeno mehansko obremenitev se preračuna v ekvivalentne vozliščne sile. Kot že omenjeno, mora obremenitev $p$ delovati v z-smeri (normalno na ravnino plošče).
+
+$$\{F_p\}_e = \int_{\Omega_e}p\,[N]^T\,d\Omega$$
+
+## 88. V čem so posebnosti analize deformacijsko-napetostnega stanja v upogibno obremenjeni plošči?
+
+V grafičnih prikazovalnikih (post-procesorjih) so rezultati prikazani (narisani) na **srednji ravnini plošče**, vendar pa prikazane vrednosti napetosti dejansko predstavljajo **maksimalne vrednosti, ki se nahajajo na površini** (spodnji ali zgornji strani plošče), saj so pri upogibu napetosti tam največje.
+
+## 89. Kako so izpolnjeni robni pogoji v primeru 3D KE v primeru mehanske analize?
+
+Robni pogoji (tako kinematični kot statični, vključno s prostimi površinami, kjer napetosti izzvenijo v nič) so lahko izpolnjeni **eksaktno**, če je mreža dovolj gosta, saj ima 3D element popolno svobodo deformiranja v vseh smereh.
+
+## 90. Kako so izpolnjeni robni pogoji v primeru 2D KE v primeru mehanske analize?
+
+Prav tako so robni pogoji na robovih 2D domene izpolnjeni **eksaktno**.
+
+## 91. Kako so izpolnjeni robni pogoji v primeru obravnave upogibno obremenjene plošče?
+
+Pri KE plošče so nekateri naravni robni pogoji na prostih površinah **kršeni (neizpolnjeni)**. 
+- Zanemarjen je robni pogoj za obremenitev v z-smeri, saj predpostavimo, da je $\sigma_{zz} = 0$ po celotni debelini, čeprav na površini deluje obremenitev $p$. 
+- V formulaciji (RM teorija) je upoštevano, da sta prečni strižni deformaciji ($\gamma_{xz}, \gamma_{yz}$) konstantni po celotni debelini KE. Kar pomeni, da strižna napetost na zgornji in spodnji prosti površini ni enaka nič, kar fizično ni pravilno (robni pogoj za strig ni izpolnjen). Zato se v praksi uporabljajo strižni korekcijski faktorji.
+
+## 92. Kaj vpliva na natančnost izračuna komponent napetostnega tenzorja?
+
+Na natančnost vpliva število elementov (gostota mreže) in število integracijskih točk (npr. reducirana vs. polna integracija), ki so uporabljene v elementu. Prav tako na natančnost vpliva tip elementa (linearne ali kvadratne interpolacijske funkcije, tj. 3-vozliščni, 4-vozliščni, 8-vozliščni elementi itd.).
+
+## 93. Na čem bazira definicija lupinskega KE?
+
+Definicija lupinskega KE bazira na **superpoziciji** KE ravninskega napetostnega stanja (stena/membrana) in KE upogibno obremenjene plošče. Lupina lahko prenaša tako osne (membranske) sile kot upogibne momente.
+
+## 94. Kakšna je vloga globalnega in lokalnega Kartezijevega koordinatnega sistema v primeru obravnave mehanskega problema z lupinskimi KE?
+
+- V **globalnem koordinatnem sistemu** $(x, y, z)$ je definirana geometrija lupine, prav tako se v njem definirajo rešitve primarnih neznank (vozliščni pomiki in zasuki).
+- V **lokalnem koordinatnem sistemu** $(\hat{x}, \hat{y}, \hat{z})$, ki je vezan na tangencialno in normalno smer posameznega elementa, pa sta definirana deformacijski in napetostni tenzor (sekundarne veličine).
