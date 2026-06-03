@@ -798,6 +798,8 @@ $$ [K]\{U\} = \{F\} $$
 
 V njem se definirajo tudi vsi robni pogoji in obremenitve.
 
+V globalnem koordinatnem sistemu je definirana tudi celotne geometrija - vozlišča elementov.
+
 ## 67. Kako je zajet vpliv lastne teže v primeru uporabe 3D KE?
 
 
@@ -1027,7 +1029,7 @@ Da lahko konstrukcijo obravnavamo kot paličje, mora biti izpolnjeno:
 
 ## 96. Kaj moramo upoštevati pri pripravi numeričnega modela z linijskimi KE, ki prenašajo samo osno obremenitev?
 
-Pri pripravi modela s paličnimi elementi moramo upoštevati, da obremenitve lahko delujejo **izključno v vozliščih** in samo kot točkovne sile. Ker element prenaša le osne obremenitve, v vozliščih **ni rotacijskih prostostnih stopenj** (ni zasukov, vozlišča delujejo kot idealni členki). Zato, kot si pravilno ugotovil, običajno velja, da **eni fizični palici pripada le en končni element**, saj linearne interpolacijske funkcije znotraj elementa eksaktno popišejo konstantno osno silo.
+Pri pripravi modela s paličnimi elementi moramo upoštevati, da obremenitve lahko delujejo **izključno v vozliščih** in samo kot točkovne sile. Ker element prenaša le osne obremenitve, v vozliščih **ni rotacijskih prostostnih stopenj** (ni zasukov, vozlišča delujejo kot idealni členki). To pomeni, da **eni fizični palici pripada le en končni element**, saj linearne interpolacijske funkcije znotraj elementa eksaktno popišejo konstantno osno silo.
 
 ## 97. Kaj mora biti izpolnjeno, da lahko konstrukcijo obravnavamo z linijskimi KE, ki prenašajo samo upogibno obremenitev?
 
