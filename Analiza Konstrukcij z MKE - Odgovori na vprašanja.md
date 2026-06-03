@@ -1141,7 +1141,7 @@ $$
 
 ## 105. Prednosti in slabosti uporabe linijskih KE.
 
-**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo izjemno hitro spreminjanje numeričnega modela (v eni sekundi lahko spremenimo I-profil v cevni profil, le z zamenjavo parametrov $A, I_y, I_z, J_x$, brez ponovnega mreženja geometrije). 
+**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo izjemno hitro spreminjanje numeričnega modela (v eni sekundi lahko spremenimo I-profil v cevni profil, le z zamenjavo parametrov $A, I_y, I_z, J_x$  ,  brez ponovnega mreženja geometrije). 
 
 **Slabosti:** Geometrijo opisujejo zgolj težiščnice. Na stikih (spojih) linijskih elementov se fizikalni volumni elementov lahko prekrivajo ali puščajo praznine, zaradi česar lokalno deformacijsko in napetostno stanje na samem spoju (npr. zvari, lokalne koncentracije napetosti) **ni natančno popisano**.
 
@@ -1150,18 +1150,18 @@ $$
 Če sta geometrija in obremenitev zrcalno simetrični (glede na neko ravnino), lahko modeliramo le polovico konstrukcije. Na prerezani (simetrijski) ravnini moramo predpisati **simetrijske robne pogoje**:
 - Pomik v smeri **normale** na simetrijsko ravnino je enak nič.
 - Zasuka okoli obeh osi, ki **ležita v** simetrijski ravnini, sta enaka nič.
-*(Primer: Če je simetrijska ravnina $y-z$, je njena normala os $x$. Zato zaklenemo $u_x = 0$, $\varphi_y = 0$ in $\varphi_z = 0$).*
+*(Primer: Če je simetrijska ravnina $y-z$  , je njena normala os $x$. Zato zaklenemo  $u_x = 0$ , $\varphi_y = 0$  in  $\varphi_z = 0$ ).*
 
 ## 107. Reševanje antisimetričnih mehanskih problemov.
 
 Antisimetrijo lahko uporabimo, ko sta **geometrija in material simetrična**, vendar pa je **obremenitev antisimetrična** (zrcalna slika obremenitve deluje v nasprotni smeri). Na prerezani ravnini predpišemo **antisimetrijske robne pogoje**:
 - Pomika v obeh smereh, ki **ležita v** antisimetrijski ravnini, sta enaka nič.
 - Zasuk okoli osi, ki je **normalna** na antisimetrijsko ravnino, je enak nič.
-*(Primer: Če je antisimetrijska ravnina $y-z$, je normala os $x$. Zato zaklenemo $u_y = 0$, $u_z = 0$ in $\varphi_x = 0$).*
+*(Primer: Če je antisimetrijska ravnina $y-z$  , je normala os $x$ . Zato zaklenemo $u_y = 0$ , $u_z = 0$ in $\varphi_x = 0$ ).*
 
 ## 108. Reševanje mehanskih problemov s ciklično ponovljivo geometrijo, robnimi pogoji in obremenitvijo.
 
-Takšne probleme (npr. propelerji, turbine) obravnavamo v **cilindričnem koordinatnem sistemu**. Zmodeliramo le en ponavljajoči se segment ("rezino"). Na obeh odrezanih robovih (rob A in rob B) predpišemo **ciklične robne pogoje**, ki zahtevajo, da so pomiki (in zasuki) v radialni, obodni in aksialni smeri na robu A strogo enaki tistim na robu B ($u_r^A = u_r^B$, $u_\varphi^A = u_\varphi^B$, $u_z^A = u_z^B$). Pri tem je ključno, da imata robova A in B **popolnoma identično topologijo mreže**.
+Takšne probleme (npr. propelerji, turbine) obravnavamo v **cilindričnem koordinatnem sistemu**. Zmodeliramo le en ponavljajoči se segment ("rezino"). Na obeh odrezanih robovih (rob A in rob B) predpišemo **ciklične robne pogoje**, ki zahtevajo, da so pomiki (in zasuki) v radialni, obodni in aksialni smeri na robu A strogo enaki tistim na robu B ( $u_r^A = u_r^B$ , $u_\varphi^A = u_\varphi^B$  ,  $u_z^A = u_z^B$  ). Pri tem je ključno, da imata robova A in B **popolnoma identično topologijo mreže**.
 
 ## 109. Kako izvedemo povezavo volumskih in linijskih KE?
 
