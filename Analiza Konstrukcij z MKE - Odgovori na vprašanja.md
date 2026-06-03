@@ -1055,3 +1055,120 @@ Primerjava teh elementov se v osnovi nanaša na problematiko strižne togosti in
 1. **Polna integracija (2 Gaussovi točki):** Če integral izračunamo eksaktno (z 2 točkama za linearni element), element postane pri vitkih nosilcih prekomerno tog. Temu pojavu rečemo "strižno zaklepanje" (*shear locking*).
 2. **Reducirana integracija (1 Gaussova točka):** Da se izognemo strižnemu zaklepanju, se pogosto uporabi reducirana integracija samo z 1 Gaussovo točko. To umetno "omehča" element in omogoča pravilno obnašanje tudi pri vitkih nosilcih.
 3. **Modificirana (kubična) oblika Timoshenkovega elementa:** To je hibridni element, ki združuje prednosti obeh teorij. Uporablja kubično polinomsko aproksimacijo (kot E-B element), hkrati pa v enačbe vključi faktor strižne podajnosti materiala ($C$). Ta element daje odlične rezultate tako za debele (kjer je strig pomemben) kot za vitke nosilce (brez strižnega zaklepanja).
+
+# Predavanje 13 - 25.5.2026
+
+## 101. Katere obremenitve lahko obravnavamo s splošnim prostorskim linijskim KE?
+
+Splošni prostorski linijski element (3D nosilec) lahko prenaša:
+- **osno (natezno/tlačno) obremenitev** v smeri težiščne osi,
+- **torzijsko obremenitev** okoli težiščne osi,
+- **upogibno obremenitev** v dveh med seboj pravokotnih ravninah.
+
+## 102. Kako je v formulaciji splošnega prostorskega linijskega KE upoštevana torzijska obremenitev?
+
+Torzijska obremenitev je upoštevana na matematično identičen način kot osna (natezna) obremenitev. Formulacija ima enake oblikovne funkcije in strukturo lokalne togostne matrike, le da:
+- namesto modula elastičnosti $E$ uporabimo strižni modul $G$,
+- namesto preseka $A$ uporabimo torzijski vztrajnostni moment $J_x$ (oz. $I_t$),
+- primarne neznanke niso translacije, temveč rotacije okoli osi elementa ($\Phi_x$),
+- obremenitev predstavlja torzijski moment ($M_x$).
+Prispevki te torzijske matrike se nato preprosto prištejejo (superponirajo) na ustrezna mesta v globalni matriki elementa.
+
+## 103. Izpeljite sistem enačb za osno obremenjeni linijski KE.
+
+Izhajamo iz šibke (integralske) oblike diferencialne enačbe za osno obremenjen linijski konstrukcijski element (palico):
+
+$$
+\int_0^L EAu''(x)v(x)\,dx + \int_0^L n(x)v(x)\, dx = 0
+$$
+
+Prvi izraz integriramo *Per Partes* in upoštevamo zvezo za osno silo $N(x) = EAu'(x)$:
+
+$$
+N(L)v(L) - N(0)v(0) - \int_0^L EAu'(x)v'(x)\,dx + \int_0^L n(x)v(x)\,dx = 0
+$$
+
+Uporabimo Galerkinov pristop, kjer za testne funkcije $v(x)$ izberemo linearne oblikovne (interpolacijske) funkcije. Pomik zapišemo matrično:
+
+$$
+u(x) = \Psi_1(x)\,U_1 + \Psi_2(x)\,U_2 = \begin{bmatrix} \Psi_1 & \Psi_2 \end{bmatrix} \begin{bmatrix} U_1 \\ U_2 \end{bmatrix} = [N(x)]\{U\}
+$$
+
+Odvod pomika (deformacija) je:
+
+$$
+u'(x) = \frac{d}{dx}[N(x)]\{U\} = \begin{bmatrix} -\frac{1}{L} & \frac{1}{L} \end{bmatrix} \{U\} = [B]\{U\}
+$$
+
+Testne funkcije $\{v\}$ in njihov odvod $\{v'\}$ so:
+
+$$
+\{v\} = \begin{bmatrix} \Psi_1(x) \\ \Psi_2(x) \end{bmatrix}, \quad \{v'\} = [B]^T = \begin{bmatrix} -\frac{1}{L} \\ \frac{1}{L} \end{bmatrix}
+$$
+
+Vstavimo v šibko obliko (upoštevamo $N_1 = -N(0)$ in $N_2 = N(L)$):
+
+$$
+\begin{bmatrix} 0 \\ N_2 \end{bmatrix} + \begin{bmatrix} N_1 \\ 0 \end{bmatrix} - \int_0^L EA [B]^T [B] \,dx \{U\} + \int_0^L n(x)\{v\}\,dx = 0
+$$
+
+Izračunamo integral produkta matrik $[B]^T [B]$:
+
+$$
+\int_0^L \begin{bmatrix} -\frac{1}{L} \\ \frac{1}{L} \end{bmatrix} \begin{bmatrix} -\frac{1}{L} & \frac{1}{L} \end{bmatrix} dx = \int_0^L \begin{bmatrix} \frac{1}{L^2} & -\frac{1}{L^2} \\ -\frac{1}{L^2} & \frac{1}{L^2} \end{bmatrix} dx = \frac{L}{L^2} \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} = \frac{1}{L} \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}
+$$
+
+Preuredimo enačbo, da dobimo znani sistem:
+
+$$
+\frac{EA}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} U_1 \\ U_2 \end{Bmatrix} = \begin{Bmatrix} N_1 \\ N_2 \end{Bmatrix} + \begin{Bmatrix} \int_0^L n(x)\Psi_1(x)\,dx \\ \int_0^L n(x)\Psi_2(x)\,dx \end{Bmatrix}
+$$
+
+## 104. Izpeljite sistem enačb za torzijsko obremenjeni linijski KE.
+
+Enačbe se izpeljejo na matematično identičen način kot pri osni obremenitvi. Razlika je le v fizikalnih veličinah vodilne diferencialne enačbe:
+
+$$
+GI_t\varphi''(x) = -m(x)
+$$
+
+kjer je $G$ strižni modul, $I_t$ torzijski vztrajnostni moment (pri splošnih prerezih se označuje tudi kot $J_x$), $\varphi$ je kot zasuka okoli osi elementa, $m(x)$ pa je porazdeljen torzijski moment. 
+Končni sistem enačb je analogno:
+
+$$
+\frac{GI_t}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} \Phi_1 \\ \Phi_2 \end{Bmatrix} = \begin{Bmatrix} M_{x1} \\ M_{x2} \end{Bmatrix} + \begin{Bmatrix} \int_0^L m(x)\Psi_1(x)\,dx \\ \int_0^L m(x)\Psi_2(x)\,dx \end{Bmatrix}
+$$
+
+## 105. Prednosti in slabosti uporabe linijskih KE.
+
+**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo izjemno hitro spreminjanje numeričnega modela (v eni sekundi lahko spremenimo I-profil v cevni profil, le z zamenjavo parametrov $A, I_y, I_z, J_x$, brez ponovnega mreženja geometrije). 
+
+**Slabosti:** Geometrijo opisujejo zgolj težiščnice. Na stikih (spojih) linijskih elementov se fizikalni volumni elementov lahko prekrivajo ali puščajo praznine, zaradi česar lokalno deformacijsko in napetostno stanje na samem spoju (npr. zvari, lokalne koncentracije napetosti) **ni natančno popisano**.
+
+## 106. Reševanje zrcalno simetričnih mehanskih problemov.
+
+Če sta geometrija in obremenitev zrcalno simetrični (glede na neko ravnino), lahko modeliramo le polovico konstrukcije. Na prerezani (simetrijski) ravnini moramo predpisati **simetrijske robne pogoje**:
+- Pomik v smeri **normale** na simetrijsko ravnino je enak nič.
+- Zasuka okoli obeh osi, ki **ležita v** simetrijski ravnini, sta enaka nič.
+*(Primer: Če je simetrijska ravnina $y-z$, je njena normala os $x$. Zato zaklenemo $u_x = 0$, $\varphi_y = 0$ in $\varphi_z = 0$).*
+
+## 107. Reševanje antisimetričnih mehanskih problemov.
+
+Antisimetrijo lahko uporabimo, ko sta **geometrija in material simetrična**, vendar pa je **obremenitev antisimetrična** (zrcalna slika obremenitve deluje v nasprotni smeri). Na prerezani ravnini predpišemo **antisimetrijske robne pogoje**:
+- Pomika v obeh smereh, ki **ležita v** antisimetrijski ravnini, sta enaka nič.
+- Zasuk okoli osi, ki je **normalna** na antisimetrijsko ravnino, je enak nič.
+*(Primer: Če je antisimetrijska ravnina $y-z$, je normala os $x$. Zato zaklenemo $u_y = 0$, $u_z = 0$ in $\varphi_x = 0$).*
+
+## 108. Reševanje mehanskih problemov s ciklično ponovljivo geometrijo, robnimi pogoji in obremenitvijo.
+
+Takšne probleme (npr. propelerji, turbine) obravnavamo v **cilindričnem koordinatnem sistemu**. Zmodeliramo le en ponavljajoči se segment ("rezino"). Na obeh odrezanih robovih (rob A in rob B) predpišemo **ciklične robne pogoje**, ki zahtevajo, da so pomiki (in zasuki) v radialni, obodni in aksialni smeri na robu A strogo enaki tistim na robu B ($u_r^A = u_r^B$, $u_\varphi^A = u_\varphi^B$, $u_z^A = u_z^B$). Pri tem je ključno, da imata robova A in B **popolnoma identično topologijo mreže**.
+
+## 109. Kako izvedemo povezavo volumskih in linijskih KE?
+
+3D volumski elementi (solid) imajo v vozliščih **samo translacijske prostostne stopnje** (nimajo zasukov). Če linijski element (nosilec, ki prenaša momente) pripnemo na 3D element zgolj v enem skupnem vozlišču, se to vozlišče obnaša kot **krogelni členek** (momenti se ne prenesejo).
+Da bi prenesli momente, moramo linijski element povezati z **več vozlišči** volumskega elementa in s tem ustvariti ročico (dvojico sil). V praksi se to izvede tako, da se linijski element podaljša in "vtisne" (embed) v notranjost volumenskega elementa preko več vozlišč, ali pa se vozlišče nosilca s pomočjo kinematičnih zvez (togih povezav / rigid links) togo poveže s skupino vozlišč na površini 3D elementa. (kinemarične zveze nam uničujejo diagnoalnost matrike in zelo upočasnijo izračun) 
+
+## 110. Kako izvedemo povezavo volumskih in lupinskih KE?
+
+Problem je identičen kot pri povezavi z linijskimi elementi. Lupinski elementi (shell) imajo rotacijske prostostne stopnje, volumski 3D elementi pa ne. Če jih združimo samo v eni vrsti vozlišč, dobimo členkast stik (moment se ne prenese).
+Povezavo izvedemo tako, da lupinski element potisnemo v notranjost volumenskega območja (združitev vozlišč po celotni debelini 3D elementa, s čimer se moment prenese kot nateg/tlak v teh vozliščih), ali pa s posebnimi kinematičnimi robnimi pogoji povežemo vozlišča lupine z vozlišči na naležnih ploskvah volumskega elementa.
