@@ -1,54 +1,62 @@
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  var tabs = $$(".tab"), lecs = $$(".lec"), search = $("#search");
-  var current = tabs[0] && tabs[0].dataset.lec;
+  var items = $$(".lec-item"), lecs = $$(".lec"), search = $("#search");
+  var side = $("#side"), scrim = $("#scrim"), menu = $("#menu");
+  var current = items[0] && items[0].dataset.lec;
   var searching = false;
 
   function norm(s) { return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d"); }
 
-  function show(id, keepHash) {
+  // header height drives the sticky sidebar offset
+  var top = $(".top");
+  function setHeader() { document.documentElement.style.setProperty("--hh", top.offsetHeight + "px"); }
+  setHeader();
+  if (window.ResizeObserver) new ResizeObserver(setHeader).observe(top);
+
+  function drawer(open) {
+    side.classList.toggle("open", open);
+    scrim.hidden = !open;
+    menu.setAttribute("aria-expanded", open);
+  }
+  menu.addEventListener("click", function () { drawer(!side.classList.contains("open")); });
+  scrim.addEventListener("click", function () { drawer(false); });
+
+  function show(id) {
     if (!document.getElementById(id)) return;
     current = id;
-    tabs.forEach(function (t) {
-      var on = t.dataset.lec === id;
-      t.setAttribute("aria-selected", on);
-      if (on) t.scrollIntoView({ block: "nearest", inline: "center" });
+    items.forEach(function (it) {
+      var on = it.dataset.lec === id;
+      it.toggleAttribute("data-active", on);
+      var a = $(".lec-link", it);
+      if (on) { a.setAttribute("aria-current", "true"); a.scrollIntoView({ block: "nearest" }); }
+      else a.removeAttribute("aria-current");
     });
     lecs.forEach(function (l) { l.hidden = l.id !== id; });
     try { localStorage.setItem("lec", id); } catch (e) {}
-    if (!keepHash) history.replaceState(null, "", "#" + id);
   }
 
   function route() {
     var h = location.hash.slice(1);
     if (!h) return;
-    if (/^p\d+$/.test(h)) { clear(); show(h, true); window.scrollTo(0, 0); return; }
+    drawer(false);
+    if (/^p\d+$/.test(h)) { clear(); show(h); window.scrollTo(0, 0); return; }
     var q = document.getElementById(h);
     if (q && q.classList.contains("q")) {
       clear();
-      show(q.closest(".lec").id, true);
+      show(q.closest(".lec").id);
       q.open = true;
       q.scrollIntoView();
     }
   }
 
-  tabs.forEach(function (t) {
-    t.addEventListener("click", function () { clear(); show(t.dataset.lec); window.scrollTo(0, 0); });
-    t.addEventListener("keydown", function (e) {
-      var i = tabs.indexOf(t), n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : null;
-      if (n === null || !tabs[n]) return;
-      e.preventDefault(); tabs[n].focus(); tabs[n].click();
-    });
-  });
-
   function clear() {
     if (!searching) return;
     searching = false; search.value = "";
     $$(".q").forEach(function (q) { q.hidden = false; });
-    $$(".toc").forEach(function (t) { t.style.display = ""; });
+    items.forEach(function (it) { it.hidden = false; });
     $("#empty").hidden = true;
-    show(current, true);
+    show(current);
   }
 
   var index = $$(".q").map(function (q) { return { el: q, text: norm(q.textContent) }; });
@@ -57,6 +65,7 @@
     if (!v) { clear(); return; }
     searching = true;
     var words = v.split(/\s+/), total = 0;
+    items.forEach(function (it) { it.removeAttribute("data-active"); });
     lecs.forEach(function (l) { l.hidden = false; });
     index.forEach(function (i) {
       var ok = words.every(function (w) { return i.text.indexOf(w) > -1; });
@@ -65,7 +74,8 @@
     lecs.forEach(function (l) {
       var any = $$(".q", l).some(function (q) { return !q.hidden; });
       l.hidden = !any;
-      $(".toc", l).style.display = "none";
+      var it = $('.lec-item[data-lec="' + l.id + '"]');
+      if (it) it.hidden = !any;
     });
     $("#empty").hidden = total > 0;
   });
@@ -84,10 +94,11 @@
   });
 
   document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") drawer(false);
     if (e.key === "/" && document.activeElement !== search) { e.preventDefault(); window.scrollTo(0, 0); search.focus(); }
   });
 
   window.addEventListener("hashchange", route);
   if (location.hash) route();
-  else { try { var s = localStorage.getItem("lec"); if (s) show(s, true); } catch (e) {} }
+  else { try { var s = localStorage.getItem("lec"); if (s) show(s); } catch (e) {} }
 })();

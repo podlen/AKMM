@@ -92,22 +92,39 @@ const inlineTitle = (s) => md(s).replace(/^<p>|<\/p>\s*$/g, "").trim();
 
 // ---- HTML -------------------------------------------------------------------
 const nQuestions = lectures.reduce((a, l) => a + l.questions.length, 0);
-const tabs = lectures
-  .map(
-    (l, i) =>
-      `<button role="tab" class="tab" id="tab-p${l.n}" data-lec="p${l.n}" aria-controls="p${l.n}" aria-selected="${i === 0}">` +
-      `<span class="tab-n">Predavanje ${l.n}</span><span class="tab-d">${escapeHtml(l.date)}</span></button>`
-  )
-  .join("");
+
+// Short topic per lecture, shown in the sidebar (the notes only have "Predavanje N - datum").
+const topics = {
+  1: "Geometrijski, fizikalni in matematični model",
+  2: "Numerični model: MKR in MKE",
+  3: "MRE, MKV in priprava modela",
+  4: "Mreženje",
+  5: "Lastnosti materiala in KE, izoparametrični KE",
+  6: "Interpolacija in numerično integriranje",
+  7: "Robni pogoji pri toploti in reševanje sistema",
+  8: "3D mehanski problemi",
+  9: "Osnosimetrični KE",
+  10: "Ravninski KE",
+  11: "Plošče, lupine, robni pogoji",
+  12: "Linijski KE: palice in nosilci",
+  13: "Splošni linijski KE, simetrije, povezovanje KE",
+};
+const topicOf = (l) => topics[l.n] || "";
+
+const sidebar = lectures
+  .map((l, i) => {
+    const qs = l.questions
+      .map((q) => `<li><a href="#q${q.num}"><b>${q.num}.</b> ${inlineTitle(q.title)}</a></li>`)
+      .join("");
+    return `<li class="lec-item" data-lec="p${l.n}"${i === 0 ? " data-active" : ""}>
+<a class="lec-link" href="#p${l.n}" data-lec="p${l.n}"><span class="ln">${l.n}</span><span class="lt"><b>${escapeHtml(topicOf(l))}</b><small>${escapeHtml(l.date)} · ${l.questions.length} vpr.</small></span></a>
+<ol class="qs">${qs}</ol>
+</li>`;
+  })
+  .join("\n");
 
 const sections = lectures
   .map((l, i) => {
-    const toc = l.questions
-      .map(
-        (q) =>
-          `<li><a href="#q${q.num}">${q.num ? `<b>${q.num}.</b> ` : ""}${inlineTitle(q.title)}</a></li>`
-      )
-      .join("");
     const cards = l.questions
       .map(
         (q) => `<details class="q" id="q${q.num}" open>
@@ -116,12 +133,9 @@ const sections = lectures
 </details>`
       )
       .join("\n");
-    return `<section role="tabpanel" class="lec" id="p${l.n}" aria-labelledby="tab-p${l.n}"${i ? " hidden" : ""}>
-<div class="lec-head"><h2>Predavanje ${l.n}</h2><span class="date">${escapeHtml(l.date)}</span></div>
-<div class="lec-grid">
-<nav class="toc" aria-label="Vprašanja"><h3>Vprašanja</h3><ol>${toc}</ol></nav>
+    return `<section class="lec" id="p${l.n}"${i ? " hidden" : ""}>
+<div class="lec-head"><span class="eyebrow">Predavanje ${l.n} · ${escapeHtml(l.date)}</span><h2>${escapeHtml(topicOf(l))}</h2></div>
 <div class="cards">${cards}</div>
-</div>
 </section>`;
   })
   .join("\n");
@@ -141,6 +155,7 @@ const html = `<!doctype html>
 <body>
 <header class="top">
   <div class="top-in">
+    <button id="menu" type="button" aria-label="Predavanja" aria-controls="side" aria-expanded="false">☰</button>
     <div class="brand"><h1>AKMM</h1><p>${escapeHtml(intro.replace(/^Zbirka odgovorov na vprašanja pri predmetu /i, "").replace(/\.$/, "").replace(/^./, (c) => c.toUpperCase()))}</p></div>
     <div class="tools">
       <input id="search" type="search" placeholder="Išči po ${nQuestions} vprašanjih …" aria-label="Iskanje">
@@ -149,12 +164,19 @@ const html = `<!doctype html>
     </div>
   </div>
 </header>
-<div class="tabbar"><div class="tabs" role="tablist" aria-label="Predavanja">${tabs}</div></div>
+<div class="shell">
+<aside class="side" id="side">
+<nav aria-label="Predavanja"><h3>Predavanja</h3><ol class="lecs">
+${sidebar}
+</ol></nav>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
 <main id="main">
 ${sections}
 <p id="empty" hidden>Ni zadetkov.</p>
-</main>
 <footer><p>Odgovori študentov za študente – ni uradno gradivo predmeta. Napake sprejmite z zdravo mero previdnosti in preverite pri predavanjih.</p></footer>
+</main>
+</div>
 <script src="app.js"></script>
 </body>
 </html>
