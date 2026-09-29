@@ -1,0 +1,14 @@
+{
+  "name": "akmm-site",
+  "version": "1.0.0",
+  "description": "Builds the static AKMM Q&A site from the Obsidian notes",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "katex": "^0.18.9",
+    "marked": "^18.0.14"
+  },
+  "private": true,
+  "type": "module"
+}

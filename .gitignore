@@ -1,0 +1,5 @@
+node_modules/
+# Lecture material (slides, PDFs, ...) is for private use only - never publish it.
+lectures/
+*.pdf
+*.pptx
