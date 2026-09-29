@@ -1,8 +1,11 @@
 ---
 tags:
+  - AKMM
+  - analiza-MKE
   - fakulteta
   - mag
-  - AKMM
+  - predavanja
+  - semester-2
 file_creation: 2026-02-23
 ---
 Zbirka odgovorov na vprašanja pri predmetu analiza konstrukcij z MKE.
@@ -1159,10 +1162,10 @@ $$
 \{v\} = \begin{bmatrix} \Psi_1(x) \\ \Psi_2(x) \end{bmatrix}, \quad \{v'\} = [B]^T = \begin{bmatrix} -\frac{1}{L} \\ \frac{1}{L} \end{bmatrix}
 $$
 
-Vstavimo v šibko obliko (upoštevamo $N_1 = -N(0)$ in $N_2 = N(L)$):
+Vstavimo v šibko obliko (upoštevamo $N_1 = N(0)$ in $N_2 = N(L)$):
 
 $$
-\begin{bmatrix} 0 \\ N_2 \end{bmatrix} + \begin{bmatrix} N_1 \\ 0 \end{bmatrix} - \int_0^L EA [B]^T [B] \,dx \{U\} + \int_0^L n(x)\{v\}\,dx = 0
+\begin{bmatrix} 0 \\ N_2 \end{bmatrix} - \begin{bmatrix} N_1 \\ 0 \end{bmatrix} - \int_0^L EA [B]^T [B] \,dx \{U\} + \int_0^L n(x)\{v\}\,dx = 0
 $$
 
 Izračunamo integral produkta matrik $[B]^T [B]$:
@@ -1174,7 +1177,7 @@ $$
 Preuredimo enačbo, da dobimo znani sistem:
 
 $$
-\frac{EA}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} U_1 \\ U_2 \end{Bmatrix} = \begin{Bmatrix} N_1 \\ N_2 \end{Bmatrix} + \begin{Bmatrix} \int_0^L n(x)\Psi_1(x)\,dx \\ \int_0^L n(x)\Psi_2(x)\,dx \end{Bmatrix}
+\frac{EA}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} U_1 \\ U_2 \end{Bmatrix} = \begin{Bmatrix} -N_1 \\ N_2 \end{Bmatrix} + \begin{Bmatrix} \int_0^L n(x)\Psi_1(x)\,dx \\ \int_0^L n(x)\Psi_2(x)\,dx \end{Bmatrix}
 $$
 
 ## 104. Izpeljite sistem enačb za torzijsko obremenjeni linijski KE.
@@ -1189,7 +1192,7 @@ kjer je $G$ strižni modul, $I_t$ torzijski vztrajnostni moment (pri splošnih p
 Končni sistem enačb je analogno:
 
 $$
-\frac{GI_t}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} \Phi_1 \\ \Phi_2 \end{Bmatrix} = \begin{Bmatrix} M_{x1} \\ M_{x2} \end{Bmatrix} + \begin{Bmatrix} \int_0^L m(x)\Psi_1(x)\,dx \\ \int_0^L m(x)\Psi_2(x)\,dx \end{Bmatrix}
+\frac{GI_t}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} \Phi_1 \\ \Phi_2 \end{Bmatrix} = \begin{Bmatrix} -M_{x1} \\ M_{x2} \end{Bmatrix} + \begin{Bmatrix} \int_0^L m(x)\Psi_1(x)\,dx \\ \int_0^L m(x)\Psi_2(x)\,dx \end{Bmatrix}
 $$
 
 ## 105. Prednosti in slabosti uporabe linijskih KE.
