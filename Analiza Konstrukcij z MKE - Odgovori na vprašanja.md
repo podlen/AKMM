@@ -8,19 +8,25 @@ file_creation: 2026-02-23
 Zbirka odgovorov na vprašanja pri predmetu analiza konstrukcij z MKE.
 
 # Predavanje 1 - 16.2.2026
+
 ## 1. Značilnosti geometrijskega modela.
+
 Geometrijski model popisuje **geometrijski prostor** analiziranega območja. Ponavadi geometrijski model izdelamo s CAD programi.
 
-Geom. model vključuje vse elemente geometrijskega območja analiziranega problema. Ponavadi ga je za potrebe numeričnega modela poenostaviti. Za poenostavitve je ključno poznati fizikalno ozadje problema. 
+Geom. model vključuje vse elemente geometrijskega območja analiziranega problema. Ponavadi ga je treba za potrebe numeričnega modela poenostaviti. Za poenostavitve je ključno poznati fizikalno ozadje problema.
 
 Poenostavimo lahko na več načinov:
+
 - [ ] simetrije
 - [ ] če je več enakih elementov - upoštevamo le enega (lopatice turbine npr.)
-- [ ] Preproste poenostavitve - glave vijakov, navoji vijakov. Zmanjšamo kompleksnost mreže, brez da prizadenemo natančnost izračuna.
+- [ ] Preproste poenostavitve - glave vijakov, navoji vijakov. Zmanjšamo kompleksnost mreže, ne da bi zmanjšali natančnost izračuna.
+
 ## 2. Značilnosti fizikalnega modela.
+
 Fizikalni model popisuje **fizikalno dogajanje** v analiziranem območju. To ne pomeni enačbe $\rightarrow$ te so v matematičnem modelu.
 
-Fizikalno območje v obravnavanem območju je lahko povezano:
+Fizikalno dogajanje v obravnavanem območju lahko obsega:
+
 - [ ] mehansko stanje (mehanika deformabilnih teles)
 - [ ] termalno stanje
 - [ ] termo-mehansko stanje
@@ -30,29 +36,34 @@ Fizikalno območje v obravnavanem območju je lahko povezano:
 
 Dogajanje je lahko časovno spremenljivo ($\frac{\partial }{\partial t}\neq 0$) ali nespremenljivo ($\frac{\partial }{\partial t} = 0$).
 
-Razumevanje fizikalnega dogajanje je ključno, saj nam napačen fizikalni model vrača napačne rešitve problema - tudi če je numerični model napreden.
+Razumevanje fizikalnega dogajanja je ključno, saj nam napačen fizikalni model vrača napačne rešitve problema - tudi če je numerični model napreden.
 
-Razumevanje fizikalnega modela nam omogoča tudi vrednotenje rezultatov - pogledamo ali je rezultat fizikalno smiseln ali ne.
+Razumevanje fizikalnega modela nam omogoča tudi vrednotenje rezultatov - pogledamo, ali je rezultat fizikalno smiseln ali ne.
 
 ## 3. Značilnosti matematičnega modela.
 
-Matematični model opisuje fizikalno dogajanje z enačbami. Treba se je zavedati, da je matematični model približek dejanskega dogajanja - rabimo vedeti pod kakšnimi pogoji lahko enačbo uporabimo. 
+Matematični model opisuje fizikalno dogajanje z enačbami. Treba se je zavedati, da je matematični model približek dejanskega dogajanja - vedeti moramo, pod kakšnimi pogoji lahko enačbo uporabimo.
 
 # Predavanje 2 - 23.2.2026
+
 ## 4. Značilnosti numeričnega modela.
 
 Numerični model lahko enačbe izpolnjuje **eksaktno** - eksaktno reševanje:
-- [ ] To pomeni da je DE izpolnjena v vseh točkah območja (eksaktno), prav tako so eksaktno izpolnjeni RP in PP.
 
-V večini primerov eksaktne rešitve DE ni mogoče določiti. 
+- [ ] To pomeni, da je DE izpolnjena v vseh točkah območja (eksaktno), prav tako so eksaktno izpolnjeni RP in PP.
+
+V večini primerov eksaktne rešitve DE ni mogoče določiti.
 
 Zato enačbe lahko rešujemo tudi **aproksimativno**:
-- [ ] Rešitev je aproksimativna če DE ni izpolnjena v vseh točkah (eksaktno izpolnjena) ali pa ni izpolnjena na robovih območja (RP ali PP).
-Aproksimativno reševanje prevede reševanje DE v reševanje sistema linearnih enačb. 
+
+- [ ] Rešitev je aproksimativna, če DE ni izpolnjena v vseh točkah (eksaktno izpolnjena) ali pa ni izpolnjena na robovih območja (RP ali PP).
+
+Aproksimativno reševanje prevede reševanje DE v reševanje sistema linearnih enačb.
 Pri izbiri aproksimativne metode se je treba zanašati na značilnosti fizikalnega modela.
+
 ## 5. Kdaj je rešitev numeričnega modela eksaktna?
 
-Rešitev numeričnega modela je eksaktna ko rešitev eksaktno izpolnjuje DE na celotnem območju. Rešitev eksaktno izpolnjuje tudi RP in PP. 
+Rešitev numeričnega modela je eksaktna, ko rešitev eksaktno izpolnjuje DE na celotnem območju. Rešitev eksaktno izpolnjuje tudi RP in PP.
 
 ## 6. Opiši izhodišča MKR.
 
@@ -61,200 +72,252 @@ $$f(x+h) = f(x) + h f'(x) + \frac{h^2}{2!} f''(x) + \frac{h^3}{3!} f'''(x) + \ma
 
 To nam omogoča, da poljubni red odvoda zapišemo kot kombinacijo funkcijskih vrednosti.
 
-Rešitev problema z MKR so funkcijske vrednosti v diskretnih točkah. Med točkami lahko naknadno napnemo interpolacijsko funkcijo. Najbolj pogosti sta linearna in kvadratna funkcija. Polinomi višje stopnje nam lahko dajo ne-fizikalne rešitve.
+Rešitev problema z MKR so funkcijske vrednosti v diskretnih točkah. Med točkami lahko naknadno napnemo interpolacijsko funkcijo. Najbolj pogosti sta linearna in kvadratna funkcija. Polinomi višje stopnje nam lahko dajo nefizikalne rešitve.
 
-Primarni robni pogoji in primarni pogoji prehoda so pri MKR izpolnjeni eksaktno (to velja če imamo na robu/prehodu območja točko). Sekundarni pogoji pa so izpolnjeni aproksimativno preko aproksimacije odvoda.
+Primarni robni pogoji in primarni pogoji prehoda so pri MKR izpolnjeni eksaktno (to velja, če imamo na robu/prehodu območja točko). Sekundarni pogoji pa so izpolnjeni aproksimativno preko aproksimacije odvoda.
 
 ## 7. Prednosti in slabosti MKR.
 
-Prednost MKR je preprostost - še posebej za 1D in tudi 2D primere. MKR se uporablja tudi za obravnavo nestacionarnih primerov, kjer z MKR opišemo kako se problem razvija skozi čas.
+Prednost MKR je preprostost - še posebej za 1D in tudi 2D primere. MKR se uporablja tudi za obravnavo nestacionarnih primerov, kjer z MKR opišemo, kako se problem razvija skozi čas.
 
-Slabost MKR je obravnava problemov v 3D, saj je za njih težavno narediti mrežo (še posebej pri neki poljubni geometriji). Aproksimacija odvodov temelji na diferenčnih shemah, ki zahtevajo ekvidistančno mrežo. 
+Slabost MKR je obravnava problemov v 3D, saj je za njih težavno narediti mrežo (še posebej pri neki poljubni geometriji). Aproksimacija odvodov temelji na diferenčnih shemah, ki zahtevajo ekvidistančno mrežo.
 
 Pri MKR je čas računanja lahko daljši, saj je matrika koeficientov polna in nesimetrična.
+
 ## 8. Opiši izhodišča MKE.
 
 MKE bazira na integralski formulaciji problema. Za primer palice:
 $$\int_0^L\biggr[\frac{d}{dx}\biggr(EI_u\biggr(\frac{d}{dx}u(x) - \alpha\Delta T(x)\biggr)\biggr) + n(x)\biggr]v(x)\space dx = 0 $$
 
-Zgornjo funkcijo lahko *per-partes* integriramo in dobimo šibko obliko integralske formulacije, ki je osnova za izpeljavo MKE.
-
+Zgornjo enačbo lahko *per-partes* integriramo in dobimo šibko obliko integralske formulacije, ki je osnova za izpeljavo MKE.
 
 Obravnavano območje razdelimo na podobmočja - ta imenujemo končni elementi. Na območju KE aproksimiramo neznane veličine.
 
-
 ## 9. Prednosti in slabosti MKE.
 
-Prednosti je, da je v rešitvi DE zajeta celotna domena. Prav tako je prednost v tem, da so lahko KE poljubne velikosti, kar nam omogoča mreženje poljubnih geometrij.
+Prednost je, da je v rešitvi DE zajeta celotna domena. Prav tako je prednost v tem, da so lahko KE poljubne velikosti, kar nam omogoča mreženje poljubnih geometrij.
 
-Slabost MKE je računska intenzivnost. Obstajajo metode, ki pohitrijo izračune - izkorišča se simetričnost in pasovnost matrike koeficientov.  
+Slabost MKE je računska intenzivnost. Obstajajo metode, ki pohitrijo izračune - izkorišča se simetričnost in pasovnost matrike koeficientov.
 
 ## 10. Primerjaj MKR in MKE
 
 **Izpolnjevanje DE**
 MKR:
-- [ ] DE je izpolnjena po točkah. Med točke lahko napnemo aproksimacijsko funkcijo. 
+
+- [ ] DE je izpolnjena po točkah. Med točke lahko napnemo aproksimacijsko funkcijo.
+
 MKE:
+
 - [ ] DE je izpolnjena po celotnem območju (ne nujno eksaktno)
 
 **Upoštevanje RP**
 
-
 MKR:
+
 - [ ] Primarna količina je izpolnjena eksaktno, sekundarna pa aproksimativno (diferenčne sheme)
+
 MKE:
-- [ ] Primarna in sekundarna količina sta izpolnjeni eksaktno. To sledi iz izpeljave in *per-partes* integracije, ki znižuje red odvoda za 1 stopnjo na enkrat. Tako pridemo do eksaktnih izrazov za sekundarne robne pogoje.
+
+- [ ] Primarna in sekundarna količina sta izpolnjeni eksaktno. To sledi iz izpeljave in *per-partes* integracije, ki znižuje red odvoda za 1 stopnjo naenkrat. Tako pridemo do eksaktnih izrazov za sekundarne robne pogoje.
+
 # Predavanje 3 - 2.3.2026
 
 ## 11. Opiši izhodišča MRE.
+
 MRE je zasnovana na integralski formulaciji - natančneje na inverzni obliki integralske formulacije.
 
-Ograja obravnavanega območja je razdeljena na pod-območja - robne elemente. V območju znotraj robnega elementa(v robnem elementu) **aproksimiramo** neznane veličine.
+Ograja obravnavanega območja je razdeljena na podobmočja - robne elemente. V območju znotraj robnega elementa (v robnem elementu) **aproksimiramo** neznane veličine.
 
-MRE se uporablja za potencialne probleme. Uporablja se tudi za reševanje fizikalnih problemov, ki niso prostorsko omejeni - verjetno kak elektromagnetizem.
+MRE se uporablja za potencialne probleme. Uporablja se tudi za reševanje fizikalnih problemov, ki niso prostorsko omejeni (npr. elektromagnetizem).
+
 ## 12. Prednosti in slabosti MRE.
+
 **Prednosti**:
+
 - Reševanje območnega problema prevedemo na iskanje neznanih veličin na ograji. Elementi so samo na robu območja, kar pomeni, da imamo za izračunati manj neznank.
 - Primerno za reševanje potencialnih problemov (gravitacijski potencial, ustaljen prevod toplote, električni potencial)
 - Primerno za reševanje fizikalnih problemov, ki niso prostorsko omejeni
+
 **Slabosti**:
+
 - Poln sistem enačb
 - Za izračun vrednosti znotraj obravnavanega območja so potrebni dodatni izračuni.
+
 ## 13. Primerjaj MKE in MRE.
+
 Obe metodi izvirata iz integralske formulacije, kar pomeni, da je rešitev definirana na celotnem območju. Glavna razlika med metodami je sestava sistema enačb, ki ga uporabimo za izračun problema. Togostna matrika je pri MKE simetrična in pasovna. Pri MRE pa je matrika polna, ampak nekoliko manjša.
 
-Pri obeh metodah je rešitev vrednost primarne in sekundarne spremenljivke v vozliščih. Pri MKE so vozlišča postavljena po celotni domeni (na ograji in v notranjosti). Pri MRE pa le na ograji. 
+Pri obeh metodah je rešitev vrednost primarne in sekundarne spremenljivke v vozliščih. Pri MKE so vozlišča postavljena po celotni domeni (na ograji in v notranjosti). Pri MRE pa le na ograji.
 
-V obeh primerih so robni pogoji eksaktno določeni. 
+V obeh primerih so robni pogoji eksaktno določeni.
 
 Pogoji prehoda so pri MKE eksaktno določeni (primarna in sekundarna spremenljivka). Pri MRE pa pogojev prehoda nimamo, saj vse točke ležijo na robu območja.
-## 14. Opiši izhodišča MKV.
-MKV je zasnovana na integralski formulaciji problema, pri čemer se integral po območju (z Gaussovim izrekom) preoblikuje na integral po ograji, ki omejuje obravnavano območje. 
 
-Obravnavano območje je razdeljeno na pod-območja, ki jih imenujemo končni volumni. Znotraj KV so neznane vrednosti **primarne veličine v eni točki**.
+## 14. Opiši izhodišča MKV.
+
+MKV je zasnovana na integralski formulaciji problema, pri čemer se integral po območju (z Gaussovim izrekom) preoblikuje na integral po ograji, ki omejuje obravnavano območje.
+
+Obravnavano območje je razdeljeno na podobmočja, ki jih imenujemo končni volumni. Znotraj KV so neznane vrednosti **primarne veličine v eni točki**.
+
 ## 15. Prednosti in slabosti MKV.
+
 **Prednosti**:
+
 - reševanje območnega problema prevedemo na iskanje vrednosti v posamezni točki - diskretizacija.
-- enostavno izpolnjevanje PP med celicami oz. pod-območji.
+- enostavno izpolnjevanje PP med celicami oz. podobmočji.
 - Podobno kot MKR - primarna spremenljivka v točki.
 - Primerno za reševanje problemov prevoda toplote, toka tekočine
 
 **Slabosti**:
-- Robni pogoji primarnih veličin so izpolnjeni aproksimativno, saj točka v kateri določimo primarno veličino ni na robu KV.
-## 16. Primerjaj MKR in MKV.
-Obe metodi rešujeta problem z iskanjem vrednosti primarne veličine v diskretnih točkah območja. 
 
-Razlikujeta se v matematični formulaciji. MKR temelji na aproksimaciji odvodov s funkcijskimi vrednostmi (s pomočjo razvoja v Taylorjevo vrsto). MKV pa temelji na integralski formulaciji, ki jo prevedemo na integral po ograji območja. Integral se nato aproksimira enako kot pri MKR. 
+- Robni pogoji primarnih veličin so izpolnjeni aproksimativno, saj točka, v kateri določimo primarno veličino ni na robu KV.
+
+## 16. Primerjaj MKR in MKV.
+
+Obe metodi rešujeta problem z iskanjem vrednosti primarne veličine v diskretnih točkah območja.
+
+Razlikujeta se v matematični formulaciji. MKR temelji na aproksimaciji odvodov s funkcijskimi vrednostmi (s pomočjo razvoja v Taylorjevo vrsto). MKV pa temelji na integralski formulaciji, ki jo prevedemo na integral po ograji območja. Integral se nato aproksimira enako kot pri MKR.
 
 Pri MKR je primarni robni pogoj izpolnjen eksaktno (točka mora biti na robu območja). Sekundarni RP pa so aproksimirani preko vrednosti primarne spremenljivke. Pri MKV je ravno obratno. Sekundarni RP so eksaktno izpolnjeni, primarni RP pa so izpolnjeni aproksimativno z interpolacijo od računske točke KV do roba.
 
 Za MKR so primarni PP izpolnjeni eksaktno, sekundarni pa aproksimativno. Pri MKV je obratno.
+
 ## 17. Primerjaj MKE in MKV.
+
 Obe metodi izvirata iz integralske formulacije problema. Pri MKE neznano veličino aproksimiramo po celotnem območju končnega elementa. Pri MKV pa se integral po območju prevede na integral po površini (ograji volumna), primarna veličina pa se izračuna le v eni diskretni točki znotraj posameznega KV.
 
-Robni pogoji so pri MKE izpolnjeni eksaktno (primarni in sekundarni). Pri MKV so primarni RP izpolnjeni aproksimativno (z interpolacijo). Sekundarni RP so izpolnjeni eksaktno. 
+Robni pogoji so pri MKE izpolnjeni eksaktno (primarni in sekundarni). Pri MKV so primarni RP izpolnjeni aproksimativno (z interpolacijo). Sekundarni RP so izpolnjeni eksaktno.
 
 Pogoji prehoda so pri MKE izpolnjeni eksaktno. Pri MKV je pogoj prehoda za sekundarne spremenljivke izpolnjen eksaktno, vrednost primarne spremenljivke med KV pa je določena aproksimativno.
-## 18. Komentiraj izpolnjevanje diferencialne enačbe, robnih pogojev in pogojev konsistentnosti prehoda v primeru uporabe MKR.
-Diferencialna enačba je izpolnjena aproksimativno le v diskretnih točkah. 
 
-Primarni RP so izpolnjeni eksaktno - pogoj za to je da je računska točka na robu območja. Sekundarni RP so izpolnjeni aproksimativno preko vrednosti primarne spremenljivke (rabimo uporabiti dodatne točke, če uporabljamo centralno diferenčno shemo)
+## 18. Komentiraj izpolnjevanje diferencialne enačbe, robnih pogojev in pogojev konsistentnosti prehoda v primeru uporabe MKR.
+
+Diferencialna enačba je izpolnjena aproksimativno le v diskretnih točkah.
+
+Primarni RP so izpolnjeni eksaktno - pogoj za to je, da je računska točka na robu območja. Sekundarni RP so izpolnjeni aproksimativno preko vrednosti primarne spremenljivke (uporabiti moramo dodatne točke, če uporabljamo centralno diferenčno shemo).
 
 PP so izpolnjeni na enak način kot RP.
+
 ## 19. Komentiraj izpolnjevanje diferencialne enačbe, robnih pogojev in pogojev konsistentnosti prehoda v primeru uporabe MKE.
+
 Diferencialna enačba je izpolnjena aproksimativno po celotnem območju.
 
 Primarni in sekundarni RP so izpolnjeni eksaktno.
 
 Za PP velja enako kot RP.
+
 ## 20. Komentiraj izpolnjevanje diferencialne enačbe, robnih pogojev in pogojev konsistentnosti prehoda v primeru uporabe MRE.
-Diferencialna enačba je **v notranjosti območja izpolnjena eksaktno**, po ograji območja pa je izpolnjena aporksimativno.
+
+Diferencialna enačba je **v notranjosti območja izpolnjena eksaktno**, po ograji območja pa je izpolnjena aproksimativno.
 
 Primarni in sekundarni RP so izpolnjeni eksaktno.
 
 Ker so elementi samo na robu območja, PP ni.
 
 **DODATNO:**
-*   **Zakaj je DE v notranjosti izpolnjena eksaktno?**
-    Z dvakratno *per-partes* integracijo (inverzna oblika) prenesemo odvode na testno funkcijo $v(x)$. Pri MRE za $v(x)$ izberemo **fundamentalno (analitično) rešitev** DE, ki se obnaša kot Diracova delta funkcija. Zaradi njenih matematičnih lastnosti integral po notranjosti območja "izgine" oz. se skrči točno v iskano vrednost. Fizika v notranjosti je tako upoštevana 100-% eksaktno, brez aproksimacij. Aproksimacija se vrši le z diskretizacijo na robu (ograji).
-*   **Zakaj je to hkrati slabost?**
+
+- **Zakaj je DE v notranjosti izpolnjena eksaktno?**
+    Z dvakratno *per-partes* integracijo (inverzna oblika) prenesemo odvode na testno funkcijo $v(x)$. Pri MRE za $v(x)$ izberemo **fundamentalno (analitično) rešitev** DE, ki se obnaša kot Diracova delta funkcija. Zaradi njenih matematičnih lastnosti integral po notranjosti območja "izgine" oz. se skrči točno v iskano vrednost. Fizika v notranjosti je tako upoštevana 100 % eksaktno, brez aproksimacij. Aproksimacija se vrši le z diskretizacijo na robu (ograji).
+- **Zakaj je to hkrati slabost?**
     Reševanje osnovnega sistema enačb nam da rezultate **samo na robu**. Če želimo določiti vrednost v poljubni notranji točki (npr. $x = a$), moramo fundamentalno (delta) funkcijo pomakniti v to koordinato in **naknadno izračunati nov integral** na podlagi že znanih robnih vrednosti. Vsaka točka v notranjosti torej zahteva svoj, dodaten računski korak.
+
 ## 21. Komentiraj izpolnjevanje diferencialne enačbe, robnih pogojev in pogojev konsistentnosti prehoda v primeru uporabe MKV.
+
 Diferencialna enačba je izpolnjena aproksimativno (v povprečju) po posameznem končnem volumnu, vrednost primarne spremenljivke pa določimo v 1 točki.
 
 Sekundarni RP so izpolnjeni eksaktno. Primarni pa aproksimativno z interpolacijo od središča volumna do roba (zato ker računska točka nikoli ni na robu območja).
 
 Za PP velja enako kot RP.
-## 22. Priprava geometrijskega modela. 
+
+## 22. Priprava geometrijskega modela.
+
 Priprava geometrijskega modela je prvi korak pri reševanju problema z MKE.
 
 Večino časa je treba geometrijski model poenostaviti:
-- detajle, ki bistveno ne vplivajo na rezultate analize odstranimo iz geometrijskega modela.
+
+- detajle, ki bistveno ne vplivajo na rezultate analize, odstranimo iz geometrijskega modela.
 - pod določenimi pogoji lahko volumske geometrijske modele nadomestimo s ploskovnimi ali celo z linijskimi modeli.
-Da lahko to naredimo rabimo poznati fizikalno ozadje problema. Tako lahko osmislimo poenostavitve.
+
+Da lahko to naredimo, moramo poznati fizikalno ozadje problema. Tako lahko osmislimo poenostavitve.
 
 ## 23. Izbira oblike KE.
+
 Glede na geometrijski model lahko izbiramo med različnimi končnimi elementi:
 **1D KE**:
+
 - 2-vozliščni KE
 - 3-vozliščni KE
-- Število vozlišč v KE vpliva na natančnost rešitve. (enako velik 3-vozliščni KE bolj natančno popiše dejansko stanje kot 2-vozliščni KE). 
+- Število vozlišč v KE vpliva na natančnost rešitve. (enako velik 3-vozliščni KE bolj natančno popiše dejansko stanje kot 2-vozliščni KE).
 - 3-vozliščni KE lahko bolj natančno popišejo geometrijo - z njimi lahko popisujemo ukrivljene oblike.
 
-
 **2D KE**:
+
 - 3-vozliščni KE
 - 4-vozliščni KE
 - 6-vozliščni KE
 - 9-vozliščni KE
 
 **3D KE**:
+
 - Tetraedri
 - Prizmatični KE
 
-Na splošno so boljši KE tisti, ki imajo več vozlišč, saj nam dajo bolj natančno rešitev. Prav tako lahko KE z več vozlišči znotraj elementa uporabljajo bolj kompleksno interpolacijsko funkcijo - zato rečemo, da so KE z več vozlišči bolj natančn
+Na splošno so boljši KE tisti, ki imajo več vozlišč, saj nam dajo bolj natančno rešitev. Prav tako lahko KE z več vozlišči znotraj elementa uporabljajo bolj kompleksno interpolacijsko funkcijo - zato rečemo, da so KE z več vozlišči bolj natančni.
 
-Z več vozlišči se podaljša čas izračuna. Prav tako je potrebno v poštev vzeti čas za pripravo mreže. 
+Z več vozlišči se podaljša čas izračuna. Prav tako je potrebno v poštev vzeti čas za pripravo mreže.
 
 Pri izbiri oblike KE se lahko navežemo še na mreženje, ki vpliva na obliko uporabljenih KE:
-- **Prosto mreženje**: Uporablja se predvsem trikotne (2D) in tetraedrične (3D) KE. Priprava mreže je hitra in avtomatizirana, primerna za zelo kompleksne oblike.
-- **Strukturirano mreženje:** Uporablja se štirikotne (2D) in heksaedrične/kockaste (3D) elemente. Zahteva več časa za pripravo geometrije, a pogosto daje boljše rezultate.
+
+- **Prosto mreženje**: Uporabljajo se predvsem trikotni (2D) in tetraedrični (3D) KE. Priprava mreže je hitra in avtomatizirana, primerna za zelo kompleksne oblike.
+- **Strukturirano mreženje:** Uporabljajo se štirikotni (2D) in heksaedrični/kockasti (3D) elementi. Zahteva več časa za pripravo geometrije, a pogosto daje boljše rezultate.
 
 # Predavanje 4 - 9.3.2026
+
 ## 24. Prednosti in slabosti prostega mreženja.
+
 **Prednosti**:
+
 - Hitro in avtomatsko
-- Dobro ko hočemo videti, kje so kritična mesta
+- Dobro, ko hočemo videti, kje so kritična mesta
 - Omogoča mreženje kompleksnih oblik
 
 **Slabosti**:
+
 - Dobljen rezultat je manj natančen, kot če bi uporabljali strukturirano mrežo
-- Uporabljeni so trikotni oz. tetraedrični KE. Ti elementi so bolj togi - zato jih za natančno rešitev potrebujemo več kot pri strukturirani mreži. 
+- Uporabljeni so trikotni oz. tetraedrični KE. Ti elementi so bolj togi - zato jih za natančno rešitev potrebujemo več kot pri strukturirani mreži.
+
 ## 25. Prednosti in slabosti strukturiranega mreženja.
+
 **Prednosti**:
+
 - Mreža je prilagojena problemu.
-- Bolj natančni izračuni, saj so uporabljeni heksaedrični, kvadratni KE.
+- Bolj natančni izračuni, saj so uporabljeni heksaedrični oz. štirikotni KE.
+
 **Slabosti**:
-- Ker je mreža specifična glede na problem jo moramo sami narediti, kar vzame več časa.
+
+- Ker je mreža specifična glede na problem, jo moramo sami narediti, kar vzame več časa.
+
 ## 26. Kako lahko vplivamo na obliko mreže 2D KE.
-Na obliko mreže 2D KE vplivamo tako, da predpišemo število elementov oz. število vozlišč na robu območja oz. pod-območja. Vozlišča na ograji lahko razporedimo enakomerno ali pa uporabimo "bias", ki v določeno smer zgosti elemente.
+
+Na obliko mreže 2D KE vplivamo tako, da predpišemo število elementov oz. število vozlišč na robu območja oz. podobmočja. Vozlišča na ograji lahko razporedimo enakomerno ali pa uporabimo "bias", ki v določeno smer zgosti elemente.
 
 Prav tako lahko na obliko mreže vplivamo z izbiro geometrije KE. Lahko izberemo trikotne KE, s katerimi je mreženje vedno izvedljivo.
 
-Lahko izberemo štirikotne KE, s katerimi mreženje ni vedno izvedljivo. (Območje razdeljeno na pod-območja, ki imajo 3,4 ali 5 robov)
+Lahko izberemo štirikotne KE, s katerimi mreženje ni vedno izvedljivo. (Območje razdeljeno na podobmočja, ki imajo 3, 4 ali 5 robov)
 
-Lahko uporabimo tudi kombinacijo obeh elementov. Moramo poskrbeti da imamo na kritičnih območjih štirikotne KE.
+Lahko uporabimo tudi kombinacijo obeh elementov. Moramo poskrbeti, da imamo na kritičnih območjih štirikotne KE.
 
-Na mrežo lahko vplivamo tudi z načinom delitve na pod-območja.
-
+Na mrežo lahko vplivamo tudi z načinom delitve na podobmočja.
 
 ## 27. Kriterij za oceno kvalitete mreže 2D KE.
+
 Kriterijev za oceno mreže je več:
-- razmerje med najdaljšo on najkrajšo stranico elementa:
+
+- razmerje med najdaljšo in najkrajšo stranico elementa:
 	- $$1\leq f_r=\frac{a}{b}\leq \infty$$
 	- $$f_{max}\leq5$$
 	- ![[Pasted image 20260309214606.png]]
-	
+
 - največji in najmanjši notranji kot trikotnega ali štirikotnega elementa
 	- $$0°\leq\alpha\leq180°$$
 	- $$45°\leq\alpha_{min}$$
@@ -269,34 +332,43 @@ Kriterijev za oceno mreže je več:
 	- $$0\leq f_g=\frac{h}{L}\leq \infty$$
 	- $$f_{gmax}\leq0.1$$
 	- ![[Pasted image 20260309215053.png]]
+
 ## 28. Kako lahko vplivamo na obliko mreže 3D KE.
+
 Pri prostem mreženju na obliko vplivamo z mrežo, narejeno na površinah (s trikotniki), ki definirajo volumen. Mrežo na površini definiramo z gostoto točk na ograji (enakomerno ali "bias"). Na gostoto tetraedrov v sami notranjosti volumna lahko vplivamo le delno (z načinom generacije) in predvsem posredno preko mreže na površini.
 
-Pri strukturiranem mreženju na obliko mreže vplivamo tako, da kompleksno geometrijo razdelimo na enostavna pod-območja ali pa (pri swept meshingu) določimo izhodiščno ploskev, na kateri je 2D mreža, ter izberemo smer generiranja heksaedričnih KE v prostor.
+Pri strukturiranem mreženju na obliko mreže vplivamo tako, da kompleksno geometrijo razdelimo na enostavna podobmočja ali pa (pri swept meshingu) določimo izhodiščno ploskev, na kateri je 2D mreža, ter izberemo smer generiranja heksaedričnih KE v prostor.
+
 ## 29. Kriterij za oceno kvalitete mreže 3D KE.
+
 Kriteriji za oceno kvalitete mreže so enaki kot pri 2D mreži:
+
 - razmerje med najdaljšo in najkrajšo stranico
 - največji in najmanjši notranji kot na ploskvi, ki omejuje volumski KE
 - oblikovni faktor (se računa le za tetraedrični KE)
 	- $$1\geq f_\Delta=\frac{V_\Delta}{V_{\Delta id}}\geq0$$
 	- $$f_{\Delta min}\geq0.5$$
 - odstopanje ploskve KE od geometrije mreženega območja
+
 ## 30. Načini strukturiranega mreženja.
-Pri mreženju 2D struktur moramo celotno območje razdeliti na pod-območja, ki imajo 3,4 ali 5 robov. Program lahko na takem območju naredi strukturirano mrežo z 4 kotnimi elementi. 
+
+Pri mreženju 2D struktur moramo celotno območje razdeliti na podobmočja, ki imajo 3, 4 ali 5 robov. Program lahko na takem območju naredi strukturirano mrežo s štirikotnimi elementi.
 
 Pri mreženju volumskih modelov imamo 2 možnosti:
 
-Ena možnost je da geometrijo razdelimo na pod-območja. Ta pod-območja ne smejo vsebovati lukenj, vrinjenih ploskev, robov in točk. Odstraniti moramo tudi vse nepotrebne elemente  - pomembnost priprave geometrije. 
-Po temu ko smo območje razdelili na pod-območja določimo koliko elementov oz. vozlišč bo na ograjah (na robovih) med pod-območji. Lahko so razporejena enakomerno ali ne. Po temu ko smo to naredili lahko naredimo heksaedrično strukturirano mrežo. 
+Ena možnost je, da geometrijo razdelimo na podobmočja. Ta podobmočja ne smejo vsebovati lukenj, vrinjenih ploskev, robov in točk. Odstraniti moramo tudi vse nepotrebne elemente - pomembnost priprave geometrije.
+Potem ko smo območje razdelili na podobmočja, določimo, koliko elementov oz. vozlišč bo na ograjah (na robovih) med podobmočji. Lahko so razporejena enakomerno ali ne. Ko smo to naredili, lahko naredimo heksaedrično strukturirano mrežo.
 
 Drug način izdelave strukturirane mreže je sweep mesh. Na čelni ploskvi geometrije moramo narediti strukturirano mrežo - če želimo imeti heksaedrične KE moramo uporabiti štirikotne elemente. Nato izberemo število vozlišč na robovih čelne ploskve in število vozlišč v vzdolžni smeri. Nato lahko generiramo mrežo, ki ima po celotnem prerezu enako topologijo tj. število vozlišč in število elementov.
 
 # Predavanje 5 - 16.3.2026
+
 ## 31. Določitev fizikalnih lastnosti materiala.
 
 Fizikalne lastnosti problema nam poleg diferencialne enačbe, robnih pogojev in območja reševanja določajo lastnosti problema oz. sistema, ki ga hočemo rešiti.
 
-Ko rešujemo reduciran problem - npr. upogib 3D konstrukcije v 1D moramo definirati dodatne materialne lastnosti, ki nam omogočajo, da upoštevamo lastnosti 3D geometrije v 1D.
+Ko rešujemo reduciran problem - npr. upogib 3D konstrukcije v 1D, moramo definirati dodatne materialne lastnosti, ki nam omogočajo, da upoštevamo lastnosti 3D geometrije v 1D.
+
 ## 32. Določitev geometrijskih lastnosti ploskovnih KE.
 
 Ploskovnim elementom moramo določiti še debelino KE in normalo na površino KE.
@@ -304,11 +376,12 @@ Ploskovnim elementom moramo določiti še debelino KE in normalo na površino KE
 ## 33. Določitev geometrijskih lastnosti linijskih KE.
 
 Linijskim elementom moramo definirati karakteristike prereza:
+
 - ploščina prereza - $A$
 - težiščni vztrajnostni momenti ploskve - $I_x, I_y$ in $I_{xy}$
 - torzijski vztrajnostni moment - $I_t$
 
-Definirati moramo tudi lego prereza glede na težiščnico - od te lege je so odvisni vztrajnostni momenti prereza.
+Definirati moramo tudi lego prereza glede na težiščnico - od te lege so odvisni vztrajnostni momenti prereza.
 
 Prav tako moramo definirati lego glavnih vztrajnostnih osi.
 
@@ -337,19 +410,18 @@ $$\begin{Bmatrix}\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \fr
 \frac{\partial T}{\partial z}
 \end{Bmatrix}+q_v = 0$$
 
-Enačbo integriramo in pomnožimo z $v(x)$:
+Enačbo pomnožimo z $v$ in integriramo:
 
 $$\int_\Omega(-\nabla^T\cdot \mathbf{q})\,v\, d\Omega + \int_\Omega q_v v\, d\Omega = 0$$
 
 Osredotočimo se na izraz v prvem integralu in zapišemo sledeče:
 
 ---
-*Pri produktnem pravilu z divergenco velja, da kadar delujemo na produkt vektorskega polja $\mathbf{q}$ in skalarne funkcije $v$, dobimo:
+*Pri produktnem pravilu z divergenco velja, da kadar delujemo na produkt vektorskega polja $\mathbf{q}$ in skalarne funkcije $v$, dobimo:*
 
 $$\nabla^T\cdot(\mathbf{q}\, v) = (\nabla^T\cdot \mathbf{q})\,v + \mathbf{q}^T(\nabla v)$$
 
-*Drugi člen vsebuje $\nabla v$ in ne $\nabla \cdot v$, ker je $v$ skalarna funkcija — divergenca 
-skalarја nima smisla. Operator $\nabla v$ predstavlja **gradient** skalarja $v$, ki vrne vektor parcialnih odvodov:*
+*Drugi člen vsebuje $\nabla v$ in ne $\nabla \cdot v$, ker je $v$ skalarna funkcija — divergenca skalarja nima smisla. Operator $\nabla v$ predstavlja **gradient** skalarja $v$, ki vrne vektor parcialnih odvodov:*
 
 $$\nabla v = \begin{Bmatrix}
 \frac{\partial v}{\partial x}\\
@@ -368,7 +440,7 @@ Izraz lahko vstavimo v integral in preko Gaussovega izreka dobimo:
 
 $$\begin{align} \int_\Omega(-\nabla^T\cdot \mathbf{q})\,v\, d\Omega &= -\int_\Omega \nabla^T\cdot(\mathbf{q}\, v)\, d\Omega + \int_\Omega \mathbf{q}^T(\nabla v)\, d\Omega \\ &= -\int_\Gamma \mathbf{q}^T\mathbf{n}\, v\, d\Gamma + \int_\Omega \mathbf{q}^T(\nabla v)\, d\Omega \end{align}$$
 
-Splošna enačba potem zgleda tako:
+Splošna enačba je potem:
 
 $$\int_\Omega \mathbf{q}^T(\nabla v)\, d\Omega - \int_\Gamma (\mathbf{q}^T\mathbf{n})\,v\, d\Gamma + \int_\Omega q_v v\, d\Omega = 0$$
 
@@ -386,36 +458,31 @@ Po območju KE se temperaturno polje interpolira preko oblikovnih funkcij:
 
 $$T(x,y,z) \approx\hat T(x,y,z) = \sum_{j=1}^{N_v}T_j\psi_j(x,y,z)$$
 
-
 Vsota gre od 1 do števila vozlišč v končnem elementu (v primeru heksaedričnega KE je to vsaj 8 - KE ima vsaj 8 vozlišč).
 
-## 36. Interpolacija geometrije v primeru izoparametričnega KE. 
+## 36. Interpolacija geometrije v primeru izoparametričnega KE.
 
 Izoparametrični KE nam omogočajo, da popišemo bolj kompleksno geometrijo - izoparametrični elementi so lahko "nepravilne" oblike in lahko bolje popisujejo geometrijo.
 
-Nepravilno obliko dobimo tako, da KE iz naravnega KS preslikamo v kartezični KS. To naredimo preko naslednjih funkcij: 
+Nepravilno obliko dobimo tako, da KE iz naravnega KS preslikamo v kartezični KS. To naredimo preko naslednjih funkcij:
 
 $$x = x(\tilde x, \tilde y, \tilde z) = \sum_{j=1}^{N_v}x_j \tilde \psi_j( \tilde x, \tilde y, \tilde z)$$
 
-
 $$y = y(\tilde x, \tilde y, \tilde z) = \sum_{j=1}^{N_v}y_j \tilde \psi_j (\tilde x, \tilde y, \tilde z)$$
-
 
 $$z = z (\tilde x,\tilde y, \tilde z) = \sum_{j=1}^{N_v} z_j \tilde \psi_j ( \tilde x, \tilde y, \tilde z)$$
 
-
 ## 37. Razlika med Kartezijskim in naravnim koordinatnim sistemom.
 
-Naravni koordinatni sistem je namišljen prostor, kjer je geometrija končnega elementa "pravilna", pravokotna. Koordinatni sistem je brez-dimenzijski (koordinate $(\tilde x,\tilde y, \tilde z)$ gredo običajno od -1 do +1), kar poenostavi numerično integriranje.
+Naravni koordinatni sistem je namišljen prostor, kjer je geometrija končnega elementa "pravilna", pravokotna. Koordinatni sistem je brezdimenzijski (koordinate $(\tilde x,\tilde y, \tilde z)$ gredo običajno od -1 do +1), kar poenostavi numerično integriranje.
 
 Za KE v naravnem koordinatnem sistemu lahko brez problema zapišemo funkcijo za interpolacijo primarne spremenljivke.
 
-V kartezičnem koordinatnem sistemu je lahko KE poljubne oblike - zanj ne moremo napisati interpolacijskih funkcij. Zato rabimo interpolacijsko funkcijo preslikati iz naravnega v kartezični koordinatni sistem.
+V kartezičnem koordinatnem sistemu je lahko KE poljubne oblike - zanj ne moremo napisati interpolacijskih funkcij. Zato moramo interpolacijsko funkcijo preslikati iz naravnega v kartezični koordinatni sistem.
 
 ## 38. Kaj predstavlja Jacobijeva matrika?
 
 Jacobijeva matrika predstavlja parcialne odvode kartezičnih koordinat $(x,y,z)$ po naravnih koordinatah $(\tilde x,\tilde y, \tilde z)$.  Predstavlja matematično transformacijo (preslikavo) med obema koordinatnima sistemoma in omogoča preračunavanje iz dejanske geometrije v referenčni naravni sistem elementa.
-
 
 # Predavanje 6 - 23.3.2026
 
@@ -501,28 +568,28 @@ Diferencial volumna postane mešani produkt:
 $$
 \begin{aligned}
 d\Omega &= \vec{a}(\vec{b}\times\vec{c}) \\
-&= \begin{vmatrix} 
+&= \begin{vmatrix}
 \frac{\partial x}{\partial\tilde{x}} & \frac{\partial y}{\partial\tilde{x}} & \frac{\partial z}{\partial\tilde{x}}\\
-\frac{\partial x}{\partial\tilde{y}} & \frac{\partial y}{\partial\tilde{y}} & \frac{\partial z}{\partial\tilde{y}}\\ 
+\frac{\partial x}{\partial\tilde{y}} & \frac{\partial y}{\partial\tilde{y}} & \frac{\partial z}{\partial\tilde{y}}\\
 \frac{\partial x}{\partial\tilde{z}} & \frac{\partial y}{\partial\tilde{z}} & \frac{\partial z}{\partial\tilde{z}}
 \end{vmatrix} d\tilde{x}\,d\tilde{y}\,d\tilde{z} \\
 &= |J|\,d\tilde{x}\,d\tilde{y}\,d\tilde{z} = |J|\,d\tilde\Omega
 \end{aligned}
 $$
 
-Jakobijeva matrika je odvisna le od koordinat vozlišč v kartezijskem KS. Za heksaedrični element so meje integracije od $-1$ do $+1$ v vsaki smeri.
+Jacobijeva matrika je odvisna le od koordinat vozlišč v kartezičnem KS. Za heksaedrični element so meje integracije od $-1$ do $+1$ v vsaki smeri.
 
 ## 43. Prehod iz Kartezijevega v naravni KS pri integriranju po površini
 
 Diferencial površine je dolžina vektorskega produkta vektorjev ploskve:
 
 $$
-d\Gamma = |\vec{a}\times\vec{b}| = 
-\begin{vmatrix} 
-\vec{e}_x & \vec{e}_y & \vec{e}_z \\ 
-\frac{\partial x}{\partial\tilde{x}} & \frac{\partial y}{\partial\tilde{x}} & \frac{\partial z}{\partial\tilde{x}} \\ 
-\frac{\partial x}{\partial\tilde{y}} & \frac{\partial y}{\partial\tilde{y}} & \frac{\partial z}{\partial\tilde{y}} 
-\end{vmatrix} 
+d\Gamma = |\vec{a}\times\vec{b}| =
+\begin{vmatrix}
+\vec{e}_x & \vec{e}_y & \vec{e}_z \\
+\frac{\partial x}{\partial\tilde{x}} & \frac{\partial y}{\partial\tilde{x}} & \frac{\partial z}{\partial\tilde{x}} \\
+\frac{\partial x}{\partial\tilde{y}} & \frac{\partial y}{\partial\tilde{y}} & \frac{\partial z}{\partial\tilde{y}}
+\end{vmatrix}
 d\tilde{x}\,d\tilde{y} = |j|\,d\tilde{x}\,d\tilde{y} = |j|\,d\tilde\Gamma
 $$
 
@@ -578,7 +645,7 @@ Uteži in koordinate integracijskih točk so vnaprej tabelirane za različno št
 
 ## 47. Izračun integrala po volumnu z volumskimi koordinatami
 
-Kadar pod integralom nastopajo volumske koordinate, lahko integral izračunamo **analitično**: 
+Kadar pod integralom nastopajo volumske koordinate, lahko integral izračunamo **analitično**:
 
 $$
 \int_\Omega (\Lambda_1)^r(\Lambda_2)^p(\Lambda_3)^s(\Lambda_4)^t\,d\Omega = (6\Omega)\frac{r!\,p!\,s!\,t!}{(r+p+s+t+3)!}, \quad 0! = 1
@@ -594,71 +661,70 @@ Volumen tetraedra izračunamo iz determinante:
 
 $$
 \Omega = V_{1234} = \frac{1}{6}
-\begin{vmatrix} 
-1 & x_1 & y_1 & z_1 \\ 
-1 & x_2 & y_2 & z_2 \\ 
-1 & x_3 & y_3 & z_3 \\ 
-1 & x_4 & y_4 & z_4 
+\begin{vmatrix}
+1 & x_1 & y_1 & z_1 \\
+1 & x_2 & y_2 & z_2 \\
+1 & x_3 & y_3 & z_3 \\
+1 & x_4 & y_4 & z_4
 \end{vmatrix}
 $$
 
 ## 48. Kako pridemo do sistema linearnih enačb za posamezni KE?
 
-**1.** Zapišemo šibko (integralsko) formulacijo fizikalnega problema.
-**2.** Po **Galerkinovi metodi** izberemo testne funkcije $v = \psi_I(x,y,z)$.
-**3.** Primarno spremenljivko po elementu aproksimiramo z interpolacijskimi funkcijami: $T \approx \hat{T} = \sum_{j=1}^{N_v} T_j\,\psi_j(x,y,z)$
-**4.** Aproksimacijo vstavimo v integralsko enačbo in izpeljemo:
+1. Zapišemo šibko (integralsko) formulacijo fizikalnega problema.
+2. Po **Galerkinovi metodi** izberemo testne funkcije $v = \psi_I(x,y,z)$.
+3. Primarno spremenljivko po elementu aproksimiramo z interpolacijskimi funkcijami: $T \approx \hat{T} = \sum_{j=1}^{N_v} T_j\,\psi_j(x,y,z)$
+4. Aproksimacijo vstavimo v integralsko enačbo in izpeljemo:
 
 $$
 k[M]\{T\} = \{q\} + \{Q\}, \quad I = 1,\ldots,N_v
 $$
 
-**5.** Integrale po volumnu in površini izračunamo numerično (Gaussova formula) ali analitično (volumske koordinate).
+5. Integrale po volumnu in površini izračunamo numerično (Gaussova formula) ali analitično (volumske koordinate).
 
 ## 49. Kako pridemo do sistema linearnih enačb za celotno območje?
 
-**1.** Za vsak posamezni KE sestavimo lokalni sistem enačb ($N_v \times N_v$ matrika).
-**2.** Vsako lokalno matriko **razširimo** na dimenzijo globalnega sistema (vrstice/stolpci vozlišč, ki ne pripadajo elementu, dobijo vrednost 0).
-**3.** Vse razširjene matrike in vektorje **seštejemo** (superpozicija):
+1. Za vsak posamezni KE sestavimo lokalni sistem enačb ($N_v \times N_v$ matrika).
+2. Vsako lokalno matriko **razširimo** na dimenzijo globalnega sistema (vrstice/stolpci vozlišč, ki ne pripadajo elementu, dobijo vrednost 0).
+3. Vse razširjene matrike in vektorje **seštejemo** (superpozicija):
 
 $$
 k[M_k]\{T\} = \{q_q\} + \{q_Q\}
 $$
 
 kjer so skupni elementi matrike vsota prispevkov vseh elementov, ki si delijo isto vozlišče:
-   
+
 $$
 M_{ij}^{(skupni)} = M_{ij}^{(1)} + M_{ij}^{(2)} + \cdots
 $$
 
-**4.** Upoštevamo robne pogoje (predpisane temperature ali tokovi) in rešimo globalni sistem enačb za neznane temperature $\{T\}$.
+4. Upoštevamo robne pogoje (predpisane temperature ali tokovi) in rešimo globalni sistem enačb za neznane temperature $\{T\}$.
 
 # Predavanje 7 - 31.3.2026
+
 ## 50. Zakaj se ne izračunava integralov po površini, ki je skupna dvema končnima elementoma?
 
 Ker na skupni površini sosednjih elementov velja zakon o ohranitvi toplotnega toka, kar pomeni, da je iztekajoči tok iz prvega elementa enak pritekajočemu toku v drugi element ($q_n^{(1)} = -q_n^{(2)}$). Pri sestavljanju globalnega sistema enačb se prispevki teh integralov v vozliščih med seboj izničijo ($\{q^{(1)}\} + \{q^{(2)}\} = 0$), zato se integrali izračunavajo le po zunanjih (prostih) površinah območja.
 
 ## 51. Kako je v izračunu z MKE upoštevan konvektivni robni pogoj prestopa toplote na površini območja?
 
-$$q = h(T_{stena}  -T_{okoloca})$$
-
+$$q = h(T_{stena}  -T_{okolica})$$
 
 Konvektivni robni pogoj se upošteva preko površinskega integrala, ki se razdeli na dva dela:
+
 1.  Del, ki je odvisen od neznanih temperatur vozlišč $\{T\}$, tvori **matriko prestopnosti** $[M_h]$, ki se prišteje k prevodnostni matriki $[M]$.
 
 2.  Del, ki je odvisen od znane temperature okolice $T_{zrak}$, tvori **vektor ekvivalentnih vozliščnih toplotnih virov** $\{q_q\}$, ki se prišteje na desno stran sistema enačb.
 
 ## 52. Kako je v izračunu z MKE upoštevan robni pogoj prestopa toplote s sevanjem na površini območja?
 
-Sevanje se upošteva podobno kot konvekcija, vendar je zaradi četrte potence temperature v enačbi  $q_s = \sigma \varepsilon (T^4 - T_0^4)$  ta robni pogoj **nelinearen**. 
+Sevanje se upošteva podobno kot konvekcija, vendar je zaradi četrte potence temperature v enačbi $q_s = \sigma \varepsilon (T^4 - T_0^4)$ ta robni pogoj **nelinearen**.
 
 V MKE se to običajno rešuje z uvedbo nadomestne (linearizirane) toplotne prestopnosti za sevanje:
 
 $$T^4 - T_{\infty}^4 = (T^2-T_{\infty}^2)(T^2 + T_{\infty}^2)$$
 
 $$T^2 - T_{\infty}^2 = (T-T_{\infty})(T+T_{\infty})$$
-
-
 
 Vzamemo člen $(T-T_{\infty})$, ostale člene pa združimo v koeficient, ki ga iterativno izračunamo. Formula za toplotni tok zaradi sevanja je torej:
 
@@ -670,15 +736,16 @@ kjer je $c = (T+T_{\infty})(T^2 + T_{\infty}^2)$.
 
 Metode delimo na direktne in iterativne:
 
-*   **Direktne metode** (Gaussova eliminacija s pivotiranjem, razcep LU ali Choleskega):
-    *   **Prednosti:** So numerično stabilne in dajo natančno rešitev v končnem številu korakov.
-    *   **Slabosti:** Čas reševanja s številom enačb narašča potenčno (eksponentna krivulja na grafu), zahtevajo veliko delovnega pomnilnika.
-*  .ter **Iterativne metode** (Gauss-Seidlova, Gauss-Jacobijeva metoda, metoda konjugiranih gradientov):
-    *   **Prednosti:** Čas reševanja narašča približno linearno s številom enačb. Porabijo manj pomnilnika.
-    *   **Slabosti:** Potrebujejo konvergenčni kriterij in niso vedno stabilne.
-*   **Povzetek:** Za manjše sisteme so boljše direktne metode, pri velikih sistemih (nad $10^6$ enačb) pa so zaradi hitrosti in pomnilniške učinkovitosti bolj smiselne iterativne metode.
+- **Direktne metode** (Gaussova eliminacija s pivotiranjem, razcep LU ali Choleskega):
+    - **Prednosti:** So numerično stabilne in dajo natančno rešitev v končnem številu korakov.
+    - **Slabosti:** Čas reševanja s številom enačb narašča potenčno (eksponentna krivulja na grafu), zahtevajo veliko delovnega pomnilnika.
+- **Iterativne metode** (Gauss-Seidlova, Gauss-Jacobijeva metoda, metoda konjugiranih gradientov):
+    - **Prednosti:** Čas reševanja narašča približno linearno s številom enačb. Porabijo manj pomnilnika.
+    - **Slabosti:** Potrebujejo konvergenčni kriterij in niso vedno stabilne.
+- **Povzetek:** Za manjše sisteme so boljše direktne metode, pri velikih sistemih (nad $10^6$ enačb) pa so zaradi hitrosti in pomnilniške učinkovitosti bolj smiselne iterativne metode.
 
 # Predavanje 8 - 13.4.2026
+
 ## 54. Izhodiščna enačba za reševanje statičnega 3D mehanskega problema z MKE.
 
 Fizikalno izhodišče so diferencialne enačbe ravnotežja, ki pa jih za reševanje z MKE preoblikujemo v šibko obliko. Ta uravnoteži notranje napetosti z zunanjimi površinskimi in volumskimi obremenitvami:
@@ -687,7 +754,7 @@ $$ \int_\Omega \{\partial v\}^T \{\sigma\} d\Omega = \int_\Gamma \{\partial v\}^
 
 ## 55. Kako je izbrana poljubna funkcija $v$ v primeru 3D KE za reševanje mehanskega problema?
 
-V skladu z Galerkinovo metodo so $v$ enake kot oblikovne funkcije $[N]$. V primeru 3D mehanskega problema so pomnožene še s poljubno vozliščno vrednostjo $\Upsilon$. 
+V skladu z Galerkinovo metodo so $v$ enake kot oblikovne funkcije $[N]$. V primeru 3D mehanskega problema so pomnožene še s poljubno vozliščno vrednostjo $\Upsilon$.
 
 $$ \{v\} = [N]\{\Upsilon\} \quad \text{in} \quad \{\partial v\} = [L][N]\{\Upsilon\} $$
 
@@ -695,116 +762,93 @@ Vektor poljubnih vrednosti $\Upsilon$ rabimo zato, da lahko poljubne funkcije $\
 
 $$\{v\} = [N]\{ \Upsilon \}$$
 
-Zakaj bi to želeli? Ko imamo funkcije $v$ popisane na tak način lahko zapišemo tudi vektor odvodov oblikovnih funkcij:
+Zakaj bi to želeli? Ko imamo funkcije $v$ popisane na tak način, lahko zapišemo tudi vektor odvodov oblikovnih funkcij:
 
 $$\{\partial v\} = [L][N]\{\Upsilon\}$$
 
-Tukaj je $[L]$ matrika operatorjev parcialnih odvodov. 
+Tukaj je $[L]$ matrika operatorjev parcialnih odvodov.
 
 To lahko vstavimo v šibko obliko integralske formulacije:
 
 $$\int_{\Omega}\biggr([L][N]\{U\}\biggr)^T[E]\{\partial v\}d\Omega =\int_{\Gamma}\{p\}\{v\}d\Gamma + \int_{\Omega}\rho\{a\}\{v\}d\Omega$$
 
-
 $$\int_{\Omega}\biggr([L][N]\{U\}\biggr)^T[E] \biggr([L][N]\{\Upsilon\}\biggr)d\Omega =\int_{\Gamma}\{p\}[N]\{\Upsilon\} d\Gamma + \int_{\Omega}\rho\{a\}[N]\{\Upsilon\}d\Omega$$
-
 
 Poljubne vozliščne vrednosti lahko izpostavimo in okrajšamo:
 
-
 $$\int_{\Omega}\biggr([L][N]\{U\}\biggr)^T[E] \biggr([L][N]\biggr)d\Omega =\int_{\Gamma}\{p\}[N] d\Gamma + \int_{\Omega}\rho\{a\}[N]d\Omega$$
-
 
 Na levi strani lahko izpostavimo pomike $\{U\}$ in dobimo znano enačbo za togostno matriko:
 
-
 $$K_e = [B]^T[E][B] = \biggr([L][N]\biggr)^T[E]\biggr([L][N]\biggr)$$
+
 ## 56. Katere so primarne neznanke pri reševanju 3D mehanskih problemov?
 
-
 Primarne neznanke so pomiki v vozliščih (ali pa reakcijske sile). V 3D prostoru ima vsako vozlišče 3 translacijske prostostne stopnje:
-
 
 $$ \{U\} = \{U_x, U_y, U_z\}^T $$
 
 ## 57. Kako se izračunajo komponente napetostnega tenzorja?
 
-
-Izračunajo se v **integracijskih točkah** preko reološkega (Hookovega) zakona, ki deformacije pomnoži z materialno matriko $[E]$. Deformacije pa dobimo iz odvodov vozliščnih pomikov:
-
+Izračunajo se v **integracijskih točkah** preko reološkega (Hookeovega) zakona, ki deformacije pomnoži z materialno matriko $[E]$. Deformacije pa dobimo iz odvodov vozliščnih pomikov:
 
 $$ \{\sigma\}_e = [E]\{\varepsilon\}_e = [E] ([L][N]) \{U\}_e $$
 
 ## 58. Kaj predstavlja vrednost in predznak komponente vektorja pomika?
 
-
 Vrednost pove, za koliko dolžinskih enot se je vozlišče premaknilo glede na neobremenjeno stanje. Predznak določa smer premika vzdolž osi ($x, y$ ali $z$) globalnega koordinatnega sistema.
 
 ## 59. Kaj predstavlja vrednost in predznak normalne komponente deformacijskega tenzorja?
 
-
 Predstavlja linearno deformacijo (razteg) materialnega delca vzdolž osi. Pozitiven predznak (+) pomeni **razteg**, negativen (-) pa **skrček**.
-
 
 $$ \varepsilon_{xx} = \frac{\partial u_x}{\partial x} $$
 
-
 ## 60. Kaj predstavlja vrednost in predznak normalne komponente napetostnega tenzorja?
-
 
 Predstavlja velikost normalne obremenitve na prerez. Pozitiven predznak (+) pomeni natezno napetost, negativen (-) pa tlačno napetost.
 
 ## 61. Kako je definirana strižna komponenta deformacijskega tenzorja?
 
-
 Strižne deformacije predstavljajo spremembo pravega kota v materialnem delcu. Zapisane so s pomočjo parcialnih odvodov pomikov pravokotno na koordinatne osi:
 
 $$ \varepsilon_{xy} = \frac{1}{2} \left( \frac{\partial u_x}{\partial y} + \frac{\partial u_y}{\partial x} \right) $$
 
-## 62. Kako preverimo ali je obremenitev mehansko obremenjene komponente v dopustnih vrednostih?
+## 62. Kako preverimo, ali je obremenitev mehansko obremenjene komponente v dopustnih vrednostih?
 
-Kompleksno 3D napetostno stanje pretvorimo v eno **primerjalno napetost**, ki jo primerjamo z dopustno mejo materiala. Najpogosteje uporabimo Von Misesovo primerjalno napetost, ki je vedno pozitivna:
-
+Kompleksno 3D napetostno stanje pretvorimo v eno **primerjalno napetost**, ki jo primerjamo z dopustno mejo materiala. Najpogosteje uporabimo von Misesovo primerjalno napetost, ki je vedno pozitivna:
 
 $$ \sigma_{ekv}^{\text{Mises}} = \sqrt{0.5 \left[ (\sigma_1-\sigma_2)^2 + (\sigma_1-\sigma_3)^2 + (\sigma_2-\sigma_3)^2 \right]} $$
 
 ## 64. Kako so definirane komponente deformacijskega tenzorja v cilindričnem koordinatnem sistemu?
 
-
 Normalne komponente opisujejo razteg v smereh $r, z, \varphi$:
-
 
 $$ \varepsilon_{rr} = \frac{\partial u_r}{\partial r}, \quad \varepsilon_{zz} = \frac{\partial u_z}{\partial z}, \quad \varepsilon_{\varphi\varphi} = \frac{u_r}{r} + \frac{1}{r}\frac{\partial u_\varphi}{\partial \varphi} $$
 
-
 Strižne komponente vsebujejo dodatne člene ($1/r$) zaradi ukrivljenosti sistema:
-
 
 $$ \varepsilon_{r\varphi} = \frac{1}{2} \left( \frac{1}{r} \frac{\partial u_r}{\partial \varphi} + \frac{\partial u_\varphi}{\partial r} - \frac{u_\varphi}{r} \right) $$
 
 ## 65. Katere mehanske veličine se v primeru uporabe 3D KE izračunavajo v vozliščih in katere v integracijskih točkah posameznega KE?
 
+- **Vozlišča:** primarne neznanke – pomiki ($\{U\}$) in ekvivalentne sile ($\{F\}$).
 
-*   **Vozlišča:** primarne neznanke – pomiki ($\{U\}$) in ekvivalentne sile ($\{F\}$).
-
-*   **Integracijske točke:** sekundarne neznanke – deformacije ($\{\varepsilon\}$) in napetosti ($\{\sigma\}$).
+- **Integracijske točke:** sekundarne neznanke – deformacije ($\{\varepsilon\}$) in napetosti ($\{\sigma\}$).
 
 ## 66. Vloga globalnega koordinatnega sistema.
-Omogoča rotacijo vseh poljubno zasukanih elementov v skupen referenčni sistem in sestavljanje sistema enačb celotnega problema:
 
+Omogoča rotacijo vseh poljubno zasukanih elementov v skupen referenčni sistem in sestavljanje sistema enačb celotnega problema:
 
 $$ [K]\{U\} = \{F\} $$
 
-
 V njem se definirajo tudi vsi robni pogoji in obremenitve.
 
-V globalnem koordinatnem sistemu je definirana tudi celotne geometrija - vozlišča elementov.
+V globalnem koordinatnem sistemu je definirana tudi celotna geometrija - vozlišča elementov.
 
 ## 67. Kako je zajet vpliv lastne teže v primeru uporabe 3D KE?
 
-
 Zajet je kot volumska obremenitev. Teža (gostota $\rho$ $\times$ pospešek $a$) se integrira preko volumna elementa in s pomočjo interpolacijskih funkcij $[N]$ pretvori v ekvivalentne vozliščne sile:
-
 
 $$ \{F_v\}_e = \int_{\Omega_e} \rho \cdot a_k [N]d\Omega $$
 
@@ -812,7 +856,8 @@ $$ \{F_v\}_e = \int_{\Omega_e} \rho \cdot a_k [N]d\Omega $$
 
 ## 68. Kaj mora biti izpolnjeno, da lahko uporabimo osnosimetrične KE?
 
-Da lahko problem obravnavamo kot osno-simetrični problem (privzemimo, da je os simetrije "z" koordinatna os), morajo biti osno-simetrični:
+Da lahko problem obravnavamo kot osnosimetrični problem (privzemimo, da je os simetrije "z" koordinatna os), morajo biti osnosimetrični:
+
 1. geometrija obravnavanega območja,
 2. materialne lastnosti,
 3. predpisani robni pogoji,
@@ -843,48 +888,43 @@ Moramo paziti: tudi če je problem osnosimetričen in so vsi odvodi $\frac{\part
 
 Aksialna točkovna obremenitev v vozlišču 2D osnosimetričnega KE dejansko predstavlja celotno silo na določenem radiju. V realnosti to ustreza linijski obremenitvi v aksialni smeri, ki je porazdeljena po celotnem obodu krožnice s tem radijem.
 
-
 ## 73. Kaj predstavlja radialna točkovna obremenitev v primeru obravnave problema z osnosimetričnimi KE?
 
 Radialna točkovna obremenitev v vozlišču predstavlja celotno silo na določenem radiju v radialni smeri (ustreza radialni linijski obremenitvi po celotnem obodu).
 
-
 ## 74. Kako obravnavamo volumske obremenitve v primeru obravnave problema z osnosimetričnimi KE?
 
-Volumske obremenitve (npr. lastna teža ali centrifugalna sila) obravnavamo tako, da zanje izračunamo ekvivalentne vozliščne sile za posamezni KE. 
+Volumske obremenitve (npr. lastna teža ali centrifugalna sila) obravnavamo tako, da zanje izračunamo ekvivalentne vozliščne sile za posamezni KE.
 Izračun teh ekvivalentnih vozliščnih sil je vezan na volumen (vrtenino), ki jo dobimo z vrtenjem površine posameznega KE okoli osi, ki predstavlja osno simetrijo ($d\Omega = 2\pi r\,d\Gamma$).
-
 
 $$\{F_V\}_e = \int_{\Omega_e}\rho_k\,a_k\,[N]^T\,2\pi r\,d\Omega = \int_{\Omega_e}\gamma\,[N]^T\,2\pi r\,d\Omega$$
 
-
 *(Fizikalno pa velja: volumsko obremenitev, ki deluje samo v eni smeri (npr. gravitacija), lahko obravnavamo le, če deluje v osni (aksialni) smeri, sicer problem ni več osnosimetričen. Druga izjema je centrifugalna sila, ki deluje osnosimetrično v radialni smeri).*
-
 
 Enako velja za ploskovno porazdeljene obremenitve na ograji obravnavanega območja:
 
 $$\{F_p\}_e = \int_{\Gamma_e}p\,[N]^T\,2\pi r\,d\Gamma$$
 
-izračun ekvivalentnih vozliščnih sil je vezan na površino, ki jo dobimo z vrtenjem robu $\Gamma_e$ posameznega KE okoli osi, ki predstavlja osno simetrijo.
+Izračun ekvivalentnih vozliščnih sil je vezan na površino, ki jo dobimo z vrtenjem roba $\Gamma_e$ posameznega KE okoli osi, ki predstavlja osno simetrijo.
+
 ## 75. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot ravninsko napetostni problem?
 
 Da lahko problem obravnavamo kot ravninsko napetostni problem (v ravnini x-y), mora biti izpolnjeno naslednje:
+
 1. Komponente napetostnega tenzorja $\sigma_{zz}$, $\sigma_{xz}$ in $\sigma_{yz}$ morajo biti tako majhne, da jih lahko zanemarimo.
 2. Material mora biti homogen, njegove fizikalne lastnosti pa so lahko tudi ortotropne (različne lastnosti v pravokotnih smereh).
 3. Predpisani robni pogoji se morajo nanašati izključno na ravnino obravnavanega problema.
 4. Obremenitev mora ležati v ravnini obravnavanega problema.
 
-
 # Predavanje 10 - 4.5.2026
 
 ## 76. Opišite prednosti uporabe ravninskih KE v primerjavi z uporabo volumskih KE?
 
-Uporaba ravninskih KE drastično zmanjša število enačb in rešuje probleme z geometrijo mreže. Glavni prednosti sta: 
+Uporaba ravninskih KE drastično zmanjša število enačb in rešuje probleme z geometrijo mreže. Glavni prednosti sta:
 
-1. **Bistveno manj prostostnih stopenj:** 2D štirikotni element za ravninske probleme ima 4 vozlišča in 2 prostostni stopnji na vozlišče (skupaj 8). Enojni sloj volumskega 3D elementa ima 8 vozlišč in 3 prostostne stopnje na vozlišče (skupaj 24). Izračun je z 2D elementi zato precej hitrejši in računalniško manj potraten, kar nam omogoča uporabo veliko gostejše mreže za isto porabo časa. 
+1. **Bistveno manj prostostnih stopenj:** 2D štirikotni element za ravninske probleme ima 4 vozlišča in 2 prostostni stopnji na vozlišče (skupaj 8). Enojni sloj volumskega 3D elementa ima 8 vozlišč in 3 prostostne stopnje na vozlišče (skupaj 24). Izračun je z 2D elementi zato precej hitrejši in računalniško manj potraten, kar nam omogoča uporabo veliko gostejše mreže za isto porabo časa.
 
 2. **Rešen problem oblikovnega razmerja (aspect ratio):** Pri obravnavi tankih struktur (npr. pločevine) bi pri uporabi 3D volumskih elementov dobili elemente z zelo slabim razmerjem stranic (npr. stranica v ravnini 100 mm, debelina pa 1 mm). Taki sploščeni elementi vodijo do hudih numeričnih napak. Pri 2D ravninskih elementih te težave ni, saj debelina plošče ni fizična dimenzija mreže, temveč le podatek (parameter $h$), ki ga vstavimo v enačbo matrike togosti.
-
 
 ## 77. Kako izračunamo deformacijo v smeri pravokotno na ravnino problema v primeru uporabe ravninsko napetostnega KE in linearno elastičnega materialnega modela?
 
@@ -903,6 +943,7 @@ $$
 ## 78. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot ravninsko deformacijski problem?
 
 Da lahko problem obravnavamo kot ravninsko deformacijski problem (RDS v ravnini x-y), mora biti izpolnjeno naslednje:
+
 1. Komponente deformacijskega tenzorja $\varepsilon_{zz}$, $\varepsilon_{xz}$ in $\varepsilon_{yz}$ morajo biti enake 0 oz. tako majhne, da jih lahko zanemarimo.
 2. Material mora biti homogen, njegove fizikalne lastnosti pa so lahko tudi ortotropne.
 3. Predpisani robni pogoji se vzdolž "z" koordinatne osi ne smejo spreminjati.
@@ -912,19 +953,20 @@ Da lahko problem obravnavamo kot ravninsko deformacijski problem (RDS v ravnini 
 
 Oba elementa (za RNS in RDS) sta **2D kontinuirna (solid) elementa** in imata v vozliščih kot primarni neznanki le pomika ($u_x$ in $u_y$). Ne vsebujeta zasukov. Glavni razliki pri njuni matematični formulaciji in fizični predstavitvi sta:
 
-**1. Konstutivna matrika (Matrika elastičnosti $[E]$):** 
+**1. Konstitutivna matrika (Matrika elastičnosti $[E]$):**
 Zveza med napetostmi in deformacijami je drugačna. Matrika $[E]$ za RNS izhaja iz predpostavke, da je element zelo tanek in zato ne more prenašati napetosti pravokotno na ravnino ($\sigma_{zz}=0$). Matrika $[E]$ za RDS pa izhaja iz predpostavke, da je element zelo dolg in je deformiranje v z-smeri blokirano ($\varepsilon_{zz}=0$).
 
 **2. Obravnava debeline (dimenzije v z-smeri):**
 Matrika togosti $[K]_e$ in ekvivalentne vozliščne sile $\{F\}_e$ se izračunajo z integriranjem po volumnu elementa ($dV = dx \cdot dy \cdot h$). Tu nastopi ključna razlika:
-*   **Pri RNS (modeliranje tankih plošč):** Kot debelino v program vnesemo **dejansko fizično debelino** plošče $h$ (npr. 5 mm). Ta debelina neposredno določa, koliko sile bo element prenesel.
-*   **Pri RDS (modeliranje dolgih struktur, npr. jez, cev):** Ker modeliramo le en presek neskončno dolge strukture, v program vnesemo (oziroma program privzame) **enotsko debelino** (npr. $h = 1 \text{ m}$). Vse izračunane sile in togosti pri RDS modelu so zato vedno podane in obravnavane *na enoto dolžine* strukture.
 
-## 80. V čem se razlikujeta tri in štiri vozliščnih KE za reševanje ravninskih problemov?
+- **Pri RNS (modeliranje tankih plošč):** Kot debelino v program vnesemo **dejansko fizično debelino** plošče $h$ (npr. 5 mm). Ta debelina neposredno določa, koliko sile bo element prenesel.
+- **Pri RDS (modeliranje dolgih struktur, npr. jez, cev):** Ker modeliramo le en presek neskončno dolge strukture, v program vnesemo (oziroma program privzame) **enotsko debelino** (npr. $h = 1 \text{ m}$). Vse izračunane sile in togosti pri RDS modelu so zato vedno podane in obravnavane *na enoto dolžine* strukture.
 
-**Tri-vozliščni KE** imajo linearne interpolacijske funkcije, kar pomeni, da so primarne veličine (pomiki) linearni, sekundarne veličine (napetosti in deformacije) pa so po celotni površini KE **konstantne**. To naredi element bolj tog (slabše popisuje gradient napetosti), zato za natančen rezultat potrebujemo precej gosto mrežo. Prednost teh elementov je uporaba trikotniških/površinskih koordinat, ki omogočajo analitično točno vrednotenje integralov brez numerične integracije.
+## 80. V čem se razlikujejo tri- in štirivozliščni KE za reševanje ravninskih problemov?
 
-**Štiri-vozliščni KE** (izoparametrični) imajo nelinearne (bilinearne) interpolacijske funkcije. Posledično se sekundarne veličine (napetosti in deformacije) po površini KE **spreminjajo**. Zaradi tega so elementi mehkejši in bolj natančni pri opisu upogiba, kar omogoča redkejšo mrežo. Intergrali se izračunavajo numerično s pomočjo **Gaussove integracije**. Napetosti se  izračunajo v integracijskih (Gaussovih) točkah znotraj elementa,.
+**Trivozliščni KE** imajo linearne interpolacijske funkcije, kar pomeni, da so primarne veličine (pomiki) linearni, sekundarne veličine (napetosti in deformacije) pa so po celotni površini KE **konstantne**. To naredi element bolj tog (slabše popisuje gradient napetosti), zato za natančen rezultat potrebujemo precej gosto mrežo. Prednost teh elementov je uporaba trikotniških/površinskih koordinat, ki omogočajo analitično točno vrednotenje integralov brez numerične integracije.
+
+**Štirivozliščni KE** (izoparametrični) imajo nelinearne (bilinearne) interpolacijske funkcije. Posledično se sekundarne veličine (napetosti in deformacije) po površini KE **spreminjajo**. Zaradi tega so elementi mehkejši in bolj natančni pri opisu upogiba, kar omogoča redkejšo mrežo. Integrali se izračunavajo numerično s pomočjo **Gaussove integracije**. Napetosti se izračunajo v integracijskih (Gaussovih) točkah znotraj elementa.
 
 ## 81. Kako izračunamo napetost v smeri pravokotno na ravnino problema v primeru uporabe ravninsko deformacijskega KE in linearno elastičnega materialnega modela?
 
@@ -937,6 +979,7 @@ $$
 ## 82. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem?
 
 Da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem (GRDS), mora veljati:
+
 1. Komponenti deformacijskega tenzorja $\varepsilon_{xz}$ in $\varepsilon_{yz}$ morata biti enaki 0 oz. tako majhni, da jih lahko zanemarimo.
 2. Material mora biti homogen, njegove fizikalne lastnosti pa so lahko ortotropne.
 3. Predpisani robni pogoji se vzdolž "z" koordinatne osi ne spreminjajo.
@@ -949,6 +992,7 @@ Da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem 
 ## 83. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot upogibno obremenjeno ploščo?
 
 Problem lahko obravnavamo kot upogibno obremenjeno ploščo (v x-y ravnini), ko velja:
+
 - obravnavano geometrijsko območje mora ležati v ravnini, pri čemer mora biti izmera v z-smeri (debelina) majhna glede na ostale mere obravnavanega območja ($h \ll L_x, L_y$).
 - material je homogen, njegove lastnosti pa so lahko ortotropne.
 - obremenitev je lahko usmerjena samo pravokotno na ravnino, v kateri leži ploskev.
@@ -962,19 +1006,21 @@ Reissner-Mindlinova teorija plošč nam pravi, da so pomiki v ravnini ($u_x$ in 
 $$u_x = +z\,\varphi_y$$
 $$u_y = -z\,\varphi_x$$
 
-Teorija predpostavlja planost prereza v deformiranem stanju, pri čemer pa prerez v splošnem **ni več pravokoten** na srednjo ravnino plošče (upoštevanje prečnih strižnih deformacij). Srednja ravnina plošče se dimenzijsko ne spremeni. 
+Teorija predpostavlja planost prereza v deformiranem stanju, pri čemer pa prerez v splošnem **ni več pravokoten** na srednjo ravnino plošče (upoštevanje prečnih strižnih deformacij). Srednja ravnina plošče se dimenzijsko ne spremeni.
 
 ## 85. Kako se izvede numerično integriranje v primeru obravnave upogibno obremenjene plošče?
 
-V ravnini x-y (v ravnini plošče) se izvaja **Gaussova numerična integracija**, kjer se količine izračunavajo v integracijskih točkah. 
+V ravnini x-y (v ravnini plošče) se izvaja **Gaussova numerična integracija**, kjer se količine izračunavajo v integracijskih točkah.
 
 Po debelini plošče (v z-smeri) imamo dve možnosti:
+
 1. **Analitična integracija:** Če je material homogen in linearno elastičen, lahko integral po z-smeri izračunamo vnaprej analitično (tako dobimo upogibne togosti).
 2. **Numerična integracija (uporaba v praksi, npr. Abaqus):** Izvaja se po **Simpsonovi metodi**. Simpsonova metoda upošteva liho število točk – točke so postavljene na robove integracijskega območja (zgornja in spodnja površina) in v sredino. To nam ustreza, saj se pri upogibu plošč največje normalne napetosti pojavijo ravno na vrhu in dnu plošče, največje strižne napetosti pa v srednji ravnini ($z=0$).
 
 ## 86. Katere so neznanke v vozliščih v primeru obravnave upogibno obremenjene plošče?
 
 V primeru upogibno obremenjene plošče imamo v posameznem vozlišču 3 primarne neznanke:
+
 - pomik v z-smeri: $u_z$
 - zasuk okoli x-osi: $\varphi_x$
 - zasuk okoli y-osi: $\varphi_y$
@@ -999,8 +1045,9 @@ Prav tako so robni pogoji na robovih 2D domene izpolnjeni **eksaktno**.
 
 ## 91. Kako so izpolnjeni robni pogoji v primeru obravnave upogibno obremenjene plošče?
 
-Pri KE plošče so nekateri naravni robni pogoji na prostih površinah **kršeni (neizpolnjeni)**. 
-- Zanemarjen je robni pogoj za obremenitev v z-smeri, saj predpostavimo, da je $\sigma_{zz} = 0$ po celotni debelini, čeprav na površini deluje obremenitev $p$. 
+Pri KE plošče so nekateri naravni robni pogoji na prostih površinah **kršeni (neizpolnjeni)**.
+
+- Zanemarjen je robni pogoj za obremenitev v z-smeri, saj predpostavimo, da je $\sigma_{zz} = 0$ po celotni debelini, čeprav na površini deluje obremenitev $p$.
 - V formulaciji (RM teorija) je upoštevano, da sta prečni strižni deformaciji ($\gamma_{xz}, \gamma_{yz}$) konstantni po celotni debelini KE. Kar pomeni, da strižna napetost na zgornji in spodnji prosti površini ni enaka nič, kar fizično ni pravilno (robni pogoj za strig ni izpolnjen). Zato se v praksi uporabljajo strižni korekcijski faktorji.
 
 ## 92. Kaj vpliva na natančnost izračuna komponent napetostnega tenzorja?
@@ -1016,12 +1063,12 @@ Definicija lupinskega KE bazira na **superpoziciji** KE ravninskega napetostnega
 - V **globalnem koordinatnem sistemu** $(x, y, z)$ je definirana geometrija lupine, prav tako se v njem definirajo rešitve primarnih neznank (vozliščni pomiki in zasuki).
 - V **lokalnem koordinatnem sistemu** $(\hat{x}, \hat{y}, \hat{z})$, ki je vezan na tangencialno in normalno smer posameznega elementa, pa sta definirana deformacijski in napetostni tenzor (sekundarne veličine).
 
-
 # Predavanje 12 - 18.5.2026
 
 ## 95. Kaj mora biti izpolnjeno, da lahko konstrukcijo obravnavamo z linijskimi KE, ki prenašajo samo osno obremenitev?
 
 Da lahko konstrukcijo obravnavamo kot paličje, mora biti izpolnjeno:
+
 1. Konstrukcijski element (imenovan palica) prenaša predvsem osno obremenitev (nateg/tlak).
 2. Material mora biti homogen in izotropen.
 3. Prerez palice mora biti majhen glede na njeno dolžino ($L \gg A$).
@@ -1034,15 +1081,16 @@ Pri pripravi modela s paličnimi elementi moramo upoštevati, da obremenitve lah
 ## 97. Kaj mora biti izpolnjeno, da lahko konstrukcijo obravnavamo z linijskimi KE, ki prenašajo samo upogibno obremenitev?
 
 Da lahko konstrukcijo obravnavamo kot upogibno obremenjen nosilec (v ravnini x-z), mora veljati:
+
 1. Konstrukcijski element (nosilec) je obremenjen predvsem upogibno.
 2. Material je homogen in izotropen.
 3. Prerez nosilca je majhen glede na njegovo dolžino ($L \gg A$).
 4. Obremenitev v obliki sile mora biti usmerjena prečno na nosilec (v smeri "z" koordinatne osi).
 5. Obremenitev v obliki momenta mora biti usmerjena okoli "y" koordinatne osi.
 
-## 98. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Euler-Bernullijevo teorijo nosilcev?
+## 98. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Euler-Bernoullijevo teorijo nosilcev?
 
-Euler-Bernoullijeva teorija predpostavlja planost prerezov v deformiranem stanju, pri čemer prerez ostane **strogo pravokoten na težiščnico**. To pomeni, da teorija povsem **zanemarja strižne deformacije** ($\gamma_{xz} = 0$). 
+Euler-Bernoullijeva teorija predpostavlja planost prerezov v deformiranem stanju, pri čemer prerez ostane **strogo pravokoten na težiščnico**. To pomeni, da teorija povsem **zanemarja strižne deformacije** ($\gamma_{xz} = 0$).
 Ker je zasuk definiran zgolj kot odvod povesa ($\varphi_y = - \frac{du_z}{dx}$), poves in zasuk nista neodvisna. Za aproksimacijo primarne spremenljivke se uporablja en sam polinom 3. stopnje (Hermitovi kubični polinomi), ki zagotavlja zveznost tako povesa kot naklona med elementi ($C^1$ zveznost).
 
 ## 99. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Timoshenkovo teorijo nosilcev?
@@ -1052,7 +1100,7 @@ Vozliščni neznanki, poves ($u_z$) in zasuk ($\varphi_y$), sta pri tej formulac
 
 ## 100. Primerjajte KE, ki prenašajo upogibno obremenitev, in so zasnovani na Timoshenkovi teoriji nosilcev.
 
-Primerjava teh elementov se v osnovi nanaša na problematiko strižne togosti in **način numeričnega integriranja** matrike togosti (kot je prikazano na prosojnicah- predavanje 12 pg.  68–70):
+Primerjava teh elementov se v osnovi nanaša na problematiko strižne togosti in **način numeričnega integriranja** matrike togosti (kot je prikazano na prosojnicah – predavanje 12, str. 68–70):
 
 1. **Polna integracija (2 Gaussovi točki):** Če integral izračunamo eksaktno (z 2 točkama za linearni element), element postane pri vitkih nosilcih prekomerno tog. Temu pojavu rečemo "strižno zaklepanje" (*shear locking*).
 2. **Reducirana integracija (1 Gaussova točka):** Da se izognemo strižnemu zaklepanju, se pogosto uporabi reducirana integracija samo z 1 Gaussovo točko. To umetno "omehča" element in omogoča pravilno obnašanje tudi pri vitkih nosilcih.
@@ -1063,6 +1111,7 @@ Primerjava teh elementov se v osnovi nanaša na problematiko strižne togosti in
 ## 101. Katere obremenitve lahko obravnavamo s splošnim prostorskim linijskim KE?
 
 Splošni prostorski linijski element (3D nosilec) lahko prenaša:
+
 - **osno (natezno/tlačno) obremenitev** v smeri težiščne osi,
 - **torzijsko obremenitev** okoli težiščne osi,
 - **upogibno obremenitev** v dveh med seboj pravokotnih ravninah.
@@ -1070,10 +1119,12 @@ Splošni prostorski linijski element (3D nosilec) lahko prenaša:
 ## 102. Kako je v formulaciji splošnega prostorskega linijskega KE upoštevana torzijska obremenitev?
 
 Torzijska obremenitev je upoštevana na matematično identičen način kot osna (natezna) obremenitev. Formulacija ima enake oblikovne funkcije in strukturo lokalne togostne matrike, le da:
+
 - namesto modula elastičnosti $E$ uporabimo strižni modul $G$,
 - namesto preseka $A$ uporabimo torzijski vztrajnostni moment $J_x$ (oz. $I_t$),
 - primarne neznanke niso translacije, temveč rotacije okoli osi elementa ($\Phi_x$),
 - obremenitev predstavlja torzijski moment ($M_x$).
+
 Prispevki te torzijske matrike se nato preprosto prištejejo (superponirajo) na ustrezna mesta v globalni matriki elementa.
 
 ## 103. Izpeljite sistem enačb za osno obremenjeni linijski KE.
@@ -1084,7 +1135,7 @@ $$
 \int_0^L EAu''(x)v(x)\,dx + \int_0^L n(x)v(x)\, dx = 0
 $$
 
-Prvi izraz integriramo *Per Partes* in upoštevamo zvezo za osno silo $N(x) = EAu'(x)$:
+Prvi izraz integriramo *per-partes* in upoštevamo zvezo za osno silo $N(x) = EAu'(x)$:
 
 $$
 N(L)v(L) - N(0)v(0) - \int_0^L EAu'(x)v'(x)\,dx + \int_0^L n(x)v(x)\,dx = 0
@@ -1134,7 +1185,7 @@ $$
 GI_t\varphi''(x) = -m(x)
 $$
 
-kjer je $G$ strižni modul, $I_t$ torzijski vztrajnostni moment (pri splošnih prerezih se označuje tudi kot $J_x$), $\varphi$ je kot zasuka okoli osi elementa, $m(x)$ pa je porazdeljen torzijski moment. 
+kjer je $G$ strižni modul, $I_t$ torzijski vztrajnostni moment (pri splošnih prerezih se označuje tudi kot $J_x$), $\varphi$ je kot zasuka okoli osi elementa, $m(x)$ pa je porazdeljen torzijski moment.
 Končni sistem enačb je analogno:
 
 $$
@@ -1143,34 +1194,38 @@ $$
 
 ## 105. Prednosti in slabosti uporabe linijskih KE.
 
-**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo izjemno hitro spreminjanje numeričnega modela (v eni sekundi lahko spremenimo I-profil v cevni profil, le z zamenjavo parametrov $A, I_y, I_z, J_x$  ,  brez ponovnega mreženja geometrije). 
+**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo izjemno hitro spreminjanje numeričnega modela (v eni sekundi lahko spremenimo I-profil v cevni profil, le z zamenjavo parametrov $A, I_y, I_z, J_x$, brez ponovnega mreženja geometrije).
 
 **Slabosti:** Geometrijo opisujejo zgolj težiščnice. Na stikih (spojih) linijskih elementov se fizikalni volumni elementov lahko prekrivajo ali puščajo praznine, zaradi česar lokalno deformacijsko in napetostno stanje na samem spoju (npr. zvari, lokalne koncentracije napetosti) **ni natančno popisano**.
 
 ## 106. Reševanje zrcalno simetričnih mehanskih problemov.
 
 Če sta geometrija in obremenitev zrcalno simetrični (glede na neko ravnino), lahko modeliramo le polovico konstrukcije. Na prerezani (simetrijski) ravnini moramo predpisati **simetrijske robne pogoje**:
+
 - Pomik v smeri **normale** na simetrijsko ravnino je enak nič.
 - Zasuka okoli obeh osi, ki **ležita v** simetrijski ravnini, sta enaka nič.
-*(Primer: Če je simetrijska ravnina $y-z$  , je njena normala os $x$. Zato zaklenemo  $u_x = 0$ , $\varphi_y = 0$  in  $\varphi_z = 0$ ).*
+
+*(Primer: Če je simetrijska ravnina $y-z$, je njena normala os $x$. Zato zaklenemo $u_x = 0$, $\varphi_y = 0$ in $\varphi_z = 0$.)*
 
 ## 107. Reševanje antisimetričnih mehanskih problemov.
 
 Antisimetrijo lahko uporabimo, ko sta **geometrija in material simetrična**, vendar pa je **obremenitev antisimetrična** (zrcalna slika obremenitve deluje v nasprotni smeri). Na prerezani ravnini predpišemo **antisimetrijske robne pogoje**:
+
 - Pomika v obeh smereh, ki **ležita v** antisimetrijski ravnini, sta enaka nič.
 - Zasuk okoli osi, ki je **normalna** na antisimetrijsko ravnino, je enak nič.
-*(Primer: Če je antisimetrijska ravnina $y-z$  , je normala os $x$ . Zato zaklenemo $u_y = 0$ , $u_z = 0$ in $\varphi_x = 0$ ).*
+
+*(Primer: Če je antisimetrijska ravnina $y-z$, je normala os $x$. Zato zaklenemo $u_y = 0$, $u_z = 0$ in $\varphi_x = 0$.)*
 
 ## 108. Reševanje mehanskih problemov s ciklično ponovljivo geometrijo, robnimi pogoji in obremenitvijo.
 
-Takšne probleme (npr. propelerji, turbine) obravnavamo v **cilindričnem koordinatnem sistemu**. Zmodeliramo le en ponavljajoči se segment ("rezino"). Na obeh odrezanih robovih (rob A in rob B) predpišemo **ciklične robne pogoje**, ki zahtevajo, da so pomiki (in zasuki) v radialni, obodni in aksialni smeri na robu A strogo enaki tistim na robu B ( $u_r^A = u_r^B$ , $u_\varphi^A = u_\varphi^B$  ,  $u_z^A = u_z^B$  ). Pri tem je ključno, da imata robova A in B **popolnoma identično topologijo mreže**.
+Takšne probleme (npr. propelerji, turbine) obravnavamo v **cilindričnem koordinatnem sistemu**. Zmodeliramo le en ponavljajoči se segment ("rezino"). Na obeh odrezanih robovih (rob A in rob B) predpišemo **ciklične robne pogoje**, ki zahtevajo, da so pomiki (in zasuki) v radialni, obodni in aksialni smeri na robu A strogo enaki tistim na robu B ($u_r^A = u_r^B$, $u_\varphi^A = u_\varphi^B$, $u_z^A = u_z^B$). Pri tem je ključno, da imata robova A in B **popolnoma identično topologijo mreže**.
 
 ## 109. Kako izvedemo povezavo volumskih in linijskih KE?
 
 3D volumski elementi (solid) imajo v vozliščih **samo translacijske prostostne stopnje** (nimajo zasukov). Če linijski element (nosilec, ki prenaša momente) pripnemo na 3D element zgolj v enem skupnem vozlišču, se to vozlišče obnaša kot **krogelni členek** (momenti se ne prenesejo).
-Da bi prenesli momente, moramo linijski element povezati z **več vozlišči** volumskega elementa in s tem ustvariti ročico (dvojico sil). V praksi se to izvede tako, da se linijski element podaljša in "vtisne" (embed) v notranjost volumenskega elementa preko več vozlišč, ali pa se vozlišče nosilca s pomočjo kinematičnih zvez (togih povezav / rigid links) togo poveže s skupino vozlišč na površini 3D elementa. (kinemarične zveze nam uničujejo diagnoalnost matrike in zelo upočasnijo izračun) 
+Da bi prenesli momente, moramo linijski element povezati z **več vozlišči** volumskega elementa in s tem ustvariti ročico (dvojico sil). V praksi se to izvede tako, da se linijski element podaljša in "vtisne" (embed) v notranjost volumskega elementa preko več vozlišč, ali pa se vozlišče nosilca s pomočjo kinematičnih zvez (togih povezav / rigid links) togo poveže s skupino vozlišč na površini 3D elementa. (Kinematične zveze nam uničujejo diagonalnost matrike in zelo upočasnijo izračun.)
 
 ## 110. Kako izvedemo povezavo volumskih in lupinskih KE?
 
 Problem je identičen kot pri povezavi z linijskimi elementi. Lupinski elementi (shell) imajo rotacijske prostostne stopnje, volumski 3D elementi pa ne. Če jih združimo samo v eni vrsti vozlišč, dobimo členkast stik (moment se ne prenese).
-Povezavo izvedemo tako, da lupinski element potisnemo v notranjost volumenskega območja (združitev vozlišč po celotni debelini 3D elementa, s čimer se moment prenese kot nateg/tlak v teh vozliščih), ali pa s posebnimi kinematičnimi robnimi pogoji povežemo vozlišča lupine z vozlišči na naležnih ploskvah volumskega elementa.
+Povezavo izvedemo tako, da lupinski element potisnemo v notranjost volumskega območja (združitev vozlišč po celotni debelini 3D elementa, s čimer se moment prenese kot nateg/tlak v teh vozliščih), ali pa s posebnimi kinematičnimi robnimi pogoji povežemo vozlišča lupine z vozlišči na naležnih ploskvah volumskega elementa.
