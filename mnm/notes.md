@@ -1229,16 +1229,16 @@ $$\int_0^LD^3w(x)\frac{dv(x)}{dx}dx = D^2w(x)\frac{dv(x)}{dx}\biggr{|}_0^L - \in
 
 V zapisani novi integralski enačbi lahko ugotovimo, da se je red diferencialnega operatorja nad primarno spremenljivko $w(x)$ zmanjšal za 2 $(D^4w(x)\rightarrow D^2w(x))$ : $$\int_0^LD^4w(x)v(x)dx = D^3w(x)v(x)\biggr{|}_0^L - D^2w(x)\frac{dv(x)}{dx}\biggr{|}_0^L + \int_0^LD^2w(x)\frac{d^2v(x)}{dx^2}dx$$
 Zapišimo za upogibno obremenjeni element diferencialni operator $D^3$ :  $$D^4 = \frac{d^2}{dx^2}\biggr{[}E(x)I_y(x)\biggr{(}\frac{d^2}{dx^2} + \alpha(x)\Delta\vartheta_{zh}(x)\biggr{)}\biggr{]}\rightarrow D^3 = \frac{d}{dx}\biggr{[}E(x)I_y(x)\biggr{(}\frac{d^2}{dx^2} + \alpha(x)\Delta\vartheta_{zh}(x)\biggr{)}\biggr{]}$$
-in še $D^2$ : $$D^3 = \frac{d}{dx}\biggr{[}E(x)I_y(x)\biggr{(}\frac{d^2}{dx^2} + \alpha(x)\Delta\vartheta_{zh}(x)\biggr{)}\biggr{]} \rightarrow D^2 = E(x)I_y(x)\biggr{(}\frac{d^2}{dx^2} + \alpha(x)\Delta\vartheta_{zh}(x)\biggr{)}\biggr{]}$$
+in še $D^2$ : $$D^3 = \frac{d}{dx}\biggr{[}E(x)I_y(x)\biggr{(}\frac{d^2}{dx^2} + \alpha(x)\Delta\vartheta_{zh}(x)\biggr{)}\biggr{]} \rightarrow D^2 = E(x)I_y(x)\biggr{(}\frac{d^2}{dx^2} + \alpha(x)\Delta\vartheta_{zh}(x)\biggr{)}$$
 Upoštevajoč diferencialne operatorje za upogibno obremenjen 1D linijski element, zapišemo integral na levi strani integralske enačbe v sledeči obliki : $$\begin{multline}\int_0^L\biggr{\{}\frac{d^2}{dx^2}\biggr{[}EI_y\biggr {(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}\biggr{\}}v\space dx = \\ =\biggr{\{}\frac{d}{dx}\biggr{[}EI_y\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}v\biggr{\}}\biggr{|}_0^L - \biggr{\{}\biggr{[}EI_y\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{(}\frac{dv}{dx}\biggr{)}\biggr{]}\biggr{\}}\biggr{|}_0^L +\\+ \int_0^L\biggr{[}EI_y\biggr {(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx\end{multline}$$
 
 V zapisani enačbi se nahajajo robne vrednosti sekundarnih veličin, $M_y(x)$ in $T_z(x)$ : $$\begin{multline}\int_0^L\biggr{\{}\frac{d^2}{dx^2}\biggr{[}EI_y\biggr {(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}\biggr{\}}v\space dx =\\=-\biggr{[}T_z(x)v(x)\biggr{]}_0^L + \biggr{[}M_y(x)\biggr{(}\frac{dv(x)}{dx}\biggr{)}\biggr{]}_0^L + \int_0^L\biggr{[}EI_y\bigg{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\bigg{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx \end{multline}$$
 ***Šibka oblika integralske formulacije*** za obravnavani ***končni element*** je tako podana z enačbo : $$\int_0^L\biggr{[}EI_y\bigg{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx = \biggr{[}T_z(x)v(x)\biggr{]}_0^L - \biggr{[}M_y(x)\biggr{(}\frac{dv(x)}{dx}\biggr{)}\biggr{]}_0^L + \int_0^Lp_zv\space dx$$
 Integral na levi strani integralske formulacije preuredimo tako, da ostane v njem samo primarna neznanka $w(x)$ : $$\begin{multline}\int_0^L\biggr{[}EI_y\biggr{(}\frac{d^2w}{dx^2}\biggr{)}\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx =\\=\biggr{[}T_z(x)v(x)\biggr{]}_0^L - \biggr{[}M_y(x)\biggr{(}\frac{dv(x)}{dx}\biggr{)}\biggr{]}_0^L + \int_0^Lp_zv\space dx - \int_0^L(EI_y\alpha\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx \end{multline}$$
-Šibko obliko integralske formulacije zapišimo z aproksimirano rešitvijo $\tilde{w}(x)$ : $$\begin{multline}\int_0^{L_e}\biggr{[}EI_y\biggr{(}\frac{d^2\tilde{w}_e}{dx^2}\biggr{)}\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx =\\=\biggr{[}T_z(x)v(x)\biggr{]}_0^{L_e} - \biggr{[}M_y(x)\biggr{(}\frac{dv(x)}{dx}\biggr{)}\biggr{]}_0^{L_e} + \int_0^{L_E}p_zv\space dx - \int_0^{L_e}(EI_y\alpha\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx \end{multline}$$
-Pri čemer izvedemo osnovno aproksimacijo funkcije $\tilde w_e(x_e)$ na podobmočju $x_e\in[0, L_e]$, imenovanem *končni element* (KE), ki ima $N_e$ vozlišč, s pomočjo diskretnih funkcijskih vrednosti na tem podobmočju : $$\tilde w_e = \tilde w_e(x_e) = \sum_{k=1}^{N_e}a_k^e \tilde \Psi_{k-1}^e(x_e) \text{ ; }x_e\in[0,L_e]$$
-V skladu s Galerkinovim pristopom izbire poljubne funkcije $v_k(x)$, le-te izberemo enake interpolacijskim funkcijam za aproksimacijo na podobmočju $x_e \in [0, L_e]$ : $$v_k = v_k(x_e) = \tilde \Psi_{k-1}^e(x_e)\text{ ; }k = 1,2,...,N_e$$
-V primeru ***dvo-vozliščnega*** KE je aproksimacija primarne spremenljivke po njegovem območju zasnovana na štirih polinomih tretjega reda in diskretnih vozliščnih vrednosti povesa in naklona upogibnice : $$\tilde w_e = \tilde w_e(x_e) = W_1^e\tilde\Psi_0^e(x_e) + \varphi_1^e\tilde\Psi_1^e(x_e)+W_2^e\tilde\Psi_2^e(x_e)+ \varphi_2^e\tilde\Psi_3^e(x_e) \text{ ; }x_e\in[0, L_e]$$
+Šibko obliko integralske formulacije zapišimo z aproksimirano rešitvijo $\tilde{w}(x)$ : $$\begin{multline}\int_0^{L_e}\biggr{[}EI_y\biggr{(}\frac{d^2\tilde{w}_e}{dx^2}\biggr{)}\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx =\\=\biggr{[}T_z(x)v(x)\biggr{]}_0^{L_e} - \biggr{[}M_y(x)\biggr{(}\frac{dv(x)}{dx}\biggr{)}\biggr{]}_0^{L_e} + \int_0^{L_e}p_zv\space dx - \int_0^{L_e}(EI_y\alpha\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx \end{multline}$$
+Pri čemer izvedemo osnovno aproksimacijo funkcije $\tilde w_e(x_e)$ na podobmočju $x_e\in[0, L_e]$, imenovanem *končni element* (KE), s pomočjo $N_e$ diskretnih vozliščnih vrednosti na tem podobmočju : $$\tilde w_e = \tilde w_e(x_e) = \sum_{k=1}^{N_e}a_k^e \tilde \Psi_{k-1}^e(x_e) \text{ ; }x_e\in[0,L_e]$$
+V skladu z Galerkinovim pristopom izbire poljubne funkcije $v_k(x)$, le-te izberemo enake interpolacijskim funkcijam za aproksimacijo na podobmočju $x_e \in [0, L_e]$ : $$v_k = v_k(x_e) = \tilde \Psi_{k-1}^e(x_e)\text{ ; }k = 1,2,...,N_e$$
+V primeru ***dvo-vozliščnega*** KE ($N_e = 4$) je aproksimacija primarne spremenljivke po njegovem območju zasnovana na štirih polinomih tretjega reda in diskretnih vozliščnih vrednosti povesa in naklona upogibnice : $$\tilde w_e = \tilde w_e(x_e) = W_1^e\tilde\Psi_0^e(x_e) + \varphi_1^e\tilde\Psi_1^e(x_e)+W_2^e\tilde\Psi_2^e(x_e)+ \varphi_2^e\tilde\Psi_3^e(x_e) \text{ ; }x_e\in[0, L_e]$$
 Funkcije $\tilde\Psi_{0,1,2,3}^e$ imajo sledečo obliko : $$\tilde\Psi_0^e(x_e) = 1-3\frac{x_e^2}{L_e^2} + 2\frac{x_e^3}{L_e^3}$$ $$\tilde\Psi_1^e(x_e) = x_e - 2 \frac{x_e^2}{L_e} + \frac{x_e^3}{L_e^2}$$ $$\tilde\Psi_2^e(x_e) = 3\frac{x_e^2}{L_e^2} - 2\frac{x_e^3}{L_e^3}$$ $$\tilde\Psi_3^e(x_e) = -\frac{x_e^2}{L_e} + \frac{x_e^3}{L_e^2}$$
 ![[Pasted image 20241229141902.png]]
 
@@ -1247,19 +1247,19 @@ Funkcije $\tilde\Psi_{0,1,2,3}^e$ imajo sledečo obliko : $$\tilde\Psi_0^e(x_e) 
 
 V nadaljevanju izpeljimo sistem enačb za dvo-vozliščni KE konstantnega vztrajnostnega momenta prereza $I_y(x_e) = I_{y0}$ in konstantnih materialnih lastnosti $E(x_e) = E_0$ in $\alpha(x_e) = \alpha_0$ , ki omogoča analizo upogibno obremenjenega 1D linijskega konstrukcijskega elementa.
 
-Šibko obliko integralske formulacije tako zapišemo : $$\begin{multline}E_0I_{y0}\int_0^{L_e}\biggr{(}\frac{d^2\tilde w_e}{dx^2}\biggr{)}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx = \\ =T_{2z}^e v(L_e) - T_{1z}^ev(0) - M_{2y}^e\frac{dv(L_e)}{dx} + M_{1y}^e\frac{dv(0)}{dx} + \int_0^{L_e}p_z v\space dx - E_0I_{y0}\int_0^{L_e}(\alpha\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx\end{multline}$$
+Šibko obliko integralske formulacije tako zapišemo : $$\begin{multline}E_0I_{y0}\int_0^{L_e}\biggr{(}\frac{d^2\tilde w_e}{dx^2}\biggr{)}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx = \\ =T_{2z}^e v(L_e) - T_{1z}^ev(0) - M_{2y}^e\frac{dv(L_e)}{dx} + M_{1y}^e\frac{dv(0)}{dx} + \int_0^{L_e}p_z v\space dx - E_0I_{y0}\int_0^{L_e}(\alpha_0\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx\end{multline}$$
 V zapisani enačbi predstavljajo vrednosti $T_{1z}^e$ , $T_{2z}^e$ vozliščne vrednosti notranje prečne sile ter $M_{1y}^e$ , $M_{2y}^e$ vozliščne vrednosti notranjega momenta v vozliščih KE.
 ![[Pasted image 20241229142929.png]]
 
-Upoštevajoč aproksimacijo primarne spremenljivke $\tilde w_e(x_e)$, lahko šibko obliko integralske formulacije zapišemo tako : $$\begin{multline}E_0I_{y0}\int_0^{L_e}\frac{d^2}{dx^2}\biggr{[}W_1^e\tilde\Psi_0^e(x_e) + \varphi_1^e\tilde\Psi_1^e(x_e)+W_2^e\tilde\Psi_2^e(x_e)+ \varphi_2^e\tilde\Psi_3^e(x_e)\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx = \\=T_{2z}^e v(L_e) - T_{1z}^ev(0) - M_{2y}^e\frac{dv(L_e)}{dx} + M_{1y}^e\frac{dv(0)}{dx} + \int_0^{L_e}p_z v\space dx - E_0I_{y0}\int_0^{L_e}(\alpha\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx\end{multline}$$
+Upoštevajoč aproksimacijo primarne spremenljivke $\tilde w_e(x_e)$, lahko šibko obliko integralske formulacije zapišemo tako : $$\begin{multline}E_0I_{y0}\int_0^{L_e}\frac{d^2}{dx^2}\biggr{[}W_1^e\tilde\Psi_0^e(x_e) + \varphi_1^e\tilde\Psi_1^e(x_e)+W_2^e\tilde\Psi_2^e(x_e)+ \varphi_2^e\tilde\Psi_3^e(x_e)\biggr{]}\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx = \\=T_{2z}^e v(L_e) - T_{1z}^ev(0) - M_{2y}^e\frac{dv(L_e)}{dx} + M_{1y}^e\frac{dv(0)}{dx} + \int_0^{L_e}p_z v\space dx - E_0I_{y0}\int_0^{L_e}(\alpha_0\Delta\vartheta_{zh})\biggr{(}\frac{d^2v}{dx^2}\biggr{)}dx\end{multline}$$
 V zapisani enačbi je neznanih ***osem*** vozliščnih vrednosti KE, in sicer vrednosti povesa in naklona upogibnice ($W_1^e, W_2^e, \varphi_1^e, \varphi_2^e$), ki predstavljajo primarni spremenljivki, ter vrednosti notranje prečne sile in notranjega momenta ($T_{1z}^e,T_{2z}^e, M_{1y}^e,M_{2y}^e$), ki predstavljajo sekundarni spremenljivki.
 ![[Pasted image 20241229143716.png]]
 
 Za ***osem*** neznank potrebujemo ***osem*** enačb. ***Štiri enačbe*** (vodilna enačba problema je diferencialna enačba četrtega reda) izhajajo iz poznanih vrednosti primarne ali sekundarne spremenljivke na robu območja KE, torej v obeh vozliščih KE.
 
-Manjkajoče ***štiri*** enačbe dobimo z izbiro poljubne funkcije $v(x_e)$. V skladu z Galerkinovim pristopom izbire poljubne funkcije, izberemo štiri funkcije, ki so bile uporabljene v aproksimaciji primarne spremenljivke $\tilde w_e(x_e)$ : $$v_1(x_e) = \tilde\Psi_0^e(x_e) = 1-3\frac{x_e^2}{L_e^2} + 2\frac{x_e^3}{L_e^3}$$ $$v_2(x_e) = \tilde\Psi_1^e(x_e) = x_e - 2 \frac{x_e^2}{L_e} + \frac{x_e^3}{L_e^2}$$ $$v_3(x_e)=\tilde\Psi_2^e(x_e) = 3\frac{x_e^2}{L_e^2} - 2\frac{x_e^3}{L_e^3}$$ $$v_4(x_e) = \tilde\Psi_3^e(x_e) = -\frac{x_e^2}{L_e} + \frac{x_e^3}{L_e^2}$$
-Štiri enačbe, ki jih dobimo z izbiro funkcije $v(x_e)$ in integriranjem integralske enačbe, zapišimo za dvo-vozliščni KE v sledeči matrični obliki : $$\frac{E_0I_0}{L_e^3}\begin{bmatrix}12&6L_e&-12&6L_e\\6L_e &4L_e^2&-6L_e&2L_e^2\\-12&-6L_e&12&-6L_e\\6L_e&2L_e^2&-6L_e&4L_e^2\end{bmatrix}\begin{Bmatrix}W_1^e\\\varphi_1^e\\W_2^e\\\varphi_2^e\end{Bmatrix} = \begin{Bmatrix}-T_{1z}^e\\M_{1y}^e\\T_{2z}^e\\-M_{2y}^e\end{Bmatrix} + \begin{Bmatrix}\tilde F_{1z}^e\\\tilde M_{1y}^e\\\tilde F_{2z}^e\\\tilde M_{2y}^e\end{Bmatrix}$$
-v kateri so zajete tudi ekvivalentne vozliščne obremenitve, ki izhajajo iz porazdeljene prečne obremenitve $p_t(x_e)$ in linearno po prerezu porazdeljene temperaturne razlike $\vartheta_h(x_e)$ : $$\tilde F_{1z}^e = F_{1p}^e + F_{1T}^e$$ $$\tilde F_{2z}^e = F_{2p}^e + F_{2T}^e$$ $$\tilde M_{1y}^e = M_{1p}^e + M_{1T}^e$$ $$\tilde M_{2y}^e = M_{2p}^e + M_{2T}^e$$
+Manjkajoče ***štiri*** enačbe dobimo z izbiro poljubne funkcije $v(x_e)$. V skladu z Galerkinovim pristopom izberemo štiri funkcije, ki so bile uporabljene v aproksimaciji primarne spremenljivke $\tilde w_e(x_e)$ : $$v_1 = \tilde\Psi_0^e,\quad v_2 = \tilde\Psi_1^e,\quad v_3 = \tilde\Psi_2^e,\quad v_4 = \tilde\Psi_3^e$$
+Štiri enačbe, ki jih dobimo z izbiro funkcije $v(x_e)$ in integriranjem integralske enačbe, zapišimo za dvo-vozliščni KE v sledeči matrični obliki : $$\frac{E_0I_{y0}}{L_e^3}\begin{bmatrix}12&6L_e&-12&6L_e\\6L_e &4L_e^2&-6L_e&2L_e^2\\-12&-6L_e&12&-6L_e\\6L_e&2L_e^2&-6L_e&4L_e^2\end{bmatrix}\begin{Bmatrix}W_1^e\\\varphi_1^e\\W_2^e\\\varphi_2^e\end{Bmatrix} = \begin{Bmatrix}-T_{1z}^e\\M_{1y}^e\\T_{2z}^e\\-M_{2y}^e\end{Bmatrix} + \begin{Bmatrix}\tilde F_{1z}^e\\\tilde M_{1y}^e\\\tilde F_{2z}^e\\\tilde M_{2y}^e\end{Bmatrix}$$
+v kateri so zajete tudi ekvivalentne vozliščne obremenitve, ki izhajajo iz porazdeljene prečne obremenitve $p_z(x_e)$ in linearno po prerezu porazdeljene temperaturne razlike $\Delta\vartheta_{zh}(x_e)$ : $$\tilde F_{1z}^e = F_{1p}^e + F_{1T}^e$$ $$\tilde F_{2z}^e = F_{2p}^e + F_{2T}^e$$ $$\tilde M_{1y}^e = M_{1p}^e + M_{1T}^e$$ $$\tilde M_{2y}^e = M_{2p}^e + M_{2T}^e$$
 ![[Pasted image 20241229144959.png]]
 
 Ekvivalentne vozliščne vrednosti obremenitve dobimo z izračuni sledečih integralov : 
@@ -1269,17 +1269,20 @@ $$\tilde F_{1z}^e = F_{1p}^e + F_{1T}^e\text{ <|> } F_{1p}^e=\int_0^{L_e}p_z\til
 
 V primeru ***dvo-vozliščnega*** KE je aproksimacija primarne spremenljivke po njegovem območju zasnovana na štirih polinomih tretjega reda in diskretnih vozliščnih vrednosti povesa in naklona upogibnice : $$\tilde w_e = \tilde w_e(x_e) = W_1^e\tilde\Psi_0^e(x_e) + \varphi_1^e\tilde\Psi_1^e(x_e)+W_2^e\tilde\Psi_2^e(x_e)+ \varphi_2^e\tilde\Psi_3^e(x_e) \text{ ; }x_e\in[0, L_e]$$
 Funkcije $\tilde\Psi_{0,1,2,3}^e$ imajo sledečo obliko : $$\tilde\Psi_0^e(x_e) = 1-3\frac{x_e^2}{L_e^2} + 2\frac{x_e^3}{L_e^3}$$ $$\tilde\Psi_1^e(x_e) = x_e - 2 \frac{x_e^2}{L_e} + \frac{x_e^3}{L_e^2}$$ $$\tilde\Psi_2^e(x_e) = 3\frac{x_e^2}{L_e^2} - 2\frac{x_e^3}{L_e^3}$$ $$\tilde\Psi_3^e(x_e) = -\frac{x_e^2}{L_e} + \frac{x_e^3}{L_e^2}$$
+To so Hermitovi polinomi: vsaka funkcija ima v svojem vozliščnem parametru (poves ali naklon v vozlišču) vrednost 1, v ostalih treh pa 0. Tako sta med KE zvezna poves in naklon, kar zahteva šibka oblika z drugimi odvodi.
 ![[Pasted image 20241229141902.png]]
 
 ### 3. Kako je upoštevana porazdeljena prečna obremenitev za primer upogibno obremenjenega konstrukcijskega elementa pri reševanju z MKE?
 
-Z ekvivalentno vozliščno vrednostjo obremenitve : $$F_{1p}^e=\int_0^{L_e}p_z\tilde\Psi_0^e(x_e)dx_e$$ $$F_{2p}^e=\int_0^{L_e}p_z\tilde\Psi_2^e(x_e)dx_e$$ $$M_{1p}^e=\int_0^{L_e}p_z\tilde\Psi_1^e(x_e)dx_e$$
+Z ekvivalentnimi vozliščnimi silami in momenti, ki sledijo iz člena $\int_0^{L_e}p_zv\,dx$ šibke oblike (Galerkin, $v = \tilde\Psi_k^e$). Prištejemo jih vektorju desne strani : $$F_{1p}^e=\int_0^{L_e}p_z\tilde\Psi_0^e(x_e)dx_e$$ $$F_{2p}^e=\int_0^{L_e}p_z\tilde\Psi_2^e(x_e)dx_e$$ $$M_{1p}^e=\int_0^{L_e}p_z\tilde\Psi_1^e(x_e)dx_e$$
 $$M_{2p}^e=\int_0^{L_e}p_z\tilde\Psi_3^e(x_e)dx_e$$
+Za konstantno $p_z = p_0$ : $F_{1p}^e = F_{2p}^e = \frac{p_0L_e}{2}$, $M_{1p}^e = \frac{p_0L_e^2}{12}$, $M_{2p}^e = -\frac{p_0L_e^2}{12}$.
 
 
 ### 4. Kako je upoštevana temperaturna obremenitev za primer upogibno obremenjenega konstrukcijskega elementa pri reševanju z MKE?
 
-Z ekvivalentno vozliščno vrednostjo obremenitve, ki povzroči enako deformacijo kot temperaturna obremenitev : $$F_{1T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde \Psi_0^e(x_e)}{dx^2}dx_e$$ $$F_{2T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde\Psi_2^e(x_e)}{dx^2}dx_e$$ $$M_{1T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde \Psi_1^e(x_e)}{dx^2}dx_e$$ $$M_{2T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde \Psi_3^e(x_e)}{dx^2}dx_e$$
+Temperaturni člen šibke oblike prenesemo na desno stran. Z $v = \tilde\Psi_k^e$ dobimo ekvivalentne vozliščne obremenitve, ki jih prištejemo vektorju desne strani : $$F_{1T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde \Psi_0^e(x_e)}{dx^2}dx_e$$ $$F_{2T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde\Psi_2^e(x_e)}{dx^2}dx_e$$ $$M_{1T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde \Psi_1^e(x_e)}{dx^2}dx_e$$ $$M_{2T}^e = -E_0I_{y0}\alpha_0\int_0^{L_e}\Delta\vartheta_{zh}\frac{d^2\tilde \Psi_3^e(x_e)}{dx^2}dx_e$$
+Za konstantno $\Delta\vartheta_{zh}$ : $F_{1T}^e = F_{2T}^e = 0$, $M_{1T}^e = E_0I_{y0}\alpha_0\Delta\vartheta_{zh}$, $M_{2T}^e = -E_0I_{y0}\alpha_0\Delta\vartheta_{zh}$.
 
 
 
@@ -1287,79 +1290,83 @@ Z ekvivalentno vozliščno vrednostjo obremenitve, ki povzroči enako deformacij
 
 ### 1. Izpeljite desno diferenčno enačbo za prvi odvod funkcije.
 
-Večkrat se izkaže smiselno, da odvode aproksimiramo ne le z centralno diferenčno shemo ampak tudi z levo/desno diferenčno shemo - časovno odvisni problemi - progresivne spremenljivke.
+Leve/desne razlike uporabimo tam, kjer točk na eni strani ni: na robu območja in pri časovno odvisnih problemih (progresivne spremenljivke).
 ![[Pasted image 20250123112235.png]]
 
 Za aproksimacijo odvodov v primeru desnih/levih razlik si pomagamo s Taylorjevo vrsto : 
 ![[Pasted image 20250123112404.png]]
 
-Jemali smo diferencialne enačbe v katerih nastopajo 4. odvodi zato vrsto razvijemo do petega člena. 
-
-Za prvi odvod vzamemo točki $w_1$ in $w_2$ in zapišemo : $$\frac{dw_0}{dx} = -\frac{1}{2h}\biggr{(}3w_0 - 4w_1 + w_2\biggr{)} + \frac{h^2}{3}\frac{d^3w_0}{dx^3} + ...$$
-Ker velja $h^3 << h< 1$ lahko zanemarimo vse člene po tretjem odvodu : $$\frac{dw_0}{dx} \approx \mp \frac{1}{2h}\biggr{(}3w_0 - 4w_{\pm1} + w_{\pm 2}\biggr{)} = D_{\pm}w_0$$
-Za desno shemo vzamemo vrednosti pozitivne indekse $w$.
+Za prvi odvod uporabimo točki $w_1 = w(x_0 + h)$ in $w_2 = w(x_0 + 2h)$ : $$w_1 = w_0 + h\frac{dw_0}{dx} + \frac{h^2}{2}\frac{d^2w_0}{dx^2} + \frac{h^3}{6}\frac{d^3w_0}{dx^3} + ...$$ $$w_2 = w_0 + 2h\frac{dw_0}{dx} + 2h^2\frac{d^2w_0}{dx^2} + \frac{4h^3}{3}\frac{d^3w_0}{dx^3} + ...$$
+Drugi odvod eliminiramo s kombinacijo $4w_1 - w_2$ in izrazimo prvi odvod : $$\frac{dw_0}{dx} = -\frac{1}{2h}\biggr{(}3w_0 - 4w_1 + w_2\biggr{)} + \frac{h^2}{3}\frac{d^3w_0}{dx^3} + ...$$
+Člen s tretjim odvodom in višje zanemarimo (napaka $O(h^2)$) : $$\frac{dw_0}{dx} \approx \mp \frac{1}{2h}\biggr{(}3w_0 - 4w_{\pm1} + w_{\pm 2}\biggr{)} = D_{\pm}w_0$$
+Za desno shemo vzamemo pozitivne indekse $w$, za levo negativne.
 ### 2. Izpeljite desno diferenčno enačbo za drugi odvod funkcije.
 
-Z eliminacijo tretjega odvoda lahko iz razvrstitev za $w_1$, $w_2$ in $w_3$ izrazimo aporksimacijo drugega odvoda v točki $x = x_0$ na sledeči način : $$\frac{d^2w_0}{dx^2} \approx \frac{1}{h^2}\biggr{(}2w_0 - 5w_{\pm1} + 4w_{\pm2} - w_{\pm 3}\biggr{)} = D_\pm^2w_0$$
-Enako kot pri prejšnjem primeru za desni odvod vzmamemo pozitivne indekse $w$.
+Iz Taylorjevih vrst za $w_1$, $w_2$ in $w_3$ eliminiramo prvi in tretji odvod ter izrazimo drugi odvod v točki $x = x_0$ (napaka $O(h^2)$) : $$\frac{d^2w_0}{dx^2} \approx \frac{1}{h^2}\biggr{(}2w_0 - 5w_{\pm1} + 4w_{\pm2} - w_{\pm 3}\biggr{)} = D_\pm^2w_0$$
+Za desni odvod vzamemo pozitivne indekse $w$.
 ### 3. Opišite postopek izpeljave modificirane diferenčne enačbe za drugi odvod funkcije.
 
-Za notranjo točko - $w_0$ - regularne delitve ($h = konst.$) želimo izpeljati difrenčni opreator drugega reda, ki ne bo baziral na centralnih razlikah ter posleično vključitvi znanje robe točke, marveč bo vključeval novo točko $+\frac{1}{2}$ oz. $-\frac{1}{2}$.
+Na robu podobmočja razpolovimo korak, zato ima notranja točka $w_0$ regularne delitve ($h = konst.$) sosednjo točko na razdalji $h/2$ (točka $+\frac{1}{2}$ oz. $-\frac{1}{2}$). Tako ne potrebujemo zunanje točke, ki bi jo zahtevale centralne razlike.
 ![[Pasted image 20250123115103.png]]
 
-Za drugi odvod zanemarimo vse člene po tretjem odvodu in tako ohranimo stopnjo natančnosti, ki smo jo dobili s centralinii diferenčnimi shemami. Postopek določitve diferenčnega operaorja je enak kot pri ekvidistančni mreži - eliminiramo tretju odvod.
+Postopek :
+1. Za vsako sosednjo točko (tudi za točko $\pm\frac{1}{2}$) zapišemo Taylorjevo vrsto okoli $x_0$ in zanemarimo člene po tretjem odvodu.
+2. Iz dobljenih enačb eliminiramo prvi in tretji odvod ter izrazimo drugi odvod.
+
+Tako ohranimo red natančnosti centralnih diferenčnih shem, $O(h^2)$.
 
 ### 4. Opišite postopek izpeljave modificirane diferenčne enačbe za tretji odvod funkcije.
 
-Vse enako kot prej le da zanemarimo vse člene od četrtega reda naprej in tako ohranimo zahtevano natančnost. Nato eliminiramo četrti odvod in zapišemo diferenčni operator. 
+Enako kot pri drugem odvodu, le da Taylorjeve vrste razvijemo do vključno četrtega odvoda (člene od petega naprej zanemarimo). Eliminiramo prvi, drugi in četrti odvod ter izrazimo tretji odvod. Natančnost ostane $O(h^2)$.
 ### 5. Opišite postopek izpeljave modificirane diferenčne enačbe za četrti odvod funkcije.
 
-Vse enako kot prej. Za zahtevano natančnost zanemarimo vse člene po petem redu in nato eliminiramo peti odvod.
+Enako kot prej. Taylorjeve vrste razvijemo do vključno petega odvoda (člene od šestega naprej zanemarimo). Eliminiramo prvi, drugi, tretji in peti odvod ter izrazimo četrti odvod.
 ### 6.  Opišite načine izpolnjevanja pogojev konsistentnega prehoda med dvema podobmočjema v primeru upogibno obremenjenega konstrukcijskega elementa pri uporabi MKR.
 
-Lahko uporabimo ekvidistančno mrežo z centralnimi razlikami. S tem pristopom potrebujemo dodatne točke, ki nimajo fizikalnega pomena. 
+Na prehodu morajo biti zvezni poves $w$, naklon $\frac{dw}{dx}$, notranji moment $M_y$ in prečna sila $T_z$. Načini :
 
-Lahko porabimo ekvidistančno mrežo in leve/desne razlike. S tem pristopom dodatne točke niso potrebne, zmanjša se numerična stabilnost rezultata. 
-
-Lahko drugače diskretiziramo podobmočji - na robu vsakega podobmočja razpolovimo korak in uporabimo modificirano diferenčno enačbo za izpolnitev RP in PKP.
+- Ekvidistančna mreža s centralnimi razlikami. Potrebujemo dodatne točke, ki nimajo fizikalnega pomena.
+- Ekvidistančna mreža z levimi/desnimi razlikami. Dodatne točke niso potrebne, natančnost pa je manjša.
+- Drugačna diskretizacija podobmočij: na robu vsakega podobmočja razpolovimo korak in uporabimo modificirane diferenčne enačbe za izpolnitev RP in PKP.
 ### 7. Kako ocenjujemo napako uporabljene diferenčne enačbe?
 
-Napako ocenjujemo glede na izpuščene čelene v Taylorjevi vrsti. $O(h^2)$ npr.
+Napako ocenimo s prvim izpuščenim členom Taylorjeve vrste. Potenca $h$ v tem členu določa red napake, npr. za centralno razliko : $$\frac{dw_0}{dx} = \frac{w_1 - w_{-1}}{2h} - \frac{h^2}{6}\frac{d^3w_0}{dx^3} - ... \quad\Rightarrow\quad O(h^2)$$
+Pri napaki $O(h^2)$ se napaka ob razpolovitvi koraka zmanjša približno 4-krat.
 ### 8. Izpeljite centralno diferenčno enačbo za Laplaceov operator upoštevajoč kartezične koordinate.
 
-Laplceov operator $\nabla$ je divergenca - funkcijsko podano kot :$$\nabla v(x, y, z) = \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2}+ \frac{\partial^2 v}{\partial z^2} $$
-Če želimo Laplaceov operator zapisati v diferenčni obliki s centralno diferenčno shemo v 2D kartezičnih koordintah zapišemo sledeče : $$\frac{\partial^2 v}{\partial x^2} = \frac{v(x-h,y) - 2v(x,y) + v(x+h,y)}{h^2} $$ $$\frac{\partial^2v}{\partial y^2} = \frac{v(x,y-h) - 2v(x,y) + v(x, y+h)}{h^2}$$
-Oba prispevka seštejemo in zapišemo : $$\nabla v(x,y) = \frac{\partial^2v}{\partial x^2} + \frac{\partial^2v}{\partial y^2} = \frac{v_{n-1,m}+ v_{n+1,m} + v_{n, m-1} + v_{n, m+1} -4 v_{n,m}}{h^2}$$
+Laplaceov operator $\nabla^2$ je divergenca gradienta : $$\nabla^2 v(x, y, z) = \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2}+ \frac{\partial^2 v}{\partial z^2} $$
+Če želimo Laplaceov operator zapisati v diferenčni obliki s centralno diferenčno shemo v 2D kartezičnih koordinatah (enak korak $h$ v obeh smereh), zapišemo sledeče : $$\frac{\partial^2 v}{\partial x^2} \approx \frac{v(x-h,y) - 2v(x,y) + v(x+h,y)}{h^2} $$ $$\frac{\partial^2v}{\partial y^2} \approx \frac{v(x,y-h) - 2v(x,y) + v(x, y+h)}{h^2}$$
+Oba prispevka seštejemo in z oznako $v_{n,m} = v(x_n, y_m)$ zapišemo (napaka $O(h^2)$) : $$\nabla^2 v(x,y) = \frac{\partial^2v}{\partial x^2} + \frac{\partial^2v}{\partial y^2} \approx \frac{v_{n-1,m}+ v_{n+1,m} + v_{n, m-1} + v_{n, m+1} -4 v_{n,m}}{h^2}$$
 Grafični prikaz : 
 ![[Pasted image 20250123121218.png]]
 
 
 ### 9. Izpeljite centralno diferenčno enačbo za Laplaceov operator upoštevajoč cilindrične koordinate.
 
-Koordinata z se ne spreminja, spremenijo pa se koordinate $x$ in $y$ : $$x = r\space cos(\varphi)$$ $$y = r\space sin(\varphi)$$ $$r^2 = x^2 + y^2$$
+Obravnavamo 2D primer ($z$ = konst.), spremenijo se koordinate $x$ in $y$ : $$x = r\space cos(\varphi)$$ $$y = r\space sin(\varphi)$$ $$r^2 = x^2 + y^2$$
 
-Rabimo spremeniti se diferencialne operatorje : $$\frac{\partial }{\partial x} = \frac{\partial }{\partial r}\frac{\partial r}{\partial x} + \frac{\partial }{\partial \varphi}\frac{\partial \varphi}{\partial x}$$ $$\frac{\partial }{\partial y} = \frac{\partial }{\partial r}\frac{\partial r}{\partial y} + \frac{\partial }{\partial \varphi}\frac{\partial \varphi}{\partial y}$$
+Rabimo spremeniti še diferencialne operatorje : $$\frac{\partial }{\partial x} = \frac{\partial }{\partial r}\frac{\partial r}{\partial x} + \frac{\partial }{\partial \varphi}\frac{\partial \varphi}{\partial x}$$ $$\frac{\partial }{\partial y} = \frac{\partial }{\partial r}\frac{\partial r}{\partial y} + \frac{\partial }{\partial \varphi}\frac{\partial \varphi}{\partial y}$$
 Za našo uporabo so zanimivi operatorji do vključno drugega reda : 
 
 ![[Pasted image 20250123121951.png]]
 
-Lahko vidimo da se Laplaceov operator spremeni : $$\nabla = \frac{\partial^2 }{\partial x^2} + \frac{\partial ^2}{\partial y^2} = \frac{\partial ^2}{\partial r^2} + \frac{1}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\frac{\partial^2}{\partial \varphi^2}$$V nadaljevanju je smiselno oštevilčiti točke, s katerimi bomo izpeljevali diferenčno shemo : 
+Lahko vidimo da se Laplaceov operator spremeni : $$\nabla^2 = \frac{\partial^2 }{\partial x^2} + \frac{\partial ^2}{\partial y^2} = \frac{\partial ^2}{\partial r^2} + \frac{1}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\frac{\partial^2}{\partial \varphi^2}$$V nadaljevanju je smiselno oštevilčiti točke, s katerimi bomo izpeljevali diferenčno shemo ($v_1$, $v_3$ v radialni smeri, $v_2$, $v_4$ v obodni smeri) : 
 ![[Pasted image 20250123122540.png]]
 
 Zapišimo parcialne odvode, ki nastopajo v enojnem Laplaceovem operatorju : 
 $$\frac{\partial v_0}{\partial r}\approx \frac{v_1 - v_3}{2\Delta r}$$ $$\frac{\partial v_0}{\partial\varphi} \approx \frac{v_2 - v_4}{2 \Delta\overset{\frown}\varphi}$$
 Še drugi odvodi : $$\frac{\partial ^2 v_0}{\partial r^2}\approx\frac{v_1 - 2v_0 + v_3}{\Delta r^2}$$ $$\frac{\partial^2 v_0}{\partial \varphi^2}\approx \frac{v_2 - 2v_0 + v_4}{\Delta\overset{\frown}\varphi^2}$$
-S tem lahko zapišemo diferenčno obliko Laplaceovega operatorja v cilindričnih koordinatah (2D) : $$\nabla v_0 = \frac{\partial ^2}{\partial r^2} + \frac{1}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\frac{\partial^2}{\partial \varphi^2} \approx \frac{v_1 - 2v_0 + v_3}{\Delta r^2} + \frac{v_1 - v_3}{2r_0 \Delta r} + \frac{v_2 - 2v_0 + v_4}{(r_0 \Delta \overset{\frown}\varphi)^2} $$
+S tem lahko zapišemo diferenčno obliko Laplaceovega operatorja v cilindričnih koordinatah (2D) : $$\nabla^2 v_0 = \frac{\partial ^2 v_0}{\partial r^2} + \frac{1}{r_0}\frac{\partial v_0}{\partial r} + \frac{1}{r_0^2}\frac{\partial^2 v_0}{\partial \varphi^2} \approx \frac{v_1 - 2v_0 + v_3}{\Delta r^2} + \frac{v_1 - v_3}{2r_0 \Delta r} + \frac{v_2 - 2v_0 + v_4}{(r_0 \Delta \overset{\frown}\varphi)^2} $$
 Grafični prikaz : 
 ![[Pasted image 20250123123752.png]]
 
 
 ### 10. Izpeljite centralno diferenčno enačbo za mešani odvod $\frac{\partial^2 F(x,y)}{\partial x \partial y}$
 
-Enojne odvode smo izpeljali že zgoraj, mešani odvod ima sledečo obliko : $$\begin{multline}\frac{\partial^2 v_0}{\partial x\partial y} \approx \frac{1}{4\Delta x\Delta y}\biggr{[}v(x_0 + \Delta x, y_0 + \Delta y) -\\- v(x_0 + \Delta x, y_0 - \Delta y) -\\- v(x_0 - \Delta x, y_0 + \Delta y) +\\+ v(x_0 -\Delta x, y_0 - \Delta y)\end{multline}$$
+Na centralno razliko po $y$, $\frac{\partial v}{\partial y} \approx \frac{v(x, y_0 + \Delta y) - v(x, y_0 - \Delta y)}{2\Delta y}$, uporabimo še centralno razliko po $x$ : $$\begin{multline}\frac{\partial^2 v_0}{\partial x\partial y} \approx \frac{1}{4\Delta x\Delta y}\biggr{[}v(x_0 + \Delta x, y_0 + \Delta y) -\\- v(x_0 + \Delta x, y_0 - \Delta y) -\\- v(x_0 - \Delta x, y_0 + \Delta y) +\\+ v(x_0 -\Delta x, y_0 - \Delta y)\biggr{]}\end{multline}$$
 ### 11. Izpeljite centralno diferenčno enačbo za mešani odvod $\frac{\partial^4 F(x,y)}{\partial x^2 \partial y^2}$
 
-$$\frac{\partial^4v_0}{\partial x^2\partial y^2}\approx\frac{4v_0 - 2(v_1 + v_2 + v_3 + v_4) + v_5 + v_6 + v_7 + v_8}{h^4}$$
+Na centralno razliko za $\frac{\partial^2 v}{\partial y^2}$ uporabimo še centralno razliko za $\frac{\partial^2}{\partial x^2}$ ($\Delta x = \Delta y = h$; $v_1$–$v_4$ so sosednje točke v smereh $x$ in $y$, $v_5$–$v_8$ diagonalne točke) : $$\frac{\partial^4v_0}{\partial x^2\partial y^2}\approx\frac{4v_0 - 2(v_1 + v_2 + v_3 + v_4) + v_5 + v_6 + v_7 + v_8}{h^4}$$
 ![[Pasted image 20250123124839.png]]
 
 ## ***PREDAVANJE 14 : REŠEVANJE 2D ČASOVNO USTALJENEGA PREVODA TOPLOTE Z METODO KONČNIH ELEMENTOV***
@@ -1368,39 +1375,46 @@ $$\frac{\partial^4v_0}{\partial x^2\partial y^2}\approx\frac{4v_0 - 2(v_1 + v_2 
 
 Izhodiščna enačba problema v 2D kartezičnih koordinatah : $$\frac{\partial }{\partial x}\biggr{(}k\frac{\partial T}{\partial x}\biggr{)} + \frac{\partial}{\partial y}\biggr{(}k\frac{\partial T}{\partial y}\biggr{)} + q_V = 0 \space , \space(x,y)\in\Omega_{2D}$$
 
-Enačbo na množimo s poljubno na območju odvedljivo funkcijo $v(x,y)$ : $$\biggr{[}div[grad(T)] + q_V\biggr{]}v(x,y) = 0$$
-Izraz lahko integriramo po obravnavanem območju : $$\int_{\Omega_{2D}}\biggr{[}div[grad(T)] + q_V\biggr{]}v(x,y)\space d\Omega_{2D}= 0$$
-Dobili smo ***osnovno obliko integralske formulacje***. Dobljeno enačbo lahko preoblikujemo : $$\int_{\Omega_{2D}}\biggr{[}div[grad(T)]\biggr{]}v(x,y)\space d\Omega_{2D}= -\int_{\Omega_{2D}}q_Vv(x,y)\space d\Omega_{2D}$$
-Integral na levi lahko z upoštevanjem ***Green-Gaussovega teorema*** zapišemo malo drugače : $$\int_{\Omega_{2D}}\biggr{[}div[grad(T)]\biggr{]}v(x,y)\space d\Omega_{2D} = \int_{\Gamma_{2D}}\biggr{[}k\space grad(T)\biggr{]} \hat n \space v(x,y) d\Gamma - \int_{\Omega_{2D}}\biggr{[}grad(v(x,y))\biggr{]}\biggr{[}k\space grad(T)\biggr{]}d\Omega$$
+Enačbo množimo s poljubno na območju odvedljivo funkcijo $v(x,y)$ : $$\biggr{[}div[k\space grad(T)] + q_V\biggr{]}v(x,y) = 0$$
+Izraz lahko integriramo po obravnavanem območju : $$\int_{\Omega_{2D}}\biggr{[}div[k\space grad(T)] + q_V\biggr{]}v(x,y)\space d\Omega_{2D}= 0$$
+Dobili smo ***osnovno obliko integralske formulacje***. Dobljeno enačbo lahko preoblikujemo : $$\int_{\Omega_{2D}}\biggr{[}div[k\space grad(T)]\biggr{]}v(x,y)\space d\Omega_{2D}= -\int_{\Omega_{2D}}q_Vv(x,y)\space d\Omega_{2D}$$
+Integral na levi lahko z upoštevanjem ***Green-Gaussovega teorema*** zapišemo malo drugače : $$\int_{\Omega_{2D}}\biggr{[}div[k\space grad(T)]\biggr{]}v(x,y)\space d\Omega_{2D} = \int_{\Gamma_{2D}}\biggr{[}k\space grad(T)\biggr{]} \hat n \space v(x,y) d\Gamma - \int_{\Omega_{2D}}\biggr{[}grad(v(x,y))\biggr{]}\biggr{[}k\space grad(T)\biggr{]}d\Omega$$
 
-***ŠIBKO OBLIKO INTEGRALSKE FORMULACIJE*** LAHKO ZAPIŠEMO KOT : $$\int_{\Omega_{2D}}\biggr{[}grad(x)\biggr{]}\biggr{[}k\space grad(T)\biggr{]}d\Omega = -\int_{\Gamma_{2D}}q_n\space v \space d\Gamma + \int_{\Omega_{2D}}q_V\space v\space d\Omega$$
+***ŠIBKO OBLIKO INTEGRALSKE FORMULACIJE*** LAHKO ZAPIŠEMO KOT : $$\int_{\Omega_{2D}}\biggr{[}grad(v)\biggr{]}\biggr{[}k\space grad(T)\biggr{]}d\Omega = -\int_{\Gamma_{2D}}q_n\space v \space d\Gamma + \int_{\Omega_{2D}}q_V\space v\space d\Omega$$
 Pri tem smo upoštevali, da je $q_n$ velikost toplotnega toka v smeri normale $\hat n$ na ograjo območja $\Gamma_{2D}$ : $$-\biggr{[}k\space grad(T)\biggr{]}\hat n = q_n$$
 
-Na delu ograje jobmočja je lahko poznana veličina ($q_{\Gamma_1} = q_0$), na preostalem delu ograje območja pa nepoznana veličina ($q_{\Gamma_2}$) : $$\int_{\Gamma_{2D}}q_n\space v\space d\Gamma  = \int_{\Gamma_1}q_0\space v\space d\Gamma + \int_{\Gamma_2}q_{\Gamma_2}\space v\space d\Gamma\space , \space \Gamma_1 \cup \Gamma_2 = \Gamma_{2D}$$
-Obravnavano območje razdelimo na podobmočja, ki sovpadajo z območjem 2D KE. Naprej normalno rešujemo z aproksimativno rešitvijo.
+Na delu ograje območja $\Gamma_1$ je toplotni tok poznan ($q_n = q_0$). Na preostalem delu $\Gamma_2$ je predpisana temperatura, toplotni tok $q_{\Gamma_2}$ pa ni poznan : $$\int_{\Gamma_{2D}}q_n\space v\space d\Gamma  = \int_{\Gamma_1}q_0\space v\space d\Gamma + \int_{\Gamma_2}q_{\Gamma_2}\space v\space d\Gamma\space , \space \Gamma_1 \cup \Gamma_2 = \Gamma_{2D}$$
+Obravnavano območje nato razdelimo na podobmočja, ki sovpadajo z območjem 2D KE, in na vsakem KE temperaturo aproksimiramo (Galerkin: $v = \hat\psi_k^e$).
 ### 2. Zapišite aproksimacijo temperaturnega polja po območju trivozliščnega 2D KE.
 
 V primeru ***trivozliščnega 2D KE*** je aproksimacija primarne spremenljivke po njegovem območju zasnovana na naslednji način : $$\hat T_e(x_e,y_e) = T_1^e\hat\psi_1^e(x_e, y_e) + T_2^e\hat\psi_2^e(x_e,y_e) + T_3^e\hat\psi_3^e(x_e,y_e)$$
-Za kartezijeve koordinate ima funkcija $\hat\psi_k^e$ naslenjo obliko : $$\hat\psi_k^e(x_e,y_e) = c_0^k + c_1^kx_e + c_2^ky_e\space, \space k = 1,2,3$$
-Izbrana funkcija zagotavlja enako porazdelitev temperature po območju KE glede na obe koordinati $x_e$ in $y_e$. 
+Za kartezijeve koordinate ima funkcija $\hat\psi_k^e$ naslednjo obliko : $$\hat\psi_k^e(x_e,y_e) = c_0^k + c_1^kx_e + c_2^ky_e\space, \space k = 1,2,3$$
+Funkcija je linearna v obeh koordinatah $x_e$ in $y_e$, zato je gradient temperature po KE konstanten.
 ![[Pasted image 20250123131953.png]]
 
-Funkcija mora izpolnjevati Kroneckerjevo delta funkcijo v 2D prostoru, namesto koordinate $x$ zdej geldamo vozlišča - več info na sliki. 
+Koeficiente $c_0^k, c_1^k, c_2^k$ določimo iz pogoja Kroneckerjeve delte v vozliščih $(x_v, y_v)$ : $$\hat\psi_k^e(x_v, y_v) = \delta_{vk}\space , \space v,k = 1,2,3$$
 
 ![[Pasted image 20250123132213.png]]
 
 ### 3. Zapišite aproksimacijo temperaturnnega polja po območju štirivozliščnega 2D KE.
 
 Funkcijska aproksimacija za štirivozliščni 2D KE je podana kot : $$\hat T_e(x_e,y_e) = T_1^e\hat\psi_1^e(x_e,y_e) + T_2^e\hat\psi_2^e(x_e, y_e) + T_3^e\hat\psi_3^e(x_e, y_e) + T_4^e\hat\psi_4^e(x_e, y_e) $$ Pri tem pa mora veljati : $$\hat\psi_k^e(x_e, y_e) = c_0^k + c_1^kx_e + c_2^k
-y_e + c_3^kx_ey_e\space , \space k = 1,2,3,4$$ in še : $$\hat\psi_k^e(x_e, y_e) = \delta_{vk} = \begin{cases}1 & \text{ if } v = k\\ 0&\text{ if }v\neq k\end{cases}\space\space\space ,\space\space\space \text{ kjer sta }\space\space\space v,k = 1,2,3,4$$
+y_e + c_3^kx_ey_e\space , \space k = 1,2,3,4$$ in še : $$\hat\psi_k^e(x_v, y_v) = \delta_{vk} = \begin{cases}1 & \text{ if } v = k\\ 0&\text{ if }v\neq k\end{cases}\space\space\space ,\space\space\space \text{ kjer sta }\space\space\space v,k = 1,2,3,4$$
 ### 4. Zapišite simetrijske robne pogoje za primer 2D prevoda toplote v primeru reševanja z MKR.
 
-V nekaterih primerih kjer se opazi simetričnost lahko zmanjšamo obravnavano domeno in s tem znatno zmanjšamo čas potreben za računanje. Gleda se simetrijo primarne spremenljivke. 
+Pri simetričnem problemu lahko obravnavano območje zmanjšamo in s tem znatno skrajšamo čas računanja.
 
-V primeru prevoda toplote z MKR so simetrijski sietrijski robni pogoji sledeci. Sekundarna spremenljivka - topoltni tok $q = 0$, saj imamo simetrijo temperaturnega polja kar pomeni, da je na simetrijski meji enaka temperatura v sosednjih tockah (na obeh straneh simetrisjke meje). Vrednosti primarne spremenljivke na simetrijski meji ne poznamo, njeno vrednost zracunamo s centralno diferenčno shemo v 2D. 
+Na simetrijski meji je toplotni tok enak nič, ker je temperatura v točkah na obeh straneh meje enaka : $$q_n = -k\frac{\partial T}{\partial n} = 0$$ Temperatura na simetrijski meji ni poznana. Izračunamo jo s centralno diferenčno shemo v 2D, pri čemer za zrcalno točko izven območja upoštevamo $T_{-1,m} = T_{1,m}$ (meja $x$ = konst.) : $$\frac{2T_{1,m} + T_{0,m-1} + T_{0,m+1} - 4T_{0,m}}{h^2} + \frac{q_V}{k} = 0$$
 
-Ostale mejne točke obravnavamo enako kot če ne bi imeli simetrijske meje saj je na njih že definiran robni pogoj - Dirac, Neumann, Robin.
+Ostale mejne točke obravnavamo enako kot če ne bi imeli simetrijske meje, saj je na njih že definiran robni pogoj (Dirichlet, Neumann, Robin).
 ### 5. Zapišite simetrijske robne pogoje za primer 2D prevoda toplote v primeru reševanja z MKE
 
- 
+Na simetrijski meji $\Gamma_s$ velja naravni (Neumannov) robni pogoj $q_n = 0$. Robni integral v šibki obliki je tam enak nič : $$\int_{\Gamma_s}q_n\space v\space d\Gamma = 0$$
+Za vozlišča na simetrijski meji zato v vektor desne strani ne dodamo ničesar. Njihove temperature ostanejo neznanke.
 ### 6. Kako upoštevamo konvektivni robni pogoj na robu območja v primeru 2D prevoda toplote v primeru reševanja z MKE?
+
+Na delu ograje $\Gamma_3$ velja konvektivni toplotni tok ($T_f$ temperatura fluida, $h_f$ prestopnostni koeficient) : $$q_n = -h_f(T_f - T) = h_f(T - T_f)$$
+Vstavimo ga v robni integral šibke oblike : $$-\int_{\Gamma_3}q_n\space v\space d\Gamma = -\int_{\Gamma_3}h_f\space T\space v\space d\Gamma + \int_{\Gamma_3}h_f\space T_f\space v\space d\Gamma$$
+Člen z neznano temperaturo $T$ prenesemo na levo stran. Z aproksimacijo $\hat T_e = \sum_j T_j^e\hat\psi_j^e$ in $v = \hat\psi_i^e$ dobimo za KE z robom na $\Gamma_3$ prispevek k matriki : $$K_{ij}^{h} = \int_{\Gamma_3^e}h_f\space\hat\psi_i^e\hat\psi_j^e\space d\Gamma$$ in prispevek k vektorju desne strani : $$F_i^{h} = \int_{\Gamma_3^e}h_f\space T_f\space\hat\psi_i^e\space d\Gamma$$
+Za raven rob KE dolžine $L_\Gamma$ z linearno aproksimacijo ter konstantnima $h_f$ in $T_f$ : $$\mathbf K^h = \frac{h_fL_\Gamma}{6}\begin{bmatrix}2&1\\1&2\end{bmatrix}\space , \space \mathbf F^h = \frac{h_fT_fL_\Gamma}{2}\begin{Bmatrix}1\\1\end{Bmatrix}$$
+Temperature vozlišč na $\Gamma_3$ ostanejo neznanke.
