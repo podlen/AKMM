@@ -1,6 +1,6 @@
 # Odgovori na izpitna vprašanja – AKMM in MNM
 
-Študentski odgovori na izpitna vprašanja dveh predmetov na Fakulteti za strojništvo UL. Zapiski so v Obsidianu, iz njih se zgradita dve statični strani.
+Študentski odgovori na izpitna vprašanja dveh predmetov na Fakulteti za strojništvo UL. Zapiski so v Markdownu (z Obsidianovimi `![[slika]]` vdelavami), iz njih se zgradita dve statični strani.
 
 | Predmet | Zapiski | Stran |
 | --- | --- | --- |
@@ -61,5 +61,9 @@ Postopek po spremembi zapiskov: `npm run build`, preveri, commit, push.
 ## Gradivo predavanj se ne objavlja
 
 Prosojnice in drugo gradivo predavanj se **nikoli ne objavijo**. Mapi `akmm/slides/` in `mnm/slides/` ter vse datoteke `*.pdf` in `*.pptx` so v `.gitignore`, `build.mjs` pa v `site/` kopira samo slike iz zapiskov.
+
+## Prispevaj
+
+Našel si napako ali imaš boljši odgovor? Odpri [issue](https://github.com/podlen/mnm_akmm_vprasanja/issues) ali pull request s popravkom v `akmm/notes.md` oz. `mnm/notes.md` (strani `site/` ni treba graditi – to naredim ob združitvi). Odgovori naj bodo popolni, a čim krajši in preprosti.
 
 Odgovori niso uradno gradivo predmeta. Napake so možne, zato jih preveri pri predavanjih.
