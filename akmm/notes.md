@@ -1057,7 +1057,7 @@ V primeru upogibno obremenjene plošče imamo v posameznem vozlišču 3 primarne
 
 ## 87. Kako se upošteva porazdeljena obremenitev po območju plošče?
 
-Porazdeljeno mehansko obremenitev se preračuna v ekvivalentne vozliščne sile. Kot že omenjeno, mora obremenitev $p$ delovati v z-smeri (normalno na ravnino plošče).
+Ploskovno porazdeljeno obremenitev $p$, ki deluje v z-smeri (pravokotno na ravnino plošče), za vsak KE preračunamo v ekvivalentne vozliščne sile:
 
 $$\{F_p\}_e = \int_{\Omega_e}p\,[N]^T\,d\Omega$$
 
@@ -1106,7 +1106,10 @@ Da lahko konstrukcijo obravnavamo kot paličje, mora biti izpolnjeno:
 
 ## 96. Kaj moramo upoštevati pri pripravi numeričnega modela z linijskimi KE, ki prenašajo samo osno obremenitev?
 
-Pri pripravi modela s paličnimi elementi moramo upoštevati, da obremenitve lahko delujejo **izključno v vozliščih** in samo kot točkovne sile. Ker element prenaša le osne obremenitve, v vozliščih **ni rotacijskih prostostnih stopenj** (ni zasukov, vozlišča delujejo kot idealni členki). To pomeni, da **eni fizični palici pripada le en končni element**, saj linearne interpolacijske funkcije znotraj elementa eksaktno popišejo konstantno osno silo.
+- Obremenitve so lahko **samo točkovne sile v vozliščih** (povezavah med palicami). Mrežo generiramo tako, da prijemališča sil sovpadajo z vozlišči.
+- V vozliščih so neznani **samo pomiki** (3 v prostoru, 2 v ravnini), **zasukov ni**. Vozlišča delujejo kot idealni členki.
+- **Eni palici pripada en 2-vozliščni KE**, saj linearni interpolacijski funkciji eksaktno popišeta konstantno osno silo.
+- Matriko KE zapišemo v lokalnem k.s. palice in jo s transformacijsko matriko preslikamo v globalni k.s.: $[K]_e = [T]_e^T [\hat K]_e [T]_e$.
 
 ## 97. Kaj mora biti izpolnjeno, da lahko konstrukcijo obravnavamo z linijskimi KE, ki prenašajo samo upogibno obremenitev?
 
@@ -1121,20 +1124,30 @@ Da lahko konstrukcijo obravnavamo kot upogibno obremenjen nosilec (v ravnini x-z
 ## 98. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Euler-Bernoullijevo teorijo nosilcev?
 
 Euler-Bernoullijeva teorija predpostavlja planost prerezov v deformiranem stanju, pri čemer prerez ostane **strogo pravokoten na težiščnico**. To pomeni, da teorija povsem **zanemarja strižne deformacije** ($\gamma_{xz} = 0$).
-Ker je zasuk definiran zgolj kot odvod povesa ($\varphi_y = - \frac{du_z}{dx}$), poves in zasuk nista neodvisna. Za aproksimacijo primarne spremenljivke se uporablja en sam polinom 3. stopnje (Hermitovi kubični polinomi), ki zagotavlja zveznost tako povesa kot naklona med elementi ($C^1$ zveznost).
+Pomik v smeri osi nosilca je določen z naklonom upogibnice, $u_x = z\,\frac{\partial u_z}{\partial x}$, zato je $\varepsilon_{xx} = z\,\frac{\partial^2 u_z}{\partial x^2}$. Od nič različna je samo napetost $\sigma_{xx} = E\,\varepsilon_{xx}$.
+
+Primarna spremenljivka je samo poves $u_z$. Zasuk ni neodvisen, ker ga določa naklon upogibnice. V vsakem vozlišču 2-vozliščnega KE sta neznana poves in naklon. Poves aproksimiramo s **štirimi Hermitovimi polinomi 3. reda**, ki zagotavljajo zveznost povesa in naklona med elementi ($C^1$ zveznost). Iz šibke oblike enačbe $EI_y\,\frac{d^4 u_z}{dx^4} = p_z$ dobimo:
+
+$$
+\frac{EI_y}{L^3}\begin{bmatrix} 12 & 6L & -12 & 6L \\ 6L & 4L^2 & -6L & 2L^2 \\ -12 & -6L & 12 & -6L \\ 6L & 2L^2 & -6L & 4L^2 \end{bmatrix} \begin{Bmatrix} U_1^z \\ \Phi_1^y \\ U_2^z \\ \Phi_2^y \end{Bmatrix} = \begin{Bmatrix} -T_1^z \\ M_1^y \\ T_2^z \\ -M_2^y \end{Bmatrix}
+$$
 
 ## 99. Značilnosti KE, ki prenaša upogibno obremenitev, in je zasnovan upoštevajoč Timoshenkovo teorijo nosilcev?
 
 Timoshenkova teorija prav tako predpostavlja planost prerezov, vendar **prerez v splošnem ni več pravokoten na težiščnico**, kar pomeni, da **upošteva prečne strižne deformacije**.
 Vozliščni neznanki, poves ($u_z$) in zasuk ($\varphi_y$), sta pri tej formulaciji obravnavani kot popolnoma **neodvisni spremenljivki**. To pomeni, da ima vsaka svojo interpolacijsko funkcijo (potrebna je le $C^0$ zveznost). Pri najenostavnejšem 2-vozliščnem elementu se tako za poves kot za zasuk uporabljata linearni aproksimaciji (polinomi prvega reda).
 
+- $u_x = z\,\varphi_y$, $\varepsilon_{xx} = z\,\frac{\partial \varphi_y}{\partial x}$, $\gamma_{xz} = \varphi_y + \frac{\partial u_z}{\partial x}$
+- Od nič različni sta $\sigma_{xx} = E\,\varepsilon_{xx}$ in $\tau_{xz} = G\,\gamma_{xz}$.
+- Strižna napetost je po prerezu konstantna, zato uporabimo strižni prerez $A_S = \kappa A$ (npr. $\kappa = 5/6$ za pravokotni prerez).
+
 ## 100. Primerjajte KE, ki prenašajo upogibno obremenitev, in so zasnovani na Timoshenkovi teoriji nosilcev.
 
-Primerjava teh elementov se v osnovi nanaša na problematiko strižne togosti in **način numeričnega integriranja** matrike togosti (kot je prikazano na prosojnicah – predavanje 12, str. 68–70):
+Elementi se razlikujejo po **načinu numeričnega integriranja** togostne matrike in po aproksimaciji povesa in zasuka:
 
 1. **Polna integracija (2 Gaussovi točki):** Če integral izračunamo eksaktno (z 2 točkama za linearni element), element postane pri vitkih nosilcih prekomerno tog. Temu pojavu rečemo "strižno zaklepanje" (*shear locking*).
 2. **Reducirana integracija (1 Gaussova točka):** Da se izognemo strižnemu zaklepanju, se pogosto uporabi reducirana integracija samo z 1 Gaussovo točko. To umetno "omehča" element in omogoča pravilno obnašanje tudi pri vitkih nosilcih.
-3. **Modificirana (kubična) oblika Timoshenkovega elementa:** To je hibridni element, ki združuje prednosti obeh teorij. Uporablja kubično polinomsko aproksimacijo (kot E-B element), hkrati pa v enačbe vključi faktor strižne podajnosti materiala ($C$). Ta element daje odlične rezultate tako za debele (kjer je strig pomemben) kot za vitke nosilce (brez strižnega zaklepanja).
+3. **Modificirana (kubična) oblika Timoshenkovega elementa:** Poves in zasuk prereza aproksimira s kubičnimi polinomi (kot E-B element), strig pa upošteva s parametrom $C = \frac{12EI_y}{A_S G L^2}$ (razmerje med upogibno in strižno togostjo). Togostna matrika ima predfaktor $\frac{EI_y}{L^3(1+C)}$ in pri $C \to 0$ (vitek nosilec) preide v E-B matriko. Element da dobre rezultate za debele in vitke nosilce, brez strižnega zaklepanja.
 
 # Predavanje 13 - 25.5.2026
 
@@ -1155,7 +1168,11 @@ Torzijska obremenitev je upoštevana na matematično identičen način kot osna 
 - primarne neznanke niso translacije, temveč rotacije okoli osi elementa ($\Phi_x$),
 - obremenitev predstavlja torzijski moment ($M_x$).
 
-Prispevki te torzijske matrike se nato preprosto prištejejo (superponirajo) na ustrezna mesta v globalni matriki elementa.
+$$
+\frac{GJ_x}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}\begin{Bmatrix} \Phi_1^x \\ \Phi_2^x \end{Bmatrix} = \begin{Bmatrix} M_1^x \\ M_2^x \end{Bmatrix}
+$$
+
+Torzijsko matriko skupaj z osno in obema upogibnima matrikama (ravnini $(x,y)$ in $(x,z)$) postavimo na ustrezna mesta v matriko KE v lokalnem k.s. Nato matriko preslikamo v globalni k.s.
 
 ## 103. Izpeljite sistem enačb za osno obremenjeni linijski KE.
 
@@ -1171,7 +1188,7 @@ $$
 N(L)v(L) - N(0)v(0) - \int_0^L EAu'(x)v'(x)\,dx + \int_0^L n(x)v(x)\,dx = 0
 $$
 
-Uporabimo Galerkinov pristop, kjer za testne funkcije $v(x)$ izberemo linearne oblikovne (interpolacijske) funkcije. Pomik zapišemo matrično:
+Uporabimo Galerkinov pristop: za testne funkcije $v(x)$ izberemo linearni interpolacijski funkciji $\Psi_1 = 1 - \frac{x}{L}$ in $\Psi_2 = \frac{x}{L}$. Pomik zapišemo matrično:
 
 $$
 u(x) = \Psi_1(x)\,U_1 + \Psi_2(x)\,U_2 = \begin{bmatrix} \Psi_1 & \Psi_2 \end{bmatrix} \begin{bmatrix} U_1 \\ U_2 \end{bmatrix} = [N(x)]\{U\}
@@ -1207,6 +1224,8 @@ $$
 \frac{EA}{L}\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{Bmatrix} U_1 \\ U_2 \end{Bmatrix} = \begin{Bmatrix} -N_1 \\ N_2 \end{Bmatrix} + \begin{Bmatrix} \int_0^L n(x)\Psi_1(x)\,dx \\ \int_0^L n(x)\Psi_2(x)\,dx \end{Bmatrix}
 $$
 
+To je $[K]_e\{U\}_e = \{F\}_e$, kjer sta vozliščni sili $F_1 = -N_1$ in $F_2 = N_2$.
+
 ## 104. Izpeljite sistem enačb za torzijsko obremenjeni linijski KE.
 
 Enačbe se izpeljejo na matematično identičen način kot pri osni obremenitvi. Razlika je le v fizikalnih veličinah vodilne diferencialne enačbe:
@@ -1224,13 +1243,13 @@ $$
 
 ## 105. Prednosti in slabosti uporabe linijskih KE.
 
-**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo izjemno hitro spreminjanje numeričnega modela (v eni sekundi lahko spremenimo I-profil v cevni profil, le z zamenjavo parametrov $A, I_y, I_z, J_x$, brez ponovnega mreženja geometrije).
+**Prednosti:** Izjemno majhno število enačb (hiter in računsko zelo ugoden izračun). Omogočajo hitro spreminjanje modela: prerez (npr. I-profil v cev) spremenimo le z zamenjavo parametrov $A, I_y, I_z, J_x$, brez ponovnega mreženja.
 
 **Slabosti:** Geometrijo opisujejo zgolj težiščnice. Na stikih (spojih) linijskih elementov se fizikalni volumni elementov lahko prekrivajo ali puščajo praznine, zaradi česar lokalno deformacijsko in napetostno stanje na samem spoju (npr. zvari, lokalne koncentracije napetosti) **ni natančno popisano**.
 
 ## 106. Reševanje zrcalno simetričnih mehanskih problemov.
 
-Če sta geometrija in obremenitev zrcalno simetrični (glede na neko ravnino), lahko modeliramo le polovico konstrukcije. Na prerezani (simetrijski) ravnini moramo predpisati **simetrijske robne pogoje**:
+Če so glede na neko ravnino zrcalno simetrični geometrija, materialne lastnosti, robni pogoji in obremenitev, lahko modeliramo le polovico konstrukcije. Na prerezani (simetrijski) ravnini moramo predpisati **simetrijske robne pogoje**:
 
 - Pomik v smeri **normale** na simetrijsko ravnino je enak nič.
 - Zasuka okoli obeh osi, ki **ležita v** simetrijski ravnini, sta enaka nič.
@@ -1239,12 +1258,14 @@ $$
 
 ## 107. Reševanje antisimetričnih mehanskih problemov.
 
-Antisimetrijo lahko uporabimo, ko sta **geometrija in material simetrična**, vendar pa je **obremenitev antisimetrična** (zrcalna slika obremenitve deluje v nasprotni smeri). Na prerezani ravnini predpišemo **antisimetrijske robne pogoje**:
+Antisimetrijo lahko uporabimo, ko so **geometrija, material in robni pogoji simetrični**, **obremenitev pa antisimetrična** (zrcalna slika obremenitve deluje v nasprotni smeri). Na prerezani ravnini predpišemo **antisimetrijske robne pogoje**:
 
 - Pomika v obeh smereh, ki **ležita v** antisimetrijski ravnini, sta enaka nič.
 - Zasuk okoli osi, ki je **normalna** na antisimetrijsko ravnino, je enak nič.
 
 *(Primer: Če je antisimetrijska ravnina $y-z$, je normala os $x$. Zato zaklenemo $u_y = 0$, $u_z = 0$ in $\varphi_x = 0$.)*
+
+Nesimetrično obremenitev geometrijsko simetrične konstrukcije razstavimo na simetrični in antisimetrični del (npr. $F = \frac{F}{2} + \frac{F}{2}$). Polovični model rešimo za oba primera in rezultate superponiramo.
 
 ## 108. Reševanje mehanskih problemov s ciklično ponovljivo geometrijo, robnimi pogoji in obremenitvijo.
 
@@ -1253,9 +1274,12 @@ Takšne probleme (npr. propelerji, turbine) obravnavamo v **cilindričnem koordi
 ## 109. Kako izvedemo povezavo volumskih in linijskih KE?
 
 3D volumski elementi (solid) imajo v vozliščih **samo translacijske prostostne stopnje** (nimajo zasukov). Če linijski element (nosilec, ki prenaša momente) pripnemo na 3D element zgolj v enem skupnem vozlišču, se to vozlišče obnaša kot **krogelni členek** (momenti se ne prenesejo).
-Da bi prenesli momente, moramo linijski element povezati z **več vozlišči** volumskega elementa in s tem ustvariti ročico (dvojico sil). V praksi se to izvede tako, da se linijski element podaljša in "vtisne" (embed) v notranjost volumskega elementa preko več vozlišč, ali pa se vozlišče nosilca s pomočjo kinematičnih zvez (togih povezav / rigid links) togo poveže s skupino vozlišč na površini 3D elementa. (Kinematične zveze nam uničujejo diagonalnost matrike in zelo upočasnijo izračun.)
+Da se momenti prenesejo, linijski element povežemo z **več vozlišči** volumskih KE, tako da se moment prenese kot dvojica sil. Možnosti:
+
+- linijski element podaljšamo v volumsko območje, tako da si z volumskimi KE deli več vozlišč vzdolž svoje osi;
+- vozlišče nosilca s kinematičnimi zvezami (togimi povezavami) povežemo s skupino vozlišč volumskih KE. Kinematične zveze pokvarijo pasovno strukturo togostne matrike in upočasnijo izračun.
 
 ## 110. Kako izvedemo povezavo volumskih in lupinskih KE?
 
 Problem je identičen kot pri povezavi z linijskimi elementi. Lupinski elementi (shell) imajo rotacijske prostostne stopnje, volumski 3D elementi pa ne. Če jih združimo samo v eni vrsti vozlišč, dobimo členkast stik (moment se ne prenese).
-Povezavo izvedemo tako, da lupinski element potisnemo v notranjost volumskega območja (združitev vozlišč po celotni debelini 3D elementa, s čimer se moment prenese kot nateg/tlak v teh vozliščih), ali pa s posebnimi kinematičnimi robnimi pogoji povežemo vozlišča lupine z vozlišči na naležnih ploskvah volumskega elementa.
+Povezavo izvedemo tako, da lupinske KE podaljšamo v volumsko območje (vsaj en element globoko), da si lupina in volumski KE delijo vozlišča v vsaj dveh vrstah. Moment se tedaj prenese kot dvojica sil v teh vozliščih. Druga možnost so kinematične zveze med vozlišči lupine in vozlišči na naležni ploskvi volumskih KE.
