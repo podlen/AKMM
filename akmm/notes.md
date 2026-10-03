@@ -368,13 +368,17 @@ Drug način izdelave strukturirane mreže je sweep mesh. Na čelni ploskvi geome
 
 ## 31. Določitev fizikalnih lastnosti materiala.
 
-Fizikalne lastnosti problema nam poleg diferencialne enačbe, robnih pogojev in območja reševanja določajo lastnosti problema oz. sistema, ki ga hočemo rešiti.
+Fizikalne lastnosti materiala nastopajo kot koeficienti v diferencialni enačbi problema. Za izotropen material podamo:
 
-Ko rešujemo reduciran problem - npr. upogib 3D konstrukcije v 1D, moramo definirati dodatne materialne lastnosti, ki nam omogočajo, da upoštevamo lastnosti 3D geometrije v 1D.
+- **toplotni problem**: toplotna prevodnost $k(T)$ [W/(m K)], gostota $\rho(T)$ [kg/m³] in specifična toplota $c(T)$ [J/(kg K)], ki nastopajo v enačbi
+
+$$\frac{\partial}{\partial x}\left(k\frac{\partial T}{\partial x}\right)+\frac{\partial}{\partial y}\left(k\frac{\partial T}{\partial y}\right)+\frac{\partial}{\partial z}\left(k\frac{\partial T}{\partial z}\right)+Q=\rho c\,\frac{\partial T}{\partial t}$$
+
+- **mehanski problem** (Hookov model linearno elastičnega materiala): modul elastičnosti $E$ [Pa] in Poissonovo število $\nu$ [1].
 
 ## 32. Določitev geometrijskih lastnosti ploskovnih KE.
 
-Ploskovnim elementom moramo določiti še debelino KE in normalo na površino KE.
+Ploskovnim elementom moramo določiti še debelino KE $t$ [m] in normalo na površino KE.
 
 ## 33. Določitev geometrijskih lastnosti linijskih KE.
 
@@ -390,84 +394,43 @@ Prav tako moramo definirati lego glavnih vztrajnostnih osi.
 
 ## 34. Izpeljava šibke integralske enačbe za časovno ustaljen prostorski prevod toplote.
 
-Najprej zapišemo enačbo za časovno ustaljen prevod toplote:
+Vodilna enačba (konstanten $k$) in Fourierov zakon:
 
-$$k\Delta T + q_v = 0$$
+$$k\Delta T + Q_V = 0, \qquad \mathbf{q} = -k\nabla T \quad\Rightarrow\quad -\nabla^T\mathbf{q} + Q_V = 0$$
 
-Prvi člen enačbe lahko zapišemo tudi preko Fourierovega zakona:
+1. Enačbo pomnožimo s poljubno (testno) funkcijo $v$ in integriramo po volumnu:
 
-$$\mathbf{q} = -k\nabla T = -k
-\begin{Bmatrix}
-\frac{\partial T}{\partial x}\\
-\frac{\partial T}{\partial y}\\
-\frac{\partial T}{\partial z}
-\end{Bmatrix}$$
+$$\int_\Omega(-\nabla^T\mathbf{q})\,v\, d\Omega + \int_\Omega Q_V v\, d\Omega = 0$$
 
-Vodilno enačbo lahko zapišemo kot:
+2. Uporabimo pravilo za odvod produkta $\nabla^T(\mathbf{q}\,v) = (\nabla^T\mathbf{q})\,v + \mathbf{q}^T\nabla v$:
 
-$$-\nabla^T\cdot \mathbf{q} + q_v = 0$$
+$$\int_\Omega \mathbf{q}^T\nabla v\, d\Omega - \int_\Omega \nabla^T(\mathbf{q}\,v)\, d\Omega + \int_\Omega Q_V v\, d\Omega = 0$$
 
-$$\begin{Bmatrix}\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z}\end{Bmatrix}(-k)\begin{Bmatrix}
-\frac{\partial T}{\partial x}\\
-\frac{\partial T}{\partial y}\\
-\frac{\partial T}{\partial z}
-\end{Bmatrix}+q_v = 0$$
+3. Z Gaussovim (Greenovim) izrekom drugi integral prevedemo na površino $\Gamma$, ki omejuje $\Omega$:
 
-Enačbo pomnožimo z $v$ in integriramo:
+$$\int_\Omega \nabla^T(\mathbf{q}\,v)\, d\Omega = \int_\Gamma \mathbf{q}^T\mathbf{n}\,v\, d\Gamma = \int_\Gamma (q_x n_x + q_y n_y + q_z n_z)\,v\, d\Gamma$$
 
-$$\int_\Omega(-\nabla^T\cdot \mathbf{q})\,v\, d\Omega + \int_\Omega q_v v\, d\Omega = 0$$
+4. V prvi integral vstavimo $\mathbf{q} = -k\nabla T$. Dobimo šibko obliko:
 
-Osredotočimo se na izraz v prvem integralu in zapišemo sledeče:
+$$k\int_\Omega \left(\frac{\partial T}{\partial x}\frac{\partial v}{\partial x} + \frac{\partial T}{\partial y}\frac{\partial v}{\partial y} + \frac{\partial T}{\partial z}\frac{\partial v}{\partial z}\right)d\Omega = -\int_\Gamma (q_x n_x + q_y n_y + q_z n_z)\, v\, d\Gamma + \int_\Omega Q_V v\, d\Omega$$
 
----
-*Pri produktnem pravilu z divergenco velja, da kadar delujemo na produkt vektorskega polja $\mathbf{q}$ in skalarne funkcije $v$, dobimo:*
-
-$$\nabla^T\cdot(\mathbf{q}\, v) = (\nabla^T\cdot \mathbf{q})\,v + \mathbf{q}^T(\nabla v)$$
-
-*Drugi člen vsebuje $\nabla v$ in ne $\nabla \cdot v$, ker je $v$ skalarna funkcija — divergenca skalarja nima smisla. Operator $\nabla v$ predstavlja **gradient** skalarja $v$, ki vrne vektor parcialnih odvodov:*
-
-$$\nabla v = \begin{Bmatrix}
-\frac{\partial v}{\partial x}\\
-\frac{\partial v}{\partial y}\\
-\frac{\partial v}{\partial z}
-\end{Bmatrix}$$
-
-*S tem je skalarni produkt $\mathbf{q}^T(\nabla v)$ dimenzijsko skladen — gre za produkt dveh vektorjev*.
-
----
-$$\nabla^T\cdot(\mathbf{q}\, v) = (\nabla^T\cdot \mathbf{q})\,v + \mathbf{q}^T(\nabla v)$$
-
-$$-(\nabla^T\cdot \mathbf{q})\,v = -\nabla^T\cdot(\mathbf{q}\, v) + \mathbf{q}^T(\nabla v)$$
-
-Izraz lahko vstavimo v integral in preko Gaussovega izreka dobimo:
-
-$$\begin{align} \int_\Omega(-\nabla^T\cdot \mathbf{q})\,v\, d\Omega &= -\int_\Omega \nabla^T\cdot(\mathbf{q}\, v)\, d\Omega + \int_\Omega \mathbf{q}^T(\nabla v)\, d\Omega \\ &= -\int_\Gamma \mathbf{q}^T\mathbf{n}\, v\, d\Gamma + \int_\Omega \mathbf{q}^T(\nabla v)\, d\Omega \end{align}$$
-
-Splošna enačba je potem:
-
-$$\int_\Omega \mathbf{q}^T(\nabla v)\, d\Omega - \int_\Gamma (\mathbf{q}^T\mathbf{n})\,v\, d\Gamma + \int_\Omega q_v v\, d\Omega = 0$$
-
-Toplotni tok v prvem členu lahko zapišemo s Fourierovim zakonom $\mathbf{q}^T = (-k\nabla T)^T$. Enačba se preoblikuje v:
-
-$$k\int_\Omega(\nabla T)^T(\nabla v)\,d\Omega = -\int_\Gamma q_n\, v\, d\Gamma + \int_\Omega q_v v\, d\Omega$$
-
-Enačbo lahko razpišemo po členih:
-
-$$k\int_\Omega \left(\frac{\partial T}{\partial x}\frac{\partial v}{\partial x} + \frac{\partial T}{\partial y}\frac{\partial v}{\partial y} + \frac{\partial T}{\partial z}\frac{\partial v}{\partial z}\right)d\Omega = -\int_\Gamma q_n\, v\, d\Gamma + \int_\Omega q_v v\, d\Omega$$
+Oblika je šibka, ker vsebuje le prve odvode $T$ (vodilna enačba vsebuje druge).
 
 ## 35. Interpolacija temperaturnega polja po območju prostorskega heksaedričnega KE.
 
-Po območju KE se temperaturno polje interpolira preko oblikovnih funkcij:
+Temperaturo po KE aproksimiramo z vozliščnimi temperaturami $T_j$ in interpolacijskimi funkcijami $\psi_j$:
 
 $$T(x,y,z) \approx\hat T(x,y,z) = \sum_{j=1}^{N_v}T_j\psi_j(x,y,z)$$
 
-Vsota gre od 1 do števila vozlišč v končnem elementu (v primeru heksaedričnega KE je to vsaj 8 - KE ima vsaj 8 vozlišč).
+$N_v$ je število vozlišč KE. Heksaedrični KE ima vsaj 8 vozlišč (npr. 8 ali 20).
+
+Pri izoparametričnem KE interpolacijo zapišemo v naravnih koordinatah:
+
+$$\hat T(x,y,z) = \tilde T(\tilde x,\tilde y,\tilde z) = \sum_{j=1}^{N_v}T_j\tilde\psi_j(\tilde x,\tilde y,\tilde z)$$
 
 ## 36. Interpolacija geometrije v primeru izoparametričnega KE.
 
-Izoparametrični KE nam omogočajo, da popišemo bolj kompleksno geometrijo - izoparametrični elementi so lahko "nepravilne" oblike in lahko bolje popisujejo geometrijo.
-
-Nepravilno obliko dobimo tako, da KE iz naravnega KS preslikamo v kartezični KS. To naredimo preko naslednjih funkcij:
+Pri izoparametričnem KE geometrijo interpoliramo z istimi funkcijami $\tilde\psi_j$ kot primarno spremenljivko. Funkcije preslikajo pravilen KE iz naravnega KS v KE "nepravilne" (tudi ukrivljene) oblike v kartezičnem KS:
 
 $$x = x(\tilde x, \tilde y, \tilde z) = \sum_{j=1}^{N_v}x_j \tilde \psi_j( \tilde x, \tilde y, \tilde z)$$
 
@@ -475,17 +438,30 @@ $$y = y(\tilde x, \tilde y, \tilde z) = \sum_{j=1}^{N_v}y_j \tilde \psi_j (\tild
 
 $$z = z (\tilde x,\tilde y, \tilde z) = \sum_{j=1}^{N_v} z_j \tilde \psi_j ( \tilde x, \tilde y, \tilde z)$$
 
+Tako KE bolje popišejo geometrijo območja (npr. ukrivljen rob).
+
 ## 37. Razlika med Kartezijskim in naravnim koordinatnim sistemom.
 
-Naravni koordinatni sistem je namišljen prostor, kjer je geometrija končnega elementa "pravilna", pravokotna. Koordinatni sistem je brezdimenzijski (koordinate $(\tilde x,\tilde y, \tilde z)$ gredo običajno od -1 do +1), kar poenostavi numerično integriranje.
+- **Kartezijev KS** $(x,y,z)$: globalni KS dejanske geometrije. KE je v njem lahko poljubne oblike.
+- **Naravni KS** $(\tilde x,\tilde y,\tilde z)$: lokalni, brezdimenzijski KS posameznega KE, v katerem ima KE pravilno obliko. Pri heksaedru gredo koordinate od $-1$ do $+1$, pri tetraedru od $0$ do $1$.
 
-Za KE v naravnem koordinatnem sistemu lahko brez problema zapišemo funkcijo za interpolacijo primarne spremenljivke.
-
-V kartezičnem koordinatnem sistemu je lahko KE poljubne oblike - zanj ne moremo napisati interpolacijskih funkcij. Zato moramo interpolacijsko funkcijo preslikati iz naravnega v kartezični koordinatni sistem.
+Interpolacijske funkcije $\tilde\psi_j$ zapišemo enkrat v naravnem KS in veljajo za vse KE iste vrste. Meje $-1$ do $+1$ ustrezajo tudi Gaussovi integraciji. V kartezični KS KE preslikamo z interpolacijo geometrije.
 
 ## 38. Kaj predstavlja Jacobijeva matrika?
 
-Jacobijeva matrika predstavlja parcialne odvode kartezičnih koordinat $(x,y,z)$ po naravnih koordinatah $(\tilde x,\tilde y, \tilde z)$.  Predstavlja matematično transformacijo (preslikavo) med obema koordinatnima sistemoma in omogoča preračunavanje iz dejanske geometrije v referenčni naravni sistem elementa.
+Jacobijeva matrika vsebuje parcialne odvode kartezičnih koordinat po naravnih koordinatah:
+
+$$[J] = \begin{bmatrix}
+\frac{\partial x}{\partial\tilde x} & \frac{\partial y}{\partial\tilde x} & \frac{\partial z}{\partial\tilde x}\\
+\frac{\partial x}{\partial\tilde y} & \frac{\partial y}{\partial\tilde y} & \frac{\partial z}{\partial\tilde y}\\
+\frac{\partial x}{\partial\tilde z} & \frac{\partial y}{\partial\tilde z} & \frac{\partial z}{\partial\tilde z}
+\end{bmatrix}$$
+
+Opisuje preslikavo med naravnim in kartezičnim KS. Z njeno inverzijo izračunamo odvode interpolacijskih funkcij po kartezičnih koordinatah:
+
+$$\begin{Bmatrix}\frac{\partial\psi_j}{\partial x}\\ \frac{\partial\psi_j}{\partial y}\\ \frac{\partial\psi_j}{\partial z}\end{Bmatrix} = [J]^{-1}\begin{Bmatrix}\frac{\partial\tilde\psi_j}{\partial\tilde x}\\ \frac{\partial\tilde\psi_j}{\partial\tilde y}\\ \frac{\partial\tilde\psi_j}{\partial\tilde z}\end{Bmatrix}$$
+
+Njena determinanta pretvori diferencial volumna: $d\Omega = |J|\,d\tilde x\,d\tilde y\,d\tilde z$.
 
 # Predavanje 6 - 23.3.2026
 
@@ -494,11 +470,17 @@ Jacobijeva matrika predstavlja parcialne odvode kartezičnih koordinat $(x,y,z)$
 1. Polinomska funkcija z vsaj toliko monomi, kot je vozlišč KE.
 2. Monomi morajo biti med seboj linearno neodvisni.
 3. Zagotavljati mora zvezni prehod primarne spremenljivke preko meja KE (včasih tudi njenih odvodov).
-4. Biti mora kompletna (enaka zastopanost vseh spremenljivk) oz. vsaj geometrijsko izotropna.
+4. Biti mora kompletna (vsebuje vse monome do določene stopnje) oz. vsaj geometrijsko izotropna (enaka zastopanost vseh spremenljivk).
 
 ## 40. Določitev interpolacijske funkcije za določene KE
 
-Za določitev interpolacijske funkcije gledamo Pascalov tetraeder monomov. Poskrbimo, da so polinomske funkcije kompletne in da imajo toliko neznanih koeficientov, kolikor je vozlišč v KE.
+Monome izberemo iz Pascalovega tetraedra. Polinom mora biti kompleten ali vsaj geometrijsko izotropen in imeti toliko koeficientov $C_i$, kolikor ima KE vozlišč.
+
+Za KE z $N_v$ vozlišči določimo $N_v$ funkcij $\psi_j$. Koeficiente dobimo iz pogoja
+
+$$\psi_j(x_i,y_i,z_i) = \delta_{ij} = \begin{cases}1, & i=j\\ 0, & i\neq j\end{cases}$$
+
+Za popis konstantnega polja mora veljati $\sum_{j=1}^{N_v}\psi_j = 1$.
 
 **4-vozliščni tetraedrični KE** ($N_v = 4$):
 
@@ -506,11 +488,15 @@ $$
 \psi(x,y,z) = C_1 + C_2 x + C_3 y + C_4 z
 $$
 
+V naravnem KS: $\tilde\psi_1 = 1-\tilde x-\tilde y-\tilde z$, $\tilde\psi_2 = \tilde x$, $\tilde\psi_3 = \tilde y$, $\tilde\psi_4 = \tilde z$.
+
 **8-vozliščni heksaedrični KE** ($N_v = 8$):
 
 $$
 \psi(x,y,z) = C_1 + C_2 x + C_3 y + C_4 z + C_5 xy + C_6 xz + C_7 yz + C_8 xyz
 $$
+
+V naravnem KS: $\tilde\psi_j = \frac{1}{8}(1+\tilde x\tilde x_j)(1+\tilde y\tilde y_j)(1+\tilde z\tilde z_j)$, kjer so $(\tilde x_j,\tilde y_j,\tilde z_j)$ koordinate vozlišča $j$ ($\pm1$).
 
 **10-vozliščni tetraedrični KE** ($N_v = 10$):
 
@@ -532,7 +518,7 @@ $$
 
 ## 41. Matrični zapis sistema enačb za posamezni KE (ustaljeni prevod toplote)
 
-Sistem enačb za posamezni KE:
+Za KE zapišemo $N_v$ enačb, po eno za vsako vozlišče (v vozlišču je neznana ena temperatura):
 
 $$
 k[M]\{T\} = \{q\} + \{Q\}
@@ -546,13 +532,13 @@ M_{Ij} = \int_\Omega \left( \frac{\partial\psi_I}{\partial x}\frac{\partial\psi_
 $$
 
 - $\{T\}$: vektor temperatur v vozliščih (primarna neznanka)
-- $\{q\}$: vektor toplotnih tokov skozi površino KE:
+- $\{q\}$: ekvivalentni vozliščni toplotni izvori/ponori zaradi toplotnega toka skozi površino KE:
 
 $$
 q_I = -\int_\Gamma[q_x n_x + q_y n_y + q_z n_z]\, \psi_I\, d\Gamma
 $$
 
-- $\{Q\}$: vektor ekvivalentnih vozliščnih vrednosti izvora/ponora toplote:
+- $\{Q\}$: vektor ekvivalentnih vozliščnih vrednosti izvora/ponora toplote v volumnu:
 
 $$
 Q_I = \int_\Omega Q_V\, \psi_I\, d\Omega
@@ -560,17 +546,17 @@ $$
 
 ## 42. Kako pri integriranju po volumnu KE preidemo iz Kartezijevega koordinatnega sistema v naravni koordinatni sistem?
 
-Izhajamo iz zapisa krajevnega vektorja $\vec{r} = x\vec{e}_x + y\vec{e}_y + z\vec{e}_z$ in definiramo bazne vektorje:
+Izhajamo iz krajevnega vektorja $\vec{r} = x\vec{e}_x + y\vec{e}_y + z\vec{e}_z$ in definiramo vektorje stranic diferencialnega volumna:
 
 $$
 \vec{a} = \frac{\partial\vec{r}}{\partial\tilde{x}}d\tilde{x}, \quad \vec{b} = \frac{\partial\vec{r}}{\partial\tilde{y}}d\tilde{y}, \quad \vec{c} = \frac{\partial\vec{r}}{\partial\tilde{z}}d\tilde{z}
 $$
 
-Diferencial volumna postane mešani produkt:
+Diferencial volumna je njihov mešani produkt:
 
 $$
 \begin{aligned}
-d\Omega &= \vec{a}(\vec{b}\times\vec{c}) \\
+d\Omega &= \vec{a}\cdot(\vec{b}\times\vec{c}) \\
 &= \begin{vmatrix}
 \frac{\partial x}{\partial\tilde{x}} & \frac{\partial y}{\partial\tilde{x}} & \frac{\partial z}{\partial\tilde{x}}\\
 \frac{\partial x}{\partial\tilde{y}} & \frac{\partial y}{\partial\tilde{y}} & \frac{\partial z}{\partial\tilde{y}}\\
@@ -580,7 +566,13 @@ d\Omega &= \vec{a}(\vec{b}\times\vec{c}) \\
 \end{aligned}
 $$
 
-Jacobijeva matrika je odvisna le od koordinat vozlišč v kartezičnem KS. Za heksaedrični element so meje integracije od $-1$ do $+1$ v vsaki smeri.
+Integral po heksaedričnem KE ima tako meje od $-1$ do $+1$:
+
+$$
+\int_\Omega f\,d\Omega = \int_{-1}^{+1}\int_{-1}^{+1}\int_{-1}^{+1}\tilde f\,|J|\,d\tilde x\,d\tilde y\,d\tilde z
+$$
+
+Elemente $[J]$ izračunamo iz koordinat vozlišč in odvodov $\tilde\psi_j$, npr. $\frac{\partial x}{\partial\tilde x} = \sum_j x_j\frac{\partial\tilde\psi_j}{\partial\tilde x}$. Odvode $\partial\psi_j/\partial x_i$ pod integralom izrazimo z $[J]^{-1}$.
 
 ## 43. Prehod iz Kartezijevega v naravni KS pri integriranju po površini
 
@@ -596,27 +588,39 @@ d\Gamma = |\vec{a}\times\vec{b}| =
 d\tilde{x}\,d\tilde{y} = |j|\,d\tilde{x}\,d\tilde{y} = |j|\,d\tilde\Gamma
 $$
 
-Meje integracije v naravnem KS so od $-1$ do $+1$.
+Meje integracije v naravnem KS so od $-1$ do $+1$. Pri heksaedru površinski integral razdelimo na 6 ploskev. Na vsaki je ena naravna koordinata konstantna ($\pm1$), integriramo pa po ostalih dveh.
 
 ## 44. Gaussovo numerično integriranje po eni spremenljivki
 
-Gaussova integracijska formula pretvori integral s poljubnimi mejami na integral od $-1$ do $+1$, ki ga aproksimiramo z uteženo vsoto funkcijskih vrednosti v izbranih točkah:
+Integral s poljubnimi mejami preslikamo na interval od $-1$ do $+1$ in ga aproksimiramo z uteženo vsoto funkcijskih vrednosti v $m$ točkah:
 
 $$
 I = \int_{x_{sp}}^{x_{zg}} f(x)\,dx = \int_{-1}^{+1}\tilde{f}(\tilde{x})\,d\tilde{x} \approx \sum_{i=1}^m w_i\,\tilde{f}(\tilde{x}_i)
 $$
 
-Uteži $w_i$ in položaje točk $\tilde{x}_i$ določimo z analitičnim integralom splošnega polinoma stopnje $n$. Ker lihe potence $\tilde{x}$ pri integraciji od $-1$ do $+1$ prispevajo nič, integral vsebuje le sode člene:
+Uteži $w_i$ in lege točk $\tilde{x}_i$ določimo tako, da formula točno integrira polinom $\tilde f = a_0 + a_1\tilde x + \dots + a_n\tilde x^n$. Lihe potence pri integraciji od $-1$ do $+1$ dajo nič:
 
 $$
 I = 2a_0 + \frac{2}{3}a_2 + \frac{2}{5}a_4 + \cdots + \frac{2}{2k+1}a_{2k}
 $$
 
-Z izenačenjem aproksimacije z analitičnim rezultatom dobimo sistem (nelinearnih) enačb, ki določi optimalne pare $(w_i, \tilde{x}_i)$. Ti so vnaprej tabelirani in zagotavljajo točen rezultat za polinome stopnje do $2m-1$, kjer je $m$ število integracijskih točk.
+Z izenačenjem koeficientov pri $a_k$ dobimo nelinearen sistem enačb za $(w_i, \tilde{x}_i)$:
+
+$$
+\sum_{i=1}^m w_i = 2, \qquad \sum_{i=1}^m w_i\tilde x_i^{2k-1} = 0, \qquad \sum_{i=1}^m w_i\tilde x_i^{2k} = \frac{2}{2k+1}
+$$
+
+Pari $(w_i, \tilde{x}_i)$ so tabelirani, npr.:
+
+- $m=1$: $w=2$, $\tilde x=0$
+- $m=2$: $w=1$, $\tilde x=\pm0{,}577350$
+- $m=3$: $w=0{,}888889$ pri $\tilde x=0$ in $w=0{,}555556$ pri $\tilde x=\pm0{,}774597$
+
+Z $m$ točkami je rezultat točen za polinome do stopnje $2m-1$.
 
 ## 45. Numerično integriranje po več spremenljivkah z Gaussovo formulo
 
-Gaussovo formulo razširimo z večkratnimi vsotami. Za **2D** območje:
+Gaussovo formulo razširimo z večkratnimi vsotami. Integracijske točke so kombinacije 1D točk ($m^2$ oz. $m^3$ točk). Za **2D** območje:
 
 $$
 I = \int_{-1}^{+1}\int_{-1}^{+1}\tilde{f}(\tilde{x},\tilde{y})\,d\tilde{x}\,d\tilde{y} \approx \sum_{j=1}^m\sum_{i=1}^m w_j\,w_i\,\tilde{f}(\tilde{x}_i,\tilde{y}_j)
@@ -644,11 +648,13 @@ $$
 I = \int_\Omega f(x,y,z)\,d\Omega \approx V_{1234}\sum_{i=1}^m w_i\,\tilde{f}(\Lambda_{1i},\Lambda_{2i},\Lambda_{3i},\Lambda_{4i})
 $$
 
-Uteži in koordinate integracijskih točk so vnaprej tabelirane za različno število točk $m$.
+Uteži in koordinate integracijskih točk so vnaprej tabelirane za različno število točk $m$ (npr. $m=1$: $w=1$ v težišču, $\Lambda = 1/3$ oz. $1/4$).
 
 ## 47. Izračun integrala po volumnu z volumskimi koordinatami
 
-Kadar pod integralom nastopajo volumske koordinate, lahko integral izračunamo **analitično**:
+Volumska koordinata je razmerje volumna delnega tetraedra (točka $T$ in tri vozlišča) in volumna KE, npr. $\Lambda_1 = V_{T234}/V_{1234}$. Za 4-vozliščni tetraeder so interpolacijske funkcije kar volumske koordinate: $\psi_j = \Lambda_j = a_j + b_j x + c_j y + d_j z$.
+
+Kadar pod integralom nastopajo volumske koordinate, integral izračunamo **analitično**:
 
 $$
 \int_\Omega (\Lambda_1)^r(\Lambda_2)^p(\Lambda_3)^s(\Lambda_4)^t\,d\Omega = (6\Omega)\frac{r!\,p!\,s!\,t!}{(r+p+s+t+3)!}, \quad 0! = 1
@@ -671,6 +677,8 @@ $$
 1 & x_4 & y_4 & z_4
 \end{vmatrix}
 $$
+
+Primer: $\int_\Omega \Lambda_I\,d\Omega = 6\Omega\,\frac{1!}{4!} = \frac{\Omega}{4}$, zato je pri konstantnem $Q_V$: $Q_I = Q_V\,V_{1234}/4$. Matrika prevodnosti je $M_{Ij} = (b_I b_j + c_I c_j + d_I d_j)\,V_{1234}$.
 
 ## 48. Kako pridemo do sistema linearnih enačb za posamezni KE?
 
@@ -711,40 +719,47 @@ Ker na skupni površini sosednjih elementov velja zakon o ohranitvi toplotnega t
 
 ## 51. Kako je v izračunu z MKE upoštevan konvektivni robni pogoj prestopa toplote na površini območja?
 
-$$q = h(T_{stena}  -T_{okolica})$$
+Na prosti površini s konvekcijo je toplotni tok odvisen od temperature površine:
 
-Konvektivni robni pogoj se upošteva preko površinskega integrala, ki se razdeli na dva dela:
+$$q_n = h\,(T - T_{zrak})$$
 
-1.  Del, ki je odvisen od neznanih temperatur vozlišč $\{T\}$, tvori **matriko prestopnosti** $[M_h]$, ki se prišteje k prevodnostni matriki $[M]$.
+Tok vstavimo v površinski integral $q_I = -\int_\Gamma q_n\,\psi_I\,d\Gamma$ in interpoliramo $T = \sum_j T_j\psi_j$:
 
-2.  Del, ki je odvisen od znane temperature okolice $T_{zrak}$, tvori **vektor ekvivalentnih vozliščnih toplotnih virov** $\{q_q\}$, ki se prišteje na desno stran sistema enačb.
+$$q_I = -h\sum_{j=1}^{N_v} T_j\int_\Gamma \psi_j\,\psi_I\,d\Gamma + h\,T_{zrak}\int_\Gamma \psi_I\,d\Gamma$$
+
+1. Del, ki je odvisen od neznanih temperatur vozlišč $\{T\}$, tvori **matriko prestopnosti** $[M_h]$. Prenesemo ga na levo stran k matriki prevodnosti.
+2. Del, ki je odvisen od znane temperature zraka $T_{zrak}$, tvori **vektor ekvivalentnih vozliščnih toplotnih izvorov** $\{q_q\}$ na desni strani.
+
+Sistem za celotno območje:
+
+$$(k[M_k] + h[M_h])\{T\} = \{q_q\} + \{q_T\} + \{q_Q\}$$
+
+$\{q_T\}$ so neznani tokovi na površinah s predpisano temperaturo.
 
 ## 52. Kako je v izračunu z MKE upoštevan robni pogoj prestopa toplote s sevanjem na površini območja?
 
-Sevanje se upošteva podobno kot konvekcija, vendar je zaradi četrte potence temperature v enačbi $q_s = \sigma \varepsilon (T^4 - T_0^4)$ ta robni pogoj **nelinearen**.
+Toplotni tok zaradi sevanja je $q_s = \sigma \varepsilon (T^4 - T_\infty^4)$, s temperaturami v K. Zaradi četrte potence je robni pogoj **nelinearen**.
 
-V MKE se to običajno rešuje z uvedbo nadomestne (linearizirane) toplotne prestopnosti za sevanje:
+Lineariziramo ga z razcepom:
 
-$$T^4 - T_{\infty}^4 = (T^2-T_{\infty}^2)(T^2 + T_{\infty}^2)$$
+$$T^4 - T_{\infty}^4 = (T^2 + T_{\infty}^2)(T + T_{\infty})(T - T_{\infty})$$
 
-$$T^2 - T_{\infty}^2 = (T-T_{\infty})(T+T_{\infty})$$
+Tok zapišemo v obliki konvekcije z nadomestno toplotno prestopnostjo $h_s$:
 
-Vzamemo člen $(T-T_{\infty})$, ostale člene pa združimo v koeficient, ki ga iterativno izračunamo. Formula za toplotni tok zaradi sevanja je torej:
+$$q_s = h_s(T - T_{\infty}), \qquad h_s = \sigma\varepsilon\,(T^2 + T_{\infty}^2)(T + T_{\infty})$$
 
-$$q_{s} = \sigma\varepsilon c(T - T_{\infty})$$
-
-kjer je $c = (T+T_{\infty})(T^2 + T_{\infty}^2)$.
+Nato ga upoštevamo enako kot konvekcijo ($[M_h]$ in $\{q_q\}$). Ker je $h_s$ odvisen od neznane $T$, ga računamo iterativno: $h_s$ izračunamo s $T$ iz prejšnje iteracije, rešimo sistem in ponavljamo do konvergence.
 
 ## 53. Primerjaj metode za reševanje sistema linearnih enačb.
 
 Metode delimo na direktne in iterativne:
 
 - **Direktne metode** (Gaussova eliminacija s pivotiranjem, razcep LU ali Choleskega):
-    - **Prednosti:** So numerično stabilne in dajo natančno rešitev v končnem številu korakov.
-    - **Slabosti:** Čas reševanja s številom enačb narašča potenčno (eksponentna krivulja na grafu), zahtevajo veliko delovnega pomnilnika.
+    - **Prednosti:** So numerično stabilne in dajo rešitev v končnem številu korakov.
+    - **Slabosti:** Čas reševanja s številom enačb narašča hitreje kot linearno (potenčno). Zahtevajo veliko delovnega pomnilnika.
 - **Iterativne metode** (Gauss-Seidlova, Gauss-Jacobijeva metoda, metoda konjugiranih gradientov):
     - **Prednosti:** Čas reševanja narašča približno linearno s številom enačb. Porabijo manj pomnilnika.
-    - **Slabosti:** Potrebujejo konvergenčni kriterij in niso vedno stabilne.
+    - **Slabosti:** Potrebujejo konvergenčni kriterij, konvergenca pa ni vedno zagotovljena.
 - **Povzetek:** Za manjše sisteme so boljše direktne metode, pri velikih sistemih (nad $10^6$ enačb) pa so zaradi hitrosti in pomnilniške učinkovitosti bolj smiselne iterativne metode.
 
 # Predavanje 8 - 13.4.2026
