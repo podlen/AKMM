@@ -678,15 +678,16 @@ Ker je $n_2 = -n_1$ : $$k_1\frac{\partial T_1(x_p,t)}{\partial x} = k_2\frac{\pa
 ### 1. Aproksimacija primarne spremenljivke v primeru tri-vozliščnega 1D KE.
 
 Enako kot pri dvo-vozliščnih elementih uporabimo aproksimacijsko funkcijo oblike : $$T(x) = \sum_{i=0}^{n=2}T_i\psi_i^e(x) = T_0\psi_0^e(x) + T_1\psi_1^e(x) + T_2\psi_2^e(x)$$
-Kjer je $\psi_i^e(x)$ polinom druge stopnje $\psi_i^e(x) = C_0 + C_1x + C_2x^2$. Te funkcije morajo v vozlišču v KE zadočati naslednjim pogojem : $$\psi_0^e(x) = \begin{cases}1&\text{if }x = 0\\0&\text{if }x = \frac{L}{2}\\0&\text{if }x = L  \end{cases}$$
+Kjer je $\psi_i^e(x)$ polinom druge stopnje $\psi_i^e(x) = C_0 + C_1x + C_2x^2$. Vozlišča so v $x = 0,\ L/2,\ L$. Vsaka funkcija je v svojem vozlišču enaka 1, v ostalih dveh pa 0, npr.: $$\psi_0^e(x) = \begin{cases}1&\text{if }x = 0\\0&\text{if }x = \frac{L}{2}\\0&\text{if }x = L  \end{cases}$$
 Analogno velja za drugi 2 funkciji. Na koncu dobimo naslednje funkcije: 
+$$\psi_0 = \Big(1-\frac{x}{L}\Big)\Big(1-\frac{2x}{L}\Big),\quad \psi_1 = \frac{2x}{L}\Big(2-\frac{2x}{L}\Big),\quad \psi_2 = \frac{x}{L}\Big(\frac{2x}{L}-1\Big)$$
 ![[aprox.png]] ![[aproxtgth.png]]
 
 Enako aproksimacijsko funkcijo bi dobili z Lagrangeovo interpolacijo. Skozi točke $T_0,T_1\text{ in }T_2$ . 
 ### 2.  Izpeljava tro-vozliščnega 1D KE za osno obremenjen konstrukcijski element.
 
-Izhodišče za izpeljavo tro-vozliščnega končnega elementa je šibka integralska formulacija, ki ima sledečo obliko : $$\int_0^LDu(x)\frac{dv(x)}{dx}dx = N(x)v(x)\biggr{|}_0^L + \int_0^Ln(x)v(x)dx$$
-$D$ operator je v tem primeru $\frac{d}{dx}EA$. 
+Izhodišče za izpeljavo tro-vozliščnega končnega elementa je šibka integralska formulacija, ki ima sledečo obliko : $$\int_0^LDu(x)\frac{dv(x)}{dx}dx = N(x)v(x)\biggr|_0^L + \int_0^Ln(x)v(x)dx$$
+$D$ operator je v tem primeru $EA\frac{d}{dx}$ (osna sila $N = EA\frac{du}{dx}$). 
 
 Naslednji korak je, da določimo aproksimacijsko funkcijo za primarno spremenljivko : $$\tilde{u}(x) = \sum_{i=0}^{N=2}u_i\psi_i^e(x)$$ Kjer je funkcija $\psi_i^e(x)$ polinom druge stopnje in mora zadostovati enakim pogojem kot v prejšnjem primeru. Po tem, ko določimo vrednosti funkcij $\psi_0(x)$, $\psi_1(x)$ in $\psi_2(x)$ lahko zapišemo aproksimacijsko funkcijo : $$\tilde u(x) = U_1(\frac{2x^2}{L^2} - \frac{3x}{L} + 1) + U_2(-\frac{4x^2}{L^2} + \frac{4x}{L}) + U_3(\frac{2x^2}{L^2} - \frac{x}{L})$$
 Izračunajmo še odvod funkcije, ki ga bomo potrebovali pozneje : $$\frac{d\tilde u(x)}{dx} = U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})$$
@@ -696,16 +697,16 @@ Ker imamo tro-vozliščni končni element potrebujemo za zapis rešitve 3 enačb
 - $v_2(x) = \psi_2(x) = \frac{2x^2}{L^2} - \frac{x}{L}$
 Funkcije vstavimo v glavno enačbo (šibka integralska oblika) in dobimo sistem 3 enačb:
 ***1.Enačba***:
-$$\begin{multline}\int_0^LEA\biggr{(}U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})\biggr{)}(\frac{4x}{L^2} - \frac{3}{L})dx= \\=N(L)(\frac{2L^2}{L^2}-\frac{3L}{L}+1) - N(0)\cdot1 + \int_0^Ln(x)\biggr{(}\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr{)}dx =\\= \frac{EA}{3L}(7U_1 - 8U_2 + U_3) = -N_1 + \int_0^Ln(x)\biggr{(}\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr{)}dx \end{multline}$$
+$$\begin{gathered}\int_0^LEA\biggr(U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})\biggr)(\frac{4x}{L^2} - \frac{3}{L})dx= \\=N(L)(\frac{2L^2}{L^2}-\frac{3L}{L}+1) - N(0)\cdot1 + \int_0^Ln(x)\biggr(\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr)dx =\\= \frac{EA}{3L}(7U_1 - 8U_2 + U_3) = -N_1 + \int_0^Ln(x)\biggr(\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr)dx \end{gathered}$$
 ***2.Enačba***:
-$$\begin{multline}\int_0^LEA\biggr{(}U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})\biggr{)}(-\frac{8x}{L^2} + \frac{4}{L})dx= \\=N(L)(-\frac{4L^2}{L^2} + \frac{4L}{L}) - N(0)\cdot0 + \int_0^Ln(x)\biggr{(}-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr{)}dx =\\= \frac{EA}{3L}(-8U_1 + 16U_2 -8 U_3) = \int_0^Ln(x)\biggr{(}-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr{)}dx \end{multline}$$
+$$\begin{gathered}\int_0^LEA\biggr(U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})\biggr)(-\frac{8x}{L^2} + \frac{4}{L})dx= \\=N(L)(-\frac{4L^2}{L^2} + \frac{4L}{L}) - N(0)\cdot0 + \int_0^Ln(x)\biggr(-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr)dx =\\= \frac{EA}{3L}(-8U_1 + 16U_2 -8 U_3) = \int_0^Ln(x)\biggr(-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr)dx \end{gathered}$$
 ***3. Enačba:***
-$$\begin{multline}\int_0^LEA\biggr{(}U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})\biggr{)}(\frac{4x}{L^2} - \frac{1}{L})dx= \\=N(L)(\frac{2L^2}{L^2} - \frac{L}{L}) - N(0)\cdot0 + \int_0^Ln(x)\biggr{(}\frac{2x^2}{L^2} - \frac{x}{L}\biggr{)}dx =\\= \frac{EA}{3L}(U_1 - 8U_2 +7 U_3) = N_3 + \int_0^Ln(x)\biggr{(}\frac{2x^2}{L^2} - \frac{x}{L}\biggr{)}dx \end{multline}$$
+$$\begin{gathered}\int_0^LEA\biggr(U_1(\frac{4x}{L^2}- \frac{3}{L})+U_2(-\frac{8x}{L^2} + \frac{4}{L}) + U_3(\frac{4x}{L^2} - \frac{1}{L})\biggr)(\frac{4x}{L^2} - \frac{1}{L})dx= \\=N(L)(\frac{2L^2}{L^2} - \frac{L}{L}) - N(0)\cdot0 + \int_0^Ln(x)\biggr(\frac{2x^2}{L^2} - \frac{x}{L}\biggr)dx =\\= \frac{EA}{3L}(U_1 - 8U_2 +7 U_3) = N_3 + \int_0^Ln(x)\biggr(\frac{2x^2}{L^2} - \frac{x}{L}\biggr)dx \end{gathered}$$
 
-Enačbe lahko zapišemo v matrični obliki - enačba 3-vozliščnega KE : $$\frac{EA}{3L}\begin{bmatrix}7&-8&1\\-8&16&-8\\1&-6&7\end{bmatrix}\begin{Bmatrix}U_1\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix}-N_1\\0\\N_3\end{Bmatrix} + \begin{Bmatrix}\int_0^Ln(x)\biggr{(}\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr{)}dx\\\int_0^Ln(x)\biggr{(}-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr{)}dx\\\int_0^Ln(x)\biggr{(}\frac{2x^2}{L^2} - \frac{x}{L}\biggr{)}dx\end{Bmatrix}$$
+Enačbe lahko zapišemo v matrični obliki - enačba 3-vozliščnega KE : $$\frac{EA}{3L}\begin{bmatrix}7&-8&1\\-8&16&-8\\1&-8&7\end{bmatrix}\begin{Bmatrix}U_1\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix}-N_1\\0\\N_3\end{Bmatrix} + \begin{Bmatrix}\int_0^Ln(x)\biggr(\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr)dx\\\int_0^Ln(x)\biggr(-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr)dx\\\int_0^Ln(x)\biggr(\frac{2x^2}{L^2} - \frac{x}{L}\biggr)dx\end{Bmatrix}$$
 ### 3. Izpeljava dvo-vozliščnega 1D KE za enoosni prevod toplote.
 
-Izajamo iz osnovne enačbe prevoda toplote : $$k\frac{\partial^2T(x,t)}{\partial x^2} + q_v(x,t)=0$$
+Izhajamo iz enačbe stacionarnega prevoda toplote : $$k\frac{d^2T(x)}{dx^2} + q_v(x)=0$$
 Za izpeljavo KE potrebujemo enačbo zapisati v šibki integeralski obliki : $$\int_0^Lk\frac{dT(x)}{dx}\frac{dv(x)}{dx}dx = k\frac{dT(L)}{dx}v(L) - k\frac{dT(0)}{dx}v(0) + \int_0^Lq_v(x)v(x)dx$$
 Za določitev aproksimacijske funkcije $\tilde T(x)$ uporabimo funkcijo : $$\tilde T(x) = T_0\psi_0(x) + T_1\psi_1(x)$$
 Kjer sta funkciji $\psi_0$ in $\psi_1$ polinoma prve stopnje : $$\psi_0(x) = 1-\frac{x}{L} \text{ in }\psi_1(x) = \frac{x}{L}$$
@@ -713,8 +714,8 @@ Ker je KE dvo-vozliščni potrebujemo za zapis enačbe KE 2 enačbi. Dobimo ju z
 - $v_0(x) = \psi_0(x)$
 - $v_1(x) = \psi_1(x)$
 Če vstavimo funkciji v glavno enačbo problema dobimo 2 enačbi, ki v matričnem zapisu izgledata tako : $$\frac{k}{L}\begin{bmatrix}1&-1\\-1&1\end{bmatrix}\begin{Bmatrix}T_1\\T_2\end{Bmatrix} = \begin{Bmatrix}Q_1\\-Q_2\end{Bmatrix} + \begin{Bmatrix}\int_0^Lq_v(x)(1-\frac{x}{L})dx\\\int_0^Lq_v(x)\frac{x}{L}dx\end{Bmatrix}$$
-Tukaj sta $Q_1$ in $Q_2$ : 
-$$Q_1^e = -k\frac{dT(x)}{dx}$$ $$Q_2^e = -k\frac{dT(L)}{dx}$$
+Tukaj sta $Q_1$ in $Q_2$ toplotna tokova v vozliščih KE : 
+$$Q_1^e = -k\frac{dT(0)}{dx}$$ $$Q_2^e = -k\frac{dT(L)}{dx}$$
 ### 4. Izpeljava tri-vozliščnega 1D KE za enoosni prevod toplote.
 
 Ponovno začnemo s šibko obliko integralske enačbe : $$\int_0^Lk\frac{dT(x)}{dx}\frac{dv(x)}{dx}dx = k\frac{dT(L)}{dx}v(L) - k\frac{dT(0)}{dx}v(0) + \int_0^Lq_v(x)v(x)dx$$
@@ -729,7 +730,7 @@ Za zapis enačbe KE potrebujemo 3 enačbe, ki jih dobimo z izbiro $v(x)$ po Gale
 - $v_1(x) = \psi_1(x) = -\frac{4x^2}{L^2} + \frac{4x}{L}$
 - $v_2(x) = \psi_2(x) = \frac{2x^2}{L^2} - \frac{x}{L}$
 
-Funkcije in njihove odvode vstavimo v glavno enačbo. Dobimo sistem 3 enačb : $$\frac{k}{3L}\begin{bmatrix}7&-8&1\\-8&16&-8\\1&-6&7\end{bmatrix}\begin{Bmatrix}T_1\\T_2\\T_3\end{Bmatrix} = \begin{Bmatrix}Q_1\\0\\-Q_3\end{Bmatrix} + \begin{Bmatrix}\int_0^Lq_v(x)\biggr{(}\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr{)}dx\\\int_0^Lq_v(x)\biggr{(}-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr{)}dx\\\int_0^Lq_v(x)\biggr{(}\frac{2x^2}{L^2} - \frac{x}{L}\biggr{)}dx\end{Bmatrix}$$
+Funkcije in njihove odvode vstavimo v glavno enačbo. Dobimo sistem 3 enačb : $$\frac{k}{3L}\begin{bmatrix}7&-8&1\\-8&16&-8\\1&-8&7\end{bmatrix}\begin{Bmatrix}T_1\\T_2\\T_3\end{Bmatrix} = \begin{Bmatrix}Q_1\\0\\-Q_3\end{Bmatrix} + \begin{Bmatrix}\int_0^Lq_v(x)\biggr(\frac{2x^2}{L^2} - \frac{3x}{L} + 1\biggr)dx\\\int_0^Lq_v(x)\biggr(-\frac{4x^2}{L^2} + \frac{4x}{L}\biggr)dx\\\int_0^Lq_v(x)\biggr(\frac{2x^2}{L^2} - \frac{x}{L}\biggr)dx\end{Bmatrix}$$
 ![[3vKE.png]]
 
 ### 5. . Primerjajte dvo-vozliščni 1D KE za osno obremenjen konstrukcijski element in za enoosni prevod toplote.
@@ -738,31 +739,37 @@ Osna obremenitev : $$EA\frac{d^2u(x)}{dx^2} = -n(x)$$
 $$\frac{EA}{L}\begin{bmatrix}1&-1\\-1&1\end{bmatrix}\begin{Bmatrix}U_1\\U_2\end{Bmatrix} = \begin{Bmatrix}-N_1\\N_2\end{Bmatrix} + \begin{Bmatrix}\int_0^Ln(x)(1-\frac{x}{L})dx\\\int_0^Ln(x)\frac{x}{L}dx\end{Bmatrix}$$
 Prevod toplote : $$k\frac{d^2T(x)}{dx^2} = -q_v(x)$$
 $$\frac{k}{L}\begin{bmatrix}1&-1\\-1&1\end{bmatrix}\begin{Bmatrix}T_1\\T_2\end{Bmatrix} = \begin{Bmatrix}Q_1\\-Q_2\end{Bmatrix} + \begin{Bmatrix}\int_0^Lq_v(x)(1-\frac{x}{L})dx\\\int_0^Lq_v(x)\frac{x}{L}dx\end{Bmatrix}$$
-Obe DE sta drugega reda. Pri osni obremenitvi je primarna spremeljivka pomik, sekundarna pa notranja osna sila. Pri prevodu toplote je primarna spremenljivka temperatura, sekundarna pa toplotni tok. Zapisa v matrični obliki sta zelo podobna. Opazimo, da se v vektorju sekundarnih spremenljivk zamenjata predznaka - zaradi izpeljave enačbe KE.
+- Obe DE sta drugega reda in enake oblike: $EA \leftrightarrow k$, $u \leftrightarrow T$, $n \leftrightarrow q_V$.
+- Primarna spremenljivka: pomik $u$ oz. temperatura $T$. Sekundarna: osna sila $N = EA\frac{du}{dx}$ oz. toplotni tok $Q = -k\frac{dT}{dx}$.
+- Aproksimacija ($\psi_0 = 1-\frac{x}{L}$, $\psi_1 = \frac{x}{L}$) in matrika KE sta enaki.
+- V vektorju sekundarnih spremenljivk sta predznaka zamenjana ($-N_1, +N_2$ oz. $+Q_1, -Q_2$), ker ima toplotni tok v definiciji minus.
 
 ### 6. Kako lahko izboljšamo natančnost rešitve pri uporabi polinomske aproksimacije?
 
-Lahko povečamo stopnjo polinoma - to naredimo pri tro-vozliščnem KE (na ravni elementa). Pri tem moramo biti pazljivi, saj se z večanjem stopnje polinoma povečuje numerična napaka računanja. Poleg tega prevelike stopnje polinomov ne dajejo fizikalno smiselnih rešitev.
+Lahko povečamo stopnjo polinoma (npr. iz 3. na 5. stopnjo) in DE izpolnimo v več točkah. Rešitev se izboljša, a z večanjem stopnje narašča numerična napaka računanja, ker v matriki nastopajo koordinate $x_i$ na visoke potence.
 
-Lahko pa razdelimo območje na več podobmočji, pri čemer vsako izmed podobmočji aproksimiramo s svojo polinomsko funkcijo, katere stopnja je enaka minimalni zahtevani stopnji aproksimacijskega polinoma (to je stopnja vodilne DE). Moramo biti pozorni, da zadostimo pogojem konsistentnega prehoda. 
+Boljše je, da območje razdelimo na več podobmočij. Vsako podobmočje aproksimiramo s svojim polinomom nizke stopnje (minimalna stopnja je red vodilne DE, tu 2). Podobmočja so manjša tam, kjer se spremenljivka hitreje spreminja. Na mejah moramo izpolniti pogoje konsistentnega prehoda (npr. $T_1 = T_2$, $\frac{dT_1}{dx} = \frac{dT_2}{dx}$). Na tem pristopu temelji MKE. 
 ### 7. Kako lahko izboljšamo natančnost rešitve pri reševanju z MKR?
 
-Zgostimo mrežo (numerično postane proces bolj zahteven) ali pa opazovano območje razdelimo na več polj. To nam omogoča, da na območjih z večjimi gradienti uporabimo bolj gosto mrežo. Drugje pa lahko prihranimo pri času računanja z redkejšo mrežo.
+Zmanjšamo korak $\Delta x$, tj. zgostimo mrežo (rešitev konvergira k eksaktni, a je sistem enačb večji) ali pa opazovano območje razdelimo na več polj. To nam omogoča, da na območjih z večjimi gradienti uporabimo bolj gosto mrežo. Drugje pa lahko prihranimo pri času računanja z redkejšo mrežo.
 ### 8. Kako lahko izboljšamo natančnost rešitve pri reševanju z MKE?
 
-Lahko uporabimo več KE, zamenjamo dvo-vozliščne KE za tri-vozliščne KE, ali pa uporabimo kombinacijo tro in dvo-vozliščnih KE. Tri-vozliščne KE uporabimo tam, kjer je gradient primarne spremenljivke večji. Več kot imamo vozlišč bolj natančna bo rešitev.
+- Uporabimo več (krajših) KE.
+- Prilagodimo velikost KE: krajše KE tam, kjer se primarna spremenljivka hitreje spreminja.
+- Dvo-vozliščne KE zamenjamo s tri-vozliščnimi (višja stopnja aproksimacije).
+- Kombiniramo tri- in dvo-vozliščne KE: tri-vozliščne tam, kjer je gradient primarne spremenljivke večji.
 
 ## ***PREDAVANJE 9 : REŠEVANJE ČASOVNO ODVISNEGA PREVODA TOPLOTE***
 
 ### 1. Kako rešujemo časovno odvisne probleme?
 
-Matematični popis fizikalnega dogajanja podaja vodilna enačba časovno odvisnega prevoda toplote v trdnini. Zaradi enostavnejšega prikaza obravnave časovno odvisnega temp. polja, obravanavamo v nadajevanju 1D prevod toplote pri konstantni prevodnosti $k$, gostoti $\rho$ in toplotni kapaciteti $c$ : $$k\frac{\partial^2 T(x,t)}{\partial x^2}+q_V(x,t) = \rho c\frac{\partial T(x,t)}{\partial t}\text{ , }x\in[0,L]\text{ in } t\geq 0$$
+Matematični popis fizikalnega dogajanja podaja vodilna enačba časovno odvisnega prevoda toplote v trdnini. Zaradi enostavnejšega prikaza obravnave časovno odvisnega temp. polja, obravnavamo v nadaljevanju 1D prevod toplote pri konstantni prevodnosti $k$, gostoti $\rho$ in toplotni kapaciteti $c$ : $$k\frac{\partial^2 T(x,t)}{\partial x^2}+q_V(x,t) = \rho c\frac{\partial T(x,t)}{\partial t}\text{ , }x\in[0,L]\text{ in } t\geq 0$$
 Pri časovno odvisnem problemu moramo poleg robnih pogojev določiti tudi začetno temperaturno stanje : $$T(x,t=0) = T_0(x)$$
-Pri določitvi pracialnega odvoda temperature po času upoštevajmo, da funkcijske odvisnosti temperature od časa ne poznamo, zato se poslužimo diferenčnega zapisa parcialnega odvoda : $$\frac{\partial T(x,t)}{\partial t} \approx\frac{T(x,t+\Delta t) - T(x,t)}{\Delta t} = \frac{T(x, t_{k+1}) - T(x, t_k)}{\Delta t}$$
+Pri določitvi parcialnega odvoda temperature po času upoštevajmo, da funkcijske odvisnosti temperature od časa ne poznamo, zato se poslužimo diferenčnega zapisa parcialnega odvoda : $$\frac{\partial T(x,t)}{\partial t} \approx\frac{T(x,t+\Delta t) - T(x,t)}{\Delta t} = \frac{T(x, t_{k+1}) - T(x, t_k)}{\Delta t}$$
 Moramo upoštevati, da je čas progresivna veličina ![[čas.png]]
 
 Vodilno enačbo problema lahko zapišemo na sledeči način : $$k\frac{\partial^2T(x, t_{k+\beta})}{\partial x^2} + q_V(x, t_{k + \beta}) = \rho c\frac{T(x, t_{k+1}) - T(x,t_k)}{\Delta t}\text{ , } t_{k+\beta}\in[t_k, t_{k+1}]$$
-Z izbiro keoficienta $\beta \in[0,1]$, določimo časovni trenutek v časovnem, intervalu $t_{k+\beta}\in[t_k, t_{k+1}]$ v katerem izpolnjujnemo DE. Aproksimativno vrednost temperature in volumske generacije toplote za izbrani časovni trenutek zapišemo : 
+Z izbiro koeficienta $\beta \in[0,1]$ določimo časovni trenutek $t_{k+\beta}\in[t_k, t_{k+1}]$, v katerem izpolnjujemo DE ($\beta=0$: korak naprej, $\beta=1$: korak nazaj, $\beta=0.5$: Crank-Nicolson). Aproksimativno vrednost temperature in volumske generacije toplote za izbrani časovni trenutek zapišemo : 
 
 $$T(x, t_{k+\beta})=T(x, t_k)(1-\beta) + T(x, t_{k+1})\beta$$
 $$q_V(x,t_{k+\beta}) = q_v(x, t_k)(1-\beta) + q_V(x, t_{k+1})\beta$$
@@ -774,10 +781,10 @@ V primeru 1D prevoda toplote v trdnini obravnavamo diskretne vrednosti temperatu
 ![[tmkr.png]]
 
 Vodilno enačbo problema : $$k\frac{\partial^2T(x, t_{k+\beta})}{\partial x^2} + q_V(x, t_{k + \beta}) = \rho c\frac{T(x, t_{k+1}) - T(x,t_k)}{\Delta t}\text{ , } t_{k+\beta}\in[t_k, t_{k+1}]$$
-Zapišemo v diferenčni obliki za točko $x_i$ in časovni trenutek $t_{k+\beta}$ : $$\begin{multline}k\frac{T(x_{i+1},t_{k+\beta}) - 2T(x_i, t_{k+\beta}) + T(x_{i-1}, t_{k+\beta})}{\Delta x^2} + q_V(x_i, t_{k+\beta}) = \rho c\frac{T(x_i, t_{k+1}) - T(x_i, t_k)}{\Delta t} \\\text{ , }t_{k+\beta}\in[t_k,t_{k+1}]\end{multline}$$
+Zapišemo v diferenčni obliki za točko $x_i$ in časovni trenutek $t_{k+\beta}$ : $$\begin{gathered}k\frac{T(x_{i+1},t_{k+\beta}) - 2T(x_i, t_{k+\beta}) + T(x_{i-1}, t_{k+\beta})}{\Delta x^2} + q_V(x_i, t_{k+\beta}) = \rho c\frac{T(x_i, t_{k+1}) - T(x_i, t_k)}{\Delta t} \\\text{ , }t_{k+\beta}\in[t_k,t_{k+1}]\end{gathered}$$
 Linearno aproksimacijo temperature in volumske generacije toplote v trenutku $t_{k+\beta}$ v odvisnosti od diskretnih vrednosti za časovna intervala $t_k$ in $t_{k+1}$ zapišemo kot : $$T(x, t_{k+\beta})=T(x, t_k)(1-\beta) + T(x, t_{k+1})\beta$$
 $$q_V(x,t_{k+\beta}) = q_v(x, t_k)(1-\beta) + q_V(x, t_{k+1})\beta$$
-
+Z izbiro $\beta$ dobimo metodo diferenčnega koraka naprej ($\beta = 0$), nazaj ($\beta = 1$) ali Crank-Nicolson ($\beta = 0.5$). Začnemo z začetnim stanjem $T(x_i, t_0) = T_0(x_i)$ in računamo korak za korakom do $t_{k+1} = t_k + \Delta t$. Odvode v robnih pogojih zapišemo s centralno shemo, zato vpeljemo dodatne točke izven območja.
 
 ### 3. Navedite značilnosti metode diferenčnega koraka naprej.
 
@@ -787,13 +794,12 @@ Grafično lahko diskretne vrednosti temperature, ki nastopajo v zgornji enačbi,
 
 Rdeč krogec predstavlja edino neznano vrednost $T(x_i, t_{k+1})$ v DE, medtem ko modri krogci predstavljajo že znane diskretne vrednosti temperature, ki nastopajo v diferenčni enačbi.
 
-Ker je to edina neznanka v diferenčni enačbi jo lahko izrazimo : $$T(x_i, t_{k+1}) = T(x_i, t_k) + \frac{\Delta t}{\rho c}\biggr{[}k\frac{T(x_{i+1}, t_k) - 2T(x_i, t_k) + T(x_{i-1},t_k)}{\Delta x^2} + q_V(x_i, t_k)\biggr{]}$$
+Ker je to edina neznanka v diferenčni enačbi jo lahko izrazimo : $$T(x_i, t_{k+1}) = T(x_i, t_k) + \frac{\Delta t}{\rho c}\biggr[k\frac{T(x_{i+1}, t_k) - 2T(x_i, t_k) + T(x_{i-1},t_k)}{\Delta x^2} + q_V(x_i, t_k)\biggr]$$
 Enačba nam omogoča, da lahko izračunamo vse neznane diskretne vrednosti $T(x_i, t_{k+1})$ v časovnem trenutnku $t_{k+1}$ ***brez reševanja sistema enačb***.
 
 Prikazani numerični postopek reševanja časovno odvisnega problema je poimenovan ***Forward-Difference Method*** oz. diferenčna metoda naprej.
 
-Rezultati reševanja so ***pogojno numerično stabilni***. Za stabilno rešitev moramo izpolnjevati sledeča kriterija : $$\frac{k}{\rho c}\frac{\Delta t}{\Delta x^2}\leq0.5$$
-$$\Delta t\leq\frac{\rho c}{2k}\Delta x^2$$
+Rezultati reševanja so ***pogojno numerično stabilni***. Za stabilno rešitev mora veljati pogoj : $$\frac{k}{\rho c}\frac{\Delta t}{\Delta x^2}\leq0.5 \quad\Leftrightarrow\quad \Delta t\leq\frac{\rho c}{2k}\Delta x^2$$
 ### 4. Navedite značilnosti metode diferenčnega koraka nazaj.
 
 Če si izbiremo $\beta = 1$. Diferencialno enačbo problema v tem preimeru ***implicitno*** izpolnjujemo v točki $x_i$ v časovnem trenutku $t_{k+1}$ : $$k\frac{T(x_{i+1},t_{k+1}) - 2T(x_i, t_{k+1}) + T(x_{i-1}, t_{k+1})}{\Delta x^2} + q_V(x_i, t_{k+1}) = \rho c\frac{T(x_i, t_{k+1}) - T(x_i, t_k)}{\Delta t}$$
@@ -805,7 +811,7 @@ V diferenčni enačbi so sedaj tri neznane vrednosti :
 - $T(x_{i-1}, t_{k+1})$
 - $T(x_{i}, t_{k+1})$
 - $T(x_{i+1}, t_{k+1})$
-Enačbo lahko preuredimo tako, da so na levi strani enačaja vse neznane vrednosti, na desni pa vse znane : $$-\frac{k}{\Delta x^2}T(x_{i+1}, t_{k+1}) + \biggr{(}\frac{2k}{\Delta x^2} + \frac{\rho c}{\Delta t}\biggr{)}T(x_i, t_{k+1}) - \frac{k}{\Delta x^2} T(x_{i-1},t_{k+1}) = \frac{\rho c}{\Delta t}T(x_i, t_k) + q_V(x_i, t_{k+1})$$
+Enačbo lahko preuredimo tako, da so na levi strani enačaja vse neznane vrednosti, na desni pa vse znane : $$-\frac{k}{\Delta x^2}T(x_{i+1}, t_{k+1}) + \biggr(\frac{2k}{\Delta x^2} + \frac{\rho c}{\Delta t}\biggr)T(x_i, t_{k+1}) - \frac{k}{\Delta x^2} T(x_{i-1},t_{k+1}) = \frac{\rho c}{\Delta t}T(x_i, t_k) + q_V(x_i, t_{k+1})$$
 Za keoficiente pred temperaturami lahko vpeljemo naslednje okrajšave : 
 - $K_1^{BD} = -\frac{k}{\Delta x^2}$
 - $K_2^{BD} = \frac{2k}{\Delta x^2} + \frac{\rho c}{\Delta t}$
@@ -815,23 +821,24 @@ Izraz omogoča izračun vseh neznanih diskretnih vrednosti temperature $T(x_i, t
 
 Numerični postopek reševanja problema se imenuje ***Backward-Difference method***. 
 
-Rezultati reševanja so brezpogojno numerično stabilni.
+Rezultati reševanja so ***brezpogojno numerično stabilni***. Natančnost rešitve zavisi od izbire časovnega koraka $\Delta t$.
 ### 5. Navedite značilnosti metode pod imenom Crank-Nicolson
 
 Za primer ko je $\beta = 0.5$, diferencialno enačbo problema izpolnjujemo v točki $x_i$ v časovnem trenutku $t_{k+0.5}$ : 
 $$k\frac{T(x_{i+1},t_{k+0.5}) - 2T(x_i, t_{k+0.5}) + T(x_{i-1}, t_{k+0.5})}{\Delta x^2} + q_V(x_i, t_{k+0.5}) = \rho c\frac{T(x_i, t_{k+1}) - T(x_i, t_k)}{\Delta t}$$
 Diskretne vrednosti temperature in generacije toplote v časovnem trenutku $t_{k+0.5}$ aproksimirajmo upoštevajoč linearno interpolacijo : $$T(x, t_{k+0.5})=T(x, t_k)\space0.5 + T(x, t_{k+1})\space0.5$$
 $$q_V(x,t_{k+0.5}) = q_v(x, t_k)\space0.5 + q_V(x, t_{k+1})\space0.5$$
-V diferenčni enačbi lahko tako nadomestimo diskretne vrednosti temperature vezane na časovni trenutek $t_{k+0.5}$ : $$\begin{multline}k\frac{[T(x_{i+1}, t_k)\space0.5 + T(x_{i+1},t_{k+1})\space0.5] - 2\space[T(x_{i}, t_k)\space0.5 + T(x_{i},t_{k+1})\space0.5]+ [T(x_{i-1}, t_k)\space0.5 + T(x_{i-1},t_{k+1})\space0.5]}{\Delta x^2} + \\ +[q_V(x_i, t_k)\space0.5 + q_V(x_i, t_{k+1})\space0.5] = \rho c\frac{T(x_i, t_{k+1}) - T(x_i, t_k)}{\Delta t} \end{multline}$$
+V diferenčni enačbi lahko tako nadomestimo diskretne vrednosti temperature vezane na časovni trenutek $t_{k+0.5}$ : $$\begin{gathered}k\frac{[T(x_{i+1}, t_k)\space0.5 + T(x_{i+1},t_{k+1})\space0.5] - 2\space[T(x_{i}, t_k)\space0.5 + T(x_{i},t_{k+1})\space0.5]+ [T(x_{i-1}, t_k)\space0.5 + T(x_{i-1},t_{k+1})\space0.5]}{\Delta x^2} + \\ +[q_V(x_i, t_k)\space0.5 + q_V(x_i, t_{k+1})\space0.5] = \rho c\frac{T(x_i, t_{k+1}) - T(x_i, t_k)}{\Delta t} \end{gathered}$$
 Grafično lahko diskretne vrednosti temperature, ki nastopajo v zapisani enačbi prikažemo na sledeči način : 
 ![[cn.png]]
-V diferenčni enačbi so tri neznane vrednosti (rdeče pike). Enačbo preuredimo tako, da neznane vrednosti nastopajo na levi strani enačaja : $$\begin{multline}\frac{k}{2\Delta x^2}T(x_{i+1}, t_{k+1}) - \biggr{(}\frac{k}{\Delta x^2} + \frac{\rho c}{\Delta t}\biggr{)}T(x_i, t_{k+1}) + \frac{k}{2\Delta x^2}T(x_{i}, t_{k+1}) = \\ =-\frac{k}{2\Delta x^2}T(x_{x+1}, t_k) + \biggr{(}\frac{k}{\Delta x^2}-\frac{\rho c}{\Delta t}\biggr{)}T(x_i, t_k) - \frac{k}{2\Delta x^2}T(x_{i_1}, t_k) + [q_V(x, t_k)\space 0.5 + q_V(x_i, t_{k+1})\space0.5]\end{multline}$$
+V diferenčni enačbi so tri neznane vrednosti (rdeče pike). Enačbo preuredimo tako, da neznane vrednosti nastopajo na levi strani enačaja : $$\begin{gathered}\frac{k}{2\Delta x^2}T(x_{i+1}, t_{k+1}) - \biggr(\frac{k}{\Delta x^2} + \frac{\rho c}{\Delta t}\biggr)T(x_i, t_{k+1}) + \frac{k}{2\Delta x^2}T(x_{i-1}, t_{k+1}) = \\ =-\frac{k}{2\Delta x^2}T(x_{i+1}, t_k) + \biggr(\frac{k}{\Delta x^2}-\frac{\rho c}{\Delta t}\biggr)T(x_i, t_k) - \frac{k}{2\Delta x^2}T(x_{i-1}, t_k) - [q_V(x_i, t_k)\space 0.5 + q_V(x_i, t_{k+1})\space0.5]\end{gathered}$$
+(Na prosojnici je pred členom $q_V$ znak $+$. Iz izpeljave sledi $-$, ker $q_V$ prenesemo z leve na desno stran.)
 Za keoficiente pred temperaturami lahko vpeljemo naslednje okrajšave : 
 - $K_1^{CN} = \frac{k}{2\Delta x^2}$
 - $K_2^{CN} = \frac{k}{\Delta x^2} + \frac{\rho c}{\Delta t}$
 - $K_3^{CN} = \frac{k}{\Delta x^2} - \frac{\rho c}{\Delta t}$
 - $C = \frac{\rho c}{\Delta t}$ 
-Z novimi konstantami lahko zapišemo skrajšano obliko enačbe v točki $x_i$ in časovnem trenutku   $t_{k+1}$ : $$\begin{multline}K_1^{CN} T(x_{i+1},t_{k+1}) - K_2^{CN}T(x_i, t_{k+1}) + K_1^{CN}T(x_{i-1}, t_{k+1}) = \\ = -\biggr{[}K_1^{CN}T(x_{i+1},t_k) - K_3^{CN}T(x_i,t_k) + K_1^{CN}T(x_{i-1}, t_k)\biggr{]} + \biggr{[}q_V(x_i, t_k)\space 0.5 + q_V(x_i, t_{k+1}) \space 0.5\biggr{]}\end{multline}$$
+Z novimi konstantami lahko zapišemo skrajšano obliko enačbe v točki $x_i$ in časovnem trenutku   $t_{k+1}$ : $$\begin{gathered}K_1^{CN} T(x_{i+1},t_{k+1}) - K_2^{CN}T(x_i, t_{k+1}) + K_1^{CN}T(x_{i-1}, t_{k+1}) = \\ = -\biggr[K_1^{CN}T(x_{i+1},t_k) - K_3^{CN}T(x_i,t_k) + K_1^{CN}T(x_{i-1}, t_k)\biggr] - \biggr[q_V(x_i, t_k)\space 0.5 + q_V(x_i, t_{k+1}) \space 0.5\biggr]\end{gathered}$$
 Izraz omogoča izračun vseh neznanih diskretnih vrednosti temperature $T(x_i, t_{k+1})$ v časovnem trenutku $t_{k+1}$ na način, da se tvori ***sistem linearnih enačb***, pri čemer mora biti število enačb enako številu neznanih diskretnih vrednosti. V sistemu enačb morajo biti zajeti robni pogoji.
 
 Prikazana metoda se imenuje ***Crank-Nicolson (CN)*** metoda. Od vseh treh navedenih metod je najbolj natančna in je ***brezpogojno numerično stabilna***.
@@ -840,44 +847,52 @@ Prikazana metoda se imenuje ***Crank-Nicolson (CN)*** metoda. Od vseh treh naved
 Izhodišče je diferencialna enačba problema : $$k\frac{\partial^2T(x, t_{k+\beta})}{\partial x^2} + q_V(x, t_{k+\beta}) = \rho c\frac{T(x, t_{k+1}) - T(x, t_k)}{\Delta t}$$
 
 
-Enačbo preoblikujemo v šibko obliko integralske formulacije, ki se, v primeru upoštevanja časovne odvisnosti za 1D primer prevoda toplote v trdnini zapiše kot : $$\begin{multline} k\int_0^L\frac{\partial \tilde T_e(x_e, t_{k+\beta})}{\partial x_e}\frac{dv(x_e)}{dx_e}dx_e = -Q_e(L, t_{k + \beta})v(L) + Q_e(0, t_{k+\beta})v(0) + \\+\int_0^Lq_V(x_e, t_{k+\beta})v(x_e)dx_e - \int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}v(x_e)dx_e\text{ , }t_{k+\beta} \in [t_k, t_{k+1}]\end{multline}$$
+Enačbo preoblikujemo v šibko obliko integralske formulacije, ki se, v primeru upoštevanja časovne odvisnosti za 1D primer prevoda toplote v trdnini zapiše kot : $$\begin{gathered} k\int_0^L\frac{\partial \tilde T_e(x_e, t_{k+\beta})}{\partial x_e}\frac{dv(x_e)}{dx_e}dx_e = -Q_e(L, t_{k + \beta})v(L) + Q_e(0, t_{k+\beta})v(0) + \\+\int_0^Lq_V(x_e, t_{k+\beta})v(x_e)dx_e - \int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}v(x_e)dx_e\text{ , }t_{k+\beta} \in [t_k, t_{k+1}]\end{gathered}$$
 Formula se nanaša na posamezni KE v časovnem trenutku $t_{k+\beta}$. 
 
 Enačbo izpeljujemo za dvo-vozliščni KE, s katerim lahko obravnavamo 1D prostorsko in časovno spreminjanje temperature. Grafično lahko dvo-vozliščni KE prikažemo na naslednji način : 
 ![[tKE.png]]
 
-Raporeditev temperature v KE v trenutku $t_{k+\beta}$ je podana z aproksimacijo : $$\tilde T_e(x_e, t_{k+\beta})= T_1^e(t_{k+\beta})\biggr{(}1-\frac{x_e}{L}\biggr{)} + T_2^e(t_{k+\beta})\biggr{(}\frac{x_e}{L}\biggr{)}$$
+Raporeditev temperature v KE v trenutku $t_{k+\beta}$ je podana z aproksimacijo : $$\tilde T_e(x_e, t_{k+\beta})= T_1^e(t_{k+\beta})\biggr(1-\frac{x_e}{L}\biggr) + T_2^e(t_{k+\beta})\biggr(\frac{x_e}{L}\biggr)$$
 V skladu z Galerkinovim pristopom izberemo za funkciji $v(x_e)$:
 - $v_1(x_e) = 1- \frac{x_e}{L}$
 - $v_2(x_e) = \frac{x_e}{L}$
-V analizi časovno ustaljenega prevoda toplote smo že uporabili dvo-vozliščni KE, tako da matrično obliko dela enačbe, v katerem ni prispevka časovne toplotne inercije materiala, že poznamo :  $$\begin{multline}\frac{k}{L}\begin{bmatrix}1&-1\\-1&1\end{bmatrix} \begin{Bmatrix}T_1^e(t_{k+\beta})\\T_2^e(t_{k+\beta})\end{Bmatrix} = \begin{Bmatrix}Q_1^e(t_{k+\beta})\\-Q_2^e(t_{k+\beta})\end{Bmatrix} + \begin{Bmatrix}Q_{1V}^e(t_{k+\beta})\\Q_{2V}^e(t_{k+\beta})\end{Bmatrix} - \int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}\begin{Bmatrix}v_1(x_e)\\v_2(x_e)\end{Bmatrix}dx_e\end{multline}$$
+V analizi časovno ustaljenega prevoda toplote smo že uporabili dvo-vozliščni KE, tako da matrično obliko dela enačbe, v katerem ni prispevka časovne toplotne inercije materiala, že poznamo :  $$\begin{gathered}\frac{k}{L}\begin{bmatrix}1&-1\\-1&1\end{bmatrix} \begin{Bmatrix}T_1^e(t_{k+\beta})\\T_2^e(t_{k+\beta})\end{Bmatrix} = \begin{Bmatrix}Q_1^e(t_{k+\beta})\\-Q_2^e(t_{k+\beta})\end{Bmatrix} + \begin{Bmatrix}Q_{1V}^e(t_{k+\beta})\\Q_{2V}^e(t_{k+\beta})\end{Bmatrix} - \int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}\begin{Bmatrix}v_1(x_e)\\v_2(x_e)\end{Bmatrix}dx_e\end{gathered}$$
 
 Izvrednotimo integral : $$\int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}\begin{Bmatrix}v_1(x_e)\\v_2(x_e)\end{Bmatrix}dx_e$$
-Upoštevajoč aproksimacijo temperature za primer dvo-vozliščnega KE : $$\tilde T_e(x_e, t_{k})= T_1^e(t_{k})\biggr{(}1-\frac{x_e}{L}\biggr{)} + T_2^e(t_{k})\biggr{(}\frac{x_e}{L}\biggr{)}$$
-$$\tilde T_e(x_e, t_{k+1})= T_1^e(t_{k+1})\biggr{(}1-\frac{x_e}{L}\biggr{)} + T_2^e(t_{k+1})\biggr{(}\frac{x_e}{L}\biggr{)}$$
-Matrični zapis izvrednotenega integrala je oblike : $$\int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}\begin{Bmatrix}v_1(x_e)\\v_2(x_e)\end{Bmatrix}dx_e = \frac{\rho c L}{\Delta t}\begin{bmatrix}2&1\\1&2\end{bmatrix}\begin{Bmatrix}T_1^e(t_{k+1}) - T_1^e(t_k)\\T_2^e(t_{k+1}) - T_2^e(t_k)\end{Bmatrix}$$
-Na krajše : $$[K_e]\{T^e(t_{k+\beta})\}\Delta t = \{Q^e(t_{k+\beta})\} \Delta t + \{Q^e_V(t_{k+\beta})\} \Delta t - [C_e]\{T^e(t_{k+1}) - T^e(t_k) \}$$
+Upoštevajoč aproksimacijo temperature za primer dvo-vozliščnega KE : $$\tilde T_e(x_e, t_{k})= T_1^e(t_{k})\biggr(1-\frac{x_e}{L}\biggr) + T_2^e(t_{k})\biggr(\frac{x_e}{L}\biggr)$$
+$$\tilde T_e(x_e, t_{k+1})= T_1^e(t_{k+1})\biggr(1-\frac{x_e}{L}\biggr) + T_2^e(t_{k+1})\biggr(\frac{x_e}{L}\biggr)$$
+Matrični zapis izvrednotenega integrala je oblike : $$\int_0^L\rho c\frac{\tilde T_e(x_e, t_{k+1}) - \tilde T_e(x_e, t_k)}{\Delta t}\begin{Bmatrix}v_1(x_e)\\v_2(x_e)\end{Bmatrix}dx_e = \frac{\rho c L}{6\Delta t}\begin{bmatrix}2&1\\1&2\end{bmatrix}\begin{Bmatrix}T_1^e(t_{k+1}) - T_1^e(t_k)\\T_2^e(t_{k+1}) - T_2^e(t_k)\end{Bmatrix}$$
+Enačbo pomnožimo z $\Delta t$ in zapišemo na krajše : $$[K_e]\{T^e(t_{k+\beta})\}\Delta t = \{Q^e(t_{k+\beta})\} \Delta t + \{Q^e_V(t_{k+\beta})\} \Delta t - [C_e]\{T^e(t_{k+1}) - T^e(t_k) \}$$
+$$[K_e] = \frac{k}{L}\begin{bmatrix}1&-1\\-1&1\end{bmatrix},\qquad [C_e] = \frac{\rho c L}{6}\begin{bmatrix}2&1\\1&2\end{bmatrix}$$
 Linearno aproksimacijo diskretne vrednosti temperature, toplotnega toka in volumske generacije toplote v časovnem trenutku $t_{k+\beta}$ v odvisnosti od diskretnih vrednosti za časovne trenutke $t_k$ in $t_{k+1}$ zapišemo :  $$T_i^e(x_i, t_{k+\beta}) = T_i^e(x_i, t_k)(1-\beta) + T_i^e(x_i, t_{k+1})\beta$$$$Q_i^e(x_i, t_{k+\beta}) = Q_i^e(x_i, t_k)(1-\beta) + Q_i^e(x_i, t_{k+1})\beta$$
 $$Q_{iV}^e(x_i, t_{k+\beta}) = Q_{iV}^e(x_i, t_k)(1-\beta) + Q_{iV}^e(x_i, t_{k+1})\beta$$
-Glede na izbiro konstante $\beta$ lahko problem naprej rešujemo z diferenčno metodo naprej, nazaj ali pa po Crank-Nicolson metodi - bolj detajlen postopek v eučilnici.
+Po sestavljanju prispevkov vseh KE dobimo glede na izbiro $\beta$ :
+- $\beta = 0$ (korak naprej): $[C]\{T(t_{k+1})\} = \big[[C] - [K]\Delta t\big]\{T(t_k)\} + \{Q(t_k)\}\Delta t + \{Q_V(t_k)\}\Delta t$
+- $\beta = 1$ (korak nazaj): $\big[[C] + [K]\Delta t\big]\{T(t_{k+1})\} = [C]\{T(t_k)\} + \{Q(t_{k+1})\}\Delta t + \{Q_V(t_{k+1})\}\Delta t$
+- $\beta = 0.5$ (Crank-Nicolson): $\big[[C] + 0.5[K]\Delta t\big]\{T(t_{k+1})\} = \big[[C] - 0.5[K]\Delta t\big]\{T(t_k)\} + 0.5\{Q(t_k) + Q(t_{k+1})\}\Delta t + 0.5\{Q_V(t_k) + Q_V(t_{k+1})\}\Delta t$
+
+V vseh treh primerih rešujemo sistem enačb, ker $[C]$ ni diagonalna.
 ### 7.  Od česa zavisi velikost stabilnega koraka pri metodi diferenčnega koraka naprej?
 
-Pri metodi diferenčnega koraka naprej je velikost stabilnega koraka odvisna od gostote medija $\rho$, njegove specifične toplote $c$ , gostote mreže $\Delta x$ in časovnega koraka $\Delta t$ : $$\frac{k}{\rho c}\frac{\Delta t}{\Delta x^2}\leq0.5$$
-$$\Delta t\leq\frac{\rho c}{2k}\Delta x^2$$
+Največji stabilni časovni korak $\Delta t$ je odvisen od snovnih lastnosti (toplotne prevodnosti $k$, gostote $\rho$, specifične toplote $c$) in od koraka mreže $\Delta x$ : $$\frac{k}{\rho c}\frac{\Delta t}{\Delta x^2}\leq0.5 \quad\Leftrightarrow\quad \Delta t\leq\frac{\rho c}{2k}\Delta x^2$$
+Ker je $\Delta t_{max} \propto \Delta x^2$, gostejša mreža zahteva bistveno manjši časovni korak.
 ### 8. Posebnost reševanja časovno odvisnega prevoda toplote po MKE z metodo diferenčnega koraka naprej?
+
+Posebnost: za razliko od MKR je tudi pri koraku naprej treba reševati sistem enačb, ker matrika $[C]$ ni diagonalna. Temu se izognemo z diagonalizacijo matrike $[C]$.
 
 Ob izbiri koeficienta $\beta = 0$, diferencialno enačbo problema izpolnjujemo v območju KE v časovnem trenutku $t_k$ : 
 ![[mke naprej.png]]
 Rdeči krogci so vozlišča KE, kjer je vrednost temperature neznana v časovnem trenutku $t_{k+1}$. Z modro barvo so obarvana vozlišča, kjer je vrednost temperature poznana. 
 
 Matrični zapis enačbe preide iz : $$[K_e]\{T^e(t_{k+\beta})\}\Delta t = \{Q^e(t_{k+\beta})\} \Delta t + \{Q^e_V(t_{k+\beta})\} \Delta t - [C_e]\{T^e(t_{k+1}) - T^e(t_k) \}$$ na : $$[K_e]\{T^e(t_{k})\}\Delta t = \{Q^e(t_{k})\} \Delta t + \{Q^e_V(t_{k})\} \Delta t - [C_e]\{T^e(t_{k+1}) - T^e(t_k) \}$$
-Enačbo preuredimo, da so neznane vrednosti na levi strani enačaja : $$[C_e]\{T^e(t_{k+1}\} = \biggr{[}[C_e] - [K_e]\Delta t\biggr{]}\{T^e(t_k)\} + \{Q^e(t_k)\} + \{Q_V^e(t_k)\}\Delta{t}$$
-Dobljeni sistem enačb lahko razširimo na celotno domeno in seštejemo posamezne prispevke KE. Tako dobimo sistem enačb celotnega problema : $$[C]\{T(t_{k+1}\} = \biggr{[}[C] - [K]\Delta t\biggr{]}\{T(t_k)\} + \{Q(t_k)\} + \{Q_V(t_k)\}\Delta{t}$$
-Dobljeni sistem enačb nam omogoča izračun vozliščnih vrednosti temperature $T(x_i, T_{k+1})$ v časovnem trenutku $t_{k+1}$. Seveda brez reševanja celotnega sistema enačb v tem primeru ne gre.
+Enačbo preuredimo, da so neznane vrednosti na levi strani enačaja : $$[C_e]\{T^e(t_{k+1})\} = \biggr[[C_e] - [K_e]\Delta t\biggr]\{T^e(t_k)\} + \{Q^e(t_k)\}\Delta t + \{Q_V^e(t_k)\}\Delta{t}$$
+Dobljeni sistem enačb lahko razširimo na celotno domeno in seštejemo posamezne prispevke KE. Tako dobimo sistem enačb celotnega problema : $$[C]\{T(t_{k+1})\} = \biggr[[C] - [K]\Delta t\biggr]\{T(t_k)\} + \{Q(t_k)\}\Delta t + \{Q_V(t_k)\}\Delta{t}$$
+Dobljeni sistem enačb nam omogoča izračun vozliščnih vrednosti temperature $T(x_i, t_{k+1})$ v časovnem trenutku $t_{k+1}$. Ker $[C]$ ni diagonalna, brez reševanja celotnega sistema enačb v tem primeru ne gre.
 
 Lahko se izognemo reševanju sistema enačb z diagonalizacijo matrike $[C]$. Izvedemo jo tako, da najprej diagonaliziramo matriko elementa $[C_e]$ : $$[C_e] = \frac{\rho c L}{6}\begin{bmatrix}2&1\\1&2\end{bmatrix} \approx \frac{\rho c L}{6}\begin{bmatrix}2+1&0\\0&1+2\end{bmatrix} = \frac{\rho c L}{6}\begin{bmatrix}3&0\\0&3\end{bmatrix}$$
 Z razširitvijo na vse prostostne stopnje problema in s seštevanjem prispevkov posameznih KE dobimo diagonalizirano matriko $[C]$  : $$[C]\approx[D] = \begin{bmatrix}D_{11}&0&...&0\\0&D_{22}&...&0\\...&...&...&...\\0&0&...&D_{nn}\end{bmatrix}$$
-Razširjena matrika omogoča zapise enačbe KE na sledeč način : $$[D]\{T(t_{k+1})\} = \biggr{[}[D] - [K]\Delta t\biggr{]}\{T(t_k)\} + \{Q(t_k)\} \Delta t + \{Q_V(t_k)\}\Delta t$$
+Razširjena matrika omogoča zapise enačbe KE na sledeč način : $$[D]\{T(t_{k+1})\} = \biggr[[D] - [K]\Delta t\biggr]\{T(t_k)\} + \{Q(t_k)\} \Delta t + \{Q_V(t_k)\}\Delta t$$
 Enačba nam z diagonalizirano matriko omogoča izračun vseh diskretnih vrednosti temperature $T(x_i, t_{k+1})$ v časovnem trenutku $t_{k+1}$ ***brez reševanja sistema enačb***.
 
 ## ***PREDAVANJE 10 : METODA KONČNIH VOLUMNOV***
@@ -886,62 +901,63 @@ Enačba nam z diagonalizirano matriko omogoča izračun vseh diskretnih vrednost
 
 Metodo končnih volumnov (***MKV***) bomo prikazali na primeru prevoda toplote v trdnini. 
 
-Izhodiščno enačbo problema predstavlja sledeča enačba : $$\frac{\partial}{\partial x}\biggr{(}k\frac{\partial T}{\partial x}\biggr{)}+\frac{\partial}{\partial y}\biggr{(}k\frac{\partial T}{\partial y}\biggr{)}+\frac{\partial}{\partial z}\biggr{(}k\frac{\partial T}{\partial z}\biggr{)} + q_V = \rho c\frac{\partial T}{\partial t}$$ Enačbo lahko zapišemo tudi v sledeči obliki : $$div[k\space grad(T)] = -q_V + \rho c\frac{\partial T}{\partial t}$$
-Izvedemo integracijo diferencialne enačbe po obravnavanem območju $\Omega$ in dobimo : $$\int_{\Omega}div[k\space grad(T)] d\Omega = \int_{\Omega}\biggr{[}-q_V + \rho c\frac{\partial T}{\partial t}\biggr{]}d\Omega$$
+Izhodiščno enačbo problema predstavlja sledeča enačba : $$\frac{\partial}{\partial x}\biggr(k\frac{\partial T}{\partial x}\biggr)+\frac{\partial}{\partial y}\biggr(k\frac{\partial T}{\partial y}\biggr)+\frac{\partial}{\partial z}\biggr(k\frac{\partial T}{\partial z}\biggr) + q_V = \rho c\frac{\partial T}{\partial t}$$ Enačbo lahko zapišemo tudi v sledeči obliki : $$div[k\space grad(T)] = -q_V + \rho c\frac{\partial T}{\partial t}$$
+Izvedemo integracijo diferencialne enačbe po obravnavanem območju $\Omega$ in dobimo : $$\int_{\Omega}div[k\space grad(T)] d\Omega = \int_{\Omega}\biggr[-q_V + \rho c\frac{\partial T}{\partial t}\biggr]d\Omega$$
 V skladu z ***divergenčnim teoremom (Gaussov izrek)***, lahko integral po območju $\Omega$ prevedemo v integral po površini obravnavanega območja $\Gamma$  : $$\int_{\Omega}div[k\space grad(T)]d\Omega = \int_{\Gamma}k\space grad(T)\space \hat{n}\space d\Gamma$$
 ![[Pasted image 20241228114008.png]]
-Velja vedeti, da divergenčni teorem ni aproksimacija!
+Divergenčni teorem ni aproksimacija! Z njim znižamo red odvoda (iz drugega na prvega), zato je aproksimacija lažja.
 
-Izhodiščno enačbo za ***metodo končnih volumnov*** tako zapišemo kot : $$\int_{\Gamma}k\space grad(T)\space \hat n \space d\Gamma = \int_{\Omega}\biggr{[}-q_V + \rho c\frac{\partial T}{\partial t}\biggr{]}d\Omega$$
+Izhodiščno enačbo za ***metodo končnih volumnov*** tako zapišemo kot : $$\int_{\Gamma}k\space grad(T)\space \hat n \space d\Gamma = \int_{\Omega}\biggr[-q_V + \rho c\frac{\partial T}{\partial t}\biggr]d\Omega$$
 ### 2. Izpeljava enačbe za posamezni KV za primer reševanja nestacionarnega prevoda toplote v trdnini.
 
 Omejimo se na 1D primer nestacionarnega prevoda toplote, pri čemer so $k\text{ , }\rho\text{ , }c = konst$. V takšnem primeru izkazuje temperaturno polje lastnost : $$T = T(x,t)$$
-Gradient temperature je v tem primeru enak : $$grad(T(x,t)) = \biggr{(}\frac{\partial T(x,t)}{\partial x},0,0\biggr{)}$$
-Integralska enačba pa se preoblikuje v obliko : $$\int_{\Gamma}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma = \int_0^L\biggr{[}-q_V + \rho c\frac{\partial T}{\partial x}\biggr{]}A dx$$
+Gradient temperature je v tem primeru enak : $$grad(T(x,t)) = \biggr(\frac{\partial T(x,t)}{\partial x},0,0\biggr)$$
+Integralska enačba pa se preoblikuje v obliko : $$\int_{\Gamma}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma = \int_0^L\biggr[-q_V + \rho c\frac{\partial T}{\partial t}\biggr]A dx$$
 Pri čemer je $A$ ploščina prereza z normalo v $x$ smeri.
 
 Obravnavano območje $X\in[0,L]$ razdelimo na podobmočja $x_v\in[0,L_v]$ , imenovana ***končni volumni*** (KV) ($v=i$). Vsakemu KV pripada ***lokalni koordinatni sistem*** $x_v$.
 
-V podobmočju posameznega KV se nahaja ***točka*** KV ($p=j$), v kateri se določa disktretna vrednost primarne spremenljivke, ki je v obravnavanem primeru vrednost temperature $T_p$.
+V podobmočju posameznega KV se nahaja ***točka*** KV ($p=j$), v kateri se določa diskretna vrednost primarne spremenljivke, ki je v obravnavanem primeru vrednost temperature $T_p$.
 ![[Pasted image 20241228115401.png]]
 
-Obravnavajmo posamezni KV v časovnem trenutku $t_{k+\beta}\in[t_k, t_{k+1}]$. Integral po celotnem območju nadomestiomo z vsoto integralov po posameznem KV : $$\sum_v\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma = \sum_v\int_0^{L_v}\biggr{[}-q_V + \rho c\frac{\partial T}{\partial t}\biggr{]}A\space dx$$
-Ker ne poznamo funkcije temperature, lahko integral v vsoti na levi strani enačbe za posamezni KV aproksimativno zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx\biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^+} (T_{p+1}(t_{k +\beta}) - T_p(t_{k+\beta}))\biggr{]}-\biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^-} (T_{p}(t_{k +\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]}$$
+Obravnavajmo posamezni KV v časovnem trenutku $t_{k+\beta}\in[t_k, t_{k+1}]$. Integral po celotnem območju nadomestimo z vsoto integralov po posameznem KV : $$\sum_v\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma = \sum_v\int_0^{L_v}\biggr[-q_V + \rho c\frac{\partial T}{\partial t}\biggr]A\space dx$$
+Ker ne poznamo funkcije temperature, lahko integral v vsoti na levi strani enačbe za posamezni KV aproksimativno zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx\biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^+} (T_{p+1}(t_{k +\beta}) - T_p(t_{k+\beta}))\biggr]-\biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^-} (T_{p}(t_{k +\beta}) - T_{p-1}(t_{k+\beta}))\biggr]$$
 ![[Pasted image 20241228120155.png]]
 
-Integral v vsoti na desni strani pa za posamezni KV aproksimativno zapišemo : $$\int_0^{L_v}\biggr{[}-q_V + \rho c\frac{\partial T}{\partial t}\biggr{]}\space A\space dx \approx -(q_V(t_{k+\beta}))_p\space A_pL_v + \rho c\frac{T_p(t_{k+1}) - T_p(t_k)}{\Delta t}A_pL_v$$
+Integral v vsoti na desni strani pa za posamezni KV aproksimativno zapišemo : $$\int_0^{L_v}\biggr[-q_V + \rho c\frac{\partial T}{\partial t}\biggr]\space A\space dx \approx -(q_V(t_{k+\beta}))_p\space A_pL_v + \rho c\frac{T_p(t_{k+1}) - T_p(t_k)}{\Delta t}A_pL_v$$
 ![[Pasted image 20241228120544.png]]
 
-Enačbo za posamezni KV sedaj zapišemo kot : $$\begin{multline}\biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^+} (T_{p+1}(t_{k +\beta}) - T_p(t_{k+\beta}))\biggr{]}-\biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^-} (T_{p}(t_{k +\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]} = \\ =   -(q_V(t_{k+\beta}))_p\space A_pL_v + \rho c\frac{T_p(t_{k+1}) - T_p(t_k)}{\Delta t}A_pL_v\end{multline}$$
-Za krajši zapis lahko vpeljemo še nekaj konstant : $$K_v^+ = \biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^+}\text{ , }K_v^- = \biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^-}\text{, }V_v = A_pL_v\text{ , }C_v = \frac{\rho c V_v}{\Delta t}$$
+Enačbo za posamezni KV sedaj zapišemo kot : $$\begin{gathered}\biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^+} (T_{p+1}(t_{k +\beta}) - T_p(t_{k+\beta}))\biggr]-\biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^-} (T_{p}(t_{k +\beta}) - T_{p-1}(t_{k+\beta}))\biggr] = \\ =   -(q_V(t_{k+\beta}))_p\space A_pL_v + \rho c\frac{T_p(t_{k+1}) - T_p(t_k)}{\Delta t}A_pL_v\end{gathered}$$
+Za krajši zapis lahko vpeljemo še nekaj konstant : $$K_v^+ = \biggr(\frac{kA}{\Delta X_v}\biggr)_{m^+}\text{ , }K_v^- = \biggr(\frac{kA}{\Delta X_v}\biggr)_{m^-}\text{, }V_v = A_pL_v\text{ , }C_v = \frac{\rho c V_v}{\Delta t}$$
 Krajši zapis enačbe : 
-$$K_v^+T_{p+1}(t_{k+\beta}) - (K_v^+ + K_v^-)T_p(t_{k+\beta}) + K_v^-T_{p-1}(t_{k+\beta}) = -(q_V(t_{k\beta}))_pV_v+C_v[T_p(t_{k+1}) - T_p(t_k)]$$
+$$K_v^+T_{p+1}(t_{k+\beta}) - (K_v^+ + K_v^-)T_p(t_{k+\beta}) + K_v^-T_{p-1}(t_{k+\beta}) = -(q_V(t_{k+\beta}))_pV_v+C_v[T_p(t_{k+1}) - T_p(t_k)]$$
 ![[Pasted image 20241228121330.png]]
 
 ### 3. Kako so upoštevani robni pogoji pri MKV?
 
 Obravnavajmo robne pogoje, ki se nanašajo na 1D prevod toplote v trdnini v skladu z MKV. Enačba za KV, ki se nahaja na robu obravnavanega območja, vključuje tudi robne pogoje. 
 
-V primeru, ko je na robu območja poznana ***temperatura*** $T_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu območja in je robna vrednost poznana na meji $m^-$ - na levi , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^-}(T_{p}(t_{k+\beta}) - T_\Gamma(t_{k+\beta}))\biggr{]} $$
+V primeru, ko je na robu območja poznana ***temperatura*** $T_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu območja in je robna vrednost poznana na meji $m^-$ - na levi , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^-}(T_{p}(t_{k+\beta}) - T_\Gamma(t_{k+\beta}))\biggr] $$
 ![[Pasted image 20241228122049.png]]
 
-Če je robni pogoj poznan na meji $m^+$, potem integral zapišemo tako : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^+}(T_{\Gamma}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]} $$
+Če je robni pogoj poznan na meji $m^+$, potem integral zapišemo tako : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^+}(T_{\Gamma}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr] $$
 ![[Pasted image 20241228122206.png]]
 
-V primeru, ko je na robu območja poznan toplotni tok $q_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx\biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - q_\Gamma(t_{k+\beta})(A)_{m^-}$$
+V primeru, ko je na robu območja poznan toplotni tok $q_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx\biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - q_\Gamma(t_{k+\beta})(A)_{m^-}$$
 
 ![[Pasted image 20241228122441.png]]
 
-Če je robna vrednost poznana na meji $m^+$, potem integral zapišemo v obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma (t_{k+\beta})(A)_{m^+} \space - \space \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]}$$
+Če je robna vrednost poznana na meji $m^+$, potem integral zapišemo v obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma (t_{k+\beta})(A)_{m^+} \space - \space \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr]$$
 
 ![[Pasted image 20241228122742.png]]
 
-V primeru, ko je rob območja izpostavljen ***konvektivnemu toplotnemu toku*** $q_\Gamma(t) = -h_f[T_f(t) - T(t)]$ , integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - q_\Gamma(t_{k+\beta}) (A)_{m^-}$$
+V primeru, ko je rob območja izpostavljen ***konvektivnemu toplotnemu toku*** $q_\Gamma(t) = -h_f[T_f(t) - T(t)]$ , integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - q_\Gamma(t_{k+\beta}) (A)_{m^-}$$
 Kjer je $q_\Gamma(t_{k+\beta})$ : $$q_\Gamma(t_{k+\beta}) = \frac{T_p(t_{k+\beta}) - T_f(t_{k+\beta})}{((\frac{k}{\Delta X_v^-})^{-1} + (h_f)^{-1})_{m^-}}$$
 ![[Pasted image 20241228123622.png]]
 
-Če je robna vrednost toplotnega toka poznana na meji $m^+$ , potem integral zapišemo v sledeči obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma(t_{k+\beta}) (A)_{m^+} \space - \space \biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^-}(T_p(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]} $$
-Kjer je $q_\Gamma(t_{k+\beta})$ : $$q_\Gamma(t_{k+\beta}) = \frac{T_p(t_{k+\beta}) - T_f(t_{k+\beta})}{((\frac{k}{\Delta X_v^+})^{-1} + (h_f)^{-1})_{m^+}}$$
+Če je robna vrednost toplotnega toka poznana na meji $m^+$ , potem integral zapišemo v sledeči obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma(t_{k+\beta}) (A)_{m^+} \space - \space \biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^-}(T_p(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr] $$
+Kjer je $q_\Gamma(t_{k+\beta})$ (pozitiven v smeri $-x$, tj. v območje) : $$q_\Gamma(t_{k+\beta}) = \frac{T_f(t_{k+\beta}) - T_p(t_{k+\beta})}{((\frac{k}{\Delta X_v^+})^{-1} + (h_f)^{-1})_{m^+}}$$
+(Na prosojnici je v števcu $T_p - T_f$, kar da napačen predznak: pri $T_p > T_f$ mora toplota iz območja odtekati.)
 
 Pri upoštevanju konvekcije na robu obravnavanega območja moramo upoštevati da temperatura na robu $T_r$ ni neznanka problema pri obravnavanju z MKV.
 
@@ -949,37 +965,39 @@ Pri upoštevanju konvekcije na robu obravnavanega območja moramo upoštevati da
 
 ### 4. Kako izpolnimo pogoje konsistentnosti prehoda pri MKV?
 
-***Pogoj konsistentnega prehoda*** na meji med ***končnima volumnoma*** v primeru, ko gre za spremembo toplotne prevodnosti $k$ , izpolnimo tako, da izračunamo nadomestno toplotno prevodnost, ki velja za mejo med njima : $$k_m = \frac{2}{\biggr{(}\frac{1}{k_p} + \frac{1}{k_{p+1}}\biggr{)}}$$
+***Pogoj konsistentnega prehoda*** na meji med ***končnima volumnoma*** v primeru, ko gre za spremembo toplotne prevodnosti $k$ , izpolnimo tako, da izračunamo nadomestno toplotno prevodnost, ki velja za mejo med njima : $$k_m = \frac{2}{\biggr(\frac{1}{k_p} + \frac{1}{k_{p+1}}\biggr)}$$
+$k_m$ je harmonična sredina (zaporedno vezana toplotna upora, točki $p$ in $p+1$ enako oddaljeni od meje). Toplotni tok skozi mejo $K^+ = \big(\frac{k_m A}{\Delta X_v}\big)_{m^+}$ je v enačbah obeh KV isti člen, zato je zveznost toka samodejno izpolnjena.
 
 ![[Pasted image 20241228124527.png]]
 
 
 ### 5. Kako je upoštevana znana temperatura na robu obravnavanega območja pri MKV?
 
-V primeru, ko je na robu območja poznana ***temperatura*** $T_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu območja in je robna vrednost poznana na meji $m^-$ - na levi , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^-}(T_{p}(t_{k+\beta}) - T_\Gamma(t_{k+\beta}))\biggr{]} $$
+V primeru, ko je na robu območja poznana ***temperatura*** $T_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu območja in je robna vrednost poznana na meji $m^-$ - na levi , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^-}(T_{p}(t_{k+\beta}) - T_\Gamma(t_{k+\beta}))\biggr] $$
 ![[Pasted image 20241228122049.png]]
 
-Če je robni pogoj poznan na meji $m^+$, potem integral zapišemo tako : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^+}(T_{\Gamma}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]} $$
+Če je robni pogoj poznan na meji $m^+$, potem integral zapišemo tako : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^+}(T_{\Gamma}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr] $$
 ![[Pasted image 20241228122206.png]]
 
 ### 6. Kako je upoštevan znani toplotni tok na robu obravnavanega območja pri MKV?
 
-V primeru, ko je na robu območja poznan toplotni tok $q_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx\biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - q_\Gamma(t_{k+\beta})(A)_{m^-}$$
+V primeru, ko je na robu območja poznan toplotni tok $q_\Gamma(t)$, integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx\biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - q_\Gamma(t_{k+\beta})(A)_{m^-}$$
 
 ![[Pasted image 20241228122441.png]]
 
-Če je robna vrednost poznana na meji $m^+$, potem integral zapišemo v obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma (t_{k+\beta})(A)_{m^+} \space - \space \biggr{[}\biggr{(}\frac{k A}{\Delta X_v}\biggr{)}_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]}$$
+Če je robna vrednost poznana na meji $m^+$, potem integral zapišemo v obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma (t_{k+\beta})(A)_{m^+} \space - \space \biggr[\biggr(\frac{k A}{\Delta X_v}\biggr)_{m^-}(T_{p}(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr]$$
 
 ![[Pasted image 20241228122742.png]]
 
 ### 7.  Kako je upoštevan konvektivni toplotni tok na robu obravnavanega območja pri MKV?
 
-V primeru, ko je rob območja izpostavljen ***konvektivnemu toplotnemu toku*** $q_\Gamma(t) = -h_f[T_f(t) - T(t)]$ , integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr{]} - q_\Gamma(t_{k+\beta}) (A)_{m^-}$$
+V primeru, ko je rob območja izpostavljen ***konvektivnemu toplotnemu toku*** $q_\Gamma(t) = -h_f[T_f(t) - T(t)]$ , integral na levi strani enačaja v enačbi za posamezni KV, ki se nahaja na robu obravnavanega območja in je robna vrednost poznana na meji $m^-$ , zapišemo : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx \biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^+}(T_{p+1}(t_{k+\beta}) - T_p(t_{k+\beta}))\biggr] - q_\Gamma(t_{k+\beta}) (A)_{m^-}$$
 Kjer je $q_\Gamma(t_{k+\beta})$ : $$q_\Gamma(t_{k+\beta}) = \frac{T_p(t_{k+\beta}) - T_f(t_{k+\beta})}{((\frac{k}{\Delta X_v^-})^{-1} + (h_f)^{-1})_{m^-}}$$
 ![[Pasted image 20241228123622.png]]
 
-Če je robna vrednost toplotnega toka poznana na meji $m^+$ , potem integral zapišemo v sledeči obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma(t_{k+\beta}) (A)_{m^+} \space - \space \biggr{[}\biggr{(}\frac{kA}{\Delta X_v}\biggr{)}_{m^-}(T_p(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr{]} $$
-Kjer je $q_\Gamma(t_{k+\beta})$ : $$q_\Gamma(t_{k+\beta}) = \frac{T_p(t_{k+\beta}) - T_f(t_{k+\beta})}{((\frac{k}{\Delta X_v^+})^{-1} + (h_f)^{-1})_{m^+}}$$
+Če je robna vrednost toplotnega toka poznana na meji $m^+$ , potem integral zapišemo v sledeči obliki : $$\int_{\Gamma_v}k\frac{\partial T}{\partial x}\space n_x\space d\Gamma \approx q_\Gamma(t_{k+\beta}) (A)_{m^+} \space - \space \biggr[\biggr(\frac{kA}{\Delta X_v}\biggr)_{m^-}(T_p(t_{k+\beta}) - T_{p-1}(t_{k+\beta}))\biggr] $$
+Kjer je $q_\Gamma(t_{k+\beta})$ (pozitiven v smeri $-x$, tj. v območje) : $$q_\Gamma(t_{k+\beta}) = \frac{T_f(t_{k+\beta}) - T_p(t_{k+\beta})}{((\frac{k}{\Delta X_v^+})^{-1} + (h_f)^{-1})_{m^+}}$$
+(Na prosojnici je v števcu $T_p - T_f$, kar da napačen predznak: pri $T_p > T_f$ mora toplota iz območja odtekati.)
 
 Pri upoštevanju konvekcije na robu obravnavanega območja moramo upoštevati da temperatura na robu $T_r$ ni neznanka problema pri obravnavanju z MKV.
 
@@ -989,12 +1007,12 @@ Pri upoštevanju konvekcije na robu obravnavanega območja moramo upoštevati da
 
 V obeh primerih metoda temelji na ***integralski formulaciji***, kar pomeni, da so zajete vse točke obravnavanega območja. Na robu obravnavanega območja pri MKE ***eksaktno*** izpolnjujemo tako primarno kot tudi sekundarno spremenljivko. Pri MKV pa eksaktno izpolnjujemo le ***sekundarno spremenljivko***, primarno pa aproksimiramo. To je zato, ker je točka, v kateri določamo temperaturo KV nekje v notranjosti KV in ne na robu. 
 
-Na prehodu med podobmočji pri MKE primarno spremenljivko popisujemo z vozlišno vrednostjo KE, sekundarno pa z razliko veličine v vozlišču. Pri MKV, pa je pogoj prehoda vedno izpolnjen, kadar nimamo ponorov ali izvorov toplote $q_V$ in kadar nimamo sprememb keficienta toplotne prevodnost $k$. Če pride do spremembe toplotne prevodnosti med podobmočji, moramo izračunati ***nadomestno toplotno prevodnost*** - $k_m$ na meji med KV.
+Na prehodu med podobmočji pri MKE zveznost primarne spremenljivke zagotovimo s skupnim vozliščem KE, sekundarno pa z vsoto vozliščnih tokov ($+Q_1^{e+1} - Q_2^{e} = 0$ oz. točkovni izvor). Pri MKV je pogoj prehoda samodejno izpolnjen, ker je tok skozi skupno mejo v enačbah obeh KV isti člen. Če se toplotna prevodnost med podobmočji spremeni, izračunamo ***nadomestno toplotno prevodnost*** $k_m$ na meji med KV.
 ### 9. Primerjajte MKV z MKR.
 
 V primeru MKV je osnova metode ***integralska formulacija***, ki zajema vse točke opaznovanega območja.  Pri MKR pa DE izpolnjujemo v ***diskretnih točkah*** s pomočjo aproksimacije s centralno diferenčno shemo. Na robu območja pri MKR primarno spremenljivko ***eksaktno popišemo***, sekundarno pa ***aproksimiramo***. Pri MKV je ravno obratno. 
 
-Na prehodu med podobmočji pri MKR primarno veličino na robu enega podobmočja enačimo s primarno veličino na robu drugega podobmočja, sekundarno veličino pa popišemo z aproksimacijo s pomočjo dodatnih točk. Pri MKV pa je pogoj prehoda vedno izpolnjen, kadar nimamo $q_v$ in spreminjajočega se $k$. Če pride do spremembe toplotne prevodnosti med podobmočji, moramo izračunati ***nadomestno toplotno prevodnost*** - $k_m$ na meji med KV.
+Na prehodu med podobmočji pri MKR primarno veličino na robu enega podobmočja enačimo s primarno veličino na robu drugega podobmočja, sekundarno veličino pa popišemo z aproksimacijo s pomočjo dodatnih točk. Pri MKV je pogoj prehoda samodejno izpolnjen, ker je tok skozi skupno mejo v enačbah obeh KV isti člen. Če se toplotna prevodnost med podobmočji spremeni, izračunamo ***nadomestno toplotno prevodnost*** $k_m$ na meji med KV.
 
 ## ***PREDAVANJE 11 : STATIKA ENOOSNIH UPOGIBNO OBREMENJENIH ELEMENTOV***
 
@@ -1022,6 +1040,11 @@ $$\Delta T_x(x) = \vartheta(x,0) - \vartheta_0\text{ ; }\Delta T_z(x,z) = \Delta
 Kjer smo vpeljali enačbo : $$\Delta\vartheta_{zh}(x) = \frac{(\vartheta^+(x) - \vartheta^-(x))}{h(x)}$$
 Kar predstavlja spremembo temperature po višini.
 
+Vpliv na deformacijsko-napetostno stanje: $$\varepsilon_{xx} = \varepsilon_{xx}^\sigma + \alpha\Delta T(x,z),\qquad \sigma_{xx} = E\,\varepsilon_{xx}^\sigma = E\big(\varepsilon_{xx} - \alpha\Delta T\big)$$
+- $\Delta T_x(x)$ (enakomerni del) povzroči enakomerno osno raztezanje vseh vlaken (osni problem).
+- $\Delta T_z(x,z) = \Delta\vartheta_{zh}z$ (linearni del) povzroči upogib z ukrivljenostjo $\alpha\Delta\vartheta_{zh}$, brez osnega raztezka težiščne osi.
+- Napetosti $\sigma_{xx}$ nastanejo le, če je temperaturna deformacija ovirana (podpore) ali če se $\Delta T$ po višini prereza ne spreminja linearno.
+
 ![[Pasted image 20241228184953.png]]
 ### 2. Izpeljava diferencialne enačbe za primer enoosnih upogibno obremenjenih konstrukcijskih elementov.
 
@@ -1042,13 +1065,13 @@ Diferencialno enačbo problema izpeljemo z obravnavo diferencialno majhnega elem
 ***KONSTITUCIJSKO OBNAŠANJE - HOOKE-OV ZAKON*** : $$\sigma_{xx} = E\varepsilon_{xx}^{\sigma}\text{  ,  }\sigma_{xx} = \frac{M_y}{I_y} z\rightarrow M_y = \frac{EI_y\varepsilon_{xx}^\sigma}{z}$$
 Iz zgornjih enačb lahko izpeljemo vodilno enačbo problema : 
 
-Kot prvo lahko združimo formulo za moment $M_y$ in deformacijo $\varepsilon_{xx}^\sigma$ - enako kot pri osno obremenjenih nosilcih moramo upoštevati še temperaturno obremenitev :
-$$M_y = \frac{EI_y\varepsilon_{xx}^\sigma}{z} \land \varepsilon_{xx}^\sigma = -z\biggr{(}\frac{d^2w}{dx^2} + \alpha \Delta\vartheta_{zh}\biggr{)}\rightarrow M_y = - EI_y\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}$$
-Iz enačbe za statično ravnotežje lahko zapišemo : $$\frac{dT_z}{dx} = \frac{d}{dx}\biggr{(}\frac{dM_y}{dx}\biggr{)} = -p_z(x)\rightarrow\frac{d^2M_y}{dx^2} = -p_z(x)$$
-V enačbo lahko vstavimo še formulo za upogibni moment in dobimo vodilno enačbo problema : $$\frac{d^2}{dx^2}\biggr{[}EI_y\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]} = p_z(x)\text{ , }x\in[0,L]$$
+Kot prvo lahko združimo formulo za moment $M_y$ in deformacijo $\varepsilon_{xx}^\sigma$ - enako kot pri osno obremenjenih nosilcih moramo upoštevati še temperaturno obremenitev. Celotna deformacija je vsota napetostnega in temperaturnega dela : $$\varepsilon_{xx} = -z\frac{d^2w}{dx^2} = \varepsilon_{xx}^\sigma + \alpha\Delta\vartheta_{zh}z$$
+$$M_y = \frac{EI_y\varepsilon_{xx}^\sigma}{z} \land \varepsilon_{xx}^\sigma = -z\biggr(\frac{d^2w}{dx^2} + \alpha \Delta\vartheta_{zh}\biggr)\rightarrow M_y = - EI_y\biggr(\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr)$$
+Iz enačbe za statično ravnotežje lahko zapišemo : $$\frac{dT_z}{dx} = \frac{d}{dx}\biggr(\frac{dM_y}{dx}\biggr) = -p_z(x)\rightarrow\frac{d^2M_y}{dx^2} = -p_z(x)$$
+V enačbo lahko vstavimo še formulo za upogibni moment in dobimo vodilno enačbo problema : $$\frac{d^2}{dx^2}\biggr[EI_y\biggr(\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr)\biggr] = p_z(x)\text{ , }x\in[0,L]$$
 z upogibkom $w(x)$ kot osnovno spremenljivko problema. 
 
-Bolj splošno - za vse primere upogibno obremenjenih elementov lahko enačbo zapišemo : $$\frac{d^2}{dx^2}\biggr{[}EI\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{h}\biggr{)}\biggr{]} = p(x)\text{ , }x\in[0,L]$$
+Bolj splošno - za vse primere upogibno obremenjenih elementov lahko enačbo zapišemo : $$\frac{d^2}{dx^2}\biggr[EI\biggr(\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_{h}\biggr)\biggr] = p(x)\text{ , }x\in[0,L]$$
 Enačba je navadna diferencialna enačba četrtega reda in v celoti določa spreminjanje funkcije prečnega pomika, t.j. upogibka $w(x)$ ter naklon $\varphi(x)$ upogibnice. Poleg tega določa tudi spreminjanje notranjih sil - prečne sile $T(x)$ in upogibnega momenta $M(x)$ vzdolž enoosnega elementa.
 
 Fizikalne spremenljivke problema so:
@@ -1063,9 +1086,9 @@ Veličine nastopanjo v konjugiranih parih :
 $$w(x)\leftrightarrow T(x) \text{ in }\varphi (x) \leftrightarrow M(x)$$
 
 V odvisnosti od primarne spremenljivke $w(x)$ izrazimo preostale veličine : 
-$$\varphi = \frac{dw}{dx} ; \text{ za }\biggr{|}\frac{dw}{dx}\biggr{|}\approx0 \rightarrow\varphi\approx \tan\varphi = \frac{dw}{dx}$$
-$$M = -EI\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_h\biggr{)}$$
-$$T = -\frac{d}{dx}\biggr{[}EI\biggr{(}\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_h\biggr{)}\biggr{]}$$
+$$\varphi = \frac{dw}{dx} ; \text{ za }\biggr|\frac{dw}{dx}\biggr|\approx0 \rightarrow\varphi\approx \tan\varphi = \frac{dw}{dx}$$
+$$M = -EI\biggr(\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_h\biggr)$$
+$$T = -\frac{d}{dx}\biggr[EI\biggr(\frac{d^2w}{dx^2} + \alpha\Delta\vartheta_h\biggr)\biggr]$$
 
 Rešitev problema podaja vodilna enačba, ki pa vključuje le vpliv zvezno porazdeljene prečne obremenitve ter temperaturne spremembe vzdolž elementa.
 
@@ -1080,28 +1103,28 @@ Fizikalna konsistentnost problema se v primeru statične analize izkazuje :
 
 Iz zapisanih pogojev sledi, da sta sekundarni spremenljivki $M(x)$ in $T(x)$ nezvezni na meji med dvema intervaloma le v primeru, ko je meja obremenjena z ustrezno koncentrirano(točkovno) obtežbo. Skokovita sprememba sekundarne spremenljivke $M(x)$ je po velikosti enaka velikosti momenta $M_p$, sprememba sekundarne spremenljivke $T(x)$ pa velikosti sile $F_p$ - vidimo na dveh enačbah zgoraj.
 
-Iz odvisnosti med sekundarno spremenljivko $M(x)$ in primarno spremenljivko $w(x)$ zapišemo : $$\biggr{(}EI\frac{d^2w}{dx^2}\biggr{)}_{k+1}\biggr{|}_{x=x_p} - \biggr{(}EI\frac{d^2w}{dx^2}\biggr{)}_{k}\biggr{|}_{x=x_p} = M_p - (EI\alpha\Delta\vartheta_h)_{k+1}|_{x=x_p} + (EI\alpha\Delta\vartheta_h)_{k}|_{x=x_p}$$
-Iz odvisnosti med sekundarno spremenljivko $T(x)$ in primarno spremenljivko $w(x)$ zapišemo : $$\begin{multline}\biggr{[}\frac{d}{dx}\biggr{(}EI\frac{d^2w}{dx^2}\biggr{)}\biggr{]}_{k+1}\biggr{|}_{x=x_p} - \biggr{[}\frac{d}{dx}\biggr{(}EI\frac{d^2w}{dx^2}\biggr{)}\biggr{]}_{k}\biggr{|}_{x=x_p} =\\= F_p - \biggr{[}\frac{d(EI\alpha\Delta\vartheta_h)}{dx}\biggr{]}_{k+1}\biggr{|}_{x=x_p} +\biggr{[}\frac{d(EI\alpha\Delta\vartheta_h)}{dx}\biggr{]}_{k}\biggr{|}_{x=x_p}\end{multline} $$
+Iz odvisnosti med sekundarno spremenljivko $M(x)$ in primarno spremenljivko $w(x)$ zapišemo : $$\biggr(EI\frac{d^2w}{dx^2}\biggr)_{k+1}\biggr|_{x=x_p} - \biggr(EI\frac{d^2w}{dx^2}\biggr)_{k}\biggr|_{x=x_p} = M_p - (EI\alpha\Delta\vartheta_h)_{k+1}|_{x=x_p} + (EI\alpha\Delta\vartheta_h)_{k}|_{x=x_p}$$
+Iz odvisnosti med sekundarno spremenljivko $T(x)$ in primarno spremenljivko $w(x)$ zapišemo : $$\begin{gathered}\biggr[\frac{d}{dx}\biggr(EI\frac{d^2w}{dx^2}\biggr)\biggr]_{k+1}\biggr|_{x=x_p} - \biggr[\frac{d}{dx}\biggr(EI\frac{d^2w}{dx^2}\biggr)\biggr]_{k}\biggr|_{x=x_p} =\\= F_p - \biggr[\frac{d(EI\alpha\Delta\vartheta_h)}{dx}\biggr]_{k+1}\biggr|_{x=x_p} +\biggr[\frac{d(EI\alpha\Delta\vartheta_h)}{dx}\biggr]_{k}\biggr|_{x=x_p}\end{gathered} $$
 Iz enačb opazimo, da morebitna zveznost sekundarnih spremenljivk $M(x)$ in $T(x)$ na meji med dvema podintervaloma še ne zagotavlja tudi zveznosti višjih odvodov (od drugega naprej) primarne spremenljivke $w(x)$.
 
 ---
 Ni del vprašanja, ampak verjetno še vseeno dobro znati.
 
 ***Robni pogoji*** so definirani z znanimi velikostmi primarnih ali sekundarnih spremenljivk v obeh krajiščih : 
-$x = x_J = 0$ : $$w_z(0) = w_J \space\space\space\text{ ali }\space\space\space T_z(0) = -\frac{d}{dx}\biggr{[}EI_y\biggr{(}\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}_{x=0} = -F_z^J$$
-$$\varphi_y(0) = \varphi _J \space\space\space\text{ ali }\space\space\space M_y(0) = -\biggr{[}EI_y\biggr{(}\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}_{x=0} = -M_y^J$$
-$x=x_K=L$ : $$w_z(L) = w_K \space\space\space\text{ ali }\space\space\space T_z(L) = -\frac{d}{dx}\biggr{[}EI_y\biggr{(}\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}_{x=L} = +F_z^K$$
-$$\varphi_y(L) = \varphi _K \space\space\space\text{ ali }\space\space\space M_y(L) = -\biggr{[}EI_y\biggr{(}\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr{)}\biggr{]}_{x=L} = +M_y^K$$
+$x = x_J = 0$ : $$w_z(0) = w_J \space\space\space\text{ ali }\space\space\space T_z(0) = -\frac{d}{dx}\biggr[EI_y\biggr(\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr)\biggr]_{x=0} = -F_z^J$$
+$$\varphi_y(0) = \varphi _J \space\space\space\text{ ali }\space\space\space M_y(0) = -\biggr[EI_y\biggr(\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr)\biggr]_{x=0} = -M_y^J$$
+$x=x_K=L$ : $$w_z(L) = w_K \space\space\space\text{ ali }\space\space\space T_z(L) = -\frac{d}{dx}\biggr[EI_y\biggr(\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr)\biggr]_{x=L} = +F_z^K$$
+$$\varphi_y(L) = \varphi _K \space\space\space\text{ ali }\space\space\space M_y(L) = -\biggr[EI_y\biggr(\frac{d^2w_z}{dx^2} + \alpha\Delta\vartheta_{zh}\biggr)\biggr]_{x=L} = +M_y^K$$
 
 ![[Pasted image 20241228211540.png]]
 
 ### 4. Izpeljite centralno diferenčno enačbo za tretji odvod funkcije.
 
-Diferencialni operator tretjega reda $D^3$ zapišemo v diferenčni obliki s centralnimi razlikami na sledeči način : $$\begin{multline}D^3w_0 = \frac{d^3w_0}{dx^3} = \frac{d}{dx}\biggr{(}\frac{d^2w_0}{dx^2}\biggr{)} \approx \frac{\biggr{(}\frac{d^2w_0}{dx^2}\biggr{)}_{+1} - \biggr{(}\frac{d^2w_0}{dx^2}\biggr{)}_{-1}}{2h} = \frac{\biggr{(}\frac{w_{+2} - 2w_{+1} + w_0}{h^2}\biggr{)} - \biggr{(}\frac{w_{0} - 2w_{-1} + w_{-2}}{h^2}\biggr{)}}{2h} = \\ =\frac{w_{+2} - 2w_{+1} + 2w_{-1} -w_{-2} }{2h^3} \end{multline}$$
+Diferencialni operator tretjega reda $D^3$ zapišemo v diferenčni obliki s centralnimi razlikami na sledeči način : $$\begin{gathered}D^3w_0 = \frac{d^3w_0}{dx^3} = \frac{d}{dx}\biggr(\frac{d^2w_0}{dx^2}\biggr) \approx \frac{\biggr(\frac{d^2w_0}{dx^2}\biggr)_{+1} - \biggr(\frac{d^2w_0}{dx^2}\biggr)_{-1}}{2h} = \frac{\biggr(\frac{w_{+2} - 2w_{+1} + w_0}{h^2}\biggr) - \biggr(\frac{w_{0} - 2w_{-1} + w_{-2}}{h^2}\biggr)}{2h} = \\ =\frac{w_{+2} - 2w_{+1} + 2w_{-1} -w_{-2} }{2h^3} \end{gathered}$$
 ![[Pasted image 20241228212532.png]]
 ### 5. Izpeljite centralno diferenčno enačbo za četrti odvod funkcije.
 
-Diferencialni operator tretjega reda $D^4$ zapišemo v diferenčni obliki s centralnimi razlikami na sledeči način : $$\begin{multline}D^4w_0 = \frac{d^4w_0}{dx^4} = \frac{d^2}{dx^2}\biggr{(}\frac{d^2w_0}{dx^2}\biggr{)} \approx \frac{\biggr{(}\frac{d^2w_0}{dx^2}\biggr{)}_{+1} - 2\biggr{(}\frac{d^2w_0}{dx^2}\biggr{)}_{0} + \biggr{(}\frac{d^2w_0}{dx^2}\biggr{)}_{-1}}{h^2} = \\ = \frac{\biggr{(}\frac{w_{+2} - 2w_{+1} + w_0}{h^2}\biggr{)} - 2\biggr{(}\frac{w_{+1} - 2w_{+0} + w_{-1}}{h^2}\biggr{)} + \biggr{(}\frac{w_{0} - 2w_{-1} + w_{-2}}{h^2}\biggr{)}}{h^2} = \frac{w_{+2} - 4w_{+1} + 6w_0 - 4w_{-1} + w_{-2}}{h^4} \end{multline}$$
+Diferencialni operator četrtega reda $D^4$ zapišemo v diferenčni obliki s centralnimi razlikami na sledeči način : $$\begin{gathered}D^4w_0 = \frac{d^4w_0}{dx^4} = \frac{d^2}{dx^2}\biggr(\frac{d^2w_0}{dx^2}\biggr) \approx \frac{\biggr(\frac{d^2w_0}{dx^2}\biggr)_{+1} - 2\biggr(\frac{d^2w_0}{dx^2}\biggr)_{0} + \biggr(\frac{d^2w_0}{dx^2}\biggr)_{-1}}{h^2} = \\ = \frac{\biggr(\frac{w_{+2} - 2w_{+1} + w_0}{h^2}\biggr) - 2\biggr(\frac{w_{+1} - 2w_{0} + w_{-1}}{h^2}\biggr) + \biggr(\frac{w_{0} - 2w_{-1} + w_{-2}}{h^2}\biggr)}{h^2} = \frac{w_{+2} - 4w_{+1} + 6w_0 - 4w_{-1} + w_{-2}}{h^4} \end{gathered}$$
 
 ![[Pasted image 20241228212532.png]]
 
@@ -1122,7 +1145,7 @@ Polinomsko aproksimativno rešitev določa $(N+1)$ neznanih keoficientov $c_i$, 
 V primeru, ko so parametri v funkcijskem predpisu $w(x)$ opredeljeni z več funkcijskimi predpisi (več podobmočji), pa je potrebno upoštevati da aproksimativno rešitev iščemo za vsak podinterval $x\in[a_k, b_k]$ posebej : $$W_{N_k}^{(k)}(x) = \sum_{i=0}^{N_k}c_i^{(k)} x^{i}\text{ ; }x\in[a_k, b_k]$$
 pri čemer je $N_k$ lahko za posamezno območje različen.
 
-Aproksimativno rešitev določa $\biggr{(}\sum_{k=1}^{n}N_k +1\biggr{)}$ neznanih koeficientov $c_i^{(k)}$ , katerih izračun zahteva obstoj ustreznega sistema $\biggr{(}\sum_{k=1}^{n}N_k +1\biggr{)}$ linearno neodvisnih enačb. 
+Aproksimativno rešitev določa $\sum_{k=1}^{n}(N_k +1)$ neznanih koeficientov $c_i^{(k)}$ , katerih izračun zahteva obstoj ustreznega sistema $\sum_{k=1}^{n}(N_k +1)$ linearno neodvisnih enačb. 
 
 Sistem linearno neodvisnih enačb dobimo tako, da upoštevamo ***robne pogoje, pogoje konsistentnosti prehoda in v čim večji meri vodilno diferencialno enačbo***.
 
@@ -1141,21 +1164,21 @@ Enačbe na osnovi ***robnih pogojev***:
 Iz naslova izpolnitve robnih pogojev je možno tvoriti največ toliko enačb, kolikor je na voljo robnih pogojev. V obravnavanem primeru imamo 4 robne pogoje : 
 
 1 . ***Robni pogoj*** - poves v $x=0$ : $$w(0) = 0\rightarrow w_0 = 0$$
-2 . ***Robni pogo***j - naklon v točki $x=0$ : $$\frac{dw(0)}{dx} = 0 \rightarrow D^1w_0 = \frac{w_1 - w_A}{2h} = 0$$ Z dodatno točko $A$ se je povečalo tudi število neznanih vrednosti $w_k$, ter posledično potrebno število enačb. V nadaljevanju izračunane vrednosti v dodatnih točkah nimajo fizikalnega pomena.
+2 . ***Robni pogoj*** - naklon v točki $x=0$ : $$\frac{dw(0)}{dx} = 0 \rightarrow D^1w_0 = \frac{w_1 - w_A}{2h} = 0$$ Z dodatno točko $A$ se je povečalo tudi število neznanih vrednosti $w_k$, ter posledično potrebno število enačb. V nadaljevanju izračunane vrednosti v dodatnih točkah nimajo fizikalnega pomena.
 ![[Pasted image 20241229112200.png]]
 
-3 . ***Robni pogoj*** - Notranji moment v $x=L$ : $$-EI\frac{d^2w(L)}{dx^2} = 0\rightarrow -EID^2w_4 = -EI\biggr{(}\frac{w_3 - 2w_4 + w_B}{h^2}\biggr{)} = 0$$
+3 . ***Robni pogoj*** - Notranji moment v $x=L$ : $$-EI\frac{d^2w(L)}{dx^2} = 0\rightarrow -EID^2w_4 = -EI\biggr(\frac{w_3 - 2w_4 + w_B}{h^2}\biggr) = 0$$
 ![[Pasted image 20241229112203.png]]
 
-4 . ***Robni pogoj*** - Notranja prečna sila v $x=L$ : $$-\frac{d}{dx}\biggr{(}EI\frac{d^2w(L)}{dx^2}\biggr{)} = F_0 \rightarrow EID^3w_4 = -EI\biggr{(}\frac{w_C-2w_b + 2w_3 - w_2}{2h^3}\biggr{)} = F_0$$
+4 . ***Robni pogoj*** - Notranja prečna sila v $x=L$ : $$-\frac{d}{dx}\biggr(EI\frac{d^2w(L)}{dx^2}\biggr) = F_0 \rightarrow -EID^3w_4 = -EI\biggr(\frac{w_C-2w_B + 2w_3 - w_2}{2h^3}\biggr) = F_0$$
 Zaradi diferenčnega operatorja $D^3$ potrebujemo dodatno točko $C$.
 ![[Pasted image 20241229112501.png]]
 
 
 Enačbe na osnovi izpolnotve ***območne enačbe problem***a v notranjih točkah območja:
 
-Za vsako točko $x_k\text{ ; }k = 2,3,...,(N-2)$ v notranjosti opazovanega intervala zapišemo območno diferencialno enačbo v ustrezni diferenčni diskretizirani obliki : $$EI\frac{d^4w_k}{dx^4} = (p_z)_k\rightarrow EID^4w_k = (p_z)_k = EI\biggr{(}\frac{w_{k+2} - 4w_{k+1} + 6w_k - 4w_{k-1} + w_{k-2}}{h^4}\biggr{)} = (p_z)_k$$
-Manjkajoče štiri enačbe dobimo v obravnavanem primeru na osnovi izpolnitve območne enačbe problema v točkah 2 in 3, dodatne točke $A$, $B$ in $C$ pa omogočajo izpolnitev območne enačbe problema tudi v točkah 1 in 4.
+Za točke $x_k$ zapišemo območno diferencialno enačbo v diferenčni obliki ($EI$ konstanten) : $$EI\frac{d^4w_k}{dx^4} = (p_z)_k\rightarrow EID^4w_k = EI\biggr(\frac{w_{k+2} - 4w_{k+1} + 6w_k - 4w_{k-1} + w_{k-2}}{h^4}\biggr) = (p_z)_k$$
+Neznank je 8 ($w_0,\dots,w_4$ ter $w_A, w_B, w_C$). Robni pogoji dajo 4 enačbe. Manjkajoče štiri enačbe dobimo z izpolnitvijo območne enačbe v točkah 1, 2, 3 in 4. V točkah 1, 3 in 4 to omogočajo dodatne točke $A$, $B$ in $C$.
 ![[Pasted image 20241229112501.png]]
 
 ## ***PREDAVANJE 12 : OBRAVNAVA UPOGIBNO OBREMENJENEGA 1D LINIJSKEGA ELEMENTA Z MKE***
