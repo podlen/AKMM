@@ -778,51 +778,39 @@ Metode delimo na direktne in iterativne:
 
 ## 54. Izhodiščna enačba za reševanje statičnega 3D mehanskega problema z MKE.
 
-Fizikalno izhodišče so diferencialne enačbe ravnotežja, ki pa jih za reševanje z MKE preoblikujemo v šibko obliko. Ta uravnoteži notranje napetosti z zunanjimi površinskimi in volumskimi obremenitvami:
+Izhodišče so diferencialne enačbe ravnotežja ($k = x, y, z$):
 
-$$ \int_\Omega \{\partial v\}^T \{\sigma\} d\Omega = \int_\Gamma \{\partial v\}^T \{p\} d\Gamma + \int_\Omega \{\partial v\}^T \rho \{a\} d\Omega $$
+$$ \frac{\partial \sigma_{kx}}{\partial x} + \frac{\partial \sigma_{ky}}{\partial y} + \frac{\partial \sigma_{kz}}{\partial z} + \rho a_k = 0 $$
+
+Pomnožimo jih s poljubnimi funkcijami $v_k$, integriramo po območju KE in z Greenovim teoremom preoblikujemo v šibko obliko. Ta uravnoteži notranje napetosti z zunanjimi površinskimi in volumskimi obremenitvami:
+
+$$ \int_\Omega \{\sigma\}^T \{\partial v\}\, d\Omega = \int_\Gamma \{p\}^T \{v\}\, d\Gamma + \int_\Omega \rho \{a\}^T \{v\}\, d\Omega $$
 
 ## 55. Kako je izbrana poljubna funkcija $v$ v primeru 3D KE za reševanje mehanskega problema?
 
-V skladu z Galerkinovo metodo so $v$ enake kot oblikovne funkcije $[N]$. V primeru 3D mehanskega problema so pomnožene še s poljubno vozliščno vrednostjo $\Upsilon$.
+V skladu z Galerkinovo metodo so $v$ enake oblikovnim funkcijam $[N]$, s katerimi interpoliramo pomike. Namesto vozliščnih pomikov jih pomnožimo s poljubnimi vozliščnimi vrednostmi $\{\Upsilon\}$:
 
 $$ \{v\} = [N]\{\Upsilon\} \quad \text{in} \quad \{\partial v\} = [L][N]\{\Upsilon\} $$
 
-Vektor poljubnih vrednosti $\Upsilon$ rabimo zato, da lahko poljubne funkcije $\{v\}$ zapišemo kot produkt matrike in vektorja:
-
-$$\{v\} = [N]\{ \Upsilon \}$$
-
-Zakaj bi to želeli? Ko imamo funkcije $v$ popisane na tak način, lahko zapišemo tudi vektor odvodov oblikovnih funkcij:
-
-$$\{\partial v\} = [L][N]\{\Upsilon\}$$
-
 Tukaj je $[L]$ matrika operatorjev parcialnih odvodov.
 
-To lahko vstavimo v šibko obliko integralske formulacije:
+Ko to vstavimo v šibko obliko, $\{\Upsilon\}$ izpostavimo. Enačba mora veljati za poljubne $\{\Upsilon\}$, zato jih okrajšamo. Ko izpostavimo še pomike $\{U\}$, dobimo enačbo KE:
 
-$$\int_{\Omega}\biggr([L][N]\{U\}\biggr)^T[E]\{\partial v\}d\Omega =\int_{\Gamma}\{p\}\{v\}d\Gamma + \int_{\Omega}\rho\{a\}\{v\}d\Omega$$
-
-$$\int_{\Omega}\biggr([L][N]\{U\}\biggr)^T[E] \biggr([L][N]\{\Upsilon\}\biggr)d\Omega =\int_{\Gamma}\{p\}[N]\{\Upsilon\} d\Gamma + \int_{\Omega}\rho\{a\}[N]\{\Upsilon\}d\Omega$$
-
-Poljubne vozliščne vrednosti lahko izpostavimo in okrajšamo:
-
-$$\int_{\Omega}\biggr([L][N]\{U\}\biggr)^T[E] \biggr([L][N]\biggr)d\Omega =\int_{\Gamma}\{p\}[N] d\Gamma + \int_{\Omega}\rho\{a\}[N]d\Omega$$
-
-Na levi strani lahko izpostavimo pomike $\{U\}$ in dobimo znano enačbo za togostno matriko:
-
-$$K_e = [B]^T[E][B] = \biggr([L][N]\biggr)^T[E]\biggr([L][N]\biggr)$$
+$$ \underbrace{\int_{\Omega_e} \big([L][N]\big)^T [E] \big([L][N]\big)\, d\Omega}_{[K]_e} \{U\}_e = \int_{\Gamma_e} [N]^T \{p\}\, d\Gamma + \int_{\Omega_e} \rho [N]^T \{a\}\, d\Omega $$
 
 ## 56. Katere so primarne neznanke pri reševanju 3D mehanskih problemov?
 
-Primarne neznanke so pomiki v vozliščih (ali pa reakcijske sile). V 3D prostoru ima vsako vozlišče 3 translacijske prostostne stopnje:
+Primarne neznanke so pomiki v vozliščih. V 3D prostoru ima vsako vozlišče 3 translacijske prostostne stopnje, KE pa $3N_v$ prostostnih stopenj:
 
-$$ \{U\} = \{U_x, U_y, U_z\}^T $$
+$$ \{U\}_i = \{U_{ix}, U_{iy}, U_{iz}\}^T $$
+
+V vozliščih s predpisanim pomikom je namesto pomika neznana sila (reakcija).
 
 ## 57. Kako se izračunajo komponente napetostnega tenzorja?
 
-Izračunajo se v **integracijskih točkah** preko reološkega (Hookeovega) zakona, ki deformacije pomnoži z materialno matriko $[E]$. Deformacije pa dobimo iz odvodov vozliščnih pomikov:
+Izračunajo se na nivoju posameznega KE, v **integracijskih točkah**. Deformacije dobimo z odvajanjem interpoliranih vozliščnih pomikov, napetosti pa iz reološkega (Hookeovega) zakona z materialno matriko $[E]$:
 
-$$ \{\sigma\}_e = [E]\{\varepsilon\}_e = [E] ([L][N]) \{U\}_e $$
+$$ \{\varepsilon\}_e = [L][N]\{U\}_e, \qquad \{\sigma\}_e = [E]\{\varepsilon\}_e $$
 
 ## 58. Kaj predstavlja vrednost in predznak komponente vektorja pomika?
 
@@ -830,35 +818,41 @@ Vrednost pove, za koliko dolžinskih enot se je vozlišče premaknilo glede na n
 
 ## 59. Kaj predstavlja vrednost in predznak normalne komponente deformacijskega tenzorja?
 
-Predstavlja linearno deformacijo (razteg) materialnega delca vzdolž osi. Pozitiven predznak (+) pomeni **razteg**, negativen (-) pa **skrček**.
+Vrednost je relativna sprememba dolžine materialnega delca v smeri osi (brezdimenzijska). Pozitiven predznak (+) pomeni **razteg**, negativen (-) pa **skrček**.
 
 $$ \varepsilon_{xx} = \frac{\partial u_x}{\partial x} $$
 
 ## 60. Kaj predstavlja vrednost in predznak normalne komponente napetostnega tenzorja?
 
-Predstavlja velikost normalne obremenitve na prerez. Pozitiven predznak (+) pomeni natezno napetost, negativen (-) pa tlačno napetost.
+Vrednost je normalna sila na enoto ploskve, pravokotne na os. Pozitiven predznak (+) pomeni natezno napetost, negativen (-) pa tlačno napetost.
 
 ## 61. Kako je definirana strižna komponenta deformacijskega tenzorja?
 
-Strižne deformacije predstavljajo spremembo pravega kota v materialnem delcu. Zapisane so s pomočjo parcialnih odvodov pomikov pravokotno na koordinatne osi:
+Strižna deformacija $\gamma_{xy}$ je sprememba pravega kota med smerema $x$ in $y$. Komponenta tenzorja je njena polovica:
 
-$$ \varepsilon_{xy} = \frac{1}{2} \left( \frac{\partial u_x}{\partial y} + \frac{\partial u_y}{\partial x} \right) $$
+$$ \varepsilon_{xy} = \frac{\gamma_{xy}}{2} = \frac{1}{2} \left( \frac{\partial u_x}{\partial y} + \frac{\partial u_y}{\partial x} \right) $$
+
+Analogno velja za $\varepsilon_{xz}$ in $\varepsilon_{yz}$.
 
 ## 62. Kako preverimo, ali je obremenitev mehansko obremenjene komponente v dopustnih vrednostih?
 
-Kompleksno 3D napetostno stanje pretvorimo v eno **primerjalno napetost**, ki jo primerjamo z dopustno mejo materiala. Najpogosteje uporabimo von Misesovo primerjalno napetost, ki je vedno pozitivna:
+Iz glavnih napetosti $\sigma_1 \ge \sigma_2 \ge \sigma_3$ izračunamo eno **primerjalno (ekvivalentno) napetost** in jo primerjamo z dopustno napetostjo materiala ($\sigma_{ekv} \le \sigma_{dop}$). Najpogosteje uporabimo von Misesovo primerjalno napetost, ki je vedno pozitivna:
 
 $$ \sigma_{ekv}^{\text{Mises}} = \sqrt{0.5 \left[ (\sigma_1-\sigma_2)^2 + (\sigma_1-\sigma_3)^2 + (\sigma_2-\sigma_3)^2 \right]} $$
 
+Druga možnost je primerjalna napetost po Tresci:
+
+$$ \sigma_{ekv}^{\text{Tresca}} = \max\left( \frac{|\sigma_1-\sigma_2|}{2}, \frac{|\sigma_1-\sigma_3|}{2}, \frac{|\sigma_2-\sigma_3|}{2} \right) $$
+
 ## 64. Kako so definirane komponente deformacijskega tenzorja v cilindričnem koordinatnem sistemu?
 
-Normalne komponente opisujejo razteg v smereh $r, z, \varphi$:
+Normalne komponente opisujejo razteg v smereh $r, \varphi, z$:
 
-$$ \varepsilon_{rr} = \frac{\partial u_r}{\partial r}, \quad \varepsilon_{zz} = \frac{\partial u_z}{\partial z}, \quad \varepsilon_{\varphi\varphi} = \frac{u_r}{r} + \frac{1}{r}\frac{\partial u_\varphi}{\partial \varphi} $$
+$$ \varepsilon_{rr} = \frac{\partial u_r}{\partial r}, \quad \varepsilon_{\varphi\varphi} = \frac{u_r}{r} + \frac{1}{r}\frac{\partial u_\varphi}{\partial \varphi}, \quad \varepsilon_{zz} = \frac{\partial u_z}{\partial z} $$
 
 Strižne komponente vsebujejo dodatne člene ($1/r$) zaradi ukrivljenosti sistema:
 
-$$ \varepsilon_{r\varphi} = \frac{1}{2} \left( \frac{1}{r} \frac{\partial u_r}{\partial \varphi} + \frac{\partial u_\varphi}{\partial r} - \frac{u_\varphi}{r} \right) $$
+$$ \varepsilon_{r\varphi} = \frac{1}{2} \left( \frac{1}{r} \frac{\partial u_r}{\partial \varphi} + \frac{\partial u_\varphi}{\partial r} - \frac{u_\varphi}{r} \right), \quad \varepsilon_{rz} = \frac{1}{2} \left( \frac{\partial u_r}{\partial z} + \frac{\partial u_z}{\partial r} \right), \quad \varepsilon_{\varphi z} = \frac{1}{2} \left( \frac{\partial u_\varphi}{\partial z} + \frac{1}{r}\frac{\partial u_z}{\partial \varphi} \right) $$
 
 ## 65. Katere mehanske veličine se v primeru uporabe 3D KE izračunavajo v vozliščih in katere v integracijskih točkah posameznega KE?
 
@@ -868,19 +862,15 @@ $$ \varepsilon_{r\varphi} = \frac{1}{2} \left( \frac{1}{r} \frac{\partial u_r}{\
 
 ## 66. Vloga globalnega koordinatnega sistema.
 
-Omogoča rotacijo vseh poljubno zasukanih elementov v skupen referenčni sistem in sestavljanje sistema enačb celotnega problema:
+V globalnem koordinatnem sistemu so definirani geometrija (vozlišča elementov), robni pogoji in obremenitve. Omogoča rotacijo vseh poljubno zasukanih elementov v skupen referenčni sistem in sestavljanje sistema enačb celotnega problema:
 
 $$ [K]\{U\} = \{F\} $$
 
-V njem se definirajo tudi vsi robni pogoji in obremenitve.
-
-V globalnem koordinatnem sistemu je definirana tudi celotna geometrija - vozlišča elementov.
-
 ## 67. Kako je zajet vpliv lastne teže v primeru uporabe 3D KE?
 
-Zajet je kot volumska obremenitev. Teža (gostota $\rho$ $\times$ pospešek $a$) se integrira preko volumna elementa in s pomočjo interpolacijskih funkcij $[N]$ pretvori v ekvivalentne vozliščne sile:
+Zajet je kot volumska obremenitev $\gamma_k = \rho\, a_k$ (pri lastni teži je $a_k = g$ v smeri gravitacije). Integriramo jo po volumnu KE in z interpolacijskimi funkcijami $[N]$ pretvorimo v ekvivalentne vozliščne sile:
 
-$$ \{F_v\}_e = \int_{\Omega_e} \rho \cdot a_k [N]d\Omega $$
+$$ \{F_V\}_e = \int_{\Omega_e} \rho\, a_k [N]^T d\Omega = \int_{\Omega_e} \gamma_k [N]^T d\Omega $$
 
 # Predavanje 9 - 20.4.2026
 
@@ -895,47 +885,43 @@ Da lahko problem obravnavamo kot osnosimetrični problem (privzemimo, da je os s
 
 ## 69. Opišite prednosti uporabe osnosimetričnih KE v primerjavi z uporabo volumskih KE?
 
-Uporabimo lahko bistveno manj končnih elementov in imamo precej manjše število enačb. To omogoča hitrejši izračun ali pa uporabo veliko gostejše mreže za isti računski čas. Prav tako lažje in boljše popišemo geometrijo, saj namesto celotnega 3D volumna modeliramo le 2D presek.
+Uporabimo lahko bistveno manj končnih elementov in imamo precej manjše število enačb (primer s predavanj: 200 000 enačb s 3D KE in 3400 enačb z 2D osnosimetričnimi KE). To omogoča hitrejši izračun ali pa uporabo veliko gostejše mreže za isti računski čas. Prav tako lažje in boljše popišemo geometrijo, saj namesto celotnega 3D volumna modeliramo le 2D presek.
 
 ## 70. Katere komponente deformacijskega tenzorja so različne od nič v primeru obravnave problema z osnosimetričnimi KE?
 
-V primerih osnosimetričnih KE ima deformacijski tenzor 4 komponente, ki so različne od 0.
-To so komponente normalne deformacije:
-$$\varepsilon_{rr} \text{ , } \varepsilon_{\varphi \varphi}\text{ , } \varepsilon_{zz}$$
+Od nič so različne 4 komponente, tri normalne in ena strižna:
 
-In komponenta strižne deformacije:
-$$\gamma_{rz} \text{  (oz. } \varepsilon_{rz})$$
+$$ \varepsilon_{rr} = \frac{\partial u_r}{\partial r}, \quad \varepsilon_{\varphi\varphi} = \frac{u_r}{r}, \quad \varepsilon_{zz} = \frac{\partial u_z}{\partial z}, \quad \gamma_{rz} = \frac{\partial u_r}{\partial z} + \frac{\partial u_z}{\partial r} $$
+
+Komponenti $\gamma_{r\varphi}$ in $\gamma_{\varphi z}$ sta enaki 0.
 
 ## 71. Kako je določena obodna deformacija v primeru obravnave problema z osnosimetričnimi KE?
 
-Obodna deformacija $\varepsilon_{\varphi \varphi}$ je določena kot:
+Obodna deformacija je relativna sprememba dolžine loka $r\,d\varphi$ zaradi radialnega pomika $u_r$:
 
-$$\varepsilon_{\varphi\varphi} = \frac{u_r}{r}$$
+$$\varepsilon_{\varphi\varphi} = \frac{(r + u_r)\,d\varphi - r\,d\varphi}{r\,d\varphi} = \frac{u_r}{r}$$
 
-Moramo paziti: tudi če je problem osnosimetričen in so vsi odvodi $\frac{\partial}{\partial \varphi}=0$, je deformacija v obodni smeri še vedno različna od 0, saj je posledica radialnega pomika $u_r$.
+Moramo paziti: tudi če so vsi odvodi $\frac{\partial}{\partial \varphi}=0$, je $\varepsilon_{\varphi\varphi}$ različna od 0, saj je posledica radialnega pomika $u_r$.
 
 ## 72. Kaj predstavlja aksialna točkovna obremenitev v primeru obravnave problema z osnosimetričnimi KE?
 
-Aksialna točkovna obremenitev v vozlišču 2D osnosimetričnega KE dejansko predstavlja celotno silo na določenem radiju. V realnosti to ustreza linijski obremenitvi v aksialni smeri, ki je porazdeljena po celotnem obodu krožnice s tem radijem.
+Aksialna točkovna obremenitev v vozlišču 2D osnosimetričnega KE predstavlja celotno aksialno silo na radiju vozlišča $r_F$. V realnosti je to linijska obremenitev $f_z$ [N/m], porazdeljena po celotnem obodu krožnice s tem radijem:
+
+$$ F_z = 2\pi r_F f_z $$
 
 ## 73. Kaj predstavlja radialna točkovna obremenitev v primeru obravnave problema z osnosimetričnimi KE?
 
-Radialna točkovna obremenitev v vozlišču predstavlja celotno silo na določenem radiju v radialni smeri (ustreza radialni linijski obremenitvi po celotnem obodu).
+Radialna točkovna obremenitev v vozlišču predstavlja celotno radialno silo na radiju vozlišča $r_F$. V realnosti je to radialna linijska obremenitev $f_r$ [N/m], porazdeljena po celotnem obodu krožnice s tem radijem:
+
+$$ F_r = 2\pi r_F f_r $$
 
 ## 74. Kako obravnavamo volumske obremenitve v primeru obravnave problema z osnosimetričnimi KE?
 
-Volumske obremenitve (npr. lastna teža ali centrifugalna sila) obravnavamo tako, da zanje izračunamo ekvivalentne vozliščne sile za posamezni KE.
-Izračun teh ekvivalentnih vozliščnih sil je vezan na volumen (vrtenino), ki jo dobimo z vrtenjem površine posameznega KE okoli osi, ki predstavlja osno simetrijo ($d\Omega = 2\pi r\,d\Gamma$).
+Volumske obremenitve (npr. lastna teža ali centrifugalna sila) obravnavamo tako, da zanje izračunamo ekvivalentne vozliščne sile za posamezni KE. Izračun je vezan na vrtenino, ki jo dobimo z vrtenjem površine KE okoli osi simetrije, zato nastopa faktor $2\pi r$:
 
 $$\{F_V\}_e = \int_{\Omega_e}\rho_k\,a_k\,[N]^T\,2\pi r\,d\Omega = \int_{\Omega_e}\gamma\,[N]^T\,2\pi r\,d\Omega$$
 
-*(Fizikalno pa velja: volumsko obremenitev, ki deluje samo v eni smeri (npr. gravitacija), lahko obravnavamo le, če deluje v osni (aksialni) smeri, sicer problem ni več osnosimetričen. Druga izjema je centrifugalna sila, ki deluje osnosimetrično v radialni smeri).*
-
-Enako velja za ploskovno porazdeljene obremenitve na ograji obravnavanega območja:
-
-$$\{F_p\}_e = \int_{\Gamma_e}p\,[N]^T\,2\pi r\,d\Gamma$$
-
-Izračun ekvivalentnih vozliščnih sil je vezan na površino, ki jo dobimo z vrtenjem roba $\Gamma_e$ posameznega KE okoli osi, ki predstavlja osno simetrijo.
+Obremenitev mora biti osnosimetrična: lastna teža le v smeri osi simetrije, centrifugalna sila pa v radialni smeri.
 
 ## 75. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot ravninsko napetostni problem?
 
@@ -950,15 +936,13 @@ Da lahko problem obravnavamo kot ravninsko napetostni problem (v ravnini x-y), m
 
 ## 76. Opišite prednosti uporabe ravninskih KE v primerjavi z uporabo volumskih KE?
 
-Uporaba ravninskih KE drastično zmanjša število enačb in rešuje probleme z geometrijo mreže. Glavni prednosti sta:
+1. **Bistveno manj prostostnih stopenj:** mrežimo le ravnino, vozlišče pa ima 2 prostostni stopnji namesto 3. Primer s predavanj: 80 700 enačb s 3D KE in 9600 enačb z 2D KE. Izračun je zato hitrejši, za isti čas pa lahko uporabimo gostejšo mrežo.
 
-1. **Bistveno manj prostostnih stopenj:** 2D štirikotni element za ravninske probleme ima 4 vozlišča in 2 prostostni stopnji na vozlišče (skupaj 8). Enojni sloj volumskega 3D elementa ima 8 vozlišč in 3 prostostne stopnje na vozlišče (skupaj 24). Izračun je z 2D elementi zato precej hitrejši in računalniško manj potraten, kar nam omogoča uporabo veliko gostejše mreže za isto porabo časa.
-
-2. **Rešen problem oblikovnega razmerja (aspect ratio):** Pri obravnavi tankih struktur (npr. pločevine) bi pri uporabi 3D volumskih elementov dobili elemente z zelo slabim razmerjem stranic (npr. stranica v ravnini 100 mm, debelina pa 1 mm). Taki sploščeni elementi vodijo do hudih numeričnih napak. Pri 2D ravninskih elementih te težave ni, saj debelina plošče ni fizična dimenzija mreže, temveč le podatek (parameter $h$), ki ga vstavimo v enačbo matrike togosti.
+2. **Ni problema oblikovnega razmerja (aspect ratio):** tanka struktura (npr. pločevina) bi z 3D KE zahtevala zelo sploščene elemente (npr. stranica 100 mm, debelina 1 mm), ki vodijo do numeričnih napak. Pri 2D KE debelina ni dimenzija mreže, temveč le parameter $h$ v togostni matriki.
 
 ## 77. Kako izračunamo deformacijo v smeri pravokotno na ravnino problema v primeru uporabe ravninsko napetostnega KE in linearno elastičnega materialnega modela?
 
-Izhajamo iz Hookeovega zakona (zveze med napetostjo in deformacijo). V primeru ravninskega napetostnega stanja (RNS) vemo, da je napetost v smeri $z$ enaka nič ($\sigma_{zz} = 0$). S pomočjo Hookeovega zakona lahko zapišemo:
+Pri ravninskem napetostnem stanju (RNS) je $\sigma_{zz} = 0$. To vstavimo v Hookeov zakon:
 
 $$
 \sigma_{zz} = 0 = \frac{E}{(1+\nu)(1-2\nu)}\left[\nu \,\varepsilon_{xx} + \nu \,\varepsilon_{yy} + (1-\nu)\,\varepsilon_{zz}\right]
@@ -981,29 +965,45 @@ Da lahko problem obravnavamo kot ravninsko deformacijski problem (RDS v ravnini 
 
 ## 79. V čem se razlikuje KE za reševanje ravninsko napetostnega problema od ravninsko deformacijskega problema?
 
-Oba elementa (za RNS in RDS) sta **2D kontinuirna (solid) elementa** in imata v vozliščih kot primarni neznanki le pomika ($u_x$ in $u_y$). Ne vsebujeta zasukov. Glavni razliki pri njuni matematični formulaciji in fizični predstavitvi sta:
+Oba sta 2D KE z dvema pomikoma ($u_x$ in $u_y$) v vozlišču in brez zasukov. Razlikujeta se v dveh stvareh.
 
-**1. Konstitutivna matrika (Matrika elastičnosti $[E]$):**
-Zveza med napetostmi in deformacijami je drugačna. Matrika $[E]$ za RNS izhaja iz predpostavke, da je element zelo tanek in zato ne more prenašati napetosti pravokotno na ravnino ($\sigma_{zz}=0$). Matrika $[E]$ za RDS pa izhaja iz predpostavke, da je element zelo dolg in je deformiranje v z-smeri blokirano ($\varepsilon_{zz}=0$).
+**1. Materialna matrika $[E]$** (za $\{\varepsilon\} = \{\varepsilon_{xx}, \varepsilon_{yy}, \gamma_{xy}\}^T$):
 
-**2. Obravnava debeline (dimenzije v z-smeri):**
-Matrika togosti $[K]_e$ in ekvivalentne vozliščne sile $\{F\}_e$ se izračunajo z integriranjem po volumnu elementa ($dV = dx \cdot dy \cdot h$). Tu nastopi ključna razlika:
+RNS predpostavi tanek element, ki ne prenaša napetosti pravokotno na ravnino ($\sigma_{zz}=0$, $\varepsilon_{zz} \neq 0$):
 
-- **Pri RNS (modeliranje tankih plošč):** Kot debelino v program vnesemo **dejansko fizično debelino** plošče $h$ (npr. 5 mm). Ta debelina neposredno določa, koliko sile bo element prenesel.
-- **Pri RDS (modeliranje dolgih struktur, npr. jez, cev):** Ker modeliramo le en presek neskončno dolge strukture, v program vnesemo (oziroma program privzame) **enotsko debelino** (npr. $h = 1 \text{ m}$). Vse izračunane sile in togosti pri RDS modelu so zato vedno podane in obravnavane *na enoto dolžine* strukture.
+$$ [E]_{RNS} = \frac{E}{1-\nu^2}\begin{bmatrix} 1 & \nu & 0 \\ \nu & 1 & 0 \\ 0 & 0 & \frac{1}{2}(1-\nu) \end{bmatrix} $$
+
+RDS predpostavi dolgo strukturo z blokiranim deformiranjem v smeri $z$ ($\varepsilon_{zz}=0$, $\sigma_{zz} \neq 0$):
+
+$$ [E]_{RDS} = \frac{E}{(1+\nu)(1-2\nu)}\begin{bmatrix} 1-\nu & \nu & 0 \\ \nu & 1-\nu & 0 \\ 0 & 0 & \frac{1}{2}(1-2\nu) \end{bmatrix} $$
+
+**2. Pomen parametra $h$** v togostni matriki in obremenitvah:
+
+$$ [K]_e = \int_{\Omega_e} \big([L][N]\big)^T [E] \big([L][N]\big)\, h\, d\Omega, \qquad F_k = h f_k $$
+
+- **RNS (tanke plošče):** $h$ je dejanska debelina plošče.
+- **RDS (dolge strukture, npr. jez, cev):** $h$ je dolžina obravnavanega območja v smeri $z$. Pogosto vzamemo enotsko dolžino, tako da so sile in togosti podane na enoto dolžine.
 
 ## 80. V čem se razlikujejo tri- in štirivozliščni KE za reševanje ravninskih problemov?
 
-**Trivozliščni KE** imajo linearne interpolacijske funkcije, kar pomeni, da so primarne veličine (pomiki) linearni, sekundarne veličine (napetosti in deformacije) pa so po celotni površini KE **konstantne**. To naredi element bolj tog (slabše popisuje gradient napetosti), zato za natančen rezultat potrebujemo precej gosto mrežo. Prednost teh elementov je uporaba trikotniških/površinskih koordinat, ki omogočajo analitično točno vrednotenje integralov brez numerične integracije.
+**Trivozliščni KE** imajo linearne interpolacijske funkcije, zapisane s trikotniškimi koordinatami:
 
-**Štirivozliščni KE** (izoparametrični) imajo nelinearne (bilinearne) interpolacijske funkcije. Posledično se sekundarne veličine (napetosti in deformacije) po površini KE **spreminjajo**. Zaradi tega so elementi mehkejši in bolj natančni pri opisu upogiba, kar omogoča redkejšo mrežo. Integrali se izračunavajo numerično s pomočjo **Gaussove integracije**. Napetosti se izračunajo v integracijskih (Gaussovih) točkah znotraj elementa.
+$$ \psi_j = \Lambda_j = a_j + b_j x + c_j y $$
+
+Pomiki so zato linearni, deformacije in napetosti pa po celotnem KE **konstantne**. Element slabše popisuje gradient napetosti, zato za natančen rezultat potrebujemo precej gosto mrežo. Integrale lahko izračunamo analitično, brez numerične integracije.
+
+**Štirivozliščni KE** (izoparametrični) imajo bilinearne interpolacijske funkcije v naravnem koordinatnem sistemu:
+
+$$ \tilde{\psi}_j = \frac{1}{4}\left(1 + \tilde{x}\tilde{x}_j\right)\left(1 + \tilde{y}\tilde{y}_j\right) $$
+
+Deformacije in napetosti se po KE **spreminjajo**, zato je element natančnejši in omogoča redkejšo mrežo. Integrali se izračunavajo numerično z **Gaussovo integracijo**, napetosti pa v integracijskih (Gaussovih) točkah. Pri reducirani integraciji (1 točka) element nekaterih oblik deformacije ne zazna, saj je deformacija v središču enaka 0.
 
 ## 81. Kako izračunamo napetost v smeri pravokotno na ravnino problema v primeru uporabe ravninsko deformacijskega KE in linearno elastičnega materialnega modela?
 
-Za ravninsko deformacijsko stanje (RDS) velja, da so komponente deformacijskega tenzorja $\varepsilon_{zz}$, $\varepsilon_{xz}$ in $\varepsilon_{yz}$ enake 0 oz. tako majhne, da jih zanemarimo. Ker je $\varepsilon_{zz} = 0$, uporabimo Hookeov zakon za izračun preostale normalne napetosti v smeri $z$:
+Pri ravninskem deformacijskem stanju (RDS) je $\varepsilon_{zz} = 0$, napetost $\sigma_{zz}$ pa ni nič. Izračunamo jo iz Hookeovega zakona:
 
 $$
-\sigma_{zz} = \frac{E}{(1+\nu)(1-2\,\nu)}\left[\nu \,\varepsilon_{xx} + \nu\,\varepsilon_{yy}\right]
+\sigma_{zz} = \frac{E}{(1+\nu)(1-2\,\nu)}\left[\nu \,\varepsilon_{xx} + \nu\,\varepsilon_{yy}\right] = \nu\left(\sigma_{xx} + \sigma_{yy}\right)
 $$
 
 ## 82. Kaj mora biti izpolnjeno, da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem?
@@ -1015,7 +1015,7 @@ Da lahko problem obravnavamo kot generalizirani ravninsko deformacijski problem 
 3. Predpisani robni pogoji se vzdolž "z" koordinatne osi ne spreminjajo.
 4. Obremenitev se vzdolž "z" koordinatne osi ne spreminja.
 5. Krajni površini analiziranega območja, katerih normali sta vzporedni z osjo "z", ostaneta plani (ravni) v obremenjenem stanju.
-6. Komponenta deformacijskega tenzorja $\varepsilon_{zz}$ je konstantna (ne enaka nič kot pri RDS, temveč konstantna povsod), oziroma od te konstantne vrednosti le malo odstopa.
+6. Komponenta deformacijskega tenzorja $\varepsilon_{zz}$ je konstantna (pri RDS je enaka nič), oziroma od te konstantne vrednosti le malo odstopa.
 
 # Predavanje 11 - 11.5.2026
 
