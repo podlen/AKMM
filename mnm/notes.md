@@ -13,64 +13,69 @@ tags:
 
 ### 1. Neposredni učinek, posredni učinek, odziv.
 
-Učinek = vzork, Odziv je posledica. 
+Učinek = vzrok, je neodvisna veličina. Odziv = posledica, je od učinka odvisna veličina. Primer: na vzmet obesimo maso $m$ (učinek), raztezek $x = c_1 m$ je odziv. Vlogi se lahko tudi zamenjata.
 
-Učinek je neodvisna veličina in neposredno vpliva na odziv, ki je od učinka odvisna veličina. (primer: vzmet in masa - utežba(masa) je učinek in raztezek vzmeti je odziv). 
-Poznamo tudi posredne učinke, ki so tudi odgovorni za obnašanje obravnavanega sistema. 
-Primer: sila + vzmet - čeprav je sila neposredni učinek, odziv vzmeti ni odvisen le od sile, ampak je odvisen tudi od koeficienta vzemti $k$ - torej je togost vzmeti posredni učinek -> $odziv = f(učinek, lastnosti \  materiala)$ 
+- **Neposredni učinek** je učinek, brez katerega ni odziva (npr. sila na vzmet).
+- **Posredni učinek** so ostali parametri sistema, ki tudi vplivajo na odziv (npr. vzmetna togost $k$).
+
+$$\text{odziv} = f(\text{učinek},\ \text{konstitutivni parametri})$$
 
 ### 2. Predpogoj za uspešno modeliranje.
 
-Predpogoj za uspešno modeliranje je razumevanje fizikalnega ozadja problema.
-- [ ] Zakaj? npr. Zakaj pridržujemo pločevino pri globokem vleku
-- [ ] Kako? npr. Kako določimo vrstni red izrezov v 6-delnem orodju.
-- [ ] Kdaj? npr. Kdaj pride do pretrga pločevine pri rezanju.
-- [ ] Kje? npr. Kje se ulitek počasenje ohlaja
+Predpogoj za uspešno modeliranje je fizikalno razumevanje problema. Odgovoriti moramo na vprašanja:
+- Zakaj? npr. Zakaj pridržujemo pločevino pri globokem vleku?
+- Kako? npr. Kako določimo vrstni red izrezov lamel v šestrednem orodju?
+- Kdaj? npr. Kdaj pride do pretrga pločevine pri rezanju?
+- Kje? npr. Kje se ulitek počasneje ohlaja?
 ### 3. Kako pridemo do fizikalnega modela.
 
-Najprej na splošno o modelu. Model je "black box", v katerega damo informacijo in dobimo ven neko drugo informacijo. 
+Do modela pridemo z opazovanjem pojavov in z ugotavljanjem soodvisnosti med veličinami, ki pojav opredeljujejo (učinek – odziv).
 
-Fizikalni model dobimo z opazovanjem fizikalnega pojava (primera) in z analizo pojava na primerih, ki so za opazovani pojav dovolj signifikantni - tak dovolj signifikanten primer opredeljuje **fizikalni model**. Fizikalni model definira območje in čas opazovanja ter objekte, pomembne za objektivno identifikacijo opazovanega pojava.
+Pojav opazujemo in analiziramo na primerih, ki so za opazovani pojav dovolj signifikantni. Tak primer opredeljuje **fizikalni (eksperimentalni) model**. Fizikalni model definira območje in čas opazovanja ter objekte, pomembne za objektivno identifikacijo opazovanega pojava.
 ### 4. Značilnosti matematičnega modela.
 
-Pojav oz. razvoj posameznih veličin v fizikalnem/eksperimentalnem modelu opredeljujejo naravne zakonitosti - npr. splošni aksiomi, fizikalni zakoni, konstitutivni zakoni.
+Razvoj veličin v fizikalnem modelu opredeljujejo naravne zakonitosti: splošni aksiomi (akcija = reakcija), fizikalni zakoni (Newtonovi zakoni) in konstitutivni zakoni (trdnina, kapljevina).
 
-Vzpostavitev odnosov (v matematičnem smislu), ki opisujejo opazovani pojav, opredeljuje **matematični model**. 
-
-Matematični model lahko definirajo algebrajske, diferencialne ali pa integralske enačbe. 
+Vzpostavitev odnosov, ki obvladujejo opazovani pojav, opredeljuje **matematični model**. Sestavljajo ga algebrajske, diferencialne ali integralske enačbe. Vsak matematični model je postavljen v okvir prostora in časa.
 ### 5. Značilnosti numeričnega modela.
 
-Če želimo matematični model računsko obvladovati potrebujemo **numerični model**. Enačbe matematičnega modela lahko rešujemo na 2 načina:
-1. Eksaktno analitično reševanje s funkcijskimi rešitvami v zaključeni obliki - rešitev enačb analitično izračunamo in dobimo eksaktno rešitev problema. Rešitev je eksaktna ko zadošča vsem točkam na definicijskem območju problema in hkrati zadošča tudi robnim pogojem. Napake, ki nastanejo pri računanju se lahko pojavijo zaradi nenatančnih vhodnih podatkov (garbage in garbage out) in iz zapisa realnih števil v računalniški spomin.
-2. Aproksimativno numerično reševanje z rešitvami v diskretni obliki - problem rešujemo z numeričnimi metodami v posameznih točkah na definicijskem območju. Napake, ki se pojavijo pri reševanju izhajajo iz: nenatančnih vhodnih podatkov, zapisa števil v računalniški spomin in najbolj pomembno, zraradi izbrane numerične metode reševanja. Ker rešujemo v diskretni obliki lahko med točkami interpoliramo aproksimativno rešitev (linearna, kvadratna funkcija - polinomi višje stopnje lahko ne dajo več fizikalno smiselne rešiteve)
+**Numerični model** je računsko obvladovanje matematičnega modela. Enačbe lahko rešujemo na 2 načina:
+1. **Eksaktno analitično reševanje** s funkcijskimi rešitvami v zaključeni obliki. Napake izhajajo iz nenatančnih vhodnih podatkov in iz zapisa realnih števil v računalniški spomin.
+2. **Aproksimativno numerično reševanje** z rešitvami v diskretni obliki (v posameznih točkah območja). Napake izhajajo iz nenatančnih vhodnih podatkov, zapisa realnih števil v računalniški spomin in iz izbrane numerične metode. Med diskretnimi točkami rešitev ekstrapoliramo (linearno, kvadratično).
 ### 6. Razlika med eksaktnim in aproksimativnim reševanjem.
 
-Eksaktno reševanje za reševanje uporabi funkcijske rešitve v zaključeni obliki - rešitev je analitično izračunana in zadošča vsem točkam na def. območju + robovom območja.
+Eksaktno reševanje da funkcijsko rešitev v zaključeni obliki. Ta zadošča vsem točkam območja in robnim pogojem.
 
-Aproksimativno reševanje rešuje problem v diskretnih točkah, skozi katere napnemo interpolacijsko funkcijo.
+Aproksimativno reševanje da rešitev v diskretnih točkah, med katerimi rešitev ekstrapoliramo. Dodatna napaka izhaja iz izbrane numerične metode.
 ### 7. Katere napake nastanejo pri aproksimativnem numeričnem računanju?
 
-Napake, ki se pojavijo pri reševanju izhajajo iz: nenatančnih vhodnih podatkov, zapisa števil v računalniški spomin in najbolj pomembno, zaradi izbrane numerične metode reševanja.
+Napake izhajajo iz:
+- nenatančnih vhodnih podatkov,
+- zapisa realnih števil v računalniški spomin,
+- izbrane numerične metode reševanja.
 ### 8. Značilnosti računalniške simulacije.
 
-Z osvojenim numeričnim modelom je omogočeno računalniško simuliranje - na simulaciji je zasnovano načrtovanje in odločanje (o procesu, produktu...). 
+Z osvojenim numeričnim modelom je omogočeno računalniško simuliranje. Na simulaciji sta zasnovana načrtovanje in odločanje (o procesu, produktu ...).
 
-Simuliranje je iskanje odziva pri enem/več spreminjajočih se vhodnih podatkov. 
+Simuliranje je iskanje odziva pri enem ali več naborih spreminjajočih se vhodnih podatkov. Iz odzivov za različne učinke s sintezo pridemo do odločitve. Numerični model omogoča tudi avtomatsko krmiljenje tehnoloških procesov.
 ### 9. Razlika med geometrijskim in materialnim prostorom.
 
-Glede na gibalno stanje materialnih delcev v prostoru lahko dogodke v prostoru obravnavamo v okviru geometrijskega ali materialnega prostora.
+Glede na gibalno stanje materialnih delcev lahko dogodke obravnavamo v geometrijskem ali materialnem prostoru.
 
-Geometrijski prostor - opazovanje je vezano na časovno fiksno območje geometrijskih točk v prostoru. Ni važno ali so te točke zasedene z različnimi materialnimi delci v različnih časovnih trenutkih
+- **Geometrijski prostor**: opazovanje je vezano na časovno fiksno območje geometrijskih točk v prostoru. Ni pomembno, ali so te točke v različnih trenutkih zasedene z različnimi materialnimi delci (npr. vlečenje žice).
+- **Materialni prostor**: opazovanje je vezano na fiksno območje snovnih točk, ne glede na njihovo gibalno stanje (npr. preoblikovanje v testastem stanju).
 
-Materialni prostor - opazovanje je vezano na fiksno območje snovnih točk v prostoru, ne glede na njihovo gibalno stanje.
-
-Razlika je torej v opazovanem območju oz. v načinu definicije opazovanega prostora.
+Če snovne točke s časom ne spreminjajo položaja, sta geometrijski in materialni prostor identična.
 ### 10. Značilnosti časovne obravnave problema.
 
-Čas ima razsežnost - tvori 1D prostor, je progresivna spremenljivka, kar pomeni da lahko njena vrednost le narašča. Časovni dogodki so umeščeni v prostor in skupaj z materialnim prostorom tvorijo 4D hiperprostor.
+Čas je fizikalna danost:
+- čas ima razsežnost (je enorazsežen),
+- čas je progresivna spremenljivka, njegova vrednost lahko le narašča.
+
+Trorazsežni materialni prostor in čas tvorita štirirazsežni hiperprostor.
 ### 11. Vpliv izbire koordinatnega sistema.
 
-K.S. omogoča matematični popis materialnega prostora in dogodkov v njem. Izbira K.S ne vpliva na fizikalno vsebino problema. Vpliva pa na matematično formulacijo in na numerično reševanje problema. 
+Koordinatni sistem omogoča matematični popis materialnega prostora in dogodkov v njem. Izbira K.S. ne vpliva na fizikalno vsebino problema. Ima pa lahko ključen vpliv na matematično formulacijo in numerično reševanje problema.
 
 ## ***PREDAVANJE 2 : Elementi modelirnega območja***
 
@@ -78,257 +83,259 @@ K.S. omogoča matematični popis materialnega prostora in dogodkov v njem. Izbir
 
 ![[set.png]]
 
-Območje v matematičnem modelu je območje našega zanimanja, ki se nahaja znotraj materialnega prostora. Ostalo območje, ki ni zajeto v območje zanimanja imenujemo okolica modeliranega območja. Med njima pa imamo množico točk, ki jo imenujemo ograja - $\Gamma^M$.
-
-Modelirano območje je območje ki nas zanima - to območje je običajno omejeno. $$\Omega^{M} \subset \Omega^{\infty} $$Vidimo, da se prostor $\Omega^{\infty}$  razdeli na na 2 podobmočji $\Omega^{M}$ in  $\Omega^{\infty - M}$ - to je okolica modeliranega območja, definirana z $\Omega^{\infty - M} = \Omega^{\infty} - \Omega^{M}$ . 
-
-Zaprto podobmočje $\Omega^{M}$ in odprto podobmočje $\Omega^{\infty - M}$  izkazujeta naslednji lastnosti:$$\Omega^{M} \cup \Omega^{\infty - M} = \Omega^{\infty} \space in\space \Omega^{M} \cap \Omega ^{\infty - M} = 0  $$ Z drugimi besedami: Območje v matematičnem modelu je območje našega zanimanja, ki se nahaja znotraj materialnega prostora. Ostalo območje, ki ni zajeto v območje zanimanja imenujemo okolica modeliranega območja. Med njima pa imamo množico točk, ki jo imenujemo ograja $\Gamma^{M}$ - ograja oz. množica robnih točk je definirana za Dedekindovim presekom odprtih podobmočji $$(\Omega^{M} - \Gamma^{M})/\Omega^{\infty - M} = \Gamma^{M}$$
+Modelirano območje $\Omega^{M}$ je območje našega zanimanja v materialnem prostoru $\Omega^{\infty}$. Običajno je omejeno: $$\Omega^{M} \subset \Omega^{\infty}$$
+Ostalo območje je okolica modeliranega območja: $$\Omega^{\infty - M} = \Omega^{\infty} - \Omega^{M}$$
+Zaprto podobmočje $\Omega^{M}$ in odprto podobmočje $\Omega^{\infty - M}$ izkazujeta lastnosti: $$\Omega^{M} \cup \Omega^{\infty - M} = \Omega^{\infty} \quad in \quad \Omega^{M} \cap \Omega^{\infty - M} = \emptyset$$
+Mejo med njima tvori ograja $\Gamma^{M}$ (robne točke $\Omega^{M}$). Določa jo Dedekindov presek odprtih podobmočij: $$(\Omega^{M} - \Gamma^{M})/\Omega^{\infty - M} = \Gamma^{M}$$
+Modelirano območje je lahko sestavljeno iz več zaprtih podobmočij $\Omega^{M} = \bigcup_{k=1}^{N} \Omega_k$. Mejo med sosednjima podobmočjema določa presek $\Omega_i \cap \Omega_j = \Gamma_{ij}$.
 ### 2. Redukcija prostorske razsežnosti v matematičnem modelu.
 
-Glede na fizikalne in geometrijske posebnosti fizikalnega problema je velikokrat mogoče matematični model zasnovati v geometrijskem prostoru, katerega razsežnost je manjša od razsežnosti materialnega prostora. 
-
-Za redukcijo dimenzije se pogosto gleda geometrijo in konstitutivne lastnosti opazovanega območja. 
+Glede na fizikalne in geometrijske posebnosti problema je matematični model velikokrat mogoče zasnovati v geometrijskem prostoru, katerega razsežnost je manjša od razsežnosti materialnega prostora: $$\Re^3 \rightarrow \Re^p \ ; \quad p \in \{1, 2\}$$
+Tako dobimo 3D, 2D ali 1D model. Sama geometrija za redukcijo ni dovolj. Redukcijo morajo dopuščati tudi obremenitve in robni pogoji. Redukcija bistveno skrajša čas računanja.
 ### 3. Značilnosti diskretnih sistemov.
 
-Diskretni sistemi so sistemi, ki imajo končno število prostostnih stopenj. 
+Diskretni sistemi so sistemi s **končnim** številom prostostnih stopenj.
 
-Ko so v modelirnem območju podobmočja:
+V modeliranem območju so podobmočja:
+- ki ne mejijo druga z drugo,
+- katerih medsebojna razdalja je praviloma veliko večja od najdaljše dolžine kateregakoli izmed teh podobmočij,
+- katerih porazdelitev snovi nima odločujočega vpliva na odziv preostalih podobmočij; vpliv je odvisen le od količine snovi v podobmočju,
+- katerih lastnosti snovi se bistveno razlikujejo od snovi v sosednjih podobmočjih.
 
-	• ki ne mejijo druga z drugo
-	• katerih medsebojna razdalja je praviloma veliko večja od najdaljše
-	dolžine kateregakoli izmed teh podobmočij
-	• katerih porazdelitev snovi po podobmočju nima odločujočega vpliva na
-	odziv preostalih podobmočij, marveč je ta vpliv odvisen le od količine
-	snovi v podobmočju
-	• katerih lastnosti snovi se bistveno razlikujejo od snovi v sosednjih
-	podobmočjih
-	
-Primeri takšnih sistemov so sistemi masnih točk, polja točkovno porazdeljenih električnih nabojev, porazdeljenih električnih nabojev
+Primeri: sistem masnih točk, polja točkovno porazdeljenih električnih nabojev, kristalne kali v talini.
 ### 4. Značilnosti kontinualnih sistemov.
 
-KONTINUALNI SISTEMI – SISTEMI Z NESKONČNIM ŠTEVILOM PROSTOSTNIH STOPENJ
+Kontinualni sistemi so sistemi z **neskončnim** številom prostostnih stopenj.
 
-Ko je v modeliranem območju:
+V modeliranem območju je:
+- snov porazdeljena zvezno po posameznih podobmočjih, z morebitno nezveznostjo le na prehodu med sosednjimi podobmočji,
+- porazdelitev snovi po podobmočju odločilna za odziv v preostalih podobmočjih.
 
-	• snov porazdeljena zvezno po posameznih podobmočjih, z
-	morebitno nezveznostjo le na prehodu med sosednjimi podobmočji
-	• porazdelitev snovi po podobmočju odločilna za odziv v preostalih
-	podobmočjih
-	
+Kontinualni sistem je limita večprostostnega diskretnega sistema, katerega število prostosti preseže vse meje, razdalje med delci pa so infinitezimalne. Spremenljivke so zvezne funkcije prostorskih koordinat in časa. Reševanje se prevede na reševanje ene ali več diferencialnih enačb.
+
 Primeri:
-
-	• plastovite kompozitne plošče
-	• območje zrak-morje-kopno
-	• dvofazno območje led-voda (taljenje, strjevanje)
-	• dvofazno območje trdnina-kapljevina (vodne turbine)
-	• tehnološko postrojenje za litje
+- plastovite kompozitne plošče
+- območje zrak-morje-kopno
+- dvofazno območje led-voda (taljenje, strjevanje)
+- dvofazno območje trdnina-kapljevina (vodne turbine)
+- tehnološko postrojenje za litje
 ### 5. Razlika med diskretnimi – kontinualnimi sistemi.
 
-Razlika med diskternimi in kontinualnimi sistemi je v številu prostosnih stopenj. Razlika pa je tudi v podobmočjih (njihovi zgradbi, lastnostih) in vplivu podobmočji na ostala podobmočja.
-
-*glej vprašanja prej za več detailov* 
+| | Diskretni sistemi | Kontinualni sistemi |
+|---|---|---|
+| Število prostostnih stopenj | končno | neskončno |
+| Porazdelitev snovi | ločena podobmočja; na ostale vpliva le količina snovi | zvezna; porazdelitev je odločilna za odziv ostalih podobmočij |
+| Reševanje | algebrajske enačbe ali NDE po času | diferencialne enačbe po prostoru (in času) |
 ### 6. Časovna odvisnost problemov.
 
-Kot že vemo je čas v absolutnem pogledu progresivna spremenljvka $dt > 0$ . 
+Čas je v absolutnem pogledu progresivna spremenljivka, $dt > 0$. Kljub temu lahko nekatere probleme obravnavamo kot časovno nespremenljive.
 
-Nekatere fizikalne probleme lahko še vedno obravnavamo kot časovno nespremenljive. - **To so stacionarni modeli** za katere velja $\frac{d}{dt}(učinek,\space konstitutivni \space parametri, \space odziv) = 0$ .
+- **Stacionarni modeli** (časovno neodvisni): $\frac{d}{dt}(\text{učinek},\ \text{konstitutivni parametri},\ \text{odziv}) = 0$
+- **Nestacionarni modeli** (časovno odvisni): $\frac{d}{dt}(\text{učinek},\ \text{konstitutivni parametri},\ \text{odziv}) \neq 0$
 
-Logično poznmo tudi **nestacionarne modele** za katere velja: $\frac{d}{dt}(učinek,\space konstitutivni \space parametri, \space odziv) \neq 0$ 
-
-*Note:* OBRAVNAVA PROBLEMA V GEOMETRIJSKEM PROSTORU OMOGOČA IZLOČITEV ČASOVNE DIMENZIJE.
+Časovna odvisnost je relativna. Transportni problemi, ki so v krajevnem smislu stacionarni (vlečenje žice, kontinuirno litje), so v materialnem prostoru nestacionarni. **Obravnava v geometrijskem prostoru omogoča izločitev časovne dimenzije.**
 ### 7. Kakšen naj bo matematični model?
 
-Naj bo kolikor se da enostaven. To pomeni, da je z njim mogoče zaobjeti vse (za odziv sistema) ključne dejavnike. 
+Matematični model naj bo kolikor je mogoče enostaven. Njegova zahtevnost naj bo ravno tolikšna, da zaobjame vse ključne dejavnike za verodostojnost sistemskega odziva.
 
-*Note:* Povečana odvečna zahtevnost modela ne doprinaša nujno k bistveno kvalitetnejši predstavi o modeliranem fizikalnem sistemu ter bistveno natančnejšemu izračunu sistemskega odziva.
+Odvečna zahtevnost ne da nujno bistveno boljše predstave o sistemu ali bistveno natančnejšega odziva. Poveča pa zahtevnost računskih postopkov in čas reševanja.
 
 ### 8. Kaj določa število prostostnih stopenj problema?
 
-Število prostostnih stopenj definirajo v splošnem med seboj linearno neodvisni parametri sistema, s katerimi je obnašanje sistema enolično določeno. Te parametri so NEKONSTITUTUVNI.  Pravimo jim osnovne spremeljivke.
+Prostostne stopnje so med seboj linearno neodvisni **nekonstitutivni** parametri sistema, s katerimi je obnašanje sistema enolično določeno. Imenujemo jih tudi osnovne spremenljivke.
 
-Število prostostnih stopenj je odvisno tudi od vrste **osnovne fizikalne spremenljivke** (skalar, vektor, tenzor), od **konstitucijskih lastnosti** (sistem masnih točk, togo telo, deformabilno telo, ...) in pa od razsežnosti **prostora** (1D, 2D, 3D)
+Število prostostnih stopenj je odvisno od:
+- vrste **osnovne fizikalne spremenljivke** (skalar, vektor, tenzor),
+- **konstitucijskih lastnosti** (sistem masnih točk, togo telo, deformabilno telo),
+- **prostorske razsežnosti** (1D, 2D, 3D).
 
-Število prostnostnih stopenj opredeljuje naravo sistema:
+Število prostostnih stopenj materialne točke:
 
-Diskretni sistemi - končno št. prost. st.
-Kontinualni sistemi - neskončno št. prost. st.
+| Spremenljivka | 3D | 2D | 1D |
+|---|---|---|---|
+| skalar | 1 | 1 | 1 |
+| vektor | 3 | 2 | 1 |
+| tenzor 2. reda | 9 | 4 | 1 |
+
+Število prostostnih stopenj opredeljuje naravo sistema: diskretni sistemi imajo končno, kontinualni pa neskončno število prostostnih stopenj.
 ### 9. Pristop k reševanju enoprostostnih diskretnih sistemov.
 
 Za enoprostostni diskretni sistem je značilno:
-- Vselej možna obravnava v 1D prostoru
-- Ne glede na značaj osnovne fizikalne spremenljivke ga je možno obravnavati skalarno z 1 prostostno stopnjo. 
-- Reševanje se prevede na reševanje **ene same enačbe**
+- vselej ga je mogoče obravnavati v 1D prostoru,
+- ne glede na značaj osnovne fizikalne spremenljivke ga je mogoče obravnavati skalarno z eno prostostno stopnjo,
+- reševanje se prevede na reševanje **ene same enačbe**.
 
-Za obravnavan sistem napišemo eno glavno (gibalno) enačbo. Enačba vsebuje 1 - glavno spremenljivko.
-
-To enačbo analitično/z numeričnimi metodami rešimo.
+Za sistem zapišemo eno ravnotežno (gibalno) enačbo z eno neznanko, npr. $F = ku$ ali $m\frac{d^2x}{dt^2} = \sum_i F_i(x)$. Stacionarni problem da algebrajsko enačbo (AE), nestacionarni pa navadno diferencialno enačbo (NDE). Enačbo rešimo analitično ali numerično.
 ### 10. Pristop k reševanju večprostostnih diskretnih sistemov.
 
-Značilno za večprostostni sistem:
-- Spremenljivke, ki določajo prostost diskretnega sistema so med seboj linearno neodvisne
-- Reševanje se pretvori na **reševanje sistema enačb**
+Za večprostostni diskretni sistem je značilno:
+- spremenljivke, ki določajo prostost sistema, so med seboj linearno neodvisne,
+- reševanje se prevede na reševanje **sistema enačb**: sistema algebrajskih enačb (SAE) pri stacionarnih in sistema NDE (SNDE) pri nestacionarnih problemih.
+
+Ko število prostostnih stopenj preseže vse meje, preide diskretni sistem pri posebnih pogojih v kontinualni sistem.
 ### 11. Funkcijska oblika matematičnih modelov.
 
-Odvisna je od **vrste osnovne fizikalne spremenljivke** (skalar, vektor, tenzor), **prostorske razsežnosti** in **časovne odvisnosti** obravnavanega fizikalnega sistema. (*Drive MNMR-P str.130 - tabela, ki pove mal več)
+Odvisna je od **vrste osnovne fizikalne spremenljivke** (skalar, vektor, tenzor), **prostorske razsežnosti** in **časovne odvisnosti** obravnavanega fizikalnega sistema.
 
-*Note : Tenzor je nekako generalizacija matrike* - A tensor is a container which can house data in N dimensions. Often and erroneously used interchangeably with the matrix (which is specifically a 2-dimensional tensor), tensors are generalizations of matrices to N-dimensional space.
+| Sistem | $\frac{d}{dt}() = 0$ | $\frac{d}{dt}() \neq 0$ |
+|---|---|---|
+| diskretni, enoprostostni | AE | NDE |
+| diskretni, večprostostni | SAE | SNDE |
+| kontinualni (skalar), 1D | NDE | PDE |
+| kontinualni (skalar), 2D, 3D | PDE | PDE |
+| kontinualni (vektor, tenzor) | SPDE | SPDE |
+
+AE – algebrajska enačba, NDE – navadna diferencialna enačba, PDE – parcialna diferencialna enačba, S – sistem.
 
 
 ## ***PREDAVANJE 3 : Kontinualni sistemi*** 
 
 ### 1. Kaj mora biti izpolnjeno, da lahko konstrukcijski element obravnavamo v enodimenzionalnem prostoru kot statični mehanski problem?
 
-Problem mora biti časovno neodvisen, konstrukcijski element pa mora biti obremenjen s točkovno ali porazdeljeno **osno** obremenitvijo ali s temperaturno obremenitvijo (ki je konstantna po prerezu).
+Problem mora biti časovno neodvisen. Element mora biti raven, iz linearno elastičnega gradiva in obremenjen le s točkovno ali zvezno porazdeljeno **osno** obtežbo ter s temperaturno spremembo, ki je konstantna po prerezu.
 
-*Razmislek:* Zakaj je lahko element obremenjen le osno? Če je obremenjen še s prečnimi zunanjimi silami/obremenitvami je treba za izračun napetosti upoštevati še vztrajnostni moment + razporeditev napetosti ni konstantna po prerezu -> rabimo dodati še eno extra dimenzijo.
+*Razmislek:* Pri prečni obremenitvi napetost po prerezu ni več konstantna, zato problem ni več osni.
 ### 2. Kaj je zajeto v vodilni enačbi, ki omogoča reševanje mehansko statično obremenjenega konstrukcijskega elementa v enodimenzionalnem prostoru?
 
 V vodilni enačbi je zajeto:
-- statično ravnotežje vseh obremenitev - to pomeni, da je vsota vseh sil, ki delujejo na opazovanem območju enaka 0.  ![[!staticno_ravnotezje.png]] Enačbo v modrem lahko zapišemo tudi kot $\frac{dN}{dx} = -n(x)$ 
-- deformacijske konsistentnosti -  to pomeni, da je deformacija konsistentna s pomikom oz. da velja $\frac{du}{dx} = \varepsilon_{xx}$  , kjer $\varepsilon_{xx} = \varepsilon_{xx}^{\sigma} + \varepsilon_{xx}^{T}$  - deformacija je doprinos obremenitev s silo in obremenitev zaradi temperature! ![[deformacije.png]]
-- konstitucijsko obnašanje - velja Hooke-ov zakon. Vemo da velja takrat ko 2x večja sila povzroči 2x večjo deformacijo ![[hookov_zakon.png]]
+- **statično ravnotežje** vseh obremenitev na diferencialnem elementu ![[!staticno_ravnotezje.png]] Iz tega sledi $\frac{dN}{dx} = -n(x)$.
+- **deformacijska konsistentnost**: deformacija je konsistentna s pomikom, $\frac{du}{dx} = \varepsilon_{xx}$, kjer je $\varepsilon_{xx} = \varepsilon_{xx}^{\sigma} + \varepsilon_{xx}^{T}$ (prispevek napetosti in temperature). ![[deformacije.png]]
+- **konstitucijsko obnašanje**: Hookov zakon, $\varepsilon_{xx}^{\sigma} = \frac{\sigma_{xx}}{E}$ in $\varepsilon_{xx}^{T} = \alpha \Delta T$. ![[hookov_zakon.png]]
 ### 3. Katere so fizikalne spremenljivke osno mehansko obremenjenega konstrukcijskega elementa?
 
-Fizikalne spremeljivke so:
-- vzdolžni premik $u(x)$ - to je primarna spremenljivka problema
-- notranja osna sila $N(x)$ - to je sekundarna spremenljivka, ki jo lahko izrazimo tudi kot $N(x) = E(x) A(x) (\frac{du}{dx} - \alpha \Delta T)$ 
+Fizikalni spremenljivki sta:
+- vzdolžni pomik $u(x)$ – **primarna** spremenljivka,
+- notranja osna sila $N(x)$ – **sekundarna** spremenljivka, izražena s primarno: $N(x) = E A \left(\frac{du}{dx} - \alpha \Delta T\right)$.
+
+Glede na robne pogoje sta konjugirani veličini.
 ### 4. Izpeljava vodilne enačbe za osno mehansko obremenjen konstrukcijski element.
 
-Iz statičnega ravnotežja smo ugotovili, da je osno porazdeljena sila odvisna od odvoda notranje osne sile po dolžini :$$\frac{dN}{dx} = -n(x)$$
-Iz deformacijske konsistentnosti smo ugotovili : $$\frac{du}{dx} = \varepsilon_{xx}, \space \varepsilon_{xx} = \varepsilon_{xx}^{\sigma} + \varepsilon_{xx}^{T}$$ Iz tega lahko izpeljemo, da $$\varepsilon_{xx}^{\sigma} = \frac{du}{dx} - \varepsilon_{xx}^{T}$$ Ker velja hookov zakon lahko jasno definiramo deformacije zaradi notranje osne napetosti in temperaturne obremenitve : $$\varepsilon_{xx}^{\sigma} = \frac{\sigma_{xx}}{E} \space\text{in}\space \varepsilon_{xx}^{T} = \alpha\Delta T $$ Notranjo osno napetost lahko zapišemo drugače : $$\sigma_{xx} = \frac{N}{A} \space\text{to pomeni da je}\space N = E A \varepsilon_{xx}^{\sigma}$$
-Z upoštevanjem enačb lahko zapišemo enačbo za notranjo osno silo : $$N = EA(\frac{du}{dx} - \varepsilon_{xx}^{T}) = EA(\frac{du}{dx} - \alpha\Delta T)$$
-*Note : Modul elastičnosti in ploščina preseka sta lahko tudi odvisna od $x$ 
+Statično ravnotežje diferencialnega elementa $dx$: $$dN = -n\,dx \quad \Rightarrow \quad \frac{dN}{dx} = -n(x)$$
+Deformacijska konsistentnost: $$\frac{du}{dx} = \varepsilon_{xx}, \quad \varepsilon_{xx} = \varepsilon_{xx}^{\sigma} + \varepsilon_{xx}^{T} \quad \Rightarrow \quad \varepsilon_{xx}^{\sigma} = \frac{du}{dx} - \varepsilon_{xx}^{T}$$
+Konstitucijsko obnašanje (Hookov zakon): $$\varepsilon_{xx}^{\sigma} = \frac{\sigma_{xx}}{E}, \quad \varepsilon_{xx}^{T} = \alpha\Delta T, \quad \sigma_{xx} = \frac{N}{A} \quad \Rightarrow \quad N = E A \varepsilon_{xx}^{\sigma}$$
+Iz tega sledi notranja osna sila: $$N = EA\left(\frac{du}{dx} - \alpha\Delta T\right)$$
+*Note:* $E$, $A$, $\alpha$ in $\Delta T$ so lahko odvisni od $x$.
 
-Z upoštevanjem enačbe $\frac{dN}{dx} = -n(x)$ lahko zapišemo vodilno enačbo problema: $$\frac{d}{dx}[EA(\frac{du}{dx} - \alpha\Delta T)] = -n(x)$$
-Vidimo, da je glavna enačba problema navadna diff. enačba drugega reda in v celoti opredeljuje spreminjanje funkcije vzdolžnega premika $u(x)$ ter notranje osne sile $N(x)$ na 1D elementu. 
+Ko to vstavimo v $\frac{dN}{dx} = -n(x)$, dobimo vodilno enačbo problema: $$\frac{d}{dx}\left[EA\left(\frac{du}{dx} - \alpha\Delta T\right)\right] = -n(x) \ ; \quad x \in [0, L]$$
+To je navadna diferencialna enačba 2. reda z vzdolžnim pomikom $u(x)$ kot osnovno spremenljivko. V celoti opredeljuje spreminjanje $u(x)$ in $N(x)$ na 1D elementu.
 ### 5. Izpolnjevanje robnih pogojev v primeru osno mehansko obremenjenega konstrukcijskega elementa.
 
-Iz vodilne enačbe problema je razvidno, da upošteva le vzdolžno razporejene obremenitve v polju elementa ter temp. spremembe vzdolž elementa. 
+Vodilna enačba upošteva le zvezno porazdeljeno obremenitev v polju elementa in temperaturno spremembo vzdolž elementa. Da je rešitev konsistentna tudi s pomiki in obremenitvami v krajiščih, mora zadostiti robnim pogojem na obeh krajiščih.
 
-Če želimo, da bo rešitev konsistentna tudi s premiki in obremenitvami na robovih območja, moramo upoštevati robna pogoja na obeh krajiščih območja.
-
-Ti robni pogoji so definirani z znanimi vrednostmi **primarne** ali **sekundarne** premenljivke v obeh krajiščih. (Konjugirani pari - če veš na enem koncu pomik, veš na drugem koncu notranjo osno silo - *ni vedno nujno, da to velja - posbni primeri*) 
+Robni pogoji so podani z znano vrednostjo **primarne** ali **sekundarne** spremenljivke v vsakem krajišču:
+$$x = 0: \quad u(0) = u_J \quad ali \quad N(0) = \left[EA\left(\frac{du}{dx} - \alpha\Delta T\right)\right]_{x=0} = -F_x^J$$
+$$x = L: \quad u(L) = u_K \quad ali \quad N(L) = \left[EA\left(\frac{du}{dx} - \alpha\Delta T\right)\right]_{x=L} = +F_x^K$$
+$u(x)$ in $N(x)$ sta konjugirani veličini. Na istem robu je ena izmed njiju znana, druga pa neznana.
 ### 6. Izpolnjevanje pogojev konsistentnega prehoda na meji med podobmočji v primeru osno mehansko obremenjenega konstrukcijskega elementa.
 
-V primeru, ko so vsi parametri vodilne enačbe:
-- $n(x)$
-- $\Delta T(x)$
-- $A(x)$
-- $E(x)$
-- $\alpha (x)$
-na celotnem intervalu $x\in [0, L]$ , vsak zase opredeljeni z **enim** funkcijskim predpisom je rešitev enačbe $u(x)$ tudi podana le z enim funkcijskim predpisom. (ki na krajiščih zadošča robnim pogojem)
+Če so vsi parametri vodilne enačbe ($n(x)$, $\Delta T(x)$, $A(x)$, $E(x)$, $\alpha(x)$) na celotnem intervalu $x \in [0, L]$ vsak podani z **enim** funkcijskim predpisom, je tudi rešitev $u(x)$ podana z enim funkcijskim predpisom. Takrat so $u(x)$, $\frac{du}{dx}$ in $N(x)$ zvezne in zvezno odvedljive funkcije (1 polje).
 
-Ker so funkcije parametrov zvezne in odvedljive sta tudi pomik $u(x)$, deformacija $\frac{du(x)}{dx}$ in s tem tudi notranja osna sila $N(x)$ zvezne in zvezno odvedljve funkcije.
+Če ima vsaj en parameter na intervalu vsaj dva funkcijska predpisa, interval razdelimo na podintervale $[a_k, b_k]$ (več polj). Na meji med podintervaloma morajo biti izpolnjeni **pogoji konsistentnosti prehoda**. Ti so vedno fizikalno pogojeni, zato njihovo nespoštovanje vedno vodi do napačne rešitve.
 
-Vse to pomeni, da imamo 1 polje.
+Pogoja konsistentnosti prehoda sta:
+- zveznost primarne spremenljivke (nerazdružljivost snovnih točk): $u_{k}(b_{k}) = u_{k+1}(a_{k+1})$
+- statično ravnotežje notranjih sil in zunanje obremenitve na meji: $N_{k}(b_{k}) = N_{k+1}(a_{k+1}) + F_{k,k+1}$
 
-Če ima kakšen izmed parametrov 2 različna funkcijska predpisa na dolžini elementa $x \in [0, L]$ moramo območje razdeliti na podobmočja - več polj. 
-
-Na prehodu med posameznimi podobmočji morajo biti izpolnjeni **pogoji konsistentnosti prehoda** - ti opredeljujeo obnašanje primarne in sekundarne spremeljivke na prehodu med območji. 
-
-Ti pogoji prehoda so vedno fizikalno pogojeni - če jih ne upoštevamo bomo vedno dobili napačno rešitev.
-
-Pogoja konistentnosti sta:
-- zveznost primarne spremenljivke na prehodu -> $u_{i}(b_{i}) = u_{i+1}(a_{i+1})$ 
-- Statično ravnotežje med notranjimi in zunanjimi obremenitvami na prehodu -> $N_{k}(b_{k}) = N_{k+1}(a_{k+1}) + F_{k,k+1}$ 
-Zadnji pogoj lahko zapišemo tudi v odvisnosti od primarne spremenljivke $u(x)$. ![[pogojiprehoda.png]]
+$N(x)$ je na meji nezvezna le, če na meji deluje koncentrirana sila $F_{k,k+1}$. Drugi pogoj zapišemo s primarno spremenljivko: ![[pogojiprehoda.png]]
+$$\left(EA\frac{du}{dx}\right)_k\bigg|_{x=b_k} - \left(EA\frac{du}{dx}\right)_{k+1}\bigg|_{x=a_{k+1}} = F_{k,k+1} + (EA\alpha\Delta T)_k\big|_{x=b_k} - (EA\alpha\Delta T)_{k+1}\big|_{x=a_{k+1}}$$
 ### 7. Kdaj je rešitev problema eksaktna?
 
-Eksaktni funkcijski popis $u(x)$ dobimo analitično po dvojnem nedoločenem integriranju vodilne enačbe problema. Ker je enačba NDE 2. reda dobimo po integraciji 2 konstanti, ki jih določimo iz robnih pogojev.
+Eksaktni funkcijski predpis $u(x)$ dobimo analitično z dvojnim nedoločenim integriranjem vodilne enačbe. Ker je enačba NDE 2. reda, dobimo 2 integracijski konstanti, ki ju določimo iz robnih pogojev.
 
-V primeru, da imamo več polj upoštevamo za izračun konstant še pogoje konsist. prehoda.  
+Pri več podintervalih dobimo 2 konstanti na podinterval. Določimo jih iz robnih pogojev in pogojev konsistentnosti prehoda.
 
-Rešitev problema je eksaktna ko zadošča vsaki točki v območju $x \in [0, L]$  in zadošča tudi robnim pogojem. 
+Rešitev je eksaktna, ko zadošča vodilni enačbi v vsaki točki območja $x \in [0, L]$ ter robnim pogojem (in pogojem konsistentnosti prehoda).
 
 ## ***PREDAVANJE 4 : Aproksimativno reševanje***
 
 ### 1. Kdaj je rešitev aproksimativna?
 
-Ko zadošča robnim pogojem in glavni differencialni enačbi vsaj v 1 točki na definicijskem območju $x \in  [0, L]$.  
+Rešitev je aproksimativna, ko zadošča robnim pogojem in pogojem konsistentnosti prehoda, vodilni diferencialni enačbi pa ne v vsaki točki območja $x \in [0, L]$, temveč le v izbranih točkah oz. podobmočjih.
+
+Aproksimativna rešitev je zasnovana na končni množici parametrov $c_i$: $$u_N(x) = f(x, c_i \ ; \ i = 0, 1, \dots, N), \qquad \lim_{N \to \infty} u_N(x) = u(x)$$
 ### 2. Funkcijski pristop pri aproksimacijskem reševanju.
 
-V primeru funkcijskega pristopa je aproksimativna rešitev zansovana na končni funkcijski množici $\{ \Psi_{i} (x) \}$ izbranih aprokismacijskih funkcij iste družine.
+Pri funkcijskem pristopu je aproksimativna rešitev zasnovana na končni množici $\{ \Psi_{i} (x) \}$ izbranih aproksimacijskih funkcij iste družine. Funkcije $\Psi_i(x)$ so zvezne in zvezno odvedljive.
 
-Tako lahko napišemo, da je aproksimativna rešitev $u_{N}(x)$: $$u_{N}(x) = \sum_{i = 0}^{N}c_{i} \Psi_{i} (x)\space;\space x\in [0, L]$$
-Kjer so $c_i$ koeficienti, ki določajo vrednost aproksimacijske rešitve in jih je v porcesu reševanja potrebno določiti.  
+Aproksimativna rešitev $u_{N}(x)$ je: $$u_{N}(x) = \sum_{i = 0}^{N}c_{i} \Psi_{i} (x)\ ;\ x\in [0, L]$$
+V funkcijskem smislu jo opredeljuje izbira funkcij $\Psi_i(x)$, po vrednosti pa koeficienti $c_i$. Neznane koeficiente $c_i$ določimo v postopku reševanja.
 ### 3. Kako izbrati aproksimacijske funkcije?
 
-Kot aproksimacijsko funkcijo lahko izberemo katerokoli zvezno in poljubnokrat odvedljivo funkcijo, ki jo nato v obliki Taylorjeve vrste razvijemo v polinom.
-
-Da bo nabor apoksimativnih funkcij $\Psi_{i}(x)$ dejankso omogočal popis eksaktne rešitve $u(x)$, mora biti ta nabor funkcij **kompleten**. Torej mora vsebovati po vrsti vse potence od najnižje ($i = 0$) do najvišje ($i = N$) - kjer je $N$ število točk v katerih aproksimiramo rešitev. 
+Vsako zvezno in poljubnokrat odvedljivo funkcijo lahko razvijemo v Taylorjevo (potenčno) vrsto okoli $x_0$. Zato je smiselna izbira potenc: $$\Psi_i(x) = (x - x_0)^i \ ; \quad i = 0, 1, 2, \dots, N$$
+Da nabor $\Psi_{i}(x)$ omogoča popis eksaktne rešitve $u(x)$, mora biti **kompleten**. Vsebovati mora po vrsti vse potence od najnižje ($i = 0$) do najvišje ($i = N$). Izpustitev ene izmed nižjih potenc ni popravljiva.
 ### 4. Kako določimo koeficiente, s katerimi so aproksimacijske funkcije pomnožene?
 
-Da bi bila aproksimativna rešitev $u_{N}(x)$ ne glede na stopnjo njene aproksimacije (velikost $N$) tudi fizikalno verodostojna, mora le-ta zadostiti **ključnim enačbam** problema:
-- enačbe za robne pogoje
-- enačbe za pogoje konsistentnega prehoda
-in v čim veči meri **vodilno diff. enačbo**.
+$u_N(x)$ ima $N+1$ neznanih koeficientov $c_i$, zato potrebujemo sistem $N+1$ linearno neodvisnih enačb. Da je aproksimativna rešitev fizikalno konsistentna in verodostojna, mora zadostiti **ključnim enačbam** problema:
+- enačbam robnih pogojev,
+- enačbam pogojev konsistentnosti prehoda,
+- in v čim večji meri **vodilni diferencialni enačbi**. Iz nje dobimo manjkajoče enačbe, ko jo zapišemo v izbranih točkah.
 
-
+Pri več podintervalih $u_N^{(k)}(x)$ iščemo za vsak podinterval posebej. Takrat potrebujemo $\sum_{k=1}^{n}(N_k + 1)$ enačb.
 ### 5. Interpolacijski pristop pri aproksimativnem reševanju.
 
-V primeru **interpolacijskega pristopa** je aproksimativna rešitev zasnovana na končni množici $\{ c_i\}$ diskretnih parametrov ki aproksimirajo vrednosti primarne spremenljivke $u(x)$ v končno mnogo točkah območja $x = x_i$ .
+Pri **interpolacijskem pristopu** je aproksimativna rešitev zasnovana na končni množici $\{ c_i\}$ diskretnih parametrov. Ti aproksimirajo vrednosti primarne spremenljivke v izbranih točkah območja: $c_i \equiv u_i \approx u(x_i)$.
 
-Aproksimativno rešitev $u_N(x)$ lahko zapišemo kot : $$u_N(x) = \Psi_{int}(x \times \{c_i\space;\space i = 0,1,....,N\})\space ; \space x\in[0,L] $$
-V funkcijskem smilsu je opredeljena šele z izbiro interpolacijske funkcije $\Psi_{int}(x \times \{c_i\})$. Ta funkcija interpolira s koeficienti $c_i$ opredeljeno končno množico aproksimativnih diskretnih vrednosti primarne spremenljivke $c_i \equiv u_i$ na celotno funkcijsko območej $x \in [0, L]$.
+Aproksimativno rešitev zapišemo kot: $$u_N(x) = \Psi_{int}(x \times \{c_i\ ;\ i = 0,1,\dots,N\})\ ;\ x\in[0,L] $$
+V funkcijskem smislu je opredeljena šele z izbiro interpolacijske funkcije $\Psi_{int}$. Ta ekstrapolira diskretne vrednosti $u_i$ na celotno območje $[0, L]$. Pri istem naboru $\{u_i\}$ dobimo z različnimi interpolacijskimi funkcijami različne aproksimacije.
 
-Formula zgoraj nam pove, da mora biti interpolacijska fukcija $\Psi_{int}$ taka, da gre skozi interpolacijske točke $u_i$.
-
-Torej je v okviru interpolacijskega pristopa potrebno za izračun aproksimativne rešitve najprej določiti nepoznano velikost primarne spremenljivke $u_i$ v izbranih točkah območja $x = x_i$.
-
-Te koeficiente $u_i$ določimo z ustreznim sistemom $(N+1)$ linarno odvisnih enačb. Da bi bila rešitev $u_N(x)$ fizikalno simiselna je treba pri tvorbi sistema enačb za neznane koef. $u_i$ upoštevati ključne enačbe problema - to so **robni pogoji, pogoji konsistentnega prehoda, vodilna DE**. (upoštevati v tem vrstnem redu)
+Najprej moramo torej določiti neznane vrednosti $u_i$ v točkah $x_i$. Za $N+1$ neznank potrebujemo sistem $N+1$ linearno neodvisnih enačb. Da je rešitev fizikalno smiselna, sistem tvorimo po vrsti iz **robnih pogojev, pogojev konsistentnega prehoda in vodilne DE**.
 ### 6. Kako transformiramo diferencialni operator v diferenčnega?
 
-Aproskimacijo gradimo na diskretnih vrednostih osnovne spremenljivke $u_i$. Ampak izpolnitev fizikalne konsistence aproksimacije je pogojena z difrencialnimi zvezami (glavna enačba, notranja osna sila -> odvodi), ki zahtevajo funkcijsko obravnavo. Te pri diskretnem reševanju nimamo.
+Aproksimacijo gradimo na diskretnih vrednostih $u_i$. Fizikalna konsistenca pa je pogojena z diferencialnimi zvezami (vodilna enačba, $N(x)$), ki zahtevajo funkcijsko obravnavo. Zato diferencialne zveze pretvorimo v diferenčne.
 
-Zato rabimo pretvoriti diferencialne zveze v diferenčne.
+Če je $u(x)$ v okolici $x_0$ zvezna in zvezno odvedljiva, jo razvijemo v Taylorjevo vrsto: $$u(x_0 + h) = u(x_0) + \frac{h^1}{1!}\frac{d^1u}{dx^1}(x_0) + \frac{h^2}{2!}\frac{d^2u}{dx^2}(x_0) + \frac{h^3}{3!}\frac{d^3u}{dx^3}(x_0) + \ ...$$ Tako izrazimo vrednost v sosednjih točkah $x_0 + h^+$ in $x_0 - h^-$: ![[h+h-.png]]
 
-Če je funkcija $u(x)$ v okolici točke $x = x_0$ zvezna in zvezno odvedljiva jo lahko razvijemo v Taylorjevo vrsto:$$u(x_0 + h) = u(x_0) + \frac{h^1}{1!}\frac{d^1u}{dx^1}(x_0) + \frac{h^2}{2!}\frac{d^2u}{dx^2}(x_0) + \frac{h^3}{3!}\frac{d^3u}{dx^3}(x_0) + \space ...$$ Tedaj je ob pozanih lastnostih funkcije $u(x)$ v točki $x=x_0$ mogoče izraziti funkcijsko vrednost v neposredni okolici točke $x = x_0$ : npr. v točki $x = x_0 + h^+ > x_0$ ali pa v točki $x = x_0 - h^- < x_0$: ![[h+h-.png]]
+Vpeljemo oznake: $$u_0 = u(x_0) \ ;\ u^+ = u(x_0 + h^+)\ ;\ u^- = u(x_0 - h^-)$$
+$$u^+ = u_0 + \frac{(h^+)^1}{1!}\frac{d^1u_0}{dx^1} + \frac{(h^+)^2}{2!}\frac{d^2u_0}{dx^2} + \frac{(h^+)^3}{3!}\frac{d^3u_0}{dx^3} + \ ...$$
+$$u^- = u_0 - \frac{(h^-)^1}{1!}\frac{d^1u_0}{dx^1} + \frac{(h^-)^2}{2!}\frac{d^2u_0}{dx^2} - \frac{(h^-)^3}{3!}\frac{d^3u_0}{dx^3} + \ ...$$
+Če velja $h^3 \ll h < 1$, zanemarimo člene s 3. in višjimi odvodi.
 
-Vpeljemo oznake: $$u_0 = u(x_0) \space;\space u^+ = u(x_0 + h^+)\space;\space u^- = u(x_0 - h^-)$$
-S pomočjo Taylorjeve vrste lahko izrazimo $u^+$ kot: $$u^+ = u_0 + \frac{(h^+)^1}{1!}\frac{d^1u_0}{dx^1} + \frac{(h^+)^2}{2!}\frac{d^2u_0}{dx^2} + \frac{(h^+)^3}{3!}\frac{d^3u_0}{dx^3} + \space ...$$
-in $u^-$ kot: $$u^- = u_0 - \frac{(h^-)^1}{1!}\frac{d^1u_0}{dx^1} + \frac{(h^-)^2}{2!}\frac{d^2u_0}{dx^2} - \frac{(h^-)^3}{3!}\frac{d^3u_0}{dx^3} + \space ...$$
-Če velja da $h^3 << h<1$ lahko brez večje škode zavržemo vse člene po 3. odvodu.
-
-(*note: izpeljava za odvod pri nekonstantih korakih h je mal wierd*)
+Z eliminacijo 2. odvoda dobimo prvi, z eliminacijo 1. odvoda pa drugi odvod: $$\frac{du_0}{dx} \approx \frac{1}{h^+ + h^-}\left[\frac{h^-}{h^+}(u^+ - u_0) - \frac{h^+}{h^-}(u^- - u_0)\right]$$
+$$\frac{d^2u_0}{dx^2} \approx \frac{2}{h^+ + h^-}\left[\frac{1}{h^+}(u^+ - u_0) + \frac{1}{h^-}(u^- - u_0)\right]$$
+Odvode tako nadomestimo z diferenčnimi operatorji: $\frac{d^r u_0}{dx^r} \approx D^r u_0$.
 ### 7. Izpeljava centralne diferenčne sheme za 1. odvod funkcije F(x).
 
-V primeru ko sta $h^-$ in $h^+$ po velikosti enaka lahko zapišemo centralno diferenčno shemo za odvode.
+Centralno shemo dobimo, ko sta točki enako oddaljeni: $h^- = h^+ = h$.
 
-Če želimo zapisati 1. odvod z uporabo zgornjih 2 funkcij moramo najprej eliminirati 2. odvode. $$u^+ - u^- \approx u_0 + \frac{h^1}{1!}\frac{d^1u_0}{dx^1} + \frac{h^2}{2!}\frac{d^2u_0}{dx^2} - u_0 + \frac{h^1}{1!}\frac{d^1u_0}{dx^1} - \frac{h^2}{2!}\frac{d^2u_0}{dx^2}$$
-Vidimo, da se eliminirata 2. odvoda in ostane: $$u^+ - u^- \approx 2 \frac{h}{1}\frac{du_0}{dx}$$
-S preureditvijo enačbe lahko zapišemo prvi odvod kot: $$\frac{du_0}{dx} \approx\frac{u^+ - u^-}{2h}$$
+Za 1. odvod $u^+$ in $u^-$ odštejemo, da se eliminira 2. odvod: $$u^+ - u^- \approx \left(u_0 + h\frac{du_0}{dx} + \frac{h^2}{2}\frac{d^2u_0}{dx^2}\right) - \left(u_0 - h\frac{du_0}{dx} + \frac{h^2}{2}\frac{d^2u_0}{dx^2}\right) = 2h\frac{du_0}{dx}$$
+Iz tega sledi: $$\frac{du_0}{dx} \approx \frac{u^+ - u^-}{2h} = D^1 u_0$$
 ### 8. Izpeljava centralne diferenčne sheme za 2. odvod funkcije F(x).
 
-Za drugi odvod v centralni diferenčni shemi moramo sešteti vrednosti $u^+$ in $u^-$ : $$u^+ + u^- \approx u_0 + \frac{h^1}{1!}\frac{d^1u_0}{dx^1} + \frac{h^2}{2!}\frac{d^2u_0}{dx^2} + u_0 - \frac{h^1}{1!}\frac{d^1u_0}{dx^1} + \frac{h^2}{2!}\frac{d^2u_0}{dx^2}$$
-Vidimo, da se odštejeta prva odvoda in dobimo : $$u^+ + u^- \approx 2u_0 + 2\frac{h^2}{2}\frac{d^2u_0}{dx^2}$$
-Preuredimo enačbo in izrazimo drugi odvod : $$\frac{d^2u_0}{dx^2} \approx\frac{u^- - 2u_0 + u^+}{h^2}$$
-(*note : $u^-$ , $u^+$ in $u_0$ lahko napišemo tudi kot $u_{i-1}$, $u_{i+1}$ in $u_i$ -> to velja za odvod v i-ti točki )
+Za 2. odvod $u^+$ in $u^-$ seštejemo, da se eliminira 1. odvod: $$u^+ + u^- \approx \left(u_0 + h\frac{du_0}{dx} + \frac{h^2}{2}\frac{d^2u_0}{dx^2}\right) + \left(u_0 - h\frac{du_0}{dx} + \frac{h^2}{2}\frac{d^2u_0}{dx^2}\right) = 2u_0 + h^2\frac{d^2u_0}{dx^2}$$
+Iz tega sledi: $$\frac{d^2u_0}{dx^2} \approx\frac{u^+ - 2u_0 + u^-}{h^2} = D^2 u_0$$
+(*note:* $u^-$, $u_0$ in $u^+$ za $i$-to točko pišemo tudi kot $u_{i-1}$, $u_i$ in $u_{i+1}$.)
 ### 9. Opišite MKR.
 
-To je aproksimativna metoda, ki temelji na interpolacijskem pristopu. **Sistem enačb**, potreben za določitev neznanih koef. $u_k$, pa temelji na pretvorbi diferencialnih operatorjev v diferenčne (uporaba centralne diferenčne sheme za aproksimacijo 1. in 2. odvodov).
+Metoda končnih razlik (MKR) je aproksimativna metoda, ki temelji na interpolacijskem pristopu. **Sistem enačb** za neznane vrednosti $u_k$ temelji na pretvorbi diferencialnih operatorjev v diferenčne (centralne razlike $D^1$ in $D^2$).
 
-Za ustrezno rešitev moramo izpolnjevati:
-- Robne pogoje
-- Pogoje konsistentnega prehoda
-- Izpolnitev območne enačbe problema (glavne DE)
+Postopek:
+1. Območje razdelimo na $N$ podintervalov s korakom $h$. Neznanke so vrednosti $u_k \approx u(x_k)$ v $N+1$ točkah.
+2. Sistem linearno neodvisnih enačb tvorimo tako, da v čim večji meri izpolnimo:
+	- robne pogoje,
+	- pogoje konsistentnosti prehoda,
+	- območno enačbo problema (vodilno DE v diferenčni obliki, npr. $EA\frac{u_{k+1} - 2u_k + u_{k-1}}{h^2} = -n_0$ v notranjih točkah).
+3. Rešimo sistem. Iz $u_k$ izračunamo še $N_k$ z $D^1$.
 
-Zato tvorimo sistem linearno neodvisinih enačb na osnovi izpolnitve zgornjih zahtev v čim večji meri. (načeloma nam da več točk bolj natančno rešitev)
+Več točk (manjši $h$) načeloma da natančnejšo rešitev.
 
 
 ### 10. Kako lahko zadostimo robnim pogojem pri reševanju po MKR?
 
-Robnim pogojem zadostimo z izbiro dodatne točke izven območja. Ta točka je potrebna tam kjer se nahaja difrenčni operator $D^1$ - zakaj? Za zapis 1. odvoda potrebujemo 2 točki. 
+Točke vedno izberemo tudi na robu območja. Iz robnih pogojev tvorimo največ toliko enačb, kolikor je robnih pogojev.
 
-Z dodatno točko se poveča tudi število neznanih vrednosti $u_k$, ter posledično tudi število enačb. 
+- Robni pogoj s primarno spremenljivko zapišemo neposredno, npr. $u(0) = 0 \Rightarrow u_0 = 0$.
+- Robni pogoj s sekundarno spremenljivko ($N$) vsebuje odvod, ki ga nadomestimo z $D^1$. Centralna razlika v robni točki potrebuje **dodatno točko izven območja**, npr. $D^1 u_4 = \frac{u_A - u_3}{2h}$.
+
+Dodatna točka poveča število neznank za ena. Manjkajočo enačbo dobimo z zapisom vodilne DE tudi v robni točki ($D^2 u_4$). Vrednost v dodatni točki nima fizikalnega pomena.
 ### 11. Kako lahko zadostimo pogojem konsistentnega prehoda pri reševanju po MKR?
 
-Prvi pogoj konsistentnega prehoda $u_1(L_1) = u_2(L_1)$ je izpolnjen že s tem, da je na meji med podintervaloma ena sama neznana disktrena vrednost. S pametno izbiro točk je en pogoj že samodejno izpolnjen.
+Prvi pogoj $u_1(L_1) = u_2(L_1)$ je samodejno izpolnjen, ker točko postavimo na mejo med podintervaloma. Tam je ena sama neznana diskretna vrednost.
 
-Drugi pogoj $N_1(L_1) - N_2(L_1) = 0$ je izpolnjen tako, da za **vsako območje posebaj izberemo dodatno točko**, ki jo nato uporabimo v diferenčni shemi za izračun prvega odvoda: $$EA_1(\frac{du_1}{dx})\biggr{|}_{x=L_1} - E A_2(\frac{du_2}{dx})\biggr{|}_{x = L_1} = EA_1\alpha\Delta T - EA_2\alpha\Delta T$$
-V diskretni obliki je zapis : $$A_1\frac{u_B-u_2}{2h_1} - A_2\frac{u_4 - u_C}{2h_2}  = \alpha\Delta T(A_1 - A_2)$$ ![[2_obmocjiMKR.png]]
+Drugi pogoj $N_1(L_1) - N_2(L_1) = 0$ vsebuje odvoda: $$EA_1\left(\frac{du_1}{dx}\right)\bigg|_{x=L_1} - E A_2\left(\frac{du_2}{dx}\right)\bigg|_{x = L_1} = EA_1\alpha\Delta T - EA_2\alpha\Delta T$$
+$D^1$ sme za vsak podinterval uporabiti le vrednosti iz tega podintervala. Zato za **vsak podinterval posebej dodamo dodatno točko** ($B$ za 1. in $C$ za 2. podinterval). V diskretni obliki je zapis: $$A_1\frac{u_B-u_2}{2h_1} - A_2\frac{u_4 - u_C}{2h_2}  = \alpha\Delta T(A_1 - A_2)$$ ![[2_obmocjiMKR.png]]
+Za dodatni neznanki $u_B$ in $u_C$ zapišemo vodilno DE v mejni točki za vsak podinterval posebej.
 
-
- (*note : če je analitična rešitev polinom 2. stopnje (za 1D palice je) je tudi aproksimacijska rešitev, ki uporablja operatorje 1. in 2. reda - $D^1 \space\text{in}\space D^2$ , eksaktna v točkah aproksimacije)![[mkr_acc.png]] 
+(*note:* če je eksaktna rešitev polinom največ 2. stopnje, sta $D^1$ in $D^2$ eksaktna. Takrat je MKR rešitev v diskretnih točkah eksaktna.) ![[mkr_acc.png]]
 
 ## ***PREDAVANJE 5 : Integralska variacijska formulacija***
 
