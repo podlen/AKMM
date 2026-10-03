@@ -6,3 +6,4 @@ mnm/slides/
 */slides/
 *.pdf
 *.pptx
+.claude/
