@@ -1,7 +1,7 @@
 {
-  "name": "akmm-site",
+  "name": "qa-sites",
   "version": "1.0.0",
-  "description": "Builds the static AKMM Q&A site from the Obsidian notes",
+  "description": "Builds the static AKMM and MNM Q&A sites from the Obsidian notes",
   "scripts": {
     "build": "node build.mjs"
   },

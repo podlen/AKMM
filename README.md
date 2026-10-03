@@ -1,53 +1,65 @@
-# AKMM – Odgovori na vprašanja
+# Odgovori na izpitna vprašanja – AKMM in MNM
 
-Odgovori na vprašanja s predmeta **Analiza konstrukcij s končnimi elementi (AKMM)** na Fakulteti za strojništvo, Univerze v Ljubljani.
+Študentski odgovori na izpitna vprašanja dveh predmetov na Fakulteti za strojništvo UL. Zapiski so v Obsidianu, iz njih se zgradita dve statični strani.
 
-Zapiski so napisani v Obsidianu (`Analiza Konstrukcij z MKE - Odgovori na vprašanja.md`), iz njih pa se zgradi statična spletna stran s stranskim menijem po predavanjih in izrisanimi enačbami.
+| Predmet | Zapiski | Stran |
+| --- | --- | --- |
+| Analiza konstrukcij z MKE (AKMM) | `akmm/notes.md` | <https://akmm.podlen-project.com> |
+| Numerične metode modeliranja (MNM) | `mnm/notes.md` | <https://mnm.podlen-project.com> |
 
-## Spletna stran
-
-Zgrajena stran je v mapi [`site/`](site/) – odpri `site/index.html` prek kateregakoli spletnega strežnika (vse je statično, KaTeX je priložen, zato internet ni potreben).
-
-Funkcije:
-
-- stranski meni s predavanji (tema, datum, število vprašanj); aktivno predavanje pokaže seznam svojih vprašanj, na telefonu se meni odpre z gumbom ☰,
-- enačbe izrisane s KaTeX,
-- iskanje po vseh vprašanjih (bližnjica `/`),
-- gumb **Skrij odgovore** za samopreverjanje (vprašanja ostanejo, odgovore odpreš s klikom),
-- svetla/temna tema in tisk (vsa predavanja skupaj).
-
-### Lokalni ogled
-
-```bash
-python3 -m http.server -d site 8080
-# nato odpri http://localhost:8080
-```
-
-Za domači strežnik (nginx, Caddy, Apache …) je dovolj, da kaže na mapo `site/`.
-
-### Ponovna gradnja po spremembi zapiskov
-
-Potrebuješ Node.js (≥ 18).
-
-```bash
-cd tools
-npm install   # samo prvič
-npm run build # prepiše mapo site/
-```
-
-Skripta [`tools/build.mjs`](tools/build.mjs) razdeli zapiske po naslovih `# Predavanje N - datum` (predavanja v stranskem meniju) in `## N. Vprašanje` (kartice), izriše enačbe in pretvori Obsidianove slike `![[slika.png]]` (mapa `images/`). Če katera enačba ni veljavna, jo izpiše v konzoli. Teme predavanj v stranskem meniju so v seznamu `topics` na vrhu razdelka HTML v `build.mjs`; ob novem predavanju dodaj vrstico tja.
+Na strani so stranski meni po predavanjih, iskanje (bližnjica `/`), gumb **Skrij odgovore** za samopreverjanje, svetla/temna tema in tisk. Enačbe so izrisane vnaprej s KaTeX, zato stran ne nalaga ničesar s tujih strežnikov.
 
 ## Struktura
 
 | Pot | Vsebina |
 | --- | --- |
-| `Analiza Konstrukcij z MKE - Odgovori na vprašanja.md` | zapiski (vir) |
-| `images/` | slike iz zapiskov |
-| `tools/` | skripta za gradnjo strani (`build.mjs`) in njena sredstva (`assets/`) |
-| `site/` | zgrajena stran (ustvari se samodejno, ne urejaj ročno) |
+| `akmm/`, `mnm/` | `notes.md` (vir), `images/` (slike iz zapiskov), `slides/` (prosojnice, samo lokalno) |
+| `tools/build.mjs` | skripta za gradnjo; nastavitve predmetov so v seznamu `subjects` |
+| `tools/assets/` | `app.js`, `theme.js`, `style.css` |
+| `site/akmm/`, `site/mnm/` | zgrajeni strani (ne urejaj ročno; sta v gitu, ker Pages ne gradi) |
 
-## Opomba glede gradiva
+Oblika zapiskov:
 
-Objavljeni so samo odgovori. **Gradiva predavanj (prosojnice, PDF-ji …) se ne objavljajo** – mapa `lectures/` in datoteke `*.pdf` / `*.pptx` so v `.gitignore`, zato jih lahko hraniš lokalno, ne da bi jih po nesreči objavil.
+- AKMM: predavanja `# Predavanje N - datum`, vprašanja `## N. Naslov` (številčenje skozi vsa predavanja). Teme predavanj so v `topics` v `build.mjs`.
+- MNM: predavanja `## ***PREDAVANJE N : Tema***`, vprašanja `### N. Naslov` (številčenje po predavanjih). Tema 1. predavanja je določena v `topics`.
 
-Odgovori so študentski zapiski in niso uradno gradivo predmeta – napake so možne, zato jih preveri pri predavanjih.
+Povezave: AKMM `#p5` (predavanje), `#q40` (vprašanje); MNM `#p5`, `#p5-q3`.
+
+## Gradnja
+
+Potrebuješ Node.js (≥ 18).
+
+```bash
+cd tools
+npm install        # samo prvič
+npm run build      # oba predmeta
+npm run build mnm  # samo en predmet
+```
+
+Skripta izpiše število vprašanj in vse neveljavne enačbe ali manjkajoče slike (s številko vrstice). Na strani se objavijo samo slike, ki jih zapiski uporabljajo.
+
+## Lokalni ogled
+
+```bash
+python3 -m http.server -d site/mnm 8091   # http://localhost:8091
+python3 -m http.server -d site/akmm 8092  # http://localhost:8092
+```
+
+## Objava (Cloudflare Pages)
+
+Dva projekta na Cloudflare Pages, povezana s tem repozitorijem:
+
+| Projekt | Izhodna mapa | Domena |
+| --- | --- | --- |
+| `akmm` | `site/akmm` | akmm.podlen-project.com |
+| `mnm` | `site/mnm` | mnm.podlen-project.com |
+
+Ukaz za gradnjo ostane prazen (stran je že zgrajena v `site/`). Vsak push na `main` samodejno objavi obe strani. Varnostne glave (CSP ipd.) in predpomnjenje so v `site/<id>/_headers`, ki ga ustvari `build.mjs`.
+
+Postopek po spremembi zapiskov: `npm run build`, preveri, commit, push.
+
+## Gradivo predavanj se ne objavlja
+
+Prosojnice in drugo gradivo predavanj se **nikoli ne objavijo**. Mapi `akmm/slides/` in `mnm/slides/` ter vse datoteke `*.pdf` in `*.pptx` so v `.gitignore`, `build.mjs` pa v `site/` kopira samo slike iz zapiskov.
+
+Odgovori niso uradno gradivo predmeta. Napake so možne, zato jih preveri pri predavanjih.
