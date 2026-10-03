@@ -214,7 +214,7 @@ function buildSubject(S) {
       const qs = l.questions
         .map((x) => `<li><a href="#${x.id}"><span>${x.n}.</span> ${inline(x.title)}</a></li>`)
         .join("");
-      const meta = [l.date, `${l.questions.length} vpr.`].filter(Boolean).join(" · ");
+      const meta = `${l.questions.length} vpr.`;
       return `<li class="lec-item" data-lec="p${l.n}"${i === 0 ? " data-active" : ""}>
 <a class="lec-link" href="#p${l.n}"><span class="ln">${l.n}</span><span class="lt">${escapeHtml(l.topic)}<small>${escapeHtml(meta)}</small></span></a>
 <ol class="qs">${qs}</ol>
@@ -232,7 +232,7 @@ function buildSubject(S) {
 </details>`
         )
         .join("\n");
-      const eyebrow = [`Predavanje ${l.n}`, l.date].filter(Boolean).join(" · ");
+      const eyebrow = `Predavanje ${l.n}`;
       return `<section class="lec" id="p${l.n}"${i ? " hidden" : ""}>
 <header class="lec-head"><p>${escapeHtml(eyebrow)}</p><h2>${escapeHtml(l.topic)}</h2></header>
 ${qs}
