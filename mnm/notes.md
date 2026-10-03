@@ -344,52 +344,51 @@ Za dodatni neznanki $u_B$ in $u_C$ zapišemo vodilno DE v mejni točki za vsak p
 Reševanje vodilne diff. enačbe lahko prevedemo na reševanje ustrezne integralske enačbe. Izhodišče predstavlja že poznana vodilna enačba problema : $$\frac{d}{dx}[EA(\frac{du}{dx} - \alpha\Delta T)] = -n\space;\space x\in[0, L]$$
 Simbolno lahko enačbo zapišemo kot $$D^2u(x) = f(x)$$
 kjer je $$D^2 = \frac{d}{dx}[EA(\frac{d}{dx} - \alpha\Delta T)]\space\text{in}\space f(x) = -n(x)$$
-Do integralske enačbe pridemo tako, da preoblikujemo vodilno DE v sledečo obliko: $$D^2u(x) - f(x) = 0$$
-Enačbo pa nato pomnožimo s poljubno na območju $x\in[0, L]$ odvedljivo funkcijo $v(x)$ :$$[D^2u(x) - f(x)]\space v(x) = 0$$
-Ker je po definiciji izraz v oklepaju v funkcijskem produktu na celotem območju, ki ga integriramo ($x\in[0,L]$) ničen, je tudi zapisani produkt, ne glede na to kakšna je funkcija $v(x)$, ničen. $$\int_{0}^{L}[D^2u(x) - f(x)]\space v(x)dx = 0$$
-ker je vrednost znotraj integrala 0 je vrednost integrala tudi 0. Tako dobimo **osnovno obliko integralske formulacije**. 
+Vodilno DE preoblikujemo v obliko: $$D^2u(x) - f(x) = 0$$
+Enačbo nato pomnožimo s poljubno na območju $x\in[0, L]$ odvedljivo funkcijo $v(x)$ :$$[D^2u(x) - f(x)]\space v(x) = 0$$
+Ker je izraz v oklepaju na celotnem območju $x\in[0,L]$ ničen, je ničen tudi produkt, ne glede na to kakšna je funkcija $v(x)$. Produkt integriramo po celotnem območju: $$\int_{0}^{L}[D^2u(x) - f(x)]\space v(x)dx = 0$$
+Integrand je povsod ničen, zato je ničen tudi integral. Tako dobimo **osnovno obliko integralske formulacije**.
 
-Za osno obremenjeni konstrukcijski element lahko to integralsko enačbo zapišemo kot : $$\int_{0}^{L}\{\frac{d}{dx}[E A[\frac{du}{dx} - \alpha\Delta T)]\}v(x) dx + \int_{0}^{L}n(x)v(x)dx = 0$$
+Za osno obremenjeni konstrukcijski element lahko to integralsko enačbo zapišemo kot : $$\int_{0}^{L}\frac{d}{dx}[E A(\frac{du}{dx} - \alpha\Delta T)]\space v(x) dx + \int_{0}^{L}n(x)v(x)dx = 0$$
 ### 2. V čem je prednost integralske formulacije?
 
-Prednost integralske formulacije je, da zajema **vse točke obravnavanega območja** (ne pomeni da je rešitev eksaktna!) Integralska fomulacija je osnova za:
+Integralska formulacija zajema **vse točke obravnavanega območja** (to ne pomeni, da je rešitev eksaktna!). Pri šibki in inverzni obliki je red diferencialnega operatorja nad $u(x)$ nižji, kar zmanjša zahteve glede aproksimacijske funkcije.
+
+Integralska formulacija je osnova za:
 - Metodo končnih razlik (osnovna oblika)
 - Metodo končnih elementov (šibka oblika)
 - Metodo robnih elementov (inverzna oblika)
 ### 3. Kako pridemo do manjkajočih enačb v primeru integralske formulacije?
 
-Reševanje katerekoli oblike integralske enačbe zahteva **funkcijsko aproksimacijo** iskane osnovne primarne spremenljivke $u = u(x)$, saj v nasportnem primeru ni mogoče izvrednotiti danih integralov. Ker je $v(x)$ poljubna funkcija, ki je dovolj odvedljiva z izbiro le-te nimamo problema.
+Integralov ni mogoče izvrednotiti brez **funkcijske aproksimacije** primarne spremenljivke: $$\hat{u}(x) = \sum_{k = 0}^N a_k \hat{\Psi}_k(x)$$
+Neznanke so diskretne vrednosti $\{a_k\}$ (in robne vrednosti sekundarne spremenljivke). Robni pogoji dajo le del enačb (pri DE 2. reda dve).
 
-Rešitev problema iščemo v obliki aproksimacije $\hat{u} = \hat{u}(x)$ : $$\hat{u} = \hat{u}(x) = \sum_{k = 0}^N a_k \hat{\Psi}_k(x)$$
-Aproksimacija je grajena na množici diskretnih vrednosti $\{a_k\}$ ter množici **funkcij** $\{\hat{\Psi}_k\}$ . Funkcije morajo izpolnjevati pogoj : $$\delta_{ik} = 
-\begin{cases} 
-1, & \text{za } x_k = x_i \\
-0, & \text{za } x_k \neq x_i 
-\end{cases}$$
-Tukaj je $\delta_{ik}$ Kronecker-jev delta tenzor. Te funkcije imajo vrednost 1 v opazovani točki $x_i$ - v vseh **drugih opazovanih točkah** pa je vrednost te funkcije 0.
+**Manjkajoče enačbe dobimo z izbiro poljubne funkcije $v(x)$**. Vsaka izbrana funkcija $v_k(x)$ da eno enačbo:
+- MKR: $v_k(x) = \delta(x-x_k)$ (Diracova funkcija v posameznih točkah),
+- MKE: $v_k(x) = \hat{\Psi}_k(x)$ (Galerkinov pristop, iste funkcije kot pri aproksimaciji),
+- MRE: $v_k(x)$ je rešitev enačbe $\tilde{D}^2v_k(x) = \delta(x-x_k)$.
 
-Kot primer bi za dve vozlišči oziroma točki $x_i$ aproksimacija izgledala tako : $$\hat{u}(x) = \sum_{k=0}^{N = 1}a_k\hat{\Psi}_k(x) = a_0\hat{\Psi}_0 + a_1\hat{\Psi}_1 = a_0(1-\frac{x}{L}) + a_1\frac{x}{L}$$
-kjer je $L$ dolžina obravnavanega območja. Taki funkciji $\hat{\Psi}_0$ in $\hat{\Psi}_1$ uporabimo za MKE.
+Primer, 2-vozliščni KE: neznanke so $U_1^e, U_2^e, N_1^e, N_2^e$. Dve enačbi dobimo iz robnih pogojev v vozliščih, dve pa z izbiro $v_1 = \hat{\Psi}_0^e = 1-\frac{x_e}{L_e}$ in $v_2 = \hat{\Psi}_1^e = \frac{x_e}{L_e}$.
 ### 4. Izpeljava šibke oblike integralske formulacije.
 
 Izpeljava se začne pri osnovni obliki integralske formulacije, ki smo jo že izpeljali : $$\int_0^L[D^2u(x) - f(x)]\space v(x)\space dx = 0$$
 Enačbo lahko preuredimo v naslednjo obliko : $$\int_0^LD^2u(x)v(x)dx = \int_0^Lf(x)v(x)dx$$
 Če privzamemo, da je $v(x)$ vsaj enkrat odvedljiva funkcija, lahko integral na levi strani enačbe enkrat integriramo z uporabo Per-Partes metode $\int_{x_1}^{x_2}u(x)dv = uv|_{x1}^{x_2} - \int_{x_1}^{x_2}v(x)du$ : $$\int_0^LD^2 u(x)v(x)dx = D^1u(x)v(x)\biggr{|}_0^L - \int_0^LD^1u(x)\frac{dv(x)}{dx}dx$$
-Vidimo, da smo v novi integralski enačbi red diferencialnega opreatorja nad primarno spremenljivko $u(x)$  zmanjšali za 1 $D^2u(x) \rightarrow D^1u(x)$ .
+Red diferencialnega operatorja nad primarno spremenljivko $u(x)$ se je zmanjšal za 1: $D^2u(x) \rightarrow D^1u(x)$.
 
 Celotno enačbo lahko sedaj zapišemo kot : $$\int_0^LD^1u(x)\frac{dv(x)}{dx}dx = D^1u(x)v(x)\biggr{|}_0^L - \int_0^Lf(x)v(x)dx$$
-Tak zapis integralske enačbe imenujemo **ŠIBKA OBLIKA INTEGRALSKE FORMULACIJE**.
+Tak zapis integralske enačbe imenujemo **ŠIBKA OBLIKA INTEGRALSKE FORMULACIJE**. Funkcija $v(x)$ mora izpolnjevati $\frac{dv}{dx} \neq 0$.
 
 Za enoosno obremenjeni konstrukcijski element je diff. operator $D^1$ enak : $$D^1 = E(x)A(x)(\frac{d}{dx} - \alpha(x)\Delta T(x))$$
 To lahko vstavimo v zgornjo enačbo in zapišemo : $$\int_0^L E A\frac{du}{dx}\frac{dv}{dx}dx = [E A(\frac{du}{dx} - \alpha\Delta T)]v(x)\biggr{|}_0^L - \int_0^Lf(x)v(x)dx + \int_0^LE A \alpha\Delta T \frac{dv}{dx}dx$$
 
 ### 5. Kateri robni pogoji so zajeti v šibki obliki integralske formulacije?
 
-Če upoštevamo zvezo med primarno spremenljivko $u(x)$ in $N(x)$ dobimo iz zgornje enačbe : $$\int_0^LEA\frac{du}{dx}\frac{dv}{dx}dx = N(L)v(L) - N(0)v(0) - \int_0^Lf(x)v(x)dx + \int_0^LE A \alpha\Delta T \frac{dv}{dx}dx$$
-Vidimo da šibka oblika integralske formulacije vključuje robne vrednosti sekundarne spremenljvke $N(x)$. 
+Robne vrednosti **sekundarne spremenljivke** $N(0)$ in $N(L)$. Ob upoštevanju $N = EA(\frac{du}{dx} - \alpha\Delta T)$ se šibka oblika glasi: $$\int_0^LEA\frac{du}{dx}\frac{dv}{dx}dx = N(L)v(L) - N(0)v(0) - \int_0^Lf(x)v(x)dx + \int_0^LE A \alpha\Delta T \frac{dv}{dx}dx$$
+Če je na robu podan robni pogoj za sekundarno spremenljivko, sta $N(0)$ oziroma $N(L)$ znani vrednosti. Robnih vrednosti primarne spremenljivke $u(0)$, $u(L)$ šibka oblika ne vsebuje.
 ### 6. Kako je z izpolnjevanjem diferencialne enačbe v primeru integralske formulacije?
 
-V primeru integralske formulacije DE ni izpolnjena v vseh točkah območja - rešitev **NI** eksaktna.
+DE je izpolnjena le v integralskem smislu po celotnem območju, ne v vsaki točki. Z aproksimativno rešitvijo $\hat{u}(x)$ DE **ni** izpolnjena v vseh točkah območja, zato rešitev ni eksaktna. Pri MKR ($v_k = \delta(x-x_k)$) je DE izpolnjena le v izbranih točkah $x_k$.
 ### 7. Izpeljava inverzne oblike integralske formulacije.
 
 Zapišimo šibko obliko integralske formulacije za 1D osno obremenjeni element : $$\int_0^L\tilde{D}^1u(x)\frac{dv(x)}{dx}dx = N(x)v(x)\biggr{|}_0^L - \int_0^Lf(x)v(x)dx + \int_0^Lf_T(x) \frac{dv}{dx}dx$$
@@ -397,87 +396,69 @@ kjer je $\tilde{D}^1 = E(x)A(x)(\frac{d}{dx})$ in je $f_T(x) = E(x)A(x)\alpha(x)
 
 S takim zapisom lahko vidimo, da lahko levo stran integralske formulacije še enkrat Per-Partes integriramo . $$\int_0^L \tilde{D}^1 u(x) \frac{dv(x)}{dx}dx = u(x) \tilde{D}^1v(x)\biggr{|}_0^L - \int_0^Lu(x)\tilde{D}^2v(x) dx$$
 S tem integralska formulacija dobi sledečo obliko : $$\int_0^Lu(x)\tilde{D}^2v(x)dx =u(x)\tilde{D}^1v(x)|_0^L - N(x)v(x)\biggr{|}_0^L + \int_0^Lf(x)v(x)dx - \int_0^Lf_T(x)\frac{dv(x)}{dx}dx$$
-Dobljeni obliki integralske enačbe rečemo **INVERZNA OBLIKA INTEGRALSKE FORMULACIJE**.
+Dobljeni obliki integralske enačbe rečemo **INVERZNA OBLIKA INTEGRALSKE FORMULACIJE**. Diferencialni operator je v celoti prešel s primarne spremenljivke na funkcijo $v(x)$ ($D^2u \rightarrow \tilde{D}^2v$, kjer je $\tilde{D}^2 = \frac{d}{dx}(EA\frac{d}{dx})$), zato mora veljati $\frac{d^2v}{dx^2} \neq 0$.
 ### 8. Kateri robni pogoji so zajeti v inverzni obliki integralske formulacije?
 
-Iz zgornje enačbe vidimo, da so v inverzni obliki integralske formulacije zajte vrednosti primarne spremenljivke na robovih $u(0)$ in $u(L)$, ter sekundarne spremenljivke na robovih $N(0)$ in $N(L)$. 
+Inverzna oblika vsebuje robne vrednosti **primarne** spremenljivke $u(0)$ in $u(L)$ ter **sekundarne** spremenljivke $N(0)$ in $N(L)$. Pri podanem robnem pogoju so to znane vrednosti.
 ### 9. Vloga globalnega koordinatnega sistema pri definiranju geometrije KE?
 
-S koordinatami v globalnem K.S. so označena vozlišča, ki določajo velikost končnega elementa.
+Vozlišča KE so podana s koordinatami v globalnem K.S. $X$. Te koordinate določajo lego in velikost KE (npr. $L_1 = X_2 - X_1$). Vsak KE ima še svoj lokalni K.S. $x_e\in[0, L_e]$, v katerem zapišemo aproksimacijo.
 ### 10. Kako je izvedena aproksimacija primarne spremenljivke pri MKE?
 
-Šibko obliko integralske formulacije lahko zapišemo z aproksimirano rešitvijo $\hat{u}(x)$ - na območju končnega elementa $x\in[0, L_e]$ : $$\int_0^{L_e} D^1\hat{u}(x) \frac{dv(x)}{dx}dx = N(x)v(x)\biggr{|}_0^{L_e} - \int_0^{L_e}f(x)v(x)dx + \int_0^{L_e}f_T(x)\frac{dv(x)}{dx}dx$$
-Kot že omenjeno izvedemo osnovno aproksimacijo funkcije $\hat{u}(x)$ na podobmočju $x\in[0,L_e]$, imenovanem končni element (KE), ki ima $N_e$ vozlišč.
+Aproksimacijo izvedemo ločeno na vsakem podobmočju $x_e\in[0,L_e]$, imenovanem končni element (KE), ki ima $N_e$ vozlišč: $$\hat{u}_e = \hat{u}_e(x_e) = \sum_{k=0}^{N_e-1}a_k^e\hat{\Psi}_k^e(x_e) \space ; \space x_e\in[0,L_e]$$
+Interpolacijske funkcije $\hat{\Psi}_k^e$ so Lagrangevi polinomi, ki izpolnjujejo pogoj (Kroneckerjev delta): $$\hat{\Psi}_k^e(x_i) = \delta_{ik} = \begin{cases}1, &\text{za  } x_i = x_k\\0, &\text{za  }x_i \neq x_k\end{cases}$$
+Zato so koeficienti kar vrednosti primarne spremenljivke v vozliščih: $a_k^e = \hat{u}_e(x_k)$. Število vozlišč $N_e$ določa stopnjo polinoma ($N_e - 1$).
 
-Aproksimacijsko funkcijo v posameznem vozlišču $\hat{u}_e$ lahko zapišemo kot : $$\hat{u}_e = \hat{u}_e(x_e) = \sum_{k=0}^{N_e-1}a_k^e\hat{\Psi}_k^e(x_e) \space ; \space x_e\in[0,L_e]$$Kjer je $\hat{\Psi}_k^e = \begin{cases}1, &\text{za  } x_i = x_k\\0, &\text{za  }x_i \neq x_k\end{cases}$  
-
-S to formulo je v naslednjem vprašanju zapisana aproksimativna funkcija.
+Aproksimacijo vstavimo v šibko obliko integralske formulacije : $$\int_0^{L_e} D^1\hat{u}(x) \frac{dv(x)}{dx}dx = N(x)v(x)\biggr{|}_0^{L_e} - \int_0^{L_e}f(x)v(x)dx + \int_0^{L_e}f_T(x)\frac{dv(x)}{dx}dx$$
+Funkcije $v(x)$ izberemo po Galerkinu: $v_k = \hat{\Psi}_k^e$. Za 2-vozliščni KE glej naslednje vprašanje.
 ### 11. Izpeljava enačbe za dvo-vozliščni 1D KE za reševanje osno obremenjenega konstrukcijskega elementa.
 
 V primeru 2-vozliščnega KE je aproksimacija primarne spremenljivke $\hat{u}_e(x_e)$ po njegovem območju zasnovana na 2 polinomih prvega reda:![[KE1D.png]]
 
-S tem je aproksimativna rešitev enaka : $$\hat{u}_e(x_e)= a_0^e(1- \frac{x_e}{L_e}) + a_1^e(\frac{x_e}{L_e})$$
-Vidimo, da je funkcijska aproksimacija primarne spremenljivke v območju 2-vozliščnega KE linearna funkcija določena z 2 konstantama.
+S tem je aproksimativna rešitev linearna funkcija, določena z 2 konstantama : $$\hat{u}_e(x_e)= a_0^e(1- \frac{x_e}{L_e}) + a_1^e(\frac{x_e}{L_e})$$
 
-Glede na to, da pri $x_e = 0$ in $x_e = L_e$ velja : $$\hat{u}_e(0) = a_0^e = U_1^e\space,\space\hat{u}_e(L_e) = a_1^e = U_2^e$$
-Ugotovimo, da predstavljata konstanti v aproksimaciji vrednost pomika v vozliščih KE![[ue.png]]
+Pri $x_e = 0$ in $x_e = L_e$ velja : $$\hat{u}_e(0) = a_0^e = U_1^e\space,\space\hat{u}_e(L_e) = a_1^e = U_2^e$$
+Konstanti sta torej pomika v vozliščih KE![[ue.png]]
 
-Za izpeljavo sistema enačb za 2-vozliščni KE bomo predpostavili, da je KE:
+Predpostavimo, da je KE:
 - konstantnega prereza ($A(x_e) = A_0$)
 - konstantnih materialnih lastnosti ($E(x_e) = E_0$ in $\alpha(x_e) = \alpha_0$)
 
-Lahko zapišemo šibko obliko integralske formulacije : $$E_0A_0\int_0^{L_e}\frac{d\hat{u}_e}{dx_e}\frac{dv}{dx_e}dx_e = N_e(L_e)v(L_e) - N_e(0)v(0) + \int_0^{L_e}n(x_e)v(x_e)dx_e + \int_0^{L_e} E_0A_0\alpha_0\Delta T \frac{dv}{dx_e}dx_e$$
-V enačbi predstavljata vrednosti $N(0)$ in $N(L_e)$ vozliščne vrenosti notranje osne sile v vozliščih KE: $$N_e(0) = N_1^e\space;\space N_e(L_e) = N_2^e$$![[ne.png]]
+Šibka oblika integralske formulacije : $$E_0A_0\int_0^{L_e}\frac{d\hat{u}_e}{dx_e}\frac{dv}{dx_e}dx_e = N_e(L_e)v(L_e) - N_e(0)v(0) + \int_0^{L_e}n(x_e)v(x_e)dx_e + \int_0^{L_e} E_0A_0\alpha_0\Delta T \frac{dv}{dx_e}dx_e$$
+$N(0)$ in $N(L_e)$ sta vozliščni vrednosti notranje osne sile: $$N_e(0) = N_1^e\space;\space N_e(L_e) = N_2^e$$![[ne.png]]
 
-V enačbi upoštevajmo aproksimacijo primarne spremenljivke $\hat{u_e}(x_e)$ : $$\begin{multline}E_0A_0\int_0^{L_e}\frac{d}{dx_e}[U_1^e(1-\frac{x_e}{L_e}) + U_2^e(\frac{x_e}{L_e})]\frac{dv}{dx_e}dx_e = \\ = N_2^ev(L_e) - N_1^ev(0) + \int_0^{L_e}n(x_e)v(x_e)dx_e + \int_0^{L_e} E_0A_0\alpha_0\Delta T \frac{dv}{dx_e}dx_e\end{multline}$$ V levem delu enačbe lahko izraz še integriramo.
+Vstavimo aproksimacijo, za katero je $\frac{d\hat{u}_e}{dx_e} = U_1^e(-\frac{1}{L_e}) + U_2^e(\frac{1}{L_e})$ : $$\begin{aligned}&E_0A_0[U_1^e(-\frac{1}{L_e}) + U_2^e(\frac{1}{L_e})]\int_0^{L_e}\frac{dv}{dx_e}dx_e = \\ &= N_2^ev(L_e) - N_1^ev(0) + \int_0^{L_e}n(x_e)v(x_e)dx_e + \int_0^{L_e} E_0A_0\alpha_0\Delta T \frac{dv}{dx_e}dx_e\end{aligned}$$
 
-V zapisani obliki imamo 4 vozliščne vrednosti KE:
-- $U_1^e$
-- $U_2^e$
-- $N_1^e$
-- $N_2^e$
-Za te 4 neznanke potrebujemo 4 enačbe. 2 enačbi (vodilna enačba problema je DE 2. reda) izhajata iz poznanih vrednosti primarne ali sekundarne spremenljivke na robu območja KE - v vozliščih KE.
+V enačbi so 4 neznanke: $U_1^e$, $U_2^e$, $N_1^e$, $N_2^e$. 2 enačbi (vodilna enačba je DE 2. reda) izhajata iz poznanih vrednosti primarne ali sekundarne spremenljivke v vozliščih KE.
 
-Manjkajoči 2 enačbi dobimo z izbiro poljubne funkcije $v(x_e)$. V skladu z **Galerkinovim** pristopom izbire poljubne funkcije izberemo 2 funkciji, ki sta bili uprabljeni v aproksimaciji primarne spremenljivke $\hat{u}_e(x_e)$ : $$v_1(x_e) = \hat{\Psi}_0^e(x_e) = 1 - \frac{x_e}{L_e}$$ $$v_2(x_e) = \hat{\Psi}_1^e(x_e) = \frac{x_e}{L_e}$$
-Te 2 funkciji vstavimo v zgoraj zapisano obliko šibke integralske formulacije:
+Manjkajoči 2 enačbi dobimo z izbiro poljubne funkcije $v(x_e)$. Po **Galerkinovem** pristopu izberemo funkciji, uporabljeni v aproksimaciji $\hat{u}_e(x_e)$ : $$v_1(x_e) = \hat{\Psi}_0^e(x_e) = 1 - \frac{x_e}{L_e}$$ $$v_2(x_e) = \hat{\Psi}_1^e(x_e) = \frac{x_e}{L_e}$$
 
-1. enačba : $$\begin{multline}E_0A_0[U_1^e(-\frac{1}{L_e}) + U_2^e(\frac{1}{L_e})]\int_0^{L_e}\frac{dv_1}{dx_e}dx_e =\\= N_2^ev_1(L_e) - N_1^ev_1(0) + \int_0^{L_e}n(x_e)v_1(x_e)dx_e + \int_0^{L_e} E_0A_0\alpha_0\Delta T \frac{dv_1}{dx_e}dx_e\end{multline}$$
-Enačbo lahko preuredimo in jo zapušemo v naslednji obliki : $$\frac{E_0A_0}{L_e}[U_1^e - U_2^e] = -N_1^e + \int_0^{L_e}n(1-\frac{x_e}{L_e})dx_e + \int_0^{L_e}E_0A_0\alpha_0\Delta T(-\frac{1}{L_e})dx_e$$
-Na enak način izpeljemo tudi 2. enačbo upoštevajoč $v(x_e) = v_2(x_e)$ : $$\frac{E_0A_0}{L_e}[-U_1^e + U_2^e] = N_2^e + \int_0^{L_e}n(\frac{x_e}{L_e})dx_e + \int_0^{L_e}E_0A_0\alpha_0\Delta T(\frac{1}{L_e})dx_e$$
-Dobljeni enačbi lahko zapišemo v matrični obliki : 
+1. enačba ($v = v_1$, $\frac{dv_1}{dx_e} = -\frac{1}{L_e}$, $v_1(0) = 1$, $v_1(L_e) = 0$) : $$\frac{E_0A_0}{L_e}[U_1^e - U_2^e] = -N_1^e + \int_0^{L_e}n(1-\frac{x_e}{L_e})dx_e + \int_0^{L_e}E_0A_0\alpha_0\Delta T(-\frac{1}{L_e})dx_e$$
+2. enačba ($v = v_2$, $\frac{dv_2}{dx_e} = \frac{1}{L_e}$, $v_2(0) = 0$, $v_2(L_e) = 1$) : $$\frac{E_0A_0}{L_e}[-U_1^e + U_2^e] = N_2^e + \int_0^{L_e}n(\frac{x_e}{L_e})dx_e + \int_0^{L_e}E_0A_0\alpha_0\Delta T(\frac{1}{L_e})dx_e$$
+Matrična oblika : 
 $$\frac{E_0A_0}{L_e}\begin{bmatrix} 1 &-1 \\ -1 &1 \end{bmatrix} \begin{pmatrix} U_1^e \\ U_2^e \end{pmatrix} = \begin{pmatrix} -N_1^e \\ N_2^e \end{pmatrix} + \begin{pmatrix} F_1^e \\ F_2^e \end{pmatrix}$$
+kjer je $F_i^e = F_{in}^e + F_{iT}^e$ (vprašanji 12 in 13). Togostna matrika KE je simetrična in odvisna le od geometrije in materiala KE.
 ![[matrix.png]]
 
 ### 12. Kako se upošteva porazdeljena obremenitev po območju KE pri MKE?
 
-Porazdeljena obremenitev se upošteva na vozliščh KE, kot ekvivalentna sila izračunana kot : $$F_{1n}^e = \int_0^{L_e}n(1-\frac{x_e}{L_e})dx_e$$ in $$F_{2n}^e = \int_0^{L_e}n(\frac{x_e}{L_e})dx_e$$
+Kot ekvivalentni sili v vozliščih KE : $$F_{1n}^e = \int_0^{L_e}n(1-\frac{x_e}{L_e})dx_e$$ in $$F_{2n}^e = \int_0^{L_e}n(\frac{x_e}{L_e})dx_e$$
+Za konstantno $n = n_0$ je $F_{1n}^e = F_{2n}^e = \frac{n_0L_e}{2}$: rezultanta $n_0L_e$ se razdeli na obe vozlišči.
 ### 13. Kako je zajet vpliv temperaturne obremenitve pri MKE?
 
-Prav tako je zajet kot ekvivalentna sila v vozliščih in sicer po enačbah : $$F_{1T}^e = \int_0^{L_e}E_0A_0\alpha_0\Delta T(x_e)(-\frac{1}{L_e})dx_e$$
+Kot ekvivalentni sili v vozliščih, ki povzročita enak raztezek KE kot sprememba temperature : $$F_{1T}^e = \int_0^{L_e}E_0A_0\alpha_0\Delta T(x_e)(-\frac{1}{L_e})dx_e$$
 in $$F_{2T}^e = \int_0^{L_e}E_0A_0\alpha_0\Delta T(x_e)(\frac{1}{L_e})dx_e$$
+Za konstantno $\Delta T = \Delta T_0$ je $F_{1T}^e = -E_0A_0\alpha_0\Delta T_0$ in $F_{2T}^e = +E_0A_0\alpha_0\Delta T_0$.
 ### 14. Opiši postopek reševanja z MKE.
 
-Najprej določimo aproksimacijsko funkcijo pomika $\hat{u}_e(x_e)$ po formuli: 
-
-$$
-u_e(x) = \sum_{i=0}^{N_e-1} a_i^{e} \Psi_i^{e} (x)
-$$
-
-Pri tem naj velja:
-
-$$
-\Psi_i^{e}(x_e) = 
-\begin{cases} 
-1, & \text{za } x_i = x_k \\
-0, & \text{za } x_i \neq x_k 
-\end{cases}
-$$
-
-Ko imamo izbrano aproksimacijsko rešitev $\hat{u}_e(x_e)$ , jo vstavimo v šibko obliko integralske formulacije. V dvo-vozliščnem problemu imamo 4 nezanke in potrebujemo 4 enačbe. Dve enačbi dobimo iz robnih pogojev - vrednosti primarne ali sekundarne spremenljivke na vozliščih KE. Drugi 2 pa dobimo z izbiro poljubnih funkcij $v_1$ in $v_2$. Izberemo jih po Galerkinovem pristopu - enake funkcije kot aproksimacijski funkciji. Funckij $v_1(x_e)$ in $v_2(x_e)$ vstavimo v šibko integralsko formulacijo. Tako dobimo sistem 2 enačb:
-
-$$
-\frac{E_0A_0}{L_e}\begin{bmatrix} 1 &-1 \\ -1 &1 \end{bmatrix} \begin{Bmatrix} U_1^e \\ U_2^e \end{Bmatrix} = \begin{Bmatrix} -N_1^e \\ N_2^e \end{Bmatrix} + \begin{Bmatrix} F_1^e \\ F_2^e \end{Bmatrix}
-$$
+1. Geometrijski model: območje razdelimo na KE, vozlišča podamo s koordinatami v globalnem K.S.
+2. Na vsakem KE aproksimiramo primarno spremenljivko $\hat{u}_e(x_e) = \sum_{k=0}^{N_e-1} a_k^{e} \hat{\Psi}_k^{e} (x_e)$ (koeficienti $a_k^e$ so vozliščni pomiki) in jo vstavimo v šibko obliko integralske formulacije.
+3. Funkcije $v(x_e)$ izberemo po Galerkinu ($v_k = \hat{\Psi}_k^e$). Za 2-vozliščni KE dobimo sistem KE: $$\frac{E_0A_0}{L_e}\begin{bmatrix} 1 &-1 \\ -1 &1 \end{bmatrix} \begin{Bmatrix} U_1^e \\ U_2^e \end{Bmatrix} = \begin{Bmatrix} -N_1^e \\ N_2^e \end{Bmatrix} + \begin{Bmatrix} F_1^e \\ F_2^e \end{Bmatrix}$$
+4. Izračunamo obremenitve KE $F_i^e = F_{in}^e + F_{iT}^e$ (porazdeljena in temperaturna obremenitev).
+5. Sisteme KE sestavimo v globalni sistem (pri več KE ob upoštevanju konsistentnosti prehoda).
+6. Upoštevamo robne pogoje: v vsakem robnem vozlišču je znan pomik ali sila.
+7. Rešimo sistem in dobimo neznane pomike in sile v vozliščih.
+8. Po območju KE izračunamo $\hat{u}_e(x_e)$, deformacijo $\varepsilon_{xx} = \frac{d\hat{u}_e}{dx_e}$, osno silo $N = E_0A_0(\frac{d\hat{u}_e}{dx_e} - \alpha_0\Delta T)$ in napetost $\sigma_{xx} = E_0(\frac{d\hat{u}_e}{dx_e} - \alpha_0\Delta T)$. Pri 2-vozliščnem KE so te veličine po KE konstantne.
 
 ## ***PREDAVANJE 6 : MKE + MRE***
 
@@ -485,245 +466,211 @@ $$
 
 ![[pkp.png]]
 
-Neznane vrednosti primarne spremenjivke $u(x)$ se nanašajo na vozlišča KE. Njihova vrednost zaradi sovpadanja globalne - $X$ in lokalne - $x_e$ koordinatne osi v obravnavanem primeru (slika zgoraj), ne zavisi od lokalnega koordinatnega sistema. Upoštevajoč še pogoj konisistentnega prehoda primarne spremenljivke v vozlišču 2 lahko zapišemo : $$U_1^1 = U_1\space;\space U_2^1 = U_2^2 = U_2\space;\space U_3^2 = U_3$$
-Iz slike lahko ugotovimo, da ima v globalnem koordinantnem sistemu problem 3 neznane vrednosti primarne spremenljivke.
+Pogoje konsistentnega prehoda upoštevamo za primarno in za sekundarno spremenljivko v vozlišču, ki je skupno dvema KE.
 
-Če upoštevamo neznane vrednosti primarne spremenljivke v globalnem koordinantnem sistemu, ter sovpadanje globalnega in lokalnega koordinantnega sistema, lahko zapišemo razširjen sistem enačb (sistem upošteva vse 3 neznane primarne spremenljivke na vsakem končnem elementu) : 
+**Primarna spremenljivka** (zveznost pomika): skupno vozlišče ima en sam pomik. Ker globalna os $X$ in lokalni osi $x_e$ sovpadata, velja : $$U_1^1 = U_1\space;\space U_2^1 = U_2^2 = U_2\space;\space U_3^2 = U_3$$
+Problem ima tako 3 neznane vrednosti primarne spremenljivke. Sistem vsakega KE razširimo na vse 3 globalne neznanke:
 
 ![[pkp.png]]
 
 **KE 1** : $$\frac{E_0A_0}{L_1}\begin{bmatrix} 1&-1&0\\-1&1&0\\0&0&0 \end{bmatrix}\begin{Bmatrix}U_1\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} -N_1^1\\N_2^1\\0\end{Bmatrix} + \begin{Bmatrix} F_{1n}^1\\F_{2n}^1\\0\end{Bmatrix}$$
 **KE 2** : $$\frac{E_0A_0}{L_2}\begin{bmatrix}0&0&0\\0&1&-1\\0&-1&1\end{bmatrix}\begin{Bmatrix}U_1\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} 0\\-N_2^2\\N_3^2\end{Bmatrix} + \begin{Bmatrix} 0\\F_{2n}^2\\F_{3n}^2\end{Bmatrix}$$
-Ker v obeh enačbah nastopajo enake 3 neznanke lahko enačbi seštejemo z malo preoblikovanja dobimo obliko enačbe : $$E_0A_0\begin{bmatrix}\frac{1}{L_1}&-\frac{1}{L_1}&0\\-\frac{1}{L_1}&\frac{1}{L_1}+\frac{1}{L_2}&-\frac{1}{L_2}\\0&-\frac{1}{L_2}&\frac{1}{L_2}\end{bmatrix}\begin{Bmatrix}U_1\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} -N_1^1\\N_2^1-N_2^2\\N_3^2\end{Bmatrix} + \begin{Bmatrix}F_{1n}^1\\F_{2n}^1 + F_{2n}^2\\F_{3n}^2\end{Bmatrix}$$
-Ta sistem enačb se nanaša na celotno območje problema.
-
-V sistemu enačb je v splošnem toliko enačb ($N_{en}$), kolikor je vozlišč KE ($N_v$), pomnoženo s številom primarnih neznank ($N_n$) v posameznem vozlišču: $$N_{en} = N_v\space N_n$$
-Torej imamo v primeru 3 vozlišča KE in 1 primarno neznanko, pomik v smeri osi elementa, kar rezultira v sistem 3 enačb. V zapisanem sistemu pa imamo skupno 7 neznank ($U_1,U_2,U_3, N_1^1, N_2^1, N_2^2, N_3^2$)
+Ker v obeh sistemih nastopajo iste neznanke, ju seštejemo : $$E_0A_0\begin{bmatrix}\frac{1}{L_1}&-\frac{1}{L_1}&0\\-\frac{1}{L_1}&\frac{1}{L_1}+\frac{1}{L_2}&-\frac{1}{L_2}\\0&-\frac{1}{L_2}&\frac{1}{L_2}\end{bmatrix}\begin{Bmatrix}U_1\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} -N_1^1\\N_2^1-N_2^2\\N_3^2\end{Bmatrix} + \begin{Bmatrix}F_{1n}^1\\F_{2n}^1 + F_{2n}^2\\F_{3n}^2\end{Bmatrix}$$
+Ta sistem 3 enačb se nanaša na celotno območje in ima 7 neznank ($U_1,U_2,U_3, N_1^1, N_2^1, N_2^2, N_3^2$).
 ![[pkp.png]]
 
-3 enačbe imamo že v sistemu enačb, dodatne enačbe pa dobimo:
-- 1. robni pogoj : $U_1 = 0$
-- 2. robni pogoj : $N_3^2 = 0$
-Upoštevamo še porazdeljeno obremenitev $n(x) = n_0$. Še enkrat zapišemo sistem enačb: $$E_0A_0\begin{bmatrix}\frac{1}{L_1}&-\frac{1}{L_1}&0\\-\frac{1}{L_1}&\frac{1}{L_1}+\frac{1}{L_2}&-\frac{1}{L_2}\\0&-\frac{1}{L_2}&\frac{1}{L_2}\end{bmatrix}\begin{Bmatrix}0\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} -N_1^1\\N_2^1-N_2^2\\0\end{Bmatrix} + \begin{Bmatrix}-\frac{n_0L_1}{2}\\-\frac{n_0(L_1+L_2)}{2}\\-\frac{n_0L_2}{2}\end{Bmatrix}$$
-Pri čemer imamo sedaj 5 neznank ($U_2, U_3, N_1^1, N_2^1, N_2^2$).
+Robna pogoja $U_1 = 0$ in $N_3^2 = 0$ odpravita 2 neznanki.
 
-Če upoštevamo pogoj konsistentosti prehoda (ravnotežje sil na prehodu med območji) nad sekundarno spremenljivko v vozlišču 2 lahko zapišemo  :  $$-N_2^1 + N_2^2 + F_0 - n_0dx_1 - n_0dx_2 = 0 \rightarrow N_2^1 - N_2^2 = F_0$$
+**Sekundarna spremenljivka** (ravnotežje sil v vozlišču 2, $dx_1, dx_2 \rightarrow 0$) :  $$-N_2^1 + N_2^2 + F_0 - n_0dx_1 - n_0dx_2 = 0 \rightarrow N_2^1 - N_2^2 = F_0$$
 ![[pkp_2.png]]
 
-Iz slike je razvidno, da se pogoji konistentnega prehoda upoštevajo kot statično ravnotežje notranjih in zunanjih sil na meji med KE. Konsistentnost primarne spremenljivke pa smo upoštevali že na začetku v sami formulaciji sistema enačb : 
-$$U_1^1 = U_1\space;\space U_2^1 = U_2^2 = U_2\space;\space U_3^2 = U_3$$
-Vidimo, da smo 2 neznani vrednosti nadomestili s $F_0$.  S tem imamo v sistemu enačb le še 3 neznanke($U_2,U_3,N_1^1$) - kar pomeni, da lahko sistem enačb rešimo : $$E_0A_0\begin{bmatrix}\frac{1}{L_1}&-\frac{1}{L_1}&0\\-\frac{1}{L_1}&\frac{1}{L_1}+\frac{1}{L_2}&-\frac{1}{L_2}\\0&-\frac{1}{L_2}&\frac{1}{L_2}\end{bmatrix}\begin{Bmatrix}0\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} -N_1^1\\F_0\\0\end{Bmatrix} + \begin{Bmatrix}-\frac{n_0L_1}{2}\\-\frac{n_0(L_1+L_2)}{2}\\-\frac{n_0L_2}{2}\end{Bmatrix}$$
+Pogoj konsistentnega prehoda za sekundarno spremenljivko je torej statično ravnotežje notranjih in zunanjih sil na meji med KE. Neznani sili $N_2^1$ in $N_2^2$ smo nadomestili z znano silo $F_0$. Ostanejo 3 neznanke ($U_2,U_3,N_1^1$) in sistem je rešljiv (za $n(x) = n_0$): $$E_0A_0\begin{bmatrix}\frac{1}{L_1}&-\frac{1}{L_1}&0\\-\frac{1}{L_1}&\frac{1}{L_1}+\frac{1}{L_2}&-\frac{1}{L_2}\\0&-\frac{1}{L_2}&\frac{1}{L_2}\end{bmatrix}\begin{Bmatrix}0\\U_2\\U_3\end{Bmatrix} = \begin{Bmatrix} -N_1^1\\F_0\\0\end{Bmatrix} + \begin{Bmatrix}-\frac{n_0L_1}{2}\\-\frac{n_0(L_1+L_2)}{2}\\-\frac{n_0L_2}{2}\end{Bmatrix}$$
 
 
 ### 2. Opišite značilnosti sistema linearnih enačb, ki ga dobimo z MKE.
 
-Sistem enačb razširimo na vse prostostne stopnje $N_e = N_v  N_n$ (to je število vozlišč pomnoženo z številom **primarnih** spremenljivk v posameznem vozlišču).
-
-Ko naredimo to rabimo upoštevati robne pogoje problema in pa tudi pogoje konsistentnega prehoda - glej izpeljavo v prejšnjem vprašanju. 
-
-Omembe vredno je tudi, da če primerjamo vektor pomikov in vekor notranjih osnih sil vidimo, da veličine nastopajo v konjugiranih parih. Torej, če je pomik neznan, je znana notranja osna sila in obratno. Za primer v prejšnjem vprašanju velja ta zveza. $$\begin{Bmatrix} U_1 = 0\\U_2\\U_3 \end{Bmatrix}\text{   in   } \begin{Bmatrix} -N_1^1\\N_2^1 - N_2^2 = F_0\\N_3^2 = 0\end{Bmatrix}$$
+- Število enačb je enako številu prostostnih stopenj: $N_{en} = N_v  N_n$ (število vozlišč × število **primarnih** neznank v vozlišču).
+- Sistem dobimo s seštevanjem razširjenih sistemov posameznih KE (vsaka enačba vsebuje vse neznanke). Na levi strani dobimo togostno matriko celotne konstrukcije.
+- Togostna matrika je simetrična in pasovna (neničelni členi so ob diagonali). Odvisna je le od geometrije in materiala, ne od robnih pogojev.
+- Pred reševanjem upoštevamo robne pogoje in pogoje konsistentnega prehoda (prejšnje vprašanje).
+- Pomik in notranja osna sila v vozlišču nastopata v konjugiranih parih: če je pomik neznan, je sila znana, in obratno. Za primer iz prejšnjega vprašanja: $$\begin{Bmatrix} U_1 = 0\\U_2\\U_3 \end{Bmatrix}\text{   in   } \begin{Bmatrix} -N_1^1\\N_2^1 - N_2^2 = F_0\\N_3^2 = 0\end{Bmatrix}$$
+- Enačbe z znanim pomikom izločimo. Ostane simetričen sistem za neznane pomike, rešljiv npr. s Cholesky razcepom. Sekundarne veličine nato izračunamo iz sistemov posameznih KE.
 ### 3. Kako določimo funkcijo $v(x)$ v primeru MRE?
 
-MRE - metoda robnih elementov izvira iz inverzne oblike integralske formulacije: $$\int_0^L \hat{u}(x) \tilde{D}^2 v(x) dx = u(x) \tilde{D}^1v(x) \biggr{|}_0^L - N(x)v(x)\biggr{|}_0^L + \int_0^L f(x)v(x) dx - \int_0^Lf_T(x)\frac{dv(x)}{dx}dx$$
-Osnovno aproksimacijo $\hat{u}_x$ izvedemo na robu analiziranega območja. V primeru 1D primera je to v $x=0$ in v $x=L$:
+MRE izhaja iz inverzne oblike integralske formulacije: $$\int_0^L \hat{u}(x) \tilde{D}^2 v(x) dx = u(x) \tilde{D}^1v(x) \biggr{|}_0^L - N(x)v(x)\biggr{|}_0^L + \int_0^L f(x)v(x) dx - \int_0^Lf_T(x)\frac{dv(x)}{dx}dx$$
+Aproksimacijo $\hat{u}$ izvedemo le na robu območja. V 1D sta to točki $x=0$ in $x=L$, aproksimacijski vrednosti $\hat{u}_1$, $\hat{u}_2$ sta konstanti:
 ![[mkr_meje.png]]
-To naredimo tako, da sta aproksimacijski vrednosti v robnih točkah konstanti. 
 
-Funkcijo $v_k(x)$ dobimo iz rešitve diferencialne enačbe:$$\tilde{D}^2v_k(x) = \delta(x-x_k)$$
-v posameznih točkah $x_k$, pri čemer je $\delta(x)$ Dirac-ova funkcija z lastnostjo :$$\delta (x-x_k) = \begin{cases} \delta(x-x_k) = 0 & \text{if } x \neq x_k \\ \int_0^L \delta (x-x_k)dx  = & \begin{cases} 1 & \text{if } x_k \in (0,L)\\\frac{1}{2} & \text{if } x_k = 0 \lor x_k = L \end{cases}\end{cases}$$
-Za osno obremenjeni primer lahko zapišemo diferencialni operator: $$\tilde{D}^2 = \frac{d}{dx}\biggr{(}E(x)A(x)\biggr{(}\frac{d}{dx}\biggr{)}\biggr{)}$$
-Enačbi združimo in zapišemo novo enačbo:$$\frac{d}{dx}\biggr{(}E(x)A(x)\biggr{(}\frac{dv_k(x)}{dx}\biggr{)}\biggr{)} = \delta (x - x_k)$$
-Po integraciji zgornje enačbe dobimo: $$E(x)A(x)\biggr{(}\frac{dv_k(x)}{dx}\biggr{)} = H(x-x_k) + C_0$$
-kjer je $H(x-x_k)$ Heaviside-ova koračna funkcija, definirana s predpisom: $$H(x-x_k) = \begin{cases} 1 & x>x_k\\ \frac{1}{2} & x=x_k\\0&x<x_k\end{cases}$$
-Ko je argument funkcije negativen funkcija vrne vrednost 0, ko pa je pozitiven funkcija vrne vrednost 1.
-
-Funckijo lahko vidimo na sliki: 
+Funkcijo $v_k(x)$ dobimo iz rešitve diferencialne enačbe z Diracovo funkcijo (vprašanje 4) na desni strani:$$\tilde{D}^2v_k(x) = \frac{d}{dx}\biggr{(}E(x)A(x)\frac{dv_k(x)}{dx}\biggr{)} = \delta (x - x_k)$$
+Po prvi integraciji dobimo: $$E(x)A(x)\frac{dv_k(x)}{dx} = H(x-x_k) + C_0$$
+kjer je $H(x-x_k)$ Heavisideova funkcija (vprašanje 5):
 ![[hevi.png]]
 
-Iz enačbe lahko izrazimo $\frac{dv_k}{dx}$ in jo še enkrat integriramo. Dobimo : $$v_k(x) = \int\frac{H(x-x_k) + C_0}{E(x)A(x)}dx$$
-V primeru ko sta $A(x)$ in $E(x)$ konstantna je funkcija $v(x)$ enaka : $$v_k(x) = \frac{(x-x_k) H(x-x_k)}{E_0A_0} + \frac{C_0x}{E_0A_0} + C_1$$
-Če upoštevamo, da je $v(-\infty) = 0$ sledi, da mora biti vrednost konstant $C_0$ in $C_1$ enaka 0. 
+Po drugi integraciji dobimo $v_k(x) = \int\frac{H(x-x_k) + C_0}{E(x)A(x)}dx$. Za konstanten $E_0A_0$ : $$v_k(x) = \frac{(x-x_k) H(x-x_k)}{E_0A_0} + \frac{C_0x}{E_0A_0} + C_1$$
+Iz pogoja $v_k(-\infty) = 0$ sledi $C_0 = C_1 = 0$: $$v_k(x) = \frac{(x-x_k) H(x-x_k)}{E_0A_0}$$
+Za robno točko 2 ($x_k = L$) uporabimo zrcalno funkcijo $v_2(x) = \frac{(L-x)H(L-x)}{E_0A_0}$.
 
-Dobljeno funkcijo $v_k(x)$ v nadaljevanju uporabimo v inverzni obliki integralske formulacije : $$\begin{multline}\begin{aligned}\int_0^L\hat{u}\frac{d}{dx}\biggr{(}EA\frac{dv_k}{dx}\biggr{)}dx = u(L)\biggr{(}EA\frac{dv_k(L)}{dx}\biggr{)} - u(0)\biggr{(}EA\frac{dv_k(0)}{dx}\biggr{)} - \\- N(L)v_k(L) + N(0)v_k(0) - \int_0^Lnv_kdx - \int_0^LEA\alpha \Delta T\frac{dv_k}{dx}dx \end{aligned}\end{multline}$$
-V zapisani enačbi sta neznanki 2 aproksimacijski vrednosti primarne spremenljivke $\hat{u}$ na robu opazovanega območja - po vrednosti sta enaki $\hat{u}(0)$ in $\hat{u}(L)$. Poleg tega sta neznani tudi vrednosti sekundarne spremenljivke na robovih območja - $N(0)$ in $N(L)$. 
-
-Skupno so torej 4 neznanke. Iz robnih pogojev zapišemo 2 enačbi, preostali 2 pa dobimo z izbiro funkcij $v_{k=1,2}(x)$.
+Funkcijo $v_k(x)$ vstavimo v inverzno obliko integralske formulacije : $$\begin{aligned}\int_0^L\hat{u}\frac{d}{dx}\biggr{(}EA\frac{dv_k}{dx}\biggr{)}dx = {}& u(L)\biggr{(}EA\frac{dv_k(L)}{dx}\biggr{)} - u(0)\biggr{(}EA\frac{dv_k(0)}{dx}\biggr{)} \\ & - N(L)v_k(L) + N(0)v_k(0) - \int_0^Lnv_kdx - \int_0^LEA\alpha \Delta T\frac{dv_k}{dx}dx \end{aligned}$$
+Neznanke so 4: $u(0) = U_1$, $u(L) = U_2$, $N(0) = N_1$ in $N(L) = N_2$. Dve enačbi dajo robni pogoji, dve pa izbira funkcij $v_{k=1,2}(x)$.
 ![[mkr_prim.png]]
 
 ### 4. Definirajte Diracovo funkcijo.
 
-$\delta(x)$ - Dirac-ova (skočna) funkcija z lastnostmi :$$\delta (x-x_k) = \begin{cases} \delta(x-x_k) = 0 & \text{if } x \neq x_k \\ \int_0^L \delta (x-x_k)dx  = & \begin{cases} 1 & \text{if } x_k \in (0,L)\\\frac{1}{2} & \text{if } x_k = 0 \lor x_k = L \end{cases}\end{cases}$$
-$$\int_{-\infty}^{\infty}\delta(x)dx = 1$$
-$$\delta(x-x_k) = \begin{cases} 0 & x\neq x_k\\1 & x=x_k\end{cases}$$
+$\delta(x-x_k)$ je Diracova (impulzna) funkcija z lastnostmi :$$\delta (x-x_k) = 0 \quad\text{za } x \neq x_k$$
+$$\int_0^L \delta (x-x_k)dx = \begin{cases} 1 & \text{za } x_k \in (0,L)\\\frac{1}{2} & \text{za } x_k = 0 \lor x_k = L \end{cases}\qquad \int_{-\infty}^{\infty}\delta(x)dx = 1$$
+Pod integralom izbere vrednost funkcije v točki $x_k$: $$\int_0^L F(x)\,\delta(x-x_k)\,dx = F(x_k)\quad\text{za } x_k\in(0,L)$$
+Je odvod Heavisideove funkcije: $\delta(x-x_k) = \frac{d}{dx}H(x-x_k)$.
 
 ### 5. Definirajte Heavisidovo funkcijo.
 
-$H(x-x_k)$ Heaviside-ova koračna funkcija, definirana s predpisom: $$H(x-x_k) = \begin{cases} 1 & x>x_k\\ \frac{1}{2} & x=x_k\\0&x<x_k\end{cases}$$
-Funckijo lahko vidimo na sliki: 
+$H(x-x_k)$ je Heavisideova koračna funkcija, definirana s predpisom: $$H(x-x_k) = \begin{cases} 1 & x>x_k\\ \frac{1}{2} & x=x_k\\0&x<x_k\end{cases}$$
+Njen odvod je Diracova funkcija: $\frac{d}{dx}H(x-x_k) = \delta(x-x_k)$.
 ![[hevi.png]]
 
 ### 6. Opiši postopek reševanja z MRE.
 
-Poglejmo si postopek reševanja na primeru : 
+Postopek na primeru palice dolžine $L = L_1 + L_2$ s porazdeljeno obremenitvijo $n_0$ (proti osi $x$, zato $n = -n_0$) in točkovno silo $F_0$ pri $x = L_1$:
 ![[primer_mre.png]]
 
-Geometrijski model območja, ki ga obravnavamo z MRE : 
+**1. Geometrijski model**: le robni točki 1 ($x=0$) in 2 ($x=L$). Neznanke so $U_1, U_2, N_1, N_2$.
 ![[mre_geo.png]]
 
-Točkovno obremenitev lahko upoštevamo tako, da jo pomnožimo z Diracovo delta funkcijo : $$f_F(x) = F_0 \space \delta (x-L_1) = \begin{cases}f_F(x) = 0 & x\neq L_1 \\ \int_0^LF_0\space \delta(x-L_1)dx = F_0 &L_1 \in (0,L)\end{cases}$$ 
-Izraz v integralu je podan v enah enotah kot porazdeljena obremenitev $n$. 
+**2. Točkovne obremenitve** zapišemo z Diracovo funkcijo kot porazdeljeno obremenitev (v enakih enotah kot $n$) : $$f_F(x) = F_0 \space \delta (x-L_1)\quad\Rightarrow\quad\int_0^LF_0\space \delta(x-L_1)dx = F_0$$
 
-Naslednji korak je določitev funkcije $v_1(x)$, ki se nanaša na robno točko 1 :  $$v_1(x) = \frac{x H(x)}{E_0A_0} \rightarrow \frac{dv_1(x)}{dx} = \frac{H(x)}{E_0A_0} \rightarrow E_0A_0\frac{d^2v_1(x)}{dx^2} = \delta(x)$$
+**3. Enačba za robno točko 1**: $$v_1(x) = \frac{x H(x)}{E_0A_0} \rightarrow \frac{dv_1(x)}{dx} = \frac{H(x)}{E_0A_0} \rightarrow E_0A_0\frac{d^2v_1(x)}{dx^2} = \delta(x)$$
 ![[obmocje.png]]
-Odvod Heavisideove funkcije je Delta funkcija :  $$\delta(x) = \frac{d}{dx}H(x)$$
-Tako lahko funckijo $v_1(x)$ in njene odvode uporabimo v inverzni obliki integralske formulacije : $$\begin{multline}\begin{aligned}\int_0^L\hat{u}\biggr{(}E_0A_0\frac{d^2v_1}{dx^2}\biggr{)}dx = \\u(L)\biggr{(}E_0A_0\frac{dv_1(L)}{dx}\biggr{)} - u(0)\biggr{(}E_0A_0\frac{dv_1(0)}{dx}\biggr{)}-N(L)v_1(L) + N(0)v_1(0) -  \int_0^L(n+f_F)v_1dx\end{aligned}\end{multline}$$
-Ko upoštevamo funkcijo $v_1(x)$ in njene odvode dobimo naslednjo enačbo : $$\int_0^L\hat{u}\space\delta(x)\space dx = u(L)H(L) - u(0)H(0) - N(L)\frac{LH(L)}{E_0A_0} + N(0)\frac{0H(0)}{E_0A_0} - \int_0^L(n + f_F)\frac{x H(x)}{E_0A_0}dx $$
-Enačbo lahko zaradi lastnoti Diracove ($\int_0^L \delta (x-0) dx = \frac{1}{2}$) in Heavisidove($H(L)=1 \text{  in  } H(0) = \frac{1}{2}$) funkcije in oznake neznank, zapišemo : $$\frac{1}{2}U_1 = U_2 - \frac{1}{2}U_1 - N_2\frac{L}{E_0A_0} + N_1\cdot0 - \int_0^L(n+f_F)\frac{xH(x)}{E_0A_0}dx$$
-V enačbi so 4 neznanke, 2 robni vrednosti primarne spremenljivke $U_1$ in $U_2$, in 2 robni vrednosti sekundarne spremenljivke $N_1$ in $N_2$. Za zapis enačbe v končni obliki potrebujemo izračunati še integral v zgornji enačbi: $$\int_0^L(n+f_F)\frac{xH(x)}{E_0A_0}dx  = \int_0^L-n_0\frac{xH(x)}{E_0A_0}dx + \int_0^LF_0\space\delta (x-L_1)\frac{xH(x)}{E_0A_0}dx$$
-($-n_0$ je zaradi porazdeljene sile, ki kaže v nasprotni smeri K.S)
+Funkcijo $v_1$ vstavimo v inverzno obliko: $$\begin{aligned}\int_0^L\hat{u}\biggr{(}E_0A_0\frac{d^2v_1}{dx^2}\biggr{)}dx = {}&u(L)\biggr{(}E_0A_0\frac{dv_1(L)}{dx}\biggr{)} - u(0)\biggr{(}E_0A_0\frac{dv_1(0)}{dx}\biggr{)} \\ &-N(L)v_1(L) + N(0)v_1(0) -  \int_0^L(n+f_F)v_1dx\end{aligned}$$
+Upoštevamo $\int_0^L \delta(x)\,dx = \frac{1}{2}$, $H(0) = \frac{1}{2}$ in $H(L) = 1$ : $$\frac{1}{2}U_1 = U_2 - \frac{1}{2}U_1 - N_2\frac{L}{E_0A_0} + N_1\cdot0 - \int_0^L(n+f_F)\frac{xH(x)}{E_0A_0}dx$$
+Integral: $$\int_0^L(n+f_F)\frac{xH(x)}{E_0A_0}dx = \int_0^L-n_0\frac{xH(x)}{E_0A_0}dx + \int_0^LF_0\space\delta (x-L_1)\frac{xH(x)}{E_0A_0}dx = \frac{-n_0L^2}{2E_0A_0} + \frac{F_0L_1}{E_0A_0}$$
+Enačba za točko 1 : $$U_1 - U_2 = -\frac{N_2L}{E_0A_0} + \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_1}{E_0A_0}$$
 
-Izračun integralov nam da naslednja rezultata : $$\int_0^L-n_0\frac{xH(x)}{E_0A_0}dx = \frac{-n_0L^2}{2E_0A_0}$$ in $$\int_0^{L}F_0\space\delta(x-L_1)\frac{xH(x)}{E_0A_0}dx = \frac{F_0L_1}{E_0A_0}$$
-Za izbrano robno točko 1 lahko napišemo enačbo : $$U_1 - U_2 = -\frac{N_2L}{E_0A_0} + \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_1}{E_0A_0}$$
-S tem smo zaključili zapis enačbe za robno točko 1. Lahko gremo naprej in določimo funkcijo $v_2(x)$, ki se nanaša na robno točko 2 : 
+**4. Enačba za robno točko 2**:
 $$v_2(x) = \frac{(L-x)H(L-x)}{E_0A_0}\rightarrow\frac{dv_2(x)}{dx} = \frac{-H(L-x)}{E_0A_0}\rightarrow E_0A_0\frac{d^2v_2(x)}{dx^2} = \delta(L-x)$$
 ![[tocka2.png]]
 
-Enako kot prej lahko $v_2(x)$ in njene odvode uporabimo v inverzni integralski obliki : $$\begin{multline}\begin{aligned}\int_0^L\hat{u}\biggr{(}E_0A_0\frac{d^2v_2}{dx^2}\biggr{)}dx = \\u(L)\biggr{(}E_0A_0\frac{dv_2(L)}{dx}\biggr{)} - u(0)\biggr{(}E_0A_0\frac{dv_2(0)}{dx}\biggr{)}-N(L)v_2(L) + N(0)v_2(0) -  \int_0^L(n+f_F)v_2dx\end{aligned}\end{multline}$$
-Z upoštevanjem funkcije dobimo : $$\begin{multline}\int_0^L\hat{u}\space\delta(L-x)\space dx = -u(L)H(L-L) + u(0)H(L-0) - \\N(L)\frac{(L-L)H(L-L)}{E_0A_0} + N(0)\frac{(L-0)H(L-0)}{E_0A_0} - \int_0^L(n + f_F)\frac{(L-x) H(L-x)}{E_0A_0}dx\end{multline}$$
-Še enkrat upoštevamo lastnosti Diracove in Heavisidove funkcije : $$\frac{1}{2}U_2 = -\frac{1}{2}U_2 + U_1 - N_2\cdot0 + N_1\frac{L}{E_0A_0} - \int_0^L(n+f_F)\frac{(L-x)H(L-x)}{E_0A_0}dx$$
-Enako kot prej imamo 4 neznanke - 2 primarni in 2 sekundarni. Da dobimo končno obliko enačbe moramo izračunati še integral : $$ \begin{multline}\int_0^L(n+f_F)\frac{(L-x)H(L-x)}{E_0A_0}dx = \\ =\int_0^L\frac{(L-x)H(L-x)}{E_0A_0}dx + \int_0^LF_0\delta(x-L_1)\frac{(L-x)H(L-x)}{E_0A_0}dx\end{multline}$$
-Izračun integralov da rezultat : $$\int_0^L-n_0\frac{(L-x)H(L-x)}{E_0A_0}dx = \frac{-n_0L^2}{2E_0A_0}$$
-in $$\int_0^LF_0\space\delta(x-L_1)\frac{(L-x)H(L-x)}{E_0A_0}dx = \frac{F_0L_2}{E_0A_0}$$
-Za robno točko 2 zapišemo enačbo : $$U_2 - U_1 = \frac{N_1L}{E_0A_0} + \frac{n_0L^2}{E_0A_0} - \frac{F_0L_2}{E_0A_0}$$
+Enako kot prej vstavimo $v_2$ v inverzno obliko in upoštevamo lastnosti funkcij $\delta$ in $H$ : $$\frac{1}{2}U_2 = -\frac{1}{2}U_2 + U_1 - N_2\cdot0 + N_1\frac{L}{E_0A_0} - \int_0^L(n+f_F)\frac{(L-x)H(L-x)}{E_0A_0}dx$$
+Integral: $$\int_0^L(n+f_F)\frac{(L-x)H(L-x)}{E_0A_0}dx = \frac{-n_0L^2}{2E_0A_0} + \frac{F_0L_2}{E_0A_0}$$
+Enačba za točko 2 : $$U_2 - U_1 = \frac{N_1L}{E_0A_0} + \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_2}{E_0A_0}$$
 
-Za obravnavan primer imamo sistem 2 enačb s štirimi neznankami ($U_1,U_2,N_1,N_2$) : $$U_2 - U_1 = \frac{N_1L}{E_0A_0} + \frac{n_0L^2}{E_0A_0} - \frac{F_0L_2}{E_0A_0}$$ $$U_1 - U_2 = -\frac{N_2L}{E_0A_0} + \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_1}{E_0A_0}$$
+**5. Robni pogoji**: imamo 2 enačbi s 4 neznankami ($U_1,U_2,N_1,N_2$).
 ![[primer_mre_2.png]]
 ![[primer_mre.png]]
- Če upoštevamo robne pogoje, lahko zapišemo še 2 enačbi : $$U_1 = 0$$ $$N_2 = 0$$
- Število neznank se tako zmanjša na 2 ($U_2, N_1$) : $$U_2 - 0 = \frac{N_1L}{E_0A_0} + \frac{n_0L^2}{E_0A_0} - \frac{F_0L_2}{E_0A_0}$$ $$0 - U_2 = -\frac{0\cdot L}{E_0A_0} + \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_1}{E_0A_0}$$
- 
-Tako lahko iz sistema enačbo izračunamo še preostali 2 neznanki : $$U_2 = -\frac{n_0L^2}{2E_0A_0} + \frac{F_0L_1}{E_0A_0}$$ in $$N_1 = U_2\frac{E_0A_0}{L} - \frac{n_0L}{2} + \frac{F_0L_2}{L} = -n_0L+F_0$$
+Robna pogoja $U_1 = 0$ in $N_2 = 0$ zmanjšata število neznank na 2 ($U_2, N_1$) : $$0 - U_2 = \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_1}{E_0A_0}$$ $$U_2 - 0 = \frac{N_1L}{E_0A_0} + \frac{n_0L^2}{2E_0A_0} - \frac{F_0L_2}{E_0A_0}$$
+
+**6. Rešitev**: $$U_2 = -\frac{n_0L^2}{2E_0A_0} + \frac{F_0L_1}{E_0A_0}$$ in $$N_1 = U_2\frac{E_0A_0}{L} - \frac{n_0L}{2} + \frac{F_0L_2}{L} = -n_0L+F_0$$
 Vrednosti sta enaki eksaktni rešitvi.
 
-Izračunali smo vrednosti na robovih primera. Zdaj rabimo izračunati še vrednost primarne spremenljivke med robnima točkama, kjer deluje sila $F_0$. 
+**7. Vrednosti v notranjosti** izračunamo naknadno, za vsako točko posebej. Za točko T pri $x = L_1$:
 ![[T.png]]
-Ponovno zapišemo inverzno integralsko obliko - le da tokrat za funkcijo $v_T(x)$ izberemo :$$v_T(x) = \frac{(x-L_1)H(x-L_1)}{E_0A_0} \rightarrow \frac{dv_T(x)}{dx}=\frac{H(x-L_1)}{E_0A_0}\rightarrow E_0A_0\frac{d^2v_T(x)}{dx^2} = \delta(x-L_1)$$ Inverzna oblika integralske formulacije ima sledečo obliko : $$\begin{multline}\int_0^L\hat{u}\space\delta(x-L_1)dx = \\ =u(L)H(L-L_1) - u(0)H(0-L_1) - N(L)\frac{(L-L_1)H(L-L_1)}{E_0A_0} + \\ +N(0)\frac{(0-L_1)H(0-L_1)}{E_0A_0}-\int_0^L(n+f_F)\frac{(x-L_1)H(x-L_1)}{E_0A_0}dx\end{multline}$$
-Enako kot prej upoštevamo lastnosti Diracove in Heavisidove funkcije : $$\begin{multline}u(L_1) = U_T = U_2\cdot1 - U_1\cdot0 - N_2\frac{L-L_1}{E_0A_0} + N_1\frac{-L_1\cdot0}{E_0A_0} - \int_0^L(n+f_F)\frac{(x-L_1)H(x-L_1)}{E_0A_0}dx = \\=U_2- \int_0^L(n+f_F)\frac{(x-L_1)H(x-L_1)}{E_0A_0}dx\end{multline}$$
-Vrednost integrala v izrazu je enaka : $$\int_0^L(n+f_F)\frac{(x-L_1)H(x-L_1)}{E_0A_0}dx = -\frac{n_0(L-L_1)^2}{2E_0A_0} + 0$$
-Torej je izraz za izračun pomika v točki T enak : 
-$$U_T = U_2 + \frac{n_0(L-L_1)^2}{2E_0A_0} = -\frac{n_0L^2}{2E_0A_0} + \frac{F_0L_1}{E_0A_0} + \frac{n_0(L-L_1)^2}{2E_0A_0} = -\frac{n_0(L_1 + 2L_2)L_1}{2E_0A_0} + \frac{F_0L_1}{E_0A_0}$$
-
+$$v_T(x) = \frac{(x-L_1)H(x-L_1)}{E_0A_0} \rightarrow \frac{dv_T(x)}{dx}=\frac{H(x-L_1)}{E_0A_0}\rightarrow E_0A_0\frac{d^2v_T(x)}{dx^2} = \delta(x-L_1)$$
+Ker je $\int_0^L\hat{u}\,\delta(x-L_1)dx = u(L_1)$, $H(L-L_1) = 1$, $H(0-L_1) = 0$ in $N_2 = 0$, iz inverzne oblike sledi : $$u(L_1) = U_T = U_2 - N_2\frac{L-L_1}{E_0A_0} - \int_0^L(n+f_F)\frac{(x-L_1)H(x-L_1)}{E_0A_0}dx = U_2 + \frac{n_0(L-L_1)^2}{2E_0A_0}$$
+Torej je pomik v točki T : 
+$$U_T = -\frac{n_0L^2}{2E_0A_0} + \frac{F_0L_1}{E_0A_0} + \frac{n_0(L-L_1)^2}{2E_0A_0} = -\frac{n_0(L_1 + 2L_2)L_1}{2E_0A_0} + \frac{F_0L_1}{E_0A_0}$$
 Tudi ta vrednost je enaka eksaktni rešitvi.
 ### 7. Primerjajte MKR in MKE.
 
-MKE je aproksimativna metoda, ki temelji na šibki inegralski formulaciji, kar pomeni da je rešitev DE definirana na celotnem opazovanem območju. MKR  je definirana oz. izpolnjuje DE le v diskretnih točkah. 
+MKR izhaja iz osnovne oblike integralske formulacije ($v_k = \delta(x-x_k)$) in izpolnjuje DE le v diskretnih točkah. MKE temelji na šibki obliki ($v_k = \hat{\Psi}_k$); aproksimacija je definirana na celotnem območju.
 
-Zaradi uporabe centralne diferenčne sheme potrebujemo za določitev R.P. pri MKR dodatne točke na robovih opazovanega območja.
+Pri MKR potrebujemo zaradi centralne diferenčne sheme za robne pogoje z odvodom dodatne točke izven območja. Pri MKE so robne vrednosti sekundarne spremenljivke neposredno v šibki obliki.
 
-Pri MKE z robnimi pogoji lahko eksaktno izpolnimo tako primarno kot sekundarno spremenljivko, medtem ko pri MKR sekundarno spremenljvko izpolnimo aproksimativno. Enako velja tudi na prehodu med polji (sekundarna spremenljivka in pogoji prehoda)
+Pri MKE robne pogoje za primarno in sekundarno spremenljivko izpolnimo eksaktno. Pri MKR robni pogoj za sekundarno spremenljivko izpolnimo le aproksimativno. Enako velja za pogoje prehoda med podobmočji: MKE jih izpolni eksaktno (ravnotežje sil v vozlišču), MKR potrebuje dodatne točke.
 ### 8. Primerjajte MKR in MRE.
 
-MRE je aproksimativna metoda, ki temelji na inverzni integralski formulaciji, ki omogoča izpolnjevanje (popis - ni nujno, da je rešitev eksaktna) DE na celotnem opazovanem območju. MKR temelji na diferenčni shemi, ki DE izpolnjuje le v disktertnih točkah.
+MRE temelji na inverzni obliki integralske formulacije; DE je popisana na celotnem območju (rešitev ni nujno eksaktna). MKR temelji na diferenčni shemi, ki DE izpolnjuje le v diskretnih točkah.
 
-Slabost MRE je, da potrebujemo za izračun notranjih vrednosti izvajati dodatne operacije (potrebna še ena formula $v(x)$). Pri MKR so notranje vrednosti znane takoj po izračunu. 
+MRE ima neznanke le na robu območja, zato je sistem majhen, a z polno matriko. Vrednosti v notranjosti mora izračunati naknadno, za vsako točko z dodatno funkcijo $v_T(x)$. Pri MKR so notranje vrednosti znane takoj po rešitvi sistema.
 
-Robne pogoje primarne in sekundarne spremenljvke pri MRE izpolnjujemo eksaktno. Pri MKR pa eksaktno izpolnjujemo le primarni spremenljivki.
+Robne pogoje za primarno in sekundarno spremenljivko MRE izpolni eksaktno. MKR eksaktno izpolni le robne pogoje za primarno spremenljivko.
 
-Pogoje prehoda pri MRE upoštevamo z uporabo Diracove funkcije (preračunamo točkovne obremenitve v ekvivalentne porazdeljene obremenitve ? nism ziher). Pri MKR uporabimo dodatne točke za izračun primarne in sekundarne spremenljivke na prehodu. 
+Točkovne obremenitve v notranjosti MRE upošteva z Diracovo funkcijo kot porazdeljeno obremenitev. Območje MRE mora biti iz enega materiala. Pri MKR za prehod med podobmočji uporabimo dodatne točke za primarno in sekundarno spremenljivko.
 ### 9. Primerjajte MKE in MRE
 
-Obe metodi izvirata iz integralske formulacije, kar pomeni, da je rešitev definirana na celotnem območju. Glavna razlika med metodami je sestava sistema enačb, ki ga uporabimo za izračun problema. Togostna matrika je pri MKE diagonalno simetrična - lažje rešljiva. Pri MRE pa je matrika polna, ampak nekoliko manjša.
+Obe metodi izhajata iz integralske formulacije: MKE iz šibke ($v_k = \hat{\Psi}_k$), MRE iz inverzne ($\tilde{D}^2v_k = \delta(x-x_k)$). Rešitev je popisana na celotnem območju.
 
-Rezultat MKE so vrednosti primarne in sekundarne spremenljivke v vseh vozliščih, medtem ko iz MRE dobimo le vrednosti primarne in sekundarne spremenljivke le na robovih območja. 
+Togostna matrika MKE je velika, a simetrična in pasovna, zato je sistem lažje rešljiv. Matrika MRE je manjša (neznanke le na robu), a polna.
 
-V obeh primerih so robni pogoji eksaktno določeni. 
+MKE da vrednosti primarne in sekundarne spremenljivke v vseh vozliščih. MRE da le robne vrednosti, notranje izračunamo naknadno.
 
-Pogoji prehoda so pri MKE eksaktno določeni (primarna in sekundarna spremenljivka). Pri MRE nimamo pogojev prehoda, saj notranje veličine popišemo z Diracovo funkcijo. 
+Pri obeh metodah robne pogoje izpolnimo eksaktno.
+
+Pri MKE ima lahko vsak KE svoje snovne lastnosti, pogoje prehoda pa izpolnimo eksaktno (primarna in sekundarna spremenljivka). Območje MRE mora biti iz enega materiala, točkovne obremenitve v notranjosti pa upoštevamo z Diracovo funkcijo. Metodi lahko tudi kombiniramo.
 
 ## ***PREDAVANJE 7 : PREVOD TOPLOTE***
 
 ### 1. Katere so primarne in sekundarne veličine v primeru obravnave prevoda toplote?
 
-Pri prevodu toplote je primarna spremenljivka **temperatura** $T(x,y,z,t)$ , sekundarna speremenljivka pa je **toplotni tok** $\hat q (x,y,z,t)$ 
+Pri prevodu toplote je primarna spremenljivka **temperatura** $T(x,y,z,t)$, sekundarna spremenljivka pa je **toplotni tok** $\hat q (x,y,z,t)$.
 ### 2. Kako pridemo do zveze med temperaturo in toplotnim tokom?
 
-Termalno stanje v trdnem mediju definira temperaturno polje $T = T(x,y,z,t) [K]$ , ki se v splošnem s časom spreminja. Množica točk $P(x,y,z)$ z enako temperaturo določa časovno spremenljivo **izotermalno ploskev** $T(x,y,z,t) = konst.$  
+Termalno stanje v trdnem mediju definira temperaturno polje $T = T(x,y,z,t) [K]$. Množica točk $P(x,y,z)$ z enako temperaturo določa časovno spremenljivo **izotermalno ploskev** $T(x,y,z,t) = konst.$  
 
 V opazovanem trenutku $t = \tau$ naj bo v točki $P_0 = P(x_0, y_0, z_0)$ temperatura $T_0$ : $$T(x_0,y_0,z_0,\tau) = T_0$$
 ![[toplota.png]]
 
-Točke, ki so v neposredni okolici $P_0$ lahko opišemo tako :  $P = P(x_0 + dx, y_0 + dy, z_0 + dz)$ ležijo na isti izotermalni ploskvi in izkazujejo lastnost : $$\frac{\partial T}{\partial x}dx + \frac{\partial T}{\partial y}dy + \frac{\partial T}{\partial z}dz = 0$$
-Pri čemer so odvodi nanašanjo na točko $P_0 = P(x_0, y_0, z_0)$.
+Za točke $P = P(x_0 + dx, y_0 + dy, z_0 + dz)$ na isti izotermalni ploskvi velja (odvodi v točki $P_0$): $$\frac{\partial T}{\partial x}dx + \frac{\partial T}{\partial y}dy + \frac{\partial T}{\partial z}dz = 0$$
 ![[odvod.png]]
 
-Enačbo $$\frac{\partial T}{\partial x}dx + \frac{\partial T}{\partial y}dy + \frac{\partial T}{\partial z}dz = 0$$ lahko zapišemo tudi kot skalarni produkt : $$grad\space T\cdot d\hat r = 0$$
+To je skalarni produkt : $$grad\space T\cdot d\hat r = 0$$
 kjer sta $$grad\space T = \frac{\partial T}{\partial x}\hat e_x + \frac{\partial T}{\partial y}\hat e_y + \frac{\partial T}{\partial z}\hat e_z = \hat \nabla T$$
 in $$d\hat r = dx \hat e_x + dy \hat e_y + dz\hat e_z$$
 ![[grad.png]]
 
-Očitno je vektor $grad\space T$ v točki $P_0$ usmerjen pravokotno na izotermalno ploskev $T(x_0, y_0,z_0,\tau) = T_0$ v smeri naraščujoče temperature $T(x,y,z,\tau) = T_0 + dT\text{ , }dT>0$ , saj velja : $$dT = \frac{\partial T}{\partial x}dx + \frac{\partial T}{\partial y}dy + \frac{\partial T}{\partial z}dz = grad\space T\cdot d\hat r > 0$$
-enačba nam pove, da oklepata vektorja $grad\space T$ ter $d\hat r$ oster kot ($<90°$). Pri tem vektor $d\hat r$ povezuje točko $P_0 = P(x_0, y_0,z_0)$ na izotermalni ploskvi $T(x,y,z,\tau) = T_0$  in točko $P=P(x,y,z)$ na sosednji izotermalni ploskvi $T(x,y,z,\tau) = T_0 + dT$.
+Vektor $grad\space T$ je torej pravokoten na izotermalno ploskev. Usmerjen je v smeri naraščajoče temperature, saj za točko na sosednji ploskvi $T_0 + dT$, $dT>0$ velja : $$dT = grad\space T\cdot d\hat r > 0$$
+Vektorja $grad\space T$ in $d\hat r$ oklepata oster kot.
 ![[sosednji ploskvi.png]]
 
-Med izotermalnima ploskvama $T(x,y,z,\tau) = T_0$ in $T(x,y,z,\tau) = T_0 + dT$ pride do prenosa energije v obliki ***toplotnega toka***, t.j. količine toplote, ki v časovni enoti prehaja skozi enoto površine izotermalne ploskve. Toplotni tok $\hat q [\frac{J}{sm^2}]$ je določen s *Fourierjevim zakonom* : $$\hat q = -k(grad\space T)$$
-$k[\frac{J}{msK}]$ je snovna lastnost, imenovana ***toplotna prevodnost***. Iz enačbe sledi, da je toplotni tok usmerjen v smeri padajoče temperature.
+Med izotermalnima ploskvama $T_0$ in $T_0 + dT$ se prenaša energija v obliki ***toplotnega toka***, t.j. količine toplote, ki v časovni enoti preide enoto površine izotermalne ploskve. Toplotni tok $\hat q [\frac{J}{sm^2}]$ določa *Fourierjev zakon* : $$\hat q = -k(grad\space T)$$
+$k[\frac{J}{msK}]$ je ***toplotna prevodnost***. Toplotni tok je usmerjen v smeri padajoče temperature. Komponenta v smeri normale $\hat n$ je $\hat q_n = -k\frac{\partial T}{\partial n}\hat n$.
 ![[fourier.png]]
 
 
 ### 3. Izpeljava diferencialne enačbe za 1D prevod toplote.
 
-Analizirajmo prevod toplote v homogenem in izotropnem trdnem telesu, ki ni v termičnem ravnovesju. Začetno temperaturno stanje $T(x,y,z,0) = T_0(x,y,z)$ v času $t=0$, t.j. ob pričetku opazovanja, se zaradi termičnega neravnotežja s časom spreminja $T = T(x,y,z,t)\text{  ,  } t>0$. Na temperaturno stanje v telesu vpliva izmenjava toplote z okolico na mejah telesa ter morebitno generiranje toplote v telesu. Snovna lastnost, ki uravnava hitrost prevoda topote je *toplotna prevodnost - $k$*.
+Obravnavamo homogeno in izotropno trdno telo, ki ni v termičnem ravnovesju, zato se temperatura s časom spreminja. Nanjo vplivata izmenjava toplote z okolico na mejah telesa in morebitno generiranje toplote v telesu.
 
-Diferencialno enačbo problema lahko izpeljemo na osnovi obravnave energijske bilance na diferencialno majhnem volumnu - volumskemu elementu. 
+Enačbo izpeljemo iz energijske bilance na diferencialnem volumskem elementu $dV = dx\space dy\space dz$ v času $dt$.
 ![[izpeljava toplota.png]]
 
-V časovnem intervalu $dt$ v diferencialnem elementu $dV = dx\space dy\space dz$  akumulirana ***notranja energija*** $dU [J]$, ki je enaka v elementu generirani toploti $dQ_V$ ter toploti , ki je prešla ploskve elementa $dQ_A$ :
+Akumulirana ***notranja energija*** $dU$ je enaka vsoti v elementu generirane toplote $dQ_V$ in toplote $dQ_A$, ki je prešla ploskve elementa :
 $$dU = dQ_A + dQ_V$$
-Akumulirana energija $dU$ se izkazuje v spremembi temp. stanja $dT$, njena velikost pa je : $$dU = dm\space c \space dT = \rho \space c \space dT \space dV$$
-kjer sta $\rho [\frac{kg}{m^3}]$ in $c[\frac{J}{kg K}]$ ***specfična gostota*** ter ***specifična toplota***. 
+Akumulirana energija se izkaže v spremembi temperature $dT$ : $$dU = dm\space c \space dT = \rho \space c \space dT \space dV$$
+kjer sta $\rho [\frac{kg}{m^3}]$ ***specifična gostota*** in $c[\frac{J}{kg K}]$ ***specifična toplota***. 
 
-V elementu generirana toplota $dQ_V$ v časovnem intervalu $dt$ je velikosti : $$dQ_V = q_V\space dV\space dt$$
-kjer je $q_V = q_V(x,y,z,t) [\frac{J}{sm^3}]$ prostorsko porazdeljeno polje toplotnih izvirov.
+Generirana toplota : $$dQ_V = q_V\space dV\space dt$$
+kjer je $q_V = q_V(x,y,z,t) [\frac{J}{sm^3}]$ polje toplotnih izvirov.
 
-Toplota $dQ_A$, ki se v časovnem intervalu $dt$ na osnovi prevoda toplote preko ploskev elementa akumulira v element, je velikosti : $$dQ_A = dQ_x + dQ_y + dQ_z$$
-Zdaj lahko analiziramo prispevek prevoda toplote preko ploskev volumskega elementa v $x$-smeri v energijski bilanci : $$dQ^-_x = -k\frac{\partial T}{\partial x}dA_xdt$$ in $$dQ^+_x = -\biggr{[}dQ^-_x + d(dQ^-_x)\biggr{]} = -\biggr{[}-k\frac{\partial T}{\partial x} + \frac{\partial}{\partial x}\biggr{(}-k\frac{\partial T}{\partial x}\biggr{)}dx\biggr{]}dA_xdt$$![[analiza.png]]
+Prevod toplote v $x$-smeri : $$dQ^-_x = -k\frac{\partial T}{\partial x}dA_xdt$$ in $$dQ^+_x = -\biggr{[}dQ^-_x + d(dQ^-_x)\biggr{]} = -\biggr{[}-k\frac{\partial T}{\partial x} + \frac{\partial}{\partial x}\biggr{(}-k\frac{\partial T}{\partial x}\biggr{)}dx\biggr{]}dA_xdt$$![[analiza.png]]
 
-Glede na gradient temperaturnega polja izstopa(A)/vstopa(B) v volumski element na mestu $x=x_0$ skozi ploskev $dA_x = dydz$ toplota $dQ^-_x$, na mestu $x = x_0 + dx$ o
-pa skozi enako ploskev vstopa(A)/izstopa(B) toplota $dQ^+_x$, keterih velikosti v splošnem zaradi prostorskega spreminjanja temp. stanja nista enaki : 
+Toplota na mestu $x_0$ izstopa(A)/vstopa(B), na mestu $x_0 + dx$ pa vstopa(A)/izstopa(B) skozi ploskev $dA_x = dydz$. Zaradi prostorskega spreminjanja temperature velikosti nista enaki: 
 ![[primerab.png]]
 
-Upoštevajoč izstop in vstop toplote v primeru A, ko je dovod toplote skozi ploskve z normalo v smeri $x$ - osi tak, da se **akumulirana toplota** v volumskem elementu **poveča**,  je velikost akumulirane toplote $dQ_x$ enaka : $$dQ_x^+ = dQ_x^+ + dQ_x^- \geq 0$$
-Lahko zapišemo : $$dQ_x = \biggr{[}\frac{\partial}{\partial x}\biggr{(}k\frac{\partial T}{\partial x}\biggr{)}dx\biggr{]}dA_xdt = \frac{\partial}{\partial x}\biggr{(}k\frac{\partial T}{\partial x}\biggr{)}dVdt$$
-Toplota $dQ_A$, ki se v časovnem intervalu $dt$ na osnovi prevoda toplote preko ploskev volumskega elementa akumulira v elementu, je tedaj velikosti : $$dQ_A = dQ_x + dQ_y + dQ_z = \biggr{[}\frac{\partial}{\partial x} \biggr{(}k\frac{\partial T}{\partial x}\biggr{)} + \frac{\partial}{\partial y} \biggr{(}k\frac{\partial T}{\partial y}\biggr{)} + \frac{\partial}{\partial z} \biggr{(}k\frac{\partial T}{\partial z}\biggr{)}\biggr{]}dVdt$$
-Enačbo energijske bilance . $$dQ_A + dQ_V = dU$$
-zapišemo v odvisnosti od primarne fizikalne spremenljivke - tempereature $T = T(x,y,z,t)$ : $$\biggr{\{}\biggr{[}\frac{\partial}{\partial x} \biggr{(}k\frac{\partial T}{\partial x}\biggr{)} + \frac{\partial}{\partial y} \biggr{(}k\frac{\partial T}{\partial y}\biggr{)} + \frac{\partial}{\partial z} \biggr{(}k\frac{\partial T}{\partial z}\biggr{)}\biggr{]} + q_V\biggr{\}}dVdt = (\rho\space c\space dT)dV$$
-Enačbo lahko še preuredimo - delimo z $dV$ in delimo z $dt$ : $$\frac{\partial}{\partial x} \biggr{(}k\frac{\partial T}{\partial x}\biggr{)} + \frac{\partial}{\partial y} \biggr{(}k\frac{\partial T}{\partial y}\biggr{)} + \frac{\partial}{\partial z} \biggr{(}k\frac{\partial T}{\partial z}\biggr{)} + q_V = \rho\space c\frac{\partial T}{\partial t}$$
-To je vodilna enačba problema v trdninah. Za 1D primer se zapiše kot  : $$\frac{\partial}{\partial x}\biggr{(}k\frac{\partial T(x,t)}{\partial x}\biggr{)} + q_V(x,t) = \rho\space c\frac{\partial T(x,t)}{\partial t}$$
-Za stacionarne primere ($dt = 0$) odpade člen na desni strani enačbe : $$\frac{d}{dx}\biggr{(}k\frac{dT}{dx}\biggr{)} + q_V = 0$$ 
+V elementu akumulirana toplota v $x$-smeri je : $$dQ_x = dQ_x^+ + dQ_x^- = \frac{\partial}{\partial x}\biggr{(}k\frac{\partial T}{\partial x}\biggr{)}dx\,dA_xdt = \frac{\partial}{\partial x}\biggr{(}k\frac{\partial T}{\partial x}\biggr{)}dVdt$$
+Enako za $y$ in $z$ smer, $dQ_A = dQ_x + dQ_y + dQ_z$. Bilanca $dQ_A + dQ_V = dU$ po deljenju z $dV\,dt$ da vodilno enačbo prevoda toplote v trdninah : $$\frac{\partial}{\partial x} \biggr{(}k\frac{\partial T}{\partial x}\biggr{)} + \frac{\partial}{\partial y} \biggr{(}k\frac{\partial T}{\partial y}\biggr{)} + \frac{\partial}{\partial z} \biggr{(}k\frac{\partial T}{\partial z}\biggr{)} + q_V = \rho\space c\frac{\partial T}{\partial t}$$
+Za 1D primer ($T = T(x,t)$) : $$\frac{\partial}{\partial x}\biggr{(}k\frac{\partial T(x,t)}{\partial x}\biggr{)} + q_V(x,t) = \rho\space c\frac{\partial T(x,t)}{\partial t}$$
+Za konstanten $k$: $$k\frac{\partial^2 T(x,t)}{\partial x^2} + q_V(x,t) = \rho\space c\frac{\partial T(x,t)}{\partial t}$$
+Za stacionarne primere ($\frac{\partial T}{\partial t} = 0$) odpade desna stran : $$\frac{d}{dx}\biggr{(}k\frac{dT}{dx}\biggr{)} + q_V = 0$$ 
 ### 4. Kako se upošteva konvektivni odvod toplote s površine telesa?
 
-***Konvektivni toplotni tok*** je posledica obtekajočega fluida s temperaturo $T_f(x,t)$ ter *prestopnostnim koeficientom* konvekcijskega prenosa toplote $h_f(x,t)$ ali $\alpha(x,t)$ $[\frac{J}{sm^2K}]$ : $$q_n(x,t) = -k\frac{\partial T(x,t)}{\partial x} = q_{\Gamma}(x,t) = -h_f(x,t)[T_f(x,t) - T(x,t)] \text{ , }x\in[x_1,x_2]$$
-$q_n$ je toplotni tok v smeri normale na površino. Ta toplotni tok določa temperaturni gradient : $$\frac{\partial T(x,t)}{\partial x}n_x = \frac{h_f(x,t)[T_f(x,t) - T(x,t)]}{k}\text{ , }n_x\in[\hat n_1, \hat n_2]\text{ , }x\in[x_1¸,x_2]$$
+Kot robni pogoj za sekundarno spremenljivko. ***Konvektivni toplotni tok*** je posledica obtekajočega fluida s temperaturo $T_f(x,t)$ in *prestopnostnim koeficientom* konvekcijskega prenosa toplote $h_f(x,t)$ $[\frac{J}{sm^2K}]$ : $$q_n(x,t) = -k\frac{\partial T(x,t)}{\partial n} = q_{\Gamma}(x,t) = -h_f(x,t)[T_f(x,t) - T(x,t)] \text{ , }x\in[x_1,x_2]$$
+$q_n$ je toplotni tok v smeri normale na površino. Določa temperaturni gradient ($\frac{\partial T}{\partial n} = \frac{\partial T}{\partial x}n_x$) : $$\frac{\partial T(x,t)}{\partial x}n_x = \frac{h_f(x,t)[T_f(x,t) - T(x,t)]}{k}\text{ , }n_x\in[\hat n_1, \hat n_2]\text{ , }x\in[x_1,x_2]$$
 ![[konverktivni.png]]
 
 ### 5. Kako se upošteva odvod toplote s površine telesa s sevanjem?
 
-***Sevalni toplotni tok*** oddaljenega telesa s temp. $T_r(x,t)$ ter prestopnostnim koeficientom sevalnega prenosa toplote $h_r(x,t)$ je določen s Stefan-Boltzmanovim zakonom : $$q_n(x,t) = -k\frac{\partial T(x,t)}{\partial n} = q_{\Gamma}(x,t) = - \sigma_s \varepsilon_s[T_r^4(x,t) - T^4(x,t)]\text{ , }x\in[x_1,x_2]$$
-kjer sta $\sigma_s$ in $\varepsilon_s$ *Stefan-Boltzmanova konstanta* in *emisivnost*. 
+Kot robni pogoj za sekundarno spremenljivko. ***Sevalni toplotni tok*** oddaljenega telesa s temperaturo $T_r(x,t)$ je določen s Stefan-Boltzmannovim zakonom : $$q_n(x,t) = -k\frac{\partial T(x,t)}{\partial n} = q_{\Gamma}(x,t) = - \sigma_s \varepsilon_s[T_r^4(x,t) - T^4(x,t)]\text{ , }x\in[x_1,x_2]$$
+kjer sta $\sigma_s$ in $\varepsilon_s$ *Stefan-Boltzmannova konstanta* in *emisivnost*. 
 ![[sevanje.png]]
 
-Ker temperatura nastopa na četrto potenco, potrebujemo za rešitev problema reševati nelinearne enačbe.  Lahko vpeljemo poenostavitev, ki linearizira problem, a zahteva iterativno reševanje. Peoblem lahko poenostavimo na sledeč način : $$\begin{multline}q_{\Gamma} =  - \sigma_s \varepsilon_s[T_r^4(x,t) - T^4(x,t)] = \\ =-(\sigma_s \varepsilon_s[T_R^2(x,t) + T^2(x,t)](T-r(x,t) + T(x,t)))[T_r(x,t) - T(x,t)] = \\ =-h_r(x,t)[T_r(x,t) - T(x,t)] \end{multline} $$
+Ker neznana temperatura nastopa na četrto potenco, bi morali reševati nelinearne enačbe. Problem lineariziramo s prestopnostnim koeficientom sevalnega prenosa toplote $h_r$, kar zahteva iterativno reševanje ($h_r$ je odvisen od neznane $T$) : $$\begin{aligned}q_{\Gamma} &=  - \sigma_s \varepsilon_s[T_r^4(x,t) - T^4(x,t)] = \\ &=-\sigma_s \varepsilon_s[T_r^2(x,t) + T^2(x,t)](T_r(x,t) + T(x,t))[T_r(x,t) - T(x,t)] = \\ &=-h_r(x,t)[T_r(x,t) - T(x,t)] \end{aligned}$$
 Temperaturni gradient pa lahko zapišemo kot : $$\frac{\partial T(x,t)}{\partial x}n_x = \frac{h_r(x,t)[T_r(x,t) - T(x,t)]}{k}$$
 ### 6. Zapišite enačbe, ki popisujejo toplotne razmere na mejni površini med dvema različnima materialoma.
 
-Na skupni meji podobmočji $\Gamma_{1,2}$ med podobmočji $\Omega_1$ in $\Omega_2$ morajo biti izpolnjeni ***pogoji konsistentnosti prehoda***, ki opredeljujejo obnašanje primarne in sekundarne spremenljivke problema ob prehodu iz enega podobmočja v drugega.
+Na skupni meji $\Gamma_{1,2}$ med podobmočjema $\Omega_1$ in $\Omega_2$ morajo biti izpolnjeni ***pogoji konsistentnosti prehoda*** za primarno in sekundarno spremenljivko.
 ![[pkp_3.png]]
-Fizikalna konsistentonst problema se v obravnavanem primeru, če predpostavimo idealen termični kontakt med telesoma, na prehodu med podobmočjema izkazuje v zveznosti primarne spremenljivke $T(x,t)$ : $$T_1(x_p,t) = T_2(x_p,t)$$
-ter zveznostjo sekundarne spremenljivke  - toplotnega toka $q(x,t)$ : $$q_{n1}(x_p,t) + q_{n2}(x_p,t) = 0 \rightarrow -k_1 \frac{\partial T_1(x_p,t)}{\partial n_1} = k2 \frac{\partial T_2(x_p,t)}{\partial n_2}$$
-( Note : tukaj nimamo minusa na obeh straneh enačbe, ker odvajamo po normali )
-
-Upoštevajoč 1D območje problema lahko pogoj konsistentnosti prehoda za sekundarno spremenljivko zapišemo z enačbo : $$-k_1\frac{\partial T_1(x_p,t)}{\partial x}n_1 = k_2\frac{\partial T_2(x_p,t)}{\partial x}n_2$$
-Oziroma  : $$k_1\frac{\partial T_1(x_p,t)}{\partial x} = k_2\frac{\partial T_2(x_p,t)}{\partial x}$$
+Ob idealnem termičnem kontaktu velja zveznost primarne spremenljivke $T(x,t)$ : $$T_1(x_p,t) = T_2(x_p,t)$$
+ter zveznost toplotnega toka : $$q_{n1}(x_p,t) + q_{n2}(x_p,t) = 0 \rightarrow -k_1 \frac{\partial T_1(x_p,t)}{\partial n_1} = k_2 \frac{\partial T_2(x_p,t)}{\partial n_2}$$
+V 1D je $\frac{\partial T}{\partial n} = \frac{\partial T}{\partial x}n_x$ : $$-k_1\frac{\partial T_1(x_p,t)}{\partial x}n_1 = k_2\frac{\partial T_2(x_p,t)}{\partial x}n_2$$
+Ker je $n_2 = -n_1$ : $$k_1\frac{\partial T_1(x_p,t)}{\partial x} = k_2\frac{\partial T_2(x_p,t)}{\partial x}$$
 ![[pkp4.png]]
 
 ## ***PREDAVANJE 8 : PREVOD TOPLOTE - PRIMERI***
